@@ -94,7 +94,7 @@ DEF NUM_EVOS_IN_BUFFER EQU 3
 DEF NUM_GROWTH_RATES EQU const_value
 
 ; wild data (see data/wild/maps/*.asm)
-DEF NUM_WILDMONS EQU 10
+DEF NUM_WILDMONS EQU 12 ; dereknote: increased wild mon slots from 10 to 12
 DEF WILDDATA_LENGTH EQU 1 + NUM_WILDMONS * 2
 
 ; PP in box_struct (see macros/ram.asm)
