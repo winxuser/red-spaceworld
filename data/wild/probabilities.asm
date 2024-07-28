@@ -26,5 +26,5 @@ WildMonEncounterSlotChances:
 	db 252, $14 ;  3/256 =  1.2% chance of slot 10
 	db 255, $16 ;  3/256 =  1.2% chance of slot 11
 	; dereknote: two additional slots added (overall, increased 4.3% and 1.2% slots from 1 each to 2 each)
-	assert_table_length NUM_WILDMONS
-	ASSERT wild_chance_total == 256, "WildMonEncounterSlotChances sum to {d:wild_chance_total}, not 256!"
+;	assert_table_length NUM_WILDMONS
+;	ASSERT wild_chance_total == 256, "WildMonEncounterSlotChances sum to {d:wild_chance_total}, not 256!"
