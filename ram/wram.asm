@@ -1237,7 +1237,7 @@ wTrainerPicPointer:: dw
 	ds 1
 
 UNION
-wTempMoveNameBuffer:: ds 14
+wTempMoveNameBuffer:: ds MOVE_NAME_LENGTH
 
 NEXTU
 ; The name of the mon that is learning a move.
@@ -1299,6 +1299,7 @@ wCriticalHitOrOHKO:: db
 
 wMoveMissed:: db
 
+wBattleStatusData::
 ; always 0
 wPlayerStatsToDouble:: db
 ; always 0
@@ -1356,6 +1357,7 @@ wPlayerNumHits:: db
 ENDU
 
 	ds 2
+wBattleStatusDataEnd::
 
 ; non-zero when an item or move that allows escape from battle was used
 wEscapedFromBattle:: db
@@ -1585,7 +1587,8 @@ wMoves:: ds NUM_MOVES
 
 wMoveNum:: db
 
-wMovesString:: ds 56
+; concatenated move name list where intermediate '@' are replaced with '<NEXT>'
+wMovesString:: ds NUM_MOVES * MOVE_NAME_LENGTH
 
 wUnusedCurMapTilesetCopy:: db
 
