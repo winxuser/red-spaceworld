@@ -19,7 +19,7 @@ ExecuteCurMapScriptInTable::
 	ld hl, wStatusFlags7
 	bit BIT_USE_CUR_MAP_SCRIPT, [hl]
 	res BIT_USE_CUR_MAP_SCRIPT, [hl]
-	jr z, .useProvidedIndex   ; test if map script index was overridden manually
+	jr z, .useProvidedIndex ; test if map script index was overridden manually
 	ld a, [wCurMapScript]
 .useProvidedIndex
 	pop hl
@@ -32,11 +32,11 @@ LoadGymLeaderAndCityName::
 	push de
 	ld de, wGymCityName
 	ld bc, GYM_CITY_LENGTH
-	call CopyData   ; load city name
+	call CopyData ; load city name
 	pop hl
 	ld de, wGymLeaderName
 	ld bc, NAME_LENGTH
-	jp CopyData     ; load gym leader name
+	jp CopyData   ; load gym leader name
 
 ; reads specific information from trainer header (pointed to at wTrainerHeaderPtr)
 ; a: offset in header data
@@ -155,7 +155,7 @@ ENDC
 	ldh [hJoyHeld], a
 	call TrainerWalkUpToPlayer_Bank0
 	ld hl, wCurMapScript
-	inc [hl]      ; increment map script index (next script function is usually DisplayEnemyTrainerTextAndStartBattle)
+	inc [hl] ; increment map script index (next script function is usually DisplayEnemyTrainerTextAndStartBattle)
 	ret
 
 ; display the before battle text after the enemy trainer has walked up to the player's sprite
@@ -179,7 +179,7 @@ StartTrainerBattle::
 	ld hl, wStatusFlags4
 	set BIT_UNKNOWN_4_1, [hl]
 	ld hl, wCurMapScript
-	inc [hl]        ; increment map script index (next script function is usually EndTrainerBattle)
+	inc [hl] ; increment map script index (next script function is usually EndTrainerBattle)
 	ret
 
 EndTrainerBattle::
@@ -208,10 +208,10 @@ EndTrainerBattle::
 	ld hl, wMissableObjectList
 	ld de, $2
 	ld a, [wSpriteIndex]
-	call IsInArray              ; search for sprite ID
+	call IsInArray ; search for sprite ID
 	inc hl
 	ld a, [hl]
-	ld [wMissableObjectIndex], a               ; load corresponding missable object index and remove it
+	ld [wMissableObjectIndex], a ; load corresponding missable object index and remove it
 	predef HideObject
 .skipRemoveSprite
 	xor a
@@ -277,7 +277,7 @@ CheckForEngagingTrainers::
 .trainerLoop
 	call StoreTrainerHeaderPointer   ; set trainer header pointer to current trainer
 	ld a, [de]
-	ld [wSpriteIndex], a                     ; store trainer flag's bit
+	ld [wSpriteIndex], a             ; store trainer flag's bit
 	ld [wTrainerHeaderFlagBit], a
 	cp -1
 	ret z
@@ -286,7 +286,7 @@ CheckForEngagingTrainers::
 	ld b, FLAG_TEST
 	ld a, [wTrainerHeaderFlagBit]
 	ld c, a
-	call TrainerFlagAction        ; read trainer flag
+	call TrainerFlagAction           ; read trainer flag
 	ld a, c
 	and a ; has the trainer already been defeated?
 	jr nz, .continue
@@ -307,7 +307,7 @@ CheckForEngagingTrainers::
 	pop hl
 	ld a, [wTrainerSpriteOffset]
 	and a
-	ret nz        ; break if the trainer is engaging
+	ret nz ; break if the trainer is engaging
 .continue
 	ld hl, $c
 	add hl, de
@@ -382,8 +382,8 @@ PrintEndBattleText::
 GetSavedEndBattleTextPointer::
 	ld a, [wBattleResult]
 	and a
-; won battle
 	jr nz, .lostBattle
+; won battle
 	ld a, [wEndBattleWinTextPointer]
 	ld h, a
 	ld a, [wEndBattleWinTextPointer + 1]
