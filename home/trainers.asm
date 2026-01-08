@@ -205,13 +205,13 @@ EndTrainerBattle::
 	ld a, [wCurMap]
 	cp POKEMON_TOWER_7F
 	jr z, .skipRemoveSprite ; the two 7F scripts call EndTrainerBattle manually after wIsTrainerBattle has been unset
-	ld hl, wMissableObjectList
+	ld hl, wToggleableObjectList
 	ld de, $2
 	ld a, [wSpriteIndex]
 	call IsInArray ; search for sprite ID
 	inc hl
 	ld a, [hl]
-	ld [wMissableObjectIndex], a ; load corresponding missable object index and remove it
+	ld [wToggleableObjectIndex], a ; load corresponding toggleable object index and remove it
 	predef HideObject
 .skipRemoveSprite
 	xor a

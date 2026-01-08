@@ -36,8 +36,8 @@ Route16DefaultScript:
 	ld [wCurEnemyLevel], a
 	xor a
 	ld [wIsTrainerBattle], a
-	ld a, HS_ROUTE_16_SNORLAX
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_ROUTE_16_SNORLAX
+	ld [wToggleableObjectIndex], a
 	predef HideObject
 	call UpdateSprites
 	ld a, SCRIPT_ROUTE16_SNORLAX_POST_BATTLE

@@ -351,7 +351,7 @@ wCheckFor180DegreeTurn:: db
 
 	ds 1
 
-wMissableObjectIndex:: db
+wToggleableObjectIndex:: db
 
 wPredefID:: db
 wPredefHL:: dw
@@ -1249,7 +1249,7 @@ ENDU
 ; money received after battle = base money × level of last enemy mon
 wTrainerBaseMoney:: dw ; BCD
 
-wMissableObjectCounter:: db
+wToggleableObjectCounter:: db
 
 	ds 1
 
@@ -1941,9 +1941,9 @@ wUnusedMapVariable:: db
 
 wPlayerCoins:: dw ; BCD
 
-; bit array of missable objects. set = removed
-wMissableObjectFlags:: flag_array $100
-wMissableObjectFlagsEnd::
+; bit array of toggleable objects; bit set = toggled off
+wToggleableObjectFlags:: flag_array $100
+wToggleableObjectFlagsEnd::
 
 	ds 7
 
@@ -1952,9 +1952,9 @@ wSavedSpriteImageIndex:: db
 
 ; each entry consists of 2 bytes
 ; * the sprite ID (depending on the current map)
-; * the missable object index (global, used for wMissableObjectFlags)
+; * the toggleable object index (global, used for wToggleableObjectFlags)
 ; terminated with $FF
-wMissableObjectList:: ds 16 * 2 + 1
+wToggleableObjectList:: ds 16 * 2 + 1
 
 	ds 1
 
