@@ -1907,7 +1907,7 @@ CollisionCheckOnWater::
 	ld a, [wTileInFrontOfPlayer] ; tile in front of player
 	cp $14 ; water tile
 	jr z, .noCollision ; keep surfing if it's a water tile
-	cp $32 ; either the left tile of the S.S. Anne boarding platform or the tile on eastern coastlines (depending on the current tileset)
+	cp $26 ;$32 ; either the left tile of the S.S. Anne boarding platform or the tile on eastern coastlines (depending on the current tileset)
 	jr z, .checkIfVermilionDockTileset
 	cp $48 ; tile on right on coast lines in Safari Zone
 	jr z, .noCollision ; keep surfing

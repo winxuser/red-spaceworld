@@ -10,7 +10,7 @@
 	const_export ROUTE21_FISHER4
 
 Route21_Object:
-	db $43 ; border block
+	db $21 ; border block
 
 	def_warp_events
 

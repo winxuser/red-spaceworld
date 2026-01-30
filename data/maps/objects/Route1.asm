@@ -3,7 +3,7 @@
 	const_export ROUTE1_YOUNGSTER2
 
 Route1_Object:
-	db $b ; border block
+	db $00 ; border block
 
 	def_warp_events
 
@@ -17,4 +17,4 @@ Route1_Object:
 	def_warps_to ROUTE_1
 
 	; unused
-	warp_to 2, 7, 4
+	warp_to  2, 10, 4

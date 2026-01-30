@@ -8,7 +8,7 @@
 	const_export ROUTE16_SNORLAX
 
 Route16_Object:
-	db $f ; border block
+	db $29 ; border block
 
 	def_warp_events
 	warp_event 17, 10, ROUTE_16_GATE_1F, 1

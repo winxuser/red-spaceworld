@@ -2,7 +2,7 @@
 	const_export NAMERATERSHOUSE_NAME_RATER
 
 NameRatersHouse_Object:
-	db $a ; border block
+	db $00 ; border block
 
 	def_warp_events
 	warp_event  2,  7, LAST_MAP, 6

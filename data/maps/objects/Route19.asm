@@ -11,7 +11,7 @@
 	const_export ROUTE19_SWIMMER8
 
 Route19_Object:
-	db $43 ; border block
+	db $21 ; border block
 
 	def_warp_events
 

@@ -11,7 +11,7 @@
 	const_export ROUTE14_BIKER4
 
 Route14_Object:
-	db $43 ; border block
+	db $7a ; border block
 
 	def_warp_events
 

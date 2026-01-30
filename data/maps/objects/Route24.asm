@@ -9,7 +9,7 @@
 	const_export ROUTE24_TM_THUNDER_WAVE
 
 Route24_Object:
-	db $2c ; border block
+	db $7a ; border block
 
 	def_warp_events
 

@@ -10,7 +10,7 @@
 	const_export ROUTE8_COOLTRAINER_F4
 
 Route8_Object:
-	db $2c ; border block
+	db $7a ; border block
 
 	def_warp_events
 	warp_event  1,  9, ROUTE_8_GATE, 1

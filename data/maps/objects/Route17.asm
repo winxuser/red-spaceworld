@@ -11,7 +11,7 @@
 	const_export ROUTE17_BIKER10
 
 Route17_Object:
-	db $43 ; border block
+	db $29 ; border block
 
 	def_warp_events
 

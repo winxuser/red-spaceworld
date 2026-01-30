@@ -10,26 +10,27 @@ MapPaletteAssignments:
 	dw RedsHouse1PalMap  ; REDS_HOUSE_1
 	dw MartPalMap        ; MART
 	dw ForestPalMap      ; FOREST
-	dw RedsHouse2PalMap  ; REDS_HOUSE_2
-	dw DojoPalMap        ; DOJO
-	dw PokecenterPalMap  ; POKECENTER
-	dw GymPalMap         ; GYM
-	dw HousePalMap       ; HOUSE
-	dw ForestGatePalMap  ; FOREST_GATE
-	dw MuseumPalMap      ; MUSEUM
-	dw UndergroundPalMap ; UNDERGROUND
-	dw GatePalMap        ; GATE
-	dw ShipPalMap        ; SHIP
-	dw ShipPortPalMap    ; SHIP_PORT
-	dw CemeteryPalMap    ; CEMETERY
-	dw InteriorPalMap    ; INTERIOR
-	dw CavernPalMap      ; CAVERN
-	dw LobbyPalMap       ; LOBBY
-	dw MansionPalMap     ; MANSION
-	dw LabPalMap         ; LAB
-	dw ClubPalMap        ; CLUB
-	dw FacilityPalMap    ; FACILITY
-	dw PlateauPalMap     ; PLATEAU
+	dw RedsHouse2PalMap   ; REDS_HOUSE_2
+	dw DojoPalMap         ; DOJO
+	dw PokecenterPalMap   ; POKECENTER
+	dw GymPalMap          ; GYM
+	dw HousePalMap        ; HOUSE
+	dw ForestGatePalMap   ; FOREST_GATE
+	dw MuseumPalMap       ; MUSEUM
+	dw UndergroundPalMap  ; UNDERGROUND
+	dw GatePalMap         ; GATE
+	dw ShipPalMap         ; SHIP
+	dw ShipPortPalMap     ; SHIP_PORT
+	dw CemeteryPalMap     ; CEMETERY
+	dw InteriorPalMap     ; INTERIOR
+	dw CavernPalMap       ; CAVERN
+	dw LobbyPalMap        ; LOBBY
+	dw MansionPalMap      ; MANSION
+	dw LabPalMap          ; LAB
+	dw ClubPalMap         ; CLUB
+	dw FacilityPalMap     ; FACILITY
+	dw PlateauPalMap      ; PLATEAU
+	dw TrashedHousePalMap ; TRASHEDHOUSE
 	assert_table_length NUM_TILESETS
 
 OverworldPalMap:
@@ -93,3 +94,6 @@ FacilityPalMap:
 
 PlateauPalMap:
 	INCLUDE "color/tilesets/plateau.asm"
+
+TrashedHousePalMap:
+	INCLUDE "color/tilesets/trashedhouse.asm"
