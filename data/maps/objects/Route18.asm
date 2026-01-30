@@ -4,7 +4,7 @@
 	const_export ROUTE18_COOLTRAINER_M3
 
 Route18_Object:
-	db $43 ; border block
+	db $29 ; border block
 
 	def_warp_events
 	warp_event 33,  8, ROUTE_18_GATE_1F, 1
@@ -13,8 +13,8 @@ Route18_Object:
 	warp_event 40,  9, ROUTE_18_GATE_1F, 4
 
 	def_bg_events
-	bg_event 43,  7, TEXT_ROUTE18_SIGN
-	bg_event 33,  5, TEXT_ROUTE18_CYCLING_ROAD_SIGN
+	bg_event 42,  7, TEXT_ROUTE18_SIGN
+	bg_event 32,  5, TEXT_ROUTE18_CYCLING_ROAD_SIGN
 
 	def_object_events
 	object_event 36, 11, SPRITE_COOLTRAINER_M, STAY, RIGHT, TEXT_ROUTE18_COOLTRAINER_M1, OPP_BIRD_KEEPER, 8

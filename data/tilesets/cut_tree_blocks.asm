@@ -1,7 +1,7 @@
 CutTreeBlockSwaps:
 	; first byte = tileset block containing the cut tree
 	; second byte = corresponding tileset block after the cut animation happens
-	db $32, $6D
+	db $32, $4D
 	db $33, $6C
 	db $34, $6F
 	db $35, $4C

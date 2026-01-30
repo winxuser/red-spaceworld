@@ -3,7 +3,7 @@
 	const_export ROUTE22_RIVAL2
 
 Route22_Object:
-	db $2c ; border block
+	db $7a ; border block
 
 	def_warp_events
 	warp_event  8,  5, ROUTE_22_GATE, 1

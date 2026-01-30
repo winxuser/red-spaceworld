@@ -10,7 +10,7 @@
 	const_export ROUTE3_COOLTRAINER_F3
 
 Route3_Object:
-	db $2c ; border block
+	db $7a ; border block
 
 	def_warp_events
 

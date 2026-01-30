@@ -11,7 +11,7 @@
 	const_export ROUTE12_IRON
 
 Route12_Object:
-	db $43 ; border block
+	db $7a ; border block
 
 	def_warp_events
 	warp_event 10, 15, ROUTE_12_GATE_1F, 1

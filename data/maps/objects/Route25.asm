@@ -11,7 +11,7 @@
 	const_export ROUTE25_TM_SEISMIC_TOSS
 
 Route25_Object:
-	db $2c ; border block
+	db $7a ; border block
 
 	def_warp_events
 	warp_event 45,  3, BILLS_HOUSE, 1

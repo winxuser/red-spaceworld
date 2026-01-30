@@ -6,10 +6,10 @@ MACRO coll_tiles
 ENDM
 
 Underground_Coll::
-	coll_tiles $0b, $0c, $13, $15, $18
+	coll_tiles $0b, $0c, $07, $13, $15, $18, $2c
 
 Overworld_Coll::
-	coll_tiles $00, $10, $1b, $20, $21, $23, $2c, $2d, $2e, $30, $31, $33, $39, $3c, $3e, $52, $54, $58, $5b
+	coll_tiles $00, $03, $04, $05, $06, $07, $2a, $2c, $25, $4f, $54
 
 RedsHouse1_Coll::
 RedsHouse2_Coll::
@@ -27,7 +27,7 @@ Forest_Coll::
 	coll_tiles $1e, $20, $2e, $30, $34, $37, $39, $3a, $40, $51, $52, $5a, $5c, $5e, $5f
 
 House_Coll::
-	coll_tiles $01, $12, $14, $28, $32, $37, $44, $54, $5c
+	coll_tiles $01, $04, $12, $14
 
 ForestGate_Coll::
 Museum_Coll::
@@ -68,3 +68,6 @@ Facility_Coll::
 
 Plateau_Coll::
 	coll_tiles $1b, $23, $2c, $2d, $3b, $45
+
+TrashedHouse_Coll::
+	coll_tiles $01, $12, $14, $28, $32, $37, $44, $54, $5c

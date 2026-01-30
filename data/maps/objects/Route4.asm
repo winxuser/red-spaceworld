@@ -4,12 +4,12 @@
 	const_export ROUTE4_TM_WHIRLWIND
 
 Route4_Object:
-	db $2c ; border block
+	db $7a ; border block
 
 	def_warp_events
 	warp_event 11,  5, MT_MOON_POKECENTER, 1
-	warp_event 18,  5, MT_MOON_1F, 1
-	warp_event 24,  5, MT_MOON_B1F, 8
+	warp_event 19,  5, MT_MOON_1F, 1
+	warp_event 25,  5, MT_MOON_B1F, 8
 
 	def_bg_events
 	bg_event 12,  5, TEXT_ROUTE4_POKECENTER_SIGN

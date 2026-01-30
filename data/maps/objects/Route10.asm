@@ -7,18 +7,18 @@
 	const_export ROUTE10_COOLTRAINER_F2
 
 Route10_Object:
-	db $2c ; border block
+	db $7a ; border block
 
 	def_warp_events
 	warp_event 11, 19, ROCK_TUNNEL_POKECENTER, 1
-	warp_event  8, 17, ROCK_TUNNEL_1F, 1
-	warp_event  8, 53, ROCK_TUNNEL_1F, 3
+	warp_event  7, 17, ROCK_TUNNEL_1F, 1
+	warp_event  9, 53, ROCK_TUNNEL_1F, 3
 	warp_event  6, 39, POWER_PLANT, 1
 
 	def_bg_events
-	bg_event  7, 19, TEXT_ROUTE10_ROCKTUNNEL_NORTH_SIGN
+	bg_event  6, 19, TEXT_ROUTE10_ROCKTUNNEL_NORTH_SIGN
 	bg_event 12, 19, TEXT_ROUTE10_POKECENTER_SIGN
-	bg_event  9, 55, TEXT_ROUTE10_ROCKTUNNEL_SOUTH_SIGN
+	bg_event  8, 54, TEXT_ROUTE10_ROCKTUNNEL_SOUTH_SIGN
 	bg_event  5, 41, TEXT_ROUTE10_POWERPLANT_SIGN
 
 	def_object_events

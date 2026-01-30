@@ -3,10 +3,10 @@
 	const_export ROUTE2_HP_UP
 
 Route2_Object:
-	db $f ; border block
+	db $00 ; border block
 
 	def_warp_events
-	warp_event 12,  9, DIGLETTS_CAVE_ROUTE_2, 1
+	warp_event 13,  9, DIGLETTS_CAVE_ROUTE_2, 1
 	warp_event  3, 11, VIRIDIAN_FOREST_NORTH_GATE, 2
 	warp_event 15, 19, ROUTE_2_TRADE_HOUSE, 1
 	warp_event 16, 35, ROUTE_2_GATE, 2
@@ -15,7 +15,7 @@ Route2_Object:
 
 	def_bg_events
 	bg_event  5, 65, TEXT_ROUTE2_SIGN
-	bg_event 11, 11, TEXT_ROUTE2_DIGLETTS_CAVE_SIGN
+	bg_event 10, 10, TEXT_ROUTE2_DIGLETTS_CAVE_SIGN
 
 	def_object_events
 	object_event 13, 54, SPRITE_POKE_BALL, STAY, NONE, TEXT_ROUTE2_MOON_STONE, MOON_STONE

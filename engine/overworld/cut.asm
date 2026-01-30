@@ -13,9 +13,9 @@ UsedCut:
 .overworld
 	dec a
 	ld a, [wTileInFrontOfPlayer]
-	cp $3d ; cut tree
+	cp $0d ; $3d  cut tree
 	jr z, .canCut
-	cp $52 ; grass
+	cp $04 ; grass
 	jr z, .canCut
 .nothingToCut
 	ld hl, .NothingToCutText
@@ -80,11 +80,11 @@ InitCutAnimOAM:
 	cp $52
 	jr z, .grass
 ; tree
-	ld de, Overworld_GFX tile $2d ; cuttable tree sprite top row
+	ld de, Overworld_GFX tile $0e ; $2d ; cuttable tree sprite top row
 	ld hl, vChars1 tile $7c
 	lb bc, BANK(Overworld_GFX), 2
 	call CopyVideoData
-	ld de, Overworld_GFX tile $3d ; cuttable tree sprite bottom row
+	ld de, Overworld_GFX tile $0d ; $3d ; cuttable tree sprite bottom row
 	ld hl, vChars1 tile $7e
 	lb bc, BANK(Overworld_GFX), 2
 	call CopyVideoData

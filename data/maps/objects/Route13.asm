@@ -11,14 +11,14 @@
 	const_export ROUTE13_COOLTRAINER_M3
 
 Route13_Object:
-	db $43 ; border block
+	db $7a ; border block
 
 	def_warp_events
 
 	def_bg_events
-	bg_event 15, 13, TEXT_ROUTE13_TRAINER_TIPS1
-	bg_event 33,  5, TEXT_ROUTE13_TRAINER_TIPS2
-	bg_event 31, 11, TEXT_ROUTE13_SIGN
+	bg_event 14, 13, TEXT_ROUTE13_TRAINER_TIPS1
+	bg_event 32,  5, TEXT_ROUTE13_TRAINER_TIPS2
+	bg_event 30, 11, TEXT_ROUTE13_SIGN
 
 	def_object_events
 	object_event 49, 10, SPRITE_COOLTRAINER_M, STAY, RIGHT, TEXT_ROUTE13_COOLTRAINER_M1, OPP_BIRD_KEEPER, 1

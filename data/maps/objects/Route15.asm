@@ -12,7 +12,7 @@
 	const_export ROUTE15_TM_RAGE
 
 Route15_Object:
-	db $43 ; border block
+	db $00 ; border block
 
 	def_warp_events
 	warp_event  7,  8, ROUTE_15_GATE_1F, 1

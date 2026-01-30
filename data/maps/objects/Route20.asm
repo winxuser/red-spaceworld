@@ -11,7 +11,7 @@
 	const_export ROUTE20_SWIMMER9
 
 Route20_Object:
-	db $43 ; border block
+	db $21 ; border block
 
 	def_warp_events
 	warp_event 48,  5, SEAFOAM_ISLANDS_1F, 1

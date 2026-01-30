@@ -25,6 +25,7 @@ MapPaletteSets:
 	dw ClubPalSet        ; CLUB
 	dw FacilityPalSet    ; FACILITY
 	dw PlateauPalSet     ; PLATEAU
+	dw TrashedHousePalSet ; TRASHEDHOUSE
 	assert_table_length NUM_TILESETS
 
 OverworldPalSet:
@@ -38,6 +39,7 @@ PlateauPalSet:
 	db OUTDOOR_ROOF
 	db CRYS_TEXTBOX
 
+TrashedHousePalSet:
 RedsHouse1PalSet:
 RedsHouse2PalSet:
 DojoPalSet:
