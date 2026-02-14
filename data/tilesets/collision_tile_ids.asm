@@ -9,7 +9,7 @@ Underground_Coll::
 	coll_tiles $0b, $0c, $07, $13, $15, $18, $2c
 
 Overworld_Coll::
-	coll_tiles $00, $03, $04, $05, $06, $07, $2a, $2c, $25, $4f, $54
+	coll_tiles $00, $03, $04, $05, $06, $07, $2a, $25, $38, $4f, $54, $5f
 
 RedsHouse1_Coll::
 RedsHouse2_Coll::
