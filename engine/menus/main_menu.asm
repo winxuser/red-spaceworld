@@ -357,21 +357,30 @@ CableClubOptionsText:
 DisplayContinueGameInfo:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	hlcoord 4, 7
-	ld b, 8
-	ld c, 14
+	hlcoord 2, 6
+	ld b, 10
+	ld c, 16
 	call TextBoxBorder
-	hlcoord 5, 9
+; show map legend
+	ld a, [wCurMap]
+	ld e, a
+	farcall GetMapName
+	hlcoord 3, 8
+	ld de, wNameBuffer
+	call PlaceString
+
+; show normal info
+	hlcoord 3, 10
 	ld de, SaveScreenInfoText
 	call PlaceString
-	hlcoord 12, 9
+	hlcoord 12, 10
 	ld de, wPlayerName
 	call PlaceString
-	hlcoord 17, 11
+	hlcoord 17, 12
 	call PrintNumBadges
-	hlcoord 16, 13
+	hlcoord 16, 14
 	call PrintNumOwnedMons
-	hlcoord 13, 15
+	hlcoord 13, 16
 	call PrintPlayTime
 	ld a, 1
 	ldh [hAutoBGTransferEnabled], a
@@ -381,23 +390,32 @@ DisplayContinueGameInfo:
 PrintSaveScreenText:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	hlcoord 4, 0
-	ld b, $8
-	ld c, $e
+	hlcoord 2, 0
+	ld b, 10
+	ld c, 16
 	call TextBoxBorder
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
-	hlcoord 5, 2
+; show map legend
+	ld a, [wCurMap]
+	ld e, a
+	farcall GetMapName
+	hlcoord 3, 2
+	ld de, wNameBuffer
+	call PlaceString
+
+; show normal info
+	hlcoord 3, 4
 	ld de, SaveScreenInfoText
 	call PlaceString
-	hlcoord 12, 2
+	hlcoord 12, 4
 	ld de, wPlayerName
 	call PlaceString
-	hlcoord 17, 4
+	hlcoord 17, 6
 	call PrintNumBadges
-	hlcoord 16, 6
+	hlcoord 16, 8
 	call PrintNumOwnedMons
-	hlcoord 13, 8
+	hlcoord 13, 10
 	call PrintPlayTime
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
