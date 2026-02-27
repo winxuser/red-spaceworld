@@ -7,11 +7,7 @@
 	db 45 ; catch rate
 	db 209 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/charizard.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/charizard.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/charizard/front.pic", 0, 1 ; sprite dimensions
 	dw CharizardPicFront, CharizardPicBack
 
 	db SCRATCH, GROWL, EMBER, LEER ; level 1 learnset

@@ -7,11 +7,7 @@
 	db 190 ; catch rate
 	db 90 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/grimer.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/grimer.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/grimer/front.pic", 0, 1 ; sprite dimensions
 	dw GrimerPicFront, GrimerPicBack
 
 	db POUND, DISABLE, NO_MOVE, NO_MOVE ; level 1 learnset

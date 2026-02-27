@@ -7,11 +7,7 @@
 	db 60 ; catch rate
 	db 192 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/rapidash.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/rapidash.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/rapidash/front.pic", 0, 1 ; sprite dimensions
 	dw RapidashPicFront, RapidashPicBack
 
 	db EMBER, TAIL_WHIP, STOMP, GROWL ; level 1 learnset

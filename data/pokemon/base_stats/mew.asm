@@ -7,11 +7,7 @@
 	db 45 ; catch rate
 	db 64 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/mew.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/mew.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/mew/front.pic", 0, 1 ; sprite dimensions
 	dw MewPicFront, MewPicBack
 
 	db POUND, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset

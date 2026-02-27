@@ -7,11 +7,7 @@
 	db 45 ; catch rate
 	db 195 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/nidoking.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/nidoking.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/nidoking/front.pic", 0, 1 ; sprite dimensions
 	dw NidokingPicFront, NidokingPicBack
 
 	db TACKLE, HORN_ATTACK, POISON_STING, THRASH ; level 1 learnset

@@ -7,11 +7,7 @@
 	db 45 ; catch rate
 	db 158 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/dodrio.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/dodrio.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/dodrio/front.pic", 0, 1 ; sprite dimensions
 	dw DodrioPicFront, DodrioPicBack
 
 	db PECK, GROWL, FURY_ATTACK, NO_MOVE ; level 1 learnset

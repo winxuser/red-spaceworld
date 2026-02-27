@@ -7,11 +7,7 @@
 	db 3 ; catch rate
 	db 215 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/articuno.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/articuno.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/articuno/front.pic", 0, 1 ; sprite dimensions
 	dw ArticunoPicFront, ArticunoPicBack
 
 	db PECK, ICE_BEAM, NO_MOVE, NO_MOVE ; level 1 learnset

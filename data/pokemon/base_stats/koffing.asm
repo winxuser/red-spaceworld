@@ -7,11 +7,7 @@
 	db 190 ; catch rate
 	db 114 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/koffing.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/koffing.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/koffing/front.pic", 0, 1 ; sprite dimensions
 	dw KoffingPicFront, KoffingPicBack
 
 	db TACKLE, SMOG, NO_MOVE, NO_MOVE ; level 1 learnset

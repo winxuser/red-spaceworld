@@ -77,23 +77,18 @@ ROMX $8
 ;	"Audio Engine 2"
 ;	"Music 2"
 ROMX $9
-	"Pics 1"
 	org $7d6b
 	"Battle Engine 3"
 ROMX $A
-	"Pics 2"
 	org $7ea9
 	"Battle Engine 4"
 ROMX $B
-	"Pics 3"
 	org $7b7b
 	"Battle Engine 5"
 ROMX $C
-	"Pics 4"
 	org $7f2b
 	"Battle Engine 6"
 ROMX $D
-	"Pics 5"
 	org $7244
 	"Slot Machines"
 ROMX $E
@@ -204,17 +199,103 @@ ROMX $2C
 ROMX $31
 	"bank31"
 ROMX $32
-	"Pics 7"
+	"Pics 1"
 ROMX $33
-	"Pics 8"
+	"Pics 2"
 ROMX $34
-	"Pics 9"
+	"Pics 3"
 ROMX $35
-	"Pics 10"
+	"Pics 4"
 ROMX $36
-	"Pics 11"
+	"Pics 5"
 ROMX $37
+	"Pics 7"
+ROMX $38
+	"Pics 8"
+ROMX $39
+	"Pics 9"
+ROMX $3A
+	"Pics 10"
+ROMX $3B
+	"Pics 11"
+ROMX $3C
 	"Pics 12"
+ROMX $3D
+	"Pics 13"
+ROMX $3E
+	"Pics 14"
+ROMX $3F
+ROMX $40
+ROMX $41
+ROMX $42
+ROMX $43
+ROMX $44
+ROMX $45
+ROMX $46
+ROMX $47
+
+ROMX $48
+ROMX $49
+ROMX $4A
+ROMX $4B
+ROMX $4C
+ROMX $4D
+ROMX $4E
+ROMX $4F
+
+ROMX $50
+ROMX $51
+ROMX $52
+ROMX $53
+ROMX $54
+ROMX $55
+ROMX $56
+ROMX $57
+
+ROMX $58
+ROMX $59
+ROMX $5A
+ROMX $5B
+ROMX $5C
+ROMX $5D
+ROMX $5E
+ROMX $5F
+
+ROMX $60
+ROMX $61
+ROMX $62
+ROMX $63
+ROMX $64
+ROMX $65
+ROMX $66
+ROMX $67
+
+ROMX $68
+ROMX $69
+ROMX $6A
+ROMX $6B
+ROMX $6C
+ROMX $6D
+ROMX $6E
+ROMX $6F
+
+ROMX $70
+ROMX $71
+ROMX $72
+ROMX $73
+ROMX $74
+ROMX $75
+ROMX $76
+ROMX $77
+
+ROMX $78
+ROMX $79
+ROMX $7A
+ROMX $7B
+ROMX $7C
+ROMX $7D
+ROMX $7E
+ROMX $7F
 WRAM0
 	"Audio RAM"
 	org $c100

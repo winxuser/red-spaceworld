@@ -7,11 +7,7 @@
 	db 190 ; catch rate
 	db 89 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/magnemite.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/magnemite.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/magnemite/front.pic", 0, 1 ; sprite dimensions
 	dw MagnemitePicFront, MagnemitePicBack
 
 	db TACKLE, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset

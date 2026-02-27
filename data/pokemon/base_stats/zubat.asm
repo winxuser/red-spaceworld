@@ -7,11 +7,7 @@
 	db 255 ; catch rate
 	db 54 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/zubat.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/zubat.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/zubat/front.pic", 0, 1 ; sprite dimensions
 	dw ZubatPicFront, ZubatPicBack
 
 	db LEECH_LIFE, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset

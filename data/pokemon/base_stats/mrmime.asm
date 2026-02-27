@@ -7,11 +7,7 @@
 	db 45 ; catch rate
 	db 136 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/mr.mime.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/mr.mime.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/mr.mime/front.pic", 0, 1 ; sprite dimensions
 	dw MrMimePicFront, MrMimePicBack
 
 	db CONFUSION, BARRIER, NO_MOVE, NO_MOVE ; level 1 learnset

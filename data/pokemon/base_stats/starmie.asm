@@ -7,11 +7,7 @@
 	db 60 ; catch rate
 	db 207 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/starmie.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/starmie.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/starmie/front.pic", 0, 1 ; sprite dimensions
 	dw StarmiePicFront, StarmiePicBack
 
 	db TACKLE, WATER_GUN, HARDEN, NO_MOVE ; level 1 learnset

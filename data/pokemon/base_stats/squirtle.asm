@@ -7,11 +7,7 @@
 	db 45 ; catch rate
 	db 66 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/squirtle.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/squirtle.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/squirtle/front.pic", 0, 1 ; sprite dimensions
 	dw SquirtlePicFront, SquirtlePicBack
 
 	db TACKLE, TAIL_WHIP, NO_MOVE, NO_MOVE ; level 1 learnset

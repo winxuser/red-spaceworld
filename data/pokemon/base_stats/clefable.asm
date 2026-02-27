@@ -7,11 +7,7 @@
 	db 25 ; catch rate
 	db 129 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/clefable.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/clefable.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/clefable/front.pic", 0, 1 ; sprite dimensions
 	dw ClefablePicFront, ClefablePicBack
 
 	db SING, DOUBLESLAP, MINIMIZE, METRONOME ; level 1 learnset

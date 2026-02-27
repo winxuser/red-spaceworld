@@ -7,11 +7,7 @@
 	db 255 ; catch rate
 	db 58 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/spearow.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/spearow.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/spearow/front.pic", 0, 1 ; sprite dimensions
 	dw SpearowPicFront, SpearowPicBack
 
 	db PECK, GROWL, NO_MOVE, NO_MOVE ; level 1 learnset
