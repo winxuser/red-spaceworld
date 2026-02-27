@@ -137,15 +137,56 @@ pokered_vc_pad     = 0x00
 pokeblue_vc_pad    = 0x00
 pokeblue_debug_pad = 0xff
 
-pokered_opt        = -Cjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON RED"
-pokeblue_opt       = -Cjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON BLUE"
-pokeblue_debug_opt = -Cjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON BLUE"
-pokered_vc_opt     = -Cjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON RED"
-pokeblue_vc_opt    = -Cjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON BLUE"
+pokered_opt        = -Cjv -n 0 -k 01 -l 0x33 -m MBC5+RAM+BATTERY -r 03 -t "POKEMON RED"
+pokeblue_opt       = -Cjv -n 0 -k 01 -l 0x33 -m MBC5+RAM+BATTERY -r 03 -t "POKEMON BLUE"
+pokeblue_debug_opt = -Cjv -n 0 -k 01 -l 0x33 -m MBC5+RAM+BATTERY -r 03 -t "POKEMON BLUE"
+pokered_vc_opt     = -Cjv -n 0 -k 01 -l 0x33 -m MBC5+RAM+BATTERY -r 03 -t "POKEMON RED"
+pokeblue_vc_opt    = -Cjv -n 0 -k 01 -l 0x33 -m MBC5+RAM+BATTERY -r 03 -t "POKEMON BLUE"
 
 %.gbc: $$(%_obj) layout.link
 	$(RGBLINK) -p $($*_pad) -d -m $*.map -n $*.sym -l layout.link -o $@ $(filter %.o,$^)
 	$(RGBFIX) -p $($*_pad) $($*_opt) $@
+
+	@echo ""
+	@echo "================ ROM INFO ================="
+	@size=$$(stat -c%s $@); \
+	banks=$$((size / 16384)); \
+	mapper_byte=$$(xxd -p -l 1 -s 0x147 $@); \
+	case $$mapper_byte in \
+		19|1a|1b) mapper="MBC5"; max=512 ;; \
+		0f|10|11|12|13) mapper="MBC3"; max=128 ;; \
+		01|02|03) mapper="MBC1"; max=125 ;; \
+		*) mapper="Unknown"; max=0 ;; \
+	esac; \
+	printf "ROM File:            %s\n" "$@"; \
+	printf "ROM Size:            %d bytes\n" "$$size"; \
+	printf "Bank Size:           16384 bytes (16KB)\n"; \
+	printf "Banks Used:          %d\n" "$$banks"; \
+	printf "Mapper:              %s\n" "$$mapper"; \
+	if [ $$max -gt 0 ]; then \
+		percent=$$((banks * 100 / max)); \
+		printf "Max Banks:           %d\n" "$$max"; \
+		printf "ROM Usage:           %d%%\n" "$$percent"; \
+	fi; \
+	\
+	echo ""; \
+	echo "--------- BANK USAGE (from .map) ---------"; \
+	grep "^ROMX bank" $*.map | awk '{print $$3}' | sort -u | tail -n1 | \
+	awk '{printf "Highest Bank Used:   %s\n", $$1}'; \
+	\
+	total_sections=$$(grep -c "^SECTION:" $*.map); \
+	printf "Total Sections:      %d\n" "$$total_sections"; \
+	\
+	sram_banks=$$(grep -c '^SRAM' layout.link); \
+	printf "SRAM Banks Defined:  %d\n" "$$sram_banks"; \
+	\
+	if [ "$$mapper" = "MBC3" ] && [ $$banks -gt 128 ]; then \
+		echo "WARNING: Exceeded MBC3 bank limit!"; \
+	fi; \
+	if [ "$$mapper" = "MBC5" ] && [ $$banks -gt 480 ]; then \
+		echo "WARNING: Nearing MBC5 limit!"; \
+	fi; \
+	echo "============================================"
 
 
 ### Misc file-specific graphics rules
