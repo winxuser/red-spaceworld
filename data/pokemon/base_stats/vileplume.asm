@@ -7,11 +7,7 @@
 	db 45 ; catch rate
 	db 184 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/vileplume.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/vileplume.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/vileplume/front.pic", 0, 1 ; sprite dimensions
 	dw VileplumePicFront, VileplumePicBack
 
 	db STUN_SPORE, SLEEP_POWDER, ACID, PETAL_DANCE ; level 1 learnset

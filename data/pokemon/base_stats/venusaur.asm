@@ -7,11 +7,7 @@
 	db 45 ; catch rate
 	db 208 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/venusaur.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/venusaur.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/venusaur/front.pic", 0, 1 ; sprite dimensions
 	dw VenusaurPicFront, VenusaurPicBack
 
 	db TACKLE, GROWL, LEECH_SEED, VINE_WHIP ; level 1 learnset

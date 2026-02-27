@@ -7,11 +7,7 @@
 	db 45 ; catch rate
 	db 119 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/kabuto.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/kabuto.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/kabuto/front.pic", 0, 1 ; sprite dimensions
 	dw KabutoPicFront, KabutoPicBack
 
 	db SCRATCH, HARDEN, NO_MOVE, NO_MOVE ; level 1 learnset

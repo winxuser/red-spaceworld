@@ -7,11 +7,7 @@
 	db 45 ; catch rate
 	db 67 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/dratini.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/dratini.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/dratini/front.pic", 0, 1 ; sprite dimensions
 	dw DratiniPicFront, DratiniPicBack
 
 	db WRAP, LEER, NO_MOVE, NO_MOVE ; level 1 learnset

@@ -7,11 +7,7 @@
 	db 50 ; catch rate
 	db 153 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/dugtrio.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/dugtrio.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/dugtrio/front.pic", 0, 1 ; sprite dimensions
 	dw DugtrioPicFront, DugtrioPicBack
 
 	db SCRATCH, GROWL, DIG, NO_MOVE ; level 1 learnset

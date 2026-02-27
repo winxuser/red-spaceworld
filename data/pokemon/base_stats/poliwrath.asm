@@ -7,11 +7,7 @@
 	db 45 ; catch rate
 	db 185 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/poliwrath.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/poliwrath.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/poliwrath/front.pic", 0, 1 ; sprite dimensions
 	dw PoliwrathPicFront, PoliwrathPicBack
 
 	db HYPNOSIS, WATER_GUN, DOUBLESLAP, BODY_SLAM ; level 1 learnset

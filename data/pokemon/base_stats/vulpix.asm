@@ -7,11 +7,7 @@
 	db 190 ; catch rate
 	db 63 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/vulpix.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/vulpix.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/vulpix/front.pic", 0, 1 ; sprite dimensions
 	dw VulpixPicFront, VulpixPicBack
 
 	db EMBER, TAIL_WHIP, NO_MOVE, NO_MOVE ; level 1 learnset

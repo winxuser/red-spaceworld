@@ -7,11 +7,7 @@
 	db 45 ; catch rate
 	db 202 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/aerodactyl.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/aerodactyl.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/aerodactyl/front.pic", 0, 1 ; sprite dimensions
 	dw AerodactylPicFront, AerodactylPicBack
 
 	db WING_ATTACK, AGILITY, NO_MOVE, NO_MOVE ; level 1 learnset

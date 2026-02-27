@@ -7,11 +7,7 @@
 	db 225 ; catch rate
 	db 106 ; base exp
 
-IF GEN_2_GRAPHICS
-	INCBIN "gfx/pokemon/gsfront/staryu.pic", 0, 1 ; sprite dimensions
-ELSE
-	INCBIN "gfx/pokemon/front/staryu.pic", 0, 1 ; sprite dimensions
-ENDC
+	INCBIN "gfx/pokemon/staryu/front.pic", 0, 1 ; sprite dimensions
 	dw StaryuPicFront, StaryuPicBack
 
 	db TACKLE, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
