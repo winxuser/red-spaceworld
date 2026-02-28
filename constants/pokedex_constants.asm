@@ -155,5 +155,14 @@
 	const DEX_DRAGONITE  ; 149
 	const DEX_MEWTWO     ; 150
 	const DEX_MEW        ; 151
+	const DEX_HAPPA      ; 152
+	const DEX_HANAMOGURA ; 153
+	const DEX_HANARYU    ; 154
+	const DEX_HONOGUMA   ; 155
+	const DEX_BORUBEA    ; 156
+	const DEX_DAINABEA   ; 157
+	const DEX_KURUSU     ; 158
+	const DEX_AKUA       ; 159
+	const DEX_AKUERIA    ; 160
 
 DEF NUM_POKEMON EQU const_value - 1

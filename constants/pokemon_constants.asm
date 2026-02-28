@@ -37,8 +37,8 @@
 	const BLASTOISE          ; $1C
 	const PINSIR             ; $1D
 	const TANGELA            ; $1E
-	const_skip               ; $1F
-	const_skip               ; $20
+	const HAPPA              ; $1F
+	const HANAMOGURA         ; $20
 	const GROWLITHE          ; $21
 	const ONIX               ; $22
 	const FEAROW             ; $23
@@ -56,24 +56,24 @@
 	const PSYDUCK            ; $2F
 	const DROWZEE            ; $30
 	const GOLEM              ; $31
-	const_skip               ; $32
+	const HANARYU            ; $32
 	const MAGMAR             ; $33
-	const_skip               ; $34
+	const HONOGUMA           ; $34
 	const ELECTABUZZ         ; $35
 	const MAGNETON           ; $36
 	const KOFFING            ; $37
-	const_skip               ; $38
+	const BORUBEA            ; $38
 	const MANKEY             ; $39
 	const SEEL               ; $3A
 	const DIGLETT            ; $3B
 	const TAUROS             ; $3C
-	const_skip               ; $3D
-	const_skip               ; $3E
-	const_skip               ; $3F
+	const DAINABEA           ; $3D
+	const KURUSU             ; $3E
+	const AKUA               ; $3F
 	const FARFETCHD          ; $40
 	const VENONAT            ; $41
 	const DRAGONITE          ; $42
-	const_skip               ; $43
+	const AKUERIA            ; $43
 	const_skip               ; $44
 	const_skip               ; $45
 	const DODUO              ; $46

@@ -30,8 +30,8 @@ PokedexEntryPointers:
 	dw BlastoiseDexEntry
 	dw PinsirDexEntry
 	dw TangelaDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw HappaDexEntry
+	dw HanamoguraDexEntry
 	dw GrowlitheDexEntry
 	dw OnixDexEntry
 	dw FearowDexEntry
@@ -49,24 +49,24 @@ PokedexEntryPointers:
 	dw PsyduckDexEntry
 	dw DrowzeeDexEntry
 	dw GolemDexEntry
-	dw MissingNoDexEntry
+	dw HanaryuDexEntry
 	dw MagmarDexEntry
-	dw MissingNoDexEntry
+	dw HonogumaDexEntry
 	dw ElectabuzzDexEntry
 	dw MagnetonDexEntry
 	dw KoffingDexEntry
-	dw MissingNoDexEntry
+	dw BorubeaDexEntry
 	dw MankeyDexEntry
 	dw SeelDexEntry
 	dw DiglettDexEntry
 	dw TaurosDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw DainabeaDexEntry
+	dw KurusuDexEntry
+	dw AkuaDexEntry
 	dw FarfetchdDexEntry
 	dw VenonatDexEntry
 	dw DragoniteDexEntry
-	dw MissingNoDexEntry
+	dw AkueriaDexEntry
 	dw MissingNoDexEntry
 	dw MissingNoDexEntry
 	dw DoduoDexEntry
@@ -407,6 +407,20 @@ TangelaDexEntry:
 	text_far _TangelaDexEntry
 	text_end
 
+HappaDexEntry:
+	db "LEAF@"
+	db 2,11
+	dw 141
+	text_far _HappaDexEntry
+	text_end
+
+HanamoguraDexEntry:
+	db "LEAF@"
+	db 3,11
+	dw 384
+	text_far _HanamoguraDexEntry
+	text_end
+
 GrowlitheDexEntry:
 	db "PUPPY@"
 	db 2,4
@@ -526,11 +540,25 @@ GolemDexEntry:
 	text_far _GolemDexEntry
 	text_end
 
+HanaryuDexEntry:
+	db "HERB@"
+	db 5,11
+	dw 2216
+	text_far _HanaryuDexEntry
+	text_end
+
 MagmarDexEntry:
 	db "SPITFIRE@"
 	db 4,3
 	dw 980
 	text_far _MagmarDexEntry
+	text_end
+
+HonogumaDexEntry:
+	db "FIREBEAR@"
+	db 1,08
+	dw 174
+	text_far _HonogumaDexEntry
 	text_end
 
 ElectabuzzDexEntry:
@@ -552,6 +580,13 @@ KoffingDexEntry:
 	db 2,0
 	dw 20
 	text_far _KoffingDexEntry
+	text_end
+
+BorubeaDexEntry:
+	db "FIRE BEAR@"
+	db 2,11
+	dw 419
+	text_far _BorubeaDexEntry
 	text_end
 
 MankeyDexEntry:
@@ -582,6 +617,27 @@ TaurosDexEntry:
 	text_far _TaurosDexEntry
 	text_end
 
+DainabeaDexEntry:
+	db "VOLCANO@"
+	db 5,7
+	dw 1753
+	text_far _DainabeaDexEntry
+	text_end
+
+KurusuDexEntry:
+	db "WATERDINO@"
+	db 1,7
+	dw 175
+	text_far _KurusuDexEntry
+	text_end
+
+AkuaDexEntry:
+	db "AQUA@"
+	db 3,7
+	dw 551
+	text_far _AkuaDexEntry
+	text_end
+
 FarfetchdDexEntry:
 	db "WILD DUCK@"
 	db 2,7
@@ -598,9 +654,16 @@ VenonatDexEntry:
 
 DragoniteDexEntry:
 	db "DRAGON@"
-	db 7,3
+	db 7,7
 	dw 4630
 	text_far _DragoniteDexEntry
+	text_end
+
+AkueriaDexEntry:
+	db "AQUA@"
+	db 7,7
+	dw 1958
+	text_far _AkueriaDexEntry
 	text_end
 
 DoduoDexEntry:

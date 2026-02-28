@@ -1,0 +1,25 @@
+	db DEX_DAINABEA ; pokedex id
+
+	db  70,  80,  60, 60,  70
+	;   hp  atk  def  spd  spc
+
+	db FIRE, FIRE ; type
+	db 45 ; catch rate
+	db 100 ; base exp
+
+	INCBIN "gfx/pokemon/dainabea/front.pic", 0, 1 ; sprite dimensions
+	dw DainabeaPicFront, DainabeaPicBack
+
+	db SCRATCH, GROWL, EMBER, LEER ; level 1 learnset
+	db GROWTH_MEDIUM_SLOW ; growth rate
+
+	; tm/hm learnset
+	tmhm MEGA_PUNCH,   SWORDS_DANCE, MEGA_KICK,    TOXIC,        BODY_SLAM,    \
+	     TAKE_DOWN,    DOUBLE_EDGE,  HYPER_BEAM,   SUBMISSION,   COUNTER,      \
+	     SEISMIC_TOSS, RAGE,         DRAGON_RAGE,  EARTHQUAKE,   FISSURE,      \
+	     DIG,          MIMIC,        DOUBLE_TEAM,  REFLECT,      BIDE,         \
+	     FIRE_BLAST,   SWIFT,        SKULL_BASH,   REST,         SUBSTITUTE,   \
+	     CUT,          STRENGTH
+	; end
+
+	db BANK(DainabeaPicFront)

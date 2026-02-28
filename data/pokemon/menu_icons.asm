@@ -151,4 +151,13 @@ MonPartyData:
 	nybble ICON_SNAKE     ; Dragonite
 	nybble ICON_MON       ; Mewtwo
 	nybble ICON_MON       ; Mew
+	nybble ICON_GRASS     ; Happa
+	nybble ICON_GRASS     ; Hanamogura
+	nybble ICON_GRASS     ; Hanaryu
+	nybble ICON_MON       ; Honoguma
+	nybble ICON_MON       ; Borubea
+	nybble ICON_MON       ; Dainabea
+	nybble ICON_WATER     ; Kurusu
+	nybble ICON_WATER     ; Akua
+	nybble ICON_WATER     ; Akueria
 	end_nybble_array NUM_POKEMON

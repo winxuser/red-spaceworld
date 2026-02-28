@@ -40,8 +40,8 @@ EvosMovesPointerTable:
 	dw BlastoiseEvosMoves
 	dw PinsirEvosMoves
 	dw TangelaEvosMoves
-	dw MissingNo1FEvosMoves
-	dw MissingNo20EvosMoves
+	dw HappaEvosMoves
+	dw HanamoguraEvosMoves
 	dw GrowlitheEvosMoves
 	dw OnixEvosMoves
 	dw FearowEvosMoves
@@ -59,24 +59,24 @@ EvosMovesPointerTable:
 	dw PsyduckEvosMoves
 	dw DrowzeeEvosMoves
 	dw GolemEvosMoves
-	dw MissingNo32EvosMoves
+	dw HanaryuEvosMoves
 	dw MagmarEvosMoves
-	dw MissingNo34EvosMoves
+	dw HonogumaEvosMoves
 	dw ElectabuzzEvosMoves
 	dw MagnetonEvosMoves
 	dw KoffingEvosMoves
-	dw MissingNo38EvosMoves
+	dw BorubeaEvosMoves
 	dw MankeyEvosMoves
 	dw SeelEvosMoves
 	dw DiglettEvosMoves
 	dw TaurosEvosMoves
-	dw MissingNo3DEvosMoves
-	dw MissingNo3EEvosMoves
-	dw MissingNo3FEvosMoves
+	dw DainabeaEvosMoves
+	dw KurusuEvosMoves
+	dw AkuaEvosMoves
 	dw FarfetchdEvosMoves
 	dw VenonatEvosMoves
 	dw DragoniteEvosMoves
-	dw MissingNo43EvosMoves
+	dw AkueriaEvosMoves
 	dw MissingNo44EvosMoves
 	dw MissingNo45EvosMoves
 	dw DoduoEvosMoves
@@ -547,17 +547,37 @@ TangelaEvosMoves:
 	db 49, GROWTH
 	db 0
 
-MissingNo1FEvosMoves:
+HappaEvosMoves:
 ; Evolutions
-	db 0
+	db EVOLVE_LEVEL, 16, DEX_HANAMOGURA
+	db 0 ; no more evolutions
 ; Learnset
-	db 0
+	db  1, TACKLE
+	db  3, GROWTH
+	db  6, LEECH_SEED
+	db 10, RAZOR_LEAF
+	db 15, STUN_SPORE
+	db 21, SLEEP_POWDER
+	db 28, SLAM
+	db 36, POISONPOWDER
+	db 55, SOLARBEAM
+	db 0 ; no more level-up moves
 
-MissingNo20EvosMoves:
+HanamoguraEvosMoves:
 ; Evolutions
-	db 0
+	db EVOLVE_LEVEL, 31, DEX_HANARYU
+	db 0 ; no more evolutions
 ; Learnset
-	db 0
+	db  1, TACKLE
+	db  3, GROWTH
+	db  6, LEECH_SEED
+	db 10, RAZOR_LEAF
+	db 15, STUN_SPORE
+	db 21, SLEEP_POWDER
+	db 28, SLAM
+	db 36, POISONPOWDER
+	db 55, SOLARBEAM
+	db 0 ; no more level-up moves
 
 GrowlitheEvosMoves:
 ; Evolutions
@@ -761,11 +781,20 @@ GolemEvosMoves:
 	db 43, EXPLOSION
 	db 0
 
-MissingNo32EvosMoves:
+HanaryuEvosMoves:
 ; Evolutions
-	db 0
+	db 0 ; no more evolutions
 ; Learnset
-	db 0
+	db  1, TACKLE
+	db  3, GROWTH
+	db  6, LEECH_SEED
+	db 10, RAZOR_LEAF
+	db 15, STUN_SPORE
+	db 21, SLEEP_POWDER
+	db 28, SLAM
+	db 36, POISONPOWDER
+	db 55, SOLARBEAM
+	db 0 ; no more level-up moves
 
 MagmarEvosMoves:
 ; Evolutions
@@ -779,11 +808,18 @@ MagmarEvosMoves:
 	db 55, FLAMETHROWER
 	db 0
 
-MissingNo34EvosMoves:
-; Evolutions
-	db 0
-; Learnset
-	db 0
+HonogumaEvosMoves:
+	db EVOLVE_LEVEL, 16, DEX_BORUBEA
+	db 0 ; no more evolutions
+	db  1, SCRATCH
+	db  5, LEER
+	db  9, EMBER
+	db 14, ROAR
+	db 19, BITE
+	db 25, REST
+	db 45, FURY_SWIPES
+	db 53, FLAMETHROWER
+	db 0 ; no more level-up moves
 
 ElectabuzzEvosMoves:
 ; Evolutions
@@ -820,11 +856,18 @@ KoffingEvosMoves:
 	db 48, EXPLOSION
 	db 0
 
-MissingNo38EvosMoves:
-; Evolutions
-	db 0
-; Learnset
-	db 0
+BorubeaEvosMoves:
+;	db EVOLVE_LEVEL, 32, DEX_DYNABEAR
+	db 0 ; no more evolutions
+	db  1, SCRATCH
+	db  6, LEER
+	db 11, ROAR
+	db 17, EMBER
+	db 23, BITE
+	db 30, REST
+	db 53, FURY_SWIPES
+	db 62, FLAMETHROWER
+	db 0 ; no more level-up moves
 
 MankeyEvosMoves:
 ; Evolutions
@@ -873,23 +916,43 @@ TaurosEvosMoves:
 	db 51, TAKE_DOWN
 	db 0
 
-MissingNo3DEvosMoves:
-; Evolutions
-	db 0
-; Learnset
-	db 0
+DainabeaEvosMoves:
+	db 0 ; no more evolutions
+	db  1, SCRATCH
+	db  7, LEER
+	db 13, ROAR
+	db 20, EMBER
+	db 27, BITE
+	db 35, REST
+	db 61, FURY_SWIPES
+	db 71, FLAMETHROWER
+	db 0 ; no more level-up moves
 
-MissingNo3EEvosMoves:
-; Evolutions
-	db 0
-; Learnset
-	db 0
+KurusuEvosMoves:
+	db EVOLVE_LEVEL, 16, DEX_AKUA
+	db 0 ; no more evolutions
+	db  1, TACKLE
+	db  4, GROWL
+	db  8, WATER_GUN
+	db 13, BITE
+	db 19, MIST
+	db 26, AURORA_BEAM
+	db 43, BODY_SLAM
+	db 53, HYDRO_PUMP
+	db 0 ; no more level-up moves
 
-MissingNo3FEvosMoves:
-; Evolutions
-	db 0
-; Learnset
-	db 0
+AkuaEvosMoves:
+;	db EVOLVE_LEVEL, 16, DEX_AKUA
+	db 0 ; no more evolutions
+	db  1, TACKLE
+	db  4, GROWL
+	db  8, WATER_GUN
+	db 13, BITE
+	db 19, MIST
+	db 26, AURORA_BEAM
+	db 43, BODY_SLAM
+	db 53, HYDRO_PUMP
+	db 0 ; no more level-up moves
 
 FarfetchdEvosMoves:
 ; Evolutions
@@ -926,11 +989,17 @@ DragoniteEvosMoves:
 	db 60, HYPER_BEAM
 	db 0
 
-MissingNo43EvosMoves:
-; Evolutions
-	db 0
-; Learnset
-	db 0
+AkueriaEvosMoves:
+	db 0 ; no more evolutions
+	db  1, TACKLE
+	db  6, GROWL
+	db 12, WATER_GUN
+	db 19, BITE
+	db 27, MIST
+	db 36, AURORA_BEAM
+	db 57, BODY_SLAM
+	db 69, HYDRO_PUMP
+	db 0 ; no more level-up moves
 
 MissingNo44EvosMoves:
 ; Evolutions

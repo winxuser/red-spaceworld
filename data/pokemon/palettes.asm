@@ -153,6 +153,15 @@ IF GEN_2_GRAPHICS
 	db PAL_DRAGONITE
 	db PAL_MEWTWO
 	db PAL_MEW
+	db PAL_GREENMON ; Happa
+	db PAL_GREENMON ; Hanamogura
+	db PAL_GREENMON ; Hanaryu
+	db PAL_REDMON   ; Honoguma
+	db PAL_REDMON   ; Borubea
+	db PAL_REDMON   ; Dainabea
+	db PAL_BLUEMON  ; Kurusu
+	db PAL_BLUEMON  ; Akua
+	db PAL_BLUEMON  ; Akueria
 TrainerPalettes: ; Gen II trainer sprites are given their own palettes
 	db PAL_HERO
 	db PAL_YOUNGSTER
