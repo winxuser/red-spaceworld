@@ -298,6 +298,22 @@ _TangelaDexEntry::
 	next "shake as it walks"
 	dex
 
+_HappaDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
+_HanamoguraDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
 _GrowlitheDexEntry::
 	text "Very protective"
 	next "of its territory."
@@ -468,6 +484,14 @@ _GolemDexEntry::
 	next "without damage"
 	dex
 
+_HanaryuDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
 _MagmarDexEntry::
 	text "Its body always"
 	next "burns with an"
@@ -476,6 +500,14 @@ _MagmarDexEntry::
 	page "enables it to"
 	next "hide perfectly"
 	next "among flames"
+	dex
+
+_HonogumaDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
 	dex
 
 _ElectabuzzDexEntry::
@@ -506,6 +538,14 @@ _KoffingDexEntry::
 	page "its body, it is"
 	next "prone to exploding"
 	next "without warning"
+	dex
+
+_BorubeaDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
 	dex
 
 _MankeyDexEntry::
@@ -548,6 +588,30 @@ _TaurosDexEntry::
 	next "long tails"
 	dex
 
+_DainabeaDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
+_KurusuDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
+_AkuaDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
 _FarfetchdDexEntry::
 	text "The sprig of"
 	next "green onions it"
@@ -576,6 +640,14 @@ _DragoniteDexEntry::
 	page "Its intelligence"
 	next "is said to match"
 	next "that of humans"
+	dex
+
+_AkueriaDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
 	dex
 
 _DoduoDexEntry::
