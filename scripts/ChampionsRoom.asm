@@ -71,17 +71,33 @@ ChampionsRoomRivalReadyToBattleScript:
 	; select which team to use during the encounter
 	ld a, [wRivalStarter]
 	cp STARTER2
-	jr nz, .NotStarter2
+	jr nz, .not_squirtle
 	ld a, $1
-	jr .saveTrainerId
-.NotStarter2
+	jr .done
+.not_squirtle
 	cp STARTER3
-	jr nz, .NotStarter3
+	jr nz, .not_charmander
 	ld a, $2
-	jr .saveTrainerId
-.NotStarter3
+	jr .done
+.not_charmander
+	cp STARTER1
+	jr nz, .not_bulbasaur
 	ld a, $3
-.saveTrainerId
+	jr .done
+.not_bulbasaur
+	cp STARTER5
+	jr nz, .not_kurusu
+	ld a, $4
+	jr .done
+.not_kurusu
+	cp STARTER4
+	jr nz, .not_honoguma
+	ld a, $5
+	jr .done
+.not_honoguma
+	cp STARTER6
+	ld a, $6
+.done
 	ld [wTrainerNo], a
 	ld a, 1
 	ld [wIsTrainerBattle], a

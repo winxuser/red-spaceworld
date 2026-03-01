@@ -156,16 +156,32 @@ PokemonTower2FRivalText:
 	; select which team to use during the encounter
 	ld a, [wRivalStarter]
 	cp STARTER2
-	jr nz, .NotSquirtle
-	ld a, $4
+	jr nz, .not_squirtle
+	ld a, $7
 	jr .done
-.NotSquirtle
+.not_squirtle
 	cp STARTER3
-	jr nz, .Charmander
-	ld a, $5
+	jr nz, .not_charmander
+	ld a, $8
 	jr .done
-.Charmander
-	ld a, $6
+.not_charmander
+	cp STARTER1
+	jr nz, .not_bulbasaur
+	ld a, $9
+	jr .done
+.not_bulbasaur
+	cp STARTER5
+	jr nz, .not_kurusu
+	ld a, $10
+	jr .done
+.not_kurusu
+	cp STARTER4
+	jr nz, .not_honoguma
+	ld a, $11
+	jr .done
+.not_honoguma
+	cp STARTER6
+	ld a, $12
 .done
 	ld [wTrainerNo], a
 

@@ -103,16 +103,32 @@ SSAnne2FRivalStartBattleScript:
 	; select which team to use during the encounter
 	ld a, [wRivalStarter]
 	cp STARTER2
-	jr nz, .NotSquirtle
+	jr nz, .not_squirtle
 	ld a, $1
 	jr .done
-.NotSquirtle
+.not_squirtle
 	cp STARTER3
-	jr nz, .Charmander
+	jr nz, .not_charmander
 	ld a, $2
 	jr .done
-.Charmander
+.not_charmander
+	cp STARTER1
 	ld a, $3
+	jr nz, .not_bulbasaur
+	jr .done
+.not_bulbasaur
+	cp STARTER5
+	ld a, $4
+	jr nz, .not_kurusu
+	jr .done
+.not_kurusu
+	cp STARTER4
+	ld a, $5
+	jr nz, .not_honoguma
+	jr .done
+.not_honoguma
+	cp STARTER6
+	ld a, $6
 .done
 	ld [wTrainerNo], a
 	ld a, 1

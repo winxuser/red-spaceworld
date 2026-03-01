@@ -43,6 +43,24 @@ _OaksLabYouWantBulbasaurText::
 	cont "BULBASAUR?"
 	done
 
+_OaksLabYouWantHonogumaText::
+	text "So! You want the"
+	line "fire #MON,"
+	cont "HONOGUMA?"
+	done
+
+_OaksLabYouWantKurusuText::
+	text "So! You want the"
+	line "water #MON,"
+	cont "KURUSU?"
+	done
+
+_OaksLabYouWantHappaText::
+	text "So! You want the"
+	line "plant #MON,"
+	cont "HAPPA?"
+	done
+
 _OaksLabMonEnergeticText::
 	text "This #MON is"
 	line "really energetic!"
@@ -56,8 +74,8 @@ _OaksLabReceivedMonText::
 	text_end
 
 _OaksLabLastMonText::
-	text "That's PROF.OAK's"
-	line "last #MON!"
+	text "These are PROF.OAK's"
+	line "last few #MON!"
 	done
 
 _OaksLabOak1WhichPokemonDoYouWantText::
@@ -200,7 +218,7 @@ _OaksLabOakChooseMonText::
 
 	para "Here, <PLAYER>!"
 
-	para "There are 3"
+	para "There are 6"
 	line "#MON here!"
 
 	para "Haha!"
@@ -213,7 +231,7 @@ _OaksLabOakChooseMonText::
 	cont "#MON trainer!"
 
 	para "In my old age, I"
-	line "have only 3 left,"
+	line "have only 6 left,"
 	cont "but you can have"
 	cont "one! Choose!"
 	done
@@ -358,7 +376,7 @@ _OaksLabRivalLeaveItAllToMeText::
 	cont "<PLAYER>! Hahaha!"
 	done
 
-_OaksLabScientistText::
-	text "I study #MON as"
-	line "PROF.OAK's AIDE."
-	done
+;_OaksLabScientistText::
+;	text "I study #MON as"
+;	line "PROF.OAK's AIDE."
+;	done

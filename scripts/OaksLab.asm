@@ -194,17 +194,25 @@ OaksLabPlayerForcedToWalkBackScript:
 OaksLabChoseStarterScript:
 	ld a, [wPlayerStarter]
 	cp STARTER1
-	jr z, .Charmander
+	jp z, .Charmander
 	cp STARTER2
-	jr z, .Squirtle
-	jr .Bulbasaur
+	jp z, .Squirtle
+	cp STARTER3
+	jp z, .Bulbasaur
+	cp STARTER4
+	jp z, .Honoguma
+	cp STARTER5
+	jp z, .Kurusu
+	cp STARTER6
+	jp z, .Happa
+
 .Charmander
 	ld de, .MiddleBallMovement1
 	ld a, [wYCoord]
 	cp 4 ; is the player standing below the table?
-	jr z, .moveBlue
+	jp z, .moveBlue
 	ld de, .MiddleBallMovement2
-	jr .moveBlue
+	jp .moveBlue
 
 .MiddleBallMovement1
 	db NPC_MOVEMENT_DOWN
@@ -226,9 +234,9 @@ OaksLabChoseStarterScript:
 	ld de, .RightBallMovement1
 	ld a, [wYCoord]
 	cp 4 ; is the player standing below the table?
-	jr z, .moveBlue
+	jp z, .moveBlue
 	ld de, .RightBallMovement2
-	jr .moveBlue
+	jp .moveBlue
 
 .RightBallMovement1
 	db NPC_MOVEMENT_DOWN
@@ -252,32 +260,87 @@ OaksLabChoseStarterScript:
 	ld de, .LeftBallMovement1
 	ld a, [wXCoord]
 	cp 9 ; is the player standing to the right of the table?
-	jr nz, .moveBlue
-	push hl
-	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
-	ld a, SPRITESTATEDATA1_YPIXELS
-	ldh [hSpriteDataOffset], a
-	call GetPointerWithinSpriteStateData1
-	push hl
-	ld [hl], $4c ; SPRITESTATEDATA1_YPIXELS
-	inc hl
-	inc hl
-	ld [hl], $0 ; SPRITESTATEDATA1_XPIXELS
-	pop hl
-	inc h
-	ld [hl], 8 ; SPRITESTATEDATA2_MAPY
-	inc hl
-	ld [hl], 9 ; SPRITESTATEDATA2_MAPX
+	jp nz, .moveBlue
 	ld de, .LeftBallMovement2 ; the rival is not currently onscreen, so account for that
 	pop hl
-	jr .moveBlue
+	jp .moveBlue
 
 .LeftBallMovement1
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_RIGHT
 .LeftBallMovement2
 	db NPC_MOVEMENT_RIGHT
+	db -1 ; end
+
+.Honoguma
+	ld de, .MiddleBallMovement3
+	ld a, [wYCoord]
+	cp 4 ; is the player standing below the table?
+	jp z, .moveBlue
+	ld de, .MiddleBallMovement4
+	jp .moveBlue
+
+.MiddleBallMovement3
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db -1 ; end
+
+.MiddleBallMovement4
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db -1 ; end
+
+.Kurusu
+	ld de, .RightBallMovement3
+	ld a, [wYCoord]
+	cp 4 ; is the player standing below the table?
+	jp z, .moveBlue
+	ld de, .RightBallMovement4
+	jp .moveBlue
+
+.RightBallMovement3
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db -1 ; end
+
+.RightBallMovement4
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db -1 ; end
+
+.Happa
+	ld de, .RightBallMovement3
+	ld a, [wXCoord]
+	cp 9 ; is the player standing to the right of the table?
+	jp nz, .moveBlue
+	ld de, .RightBallMovement4 ; the rival is not currently onscreen, so account for that
+	pop hl
+	jp .moveBlue
+
+.LeftBallMovement3
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+.LeftBallMovement4
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
 	db -1 ; end
 
 .moveBlue
@@ -305,16 +368,32 @@ OaksLabRivalChoosesStarterScript:
 	call DisplayTextID
 	ld a, [wRivalStarterBallSpriteIndex]
 	cp OAKSLAB_CHARMANDER_POKE_BALL
-	jr nz, .not_charmander
+	jp nz, .not_charmander
 	ld a, HS_STARTER_BALL_1
-	jr .hideBallAndContinue
+	jp .hideBallAndContinue
 .not_charmander
 	cp OAKSLAB_SQUIRTLE_POKE_BALL
-	jr nz, .not_squirtle
+	jp nz, .not_squirtle
 	ld a, HS_STARTER_BALL_2
-	jr .hideBallAndContinue
+	jp .hideBallAndContinue
 .not_squirtle
+	cp OAKSLAB_BULBASAUR_POKE_BALL
+	jp nz, .not_bulbasaur
 	ld a, HS_STARTER_BALL_3
+	jp .hideBallAndContinue
+.not_bulbasaur
+	cp OAKSLAB_HONOGUMA_POKE_BALL
+	jp nz, .not_honoguma
+	ld a, HS_STARTER_BALL_4
+	jp .hideBallAndContinue
+.not_honoguma
+	cp OAKSLAB_KURUSU_POKE_BALL
+	jp nz, .not_kurusu
+	ld a, HS_STARTER_BALL_5
+	jp .hideBallAndContinue
+.not_kurusu
+	cp OAKSLAB_HAPPA_POKE_BALL
+	ld a, HS_STARTER_BALL_6
 .hideBallAndContinue
 	ld [wMissableObjectIndex], a
 	predef HideObject
@@ -397,7 +476,23 @@ OaksLabRivalStartBattleScript:
 	ld a, $2
 	jr .done
 .not_bulbasaur
+	cp STARTER1
+	jr nz, .not_charmander
 	ld a, $3
+	jr .done
+.not_charmander
+	cp STARTER5
+	jr nz, .not_kurusu
+	ld a, $4
+	jr .done
+.not_kurusu
+	cp STARTER6
+	jr nz, .not_happa
+	ld a, $5
+	jr .done
+.not_happa
+	cp STARTER4
+	ld a, $6
 .done
 	ld [wTrainerNo], a
 	ld a, OAKSLAB_RIVAL
@@ -582,9 +677,9 @@ OaksLabOakGivesPokedexScript:
 	ldh [hTextID], a
 	call DisplayTextID
 	call Delay3
-	ld a, HS_POKEDEX_1
-	ld [wMissableObjectIndex], a
-	predef HideObject
+;	ld a, HS_POKEDEX_1
+;	ld [wMissableObjectIndex], a
+;	predef HideObject
 	ld a, HS_POKEDEX_2
 	ld [wMissableObjectIndex], a
 	predef HideObject
@@ -730,13 +825,16 @@ OaksLab_TextPointers:
 	dw_const OaksLabCharmanderPokeBallText,       TEXT_OAKSLAB_CHARMANDER_POKE_BALL
 	dw_const OaksLabSquirtlePokeBallText,         TEXT_OAKSLAB_SQUIRTLE_POKE_BALL
 	dw_const OaksLabBulbasaurPokeBallText,        TEXT_OAKSLAB_BULBASAUR_POKE_BALL
+	dw_const OaksLabHonogumaPokeBallText,         TEXT_OAKSLAB_HONOGUMA_POKE_BALL
+	dw_const OaksLabKurusuPokeBallText,           TEXT_OAKSLAB_KURUSU_POKE_BALL
+	dw_const OaksLabHappaPokeBallText,            TEXT_OAKSLAB_HAPPA_POKE_BALL
 	dw_const OaksLabOak1Text,                     TEXT_OAKSLAB_OAK1
-	dw_const OaksLabPokedexText,                  TEXT_OAKSLAB_POKEDEX1
+;	dw_const OaksLabPokedexText,                  TEXT_OAKSLAB_POKEDEX1
 	dw_const OaksLabPokedexText,                  TEXT_OAKSLAB_POKEDEX2
 	dw_const OaksLabOak2Text,                     TEXT_OAKSLAB_OAK2
-	dw_const OaksLabGirlText,                     TEXT_OAKSLAB_GIRL
-	dw_const OaksLabScientistText,                TEXT_OAKSLAB_SCIENTIST1
-	dw_const OaksLabScientistText,                TEXT_OAKSLAB_SCIENTIST2
+;	dw_const OaksLabGirlText,                     TEXT_OAKSLAB_GIRL
+;	dw_const OaksLabScientistText,                TEXT_OAKSLAB_SCIENTIST1
+;	dw_const OaksLabScientistText,                TEXT_OAKSLAB_SCIENTIST2
 	dw_const OaksLabOakDontGoAwayYetText,         TEXT_OAKSLAB_OAK_DONT_GO_AWAY_YET
 	dw_const OaksLabRivalIllTakeThisOneText,      TEXT_OAKSLAB_RIVAL_ILL_TAKE_THIS_ONE
 	dw_const OaksLabRivalReceivedMonText,         TEXT_OAKSLAB_RIVAL_RECEIVED_MON
@@ -759,13 +857,16 @@ OaksLab_TextPointers2:
 	dw OaksLabCharmanderPokeBallText
 	dw OaksLabSquirtlePokeBallText
 	dw OaksLabBulbasaurPokeBallText
+	dw OaksLabHonogumaPokeBallText
+	dw OaksLabKurusuPokeBallText
+	dw OaksLabHappaPokeBallText
 	dw OaksLabOak1Text
-	dw OaksLabPokedexText
+;	dw OaksLabPokedexText
 	dw OaksLabPokedexText
 	dw OaksLabOak2Text
-	dw OaksLabGirlText
-	dw OaksLabScientistText
-	dw OaksLabScientistText
+;	dw OaksLabGirlText
+;	dw OaksLabScientistText
+;	dw OaksLabScientistText
 
 OaksLabRivalText:
 	text_asm
@@ -826,6 +927,36 @@ OaksLabBulbasaurPokeBallText:
 	ld [wRivalStarterBallSpriteIndex], a
 	ld a, STARTER3
 	ld b, OAKSLAB_BULBASAUR_POKE_BALL
+	jr OaksLabSelectedPokeBallScript
+
+OaksLabHonogumaPokeBallText:
+	text_asm
+	ld a, STARTER5
+	ld [wRivalStarterTemp], a
+	ld a, OAKSLAB_KURUSU_POKE_BALL
+	ld [wRivalStarterBallSpriteIndex], a
+	ld a, STARTER4
+	ld b, OAKSLAB_HONOGUMA_POKE_BALL
+	jr OaksLabSelectedPokeBallScript
+
+OaksLabKurusuPokeBallText:
+	text_asm
+	ld a, STARTER6
+	ld [wRivalStarterTemp], a
+	ld a, OAKSLAB_HAPPA_POKE_BALL
+	ld [wRivalStarterBallSpriteIndex], a
+	ld a, STARTER5
+	ld b, OAKSLAB_KURUSU_POKE_BALL
+	jr OaksLabSelectedPokeBallScript
+
+OaksLabHappaPokeBallText:
+	text_asm
+	ld a, STARTER4
+	ld [wRivalStarterTemp], a
+	ld a, OAKSLAB_HONOGUMA_POKE_BALL
+	ld [wRivalStarterBallSpriteIndex], a
+	ld a, STARTER6
+	ld b, OAKSLAB_HAPPA_POKE_BALL
 
 OaksLabSelectedPokeBallScript:
 	ld [wCurPartySpecies], a
@@ -870,7 +1001,14 @@ OaksLabShowPokeBallPokemonScript:
 	jr z, OaksLabYouWantCharmanderText
 	cp OAKSLAB_SQUIRTLE_POKE_BALL
 	jr z, OaksLabYouWantSquirtleText
-	jr OaksLabYouWantBulbasaurText
+	cp OAKSLAB_BULBASAUR_POKE_BALL
+	jr z, OaksLabYouWantBulbasaurText
+	cp OAKSLAB_HONOGUMA_POKE_BALL
+	jr z, OaksLabYouWantHonogumaText
+	cp OAKSLAB_KURUSU_POKE_BALL
+	jr z, OaksLabYouWantKurusuText
+	cp OAKSLAB_HAPPA_POKE_BALL
+	jr z, OaksLabYouWantHappaText
 
 OaksLabYouWantCharmanderText:
 	ld hl, .Text
@@ -891,6 +1029,27 @@ OaksLabYouWantBulbasaurText:
 	jr OaksLabMonChoiceMenu
 .Text:
 	text_far _OaksLabYouWantBulbasaurText
+	text_end
+
+OaksLabYouWantHonogumaText:
+	ld hl, .Text
+	jr OaksLabMonChoiceMenu
+.Text:
+	text_far _OaksLabYouWantHonogumaText
+	text_end
+
+OaksLabYouWantKurusuText:
+	ld hl, .Text
+	jr OaksLabMonChoiceMenu
+.Text:
+	text_far _OaksLabYouWantKurusuText
+	text_end
+
+OaksLabYouWantHappaText:
+	ld hl, .Text
+	jr OaksLabMonChoiceMenu
+.Text:
+	text_far _OaksLabYouWantHappaText
 	text_end
 
 OaksLabMonChoiceMenu:
@@ -916,7 +1075,23 @@ OaksLabMonChoiceMenu:
 	ld a, HS_STARTER_BALL_2
 	jr .continue
 .not_squirtle
+	cp OAKSLAB_BULBASAUR_POKE_BALL
+	jr nz, .not_bulbasaur
 	ld a, HS_STARTER_BALL_3
+	jr .continue
+.not_bulbasaur
+	cp OAKSLAB_HONOGUMA_POKE_BALL
+	jr nz, .not_honoguma
+	ld a, HS_STARTER_BALL_4
+	jr .continue
+.not_honoguma
+	cp OAKSLAB_KURUSU_POKE_BALL
+	jr nz, .not_kurusu
+	ld a, HS_STARTER_BALL_5
+	jr .continue
+.not_kurusu
+	cp OAKSLAB_HAPPA_POKE_BALL
+	ld a, HS_STARTER_BALL_6
 .continue
 	ld [wMissableObjectIndex], a
 	predef HideObject
@@ -1087,15 +1262,15 @@ OaksLabOak2Text:
 	text_far _OaksLabOak2Text
 	text_end
 
-OaksLabGirlText:
-	text_asm
-	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+;OaksLabGirlText:
+;	text_asm
+;	ld hl, .Text
+;	call PrintText
+;	jp TextScriptEnd
 
-.Text:
-	text_far _OaksLabGirlText
-	text_end
+;.Text:
+;	text_far _OaksLabGirlText
+;	text_end
 
 OaksLabRivalFedUpWithWaitingText:
 	text_asm
@@ -1225,12 +1400,12 @@ OaksLabRivalLeaveItAllToMeText:
 	text_far _OaksLabRivalLeaveItAllToMeText
 	text_end
 
-OaksLabScientistText:
-	text_asm
-	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+;OaksLabScientistText:
+;	text_asm
+;	ld hl, .Text
+;	call PrintText
+;	jp TextScriptEnd
 
-.Text:
-	text_far _OaksLabScientistText
-	text_end
+;.Text:
+;	text_far _OaksLabScientistText
+;	text_end

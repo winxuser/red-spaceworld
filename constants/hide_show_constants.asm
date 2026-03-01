@@ -55,8 +55,11 @@ DEF SHOW EQU $15
 	const HS_STARTER_BALL_1                ; 2B
 	const HS_STARTER_BALL_2                ; 2C
 	const HS_STARTER_BALL_3                ; 2D
+	const HS_STARTER_BALL_4                ; 2B
+	const HS_STARTER_BALL_5                ; 2C
+	const HS_STARTER_BALL_6                ; 2D
 	const HS_OAKS_LAB_OAK_1                ; 2E
-	const HS_POKEDEX_1                     ; 2F
+;	const HS_POKEDEX_1                     ; 2F
 	const HS_POKEDEX_2                     ; 30
 	const HS_OAKS_LAB_OAK_2                ; 31
 	const HS_VIRIDIAN_GYM_GIOVANNI         ; 32

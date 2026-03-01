@@ -145,16 +145,32 @@ CeruleanCityRivalBattleScript:
 	; select which team to use during the encounter
 	ld a, [wRivalStarter]
 	cp STARTER2
-	jr nz, .NotSquirtle
+	jr nz, .not_squirtle
 	ld a, $7
 	jr .done
-.NotSquirtle
+.not_squirtle
 	cp STARTER3
-	jr nz, .Charmander
+	jr nz, .not_charmander
 	ld a, $8
 	jr .done
-.Charmander
+.not_charmander
+	cp STARTER1
+	jr nz, .not_bulbasaur
 	ld a, $9
+	jr .done
+.not_bulbasaur
+	cp STARTER5
+	jr nz, .not_kurusu
+	ld a, $10
+	jr .done
+.not_kurusu
+	cp STARTER6
+	jr nz, .not_happa
+	ld a, $11
+	jr .done
+.not_happa
+	cp STARTER4
+	ld a, $12
 .done
 	ld [wTrainerNo], a
 	ld a, 1

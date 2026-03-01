@@ -144,9 +144,12 @@ Route22Rival1StartBattleScript:
 
 .StarterTable:
 ; starter the rival picked, rival trainer number
-	db STARTER2, 4
-	db STARTER3, 5
-	db STARTER1, 6
+	db STARTER2, 7
+	db STARTER3, 8
+	db STARTER1, 9
+	db STARTER5, 10
+	db STARTER6, 11
+	db STARTER4, 12
 
 Route22Rival1AfterBattleScript:
 	ld a, [wIsInBattle]
@@ -301,9 +304,12 @@ Route22Rival2StartBattleScript:
 	ret
 
 .StarterTable:
-	db STARTER2, 10
-	db STARTER3, 11
-	db STARTER1, 12
+	db STARTER2, 19
+	db STARTER3, 20
+	db STARTER1, 21
+	db STARTER5, 22
+	db STARTER6, 23
+	db STARTER4, 24
 
 Route22Rival2AfterBattleScript:
 	ld a, [wIsInBattle]

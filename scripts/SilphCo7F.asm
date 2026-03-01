@@ -188,17 +188,33 @@ SilphCo7FRivalStartBattleScript:
 	ld [wCurOpponent], a
 	ld a, [wRivalStarter]
 	cp STARTER2
-	jr nz, .not_starter_2
-	ld a, $7
-	jr .set_trainer_no
-.not_starter_2
+	jr nz, .not_squirtle
+	ld a, $13
+	jr .done
+.not_squirtle
 	cp STARTER3
-	jr nz, .no_starter_3
-	ld a, $8
-	jr .set_trainer_no
-.no_starter_3
-	ld a, $9
-.set_trainer_no
+	jr nz, .not_charmander
+	ld a, $14
+	jr .done
+.not_charmander
+	cp STARTER1
+	jr nz, .not_bulbasaur
+	ld a, $15
+	jr .done
+.not_bulbasaur
+	cp STARTER5
+	jr nz, .not_kurusu
+	ld a, $16
+	jr .done
+.not_kurusu
+	cp STARTER4
+	jr nz, .not_honoguma
+	ld a, $17
+	jr .done
+.not_honoguma
+	cp STARTER6
+	ld a, $18
+.done
 	ld [wTrainerNo], a
 	ld a, 1
 	ld [wIsTrainerBattle], a
