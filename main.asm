@@ -120,7 +120,6 @@ INCLUDE "engine/gfx/load_pokedex_tiles.asm"
 INCLUDE "engine/overworld/map_sprites.asm"
 INCLUDE "engine/overworld/emotion_bubbles.asm"
 INCLUDE "engine/events/evolve_trade.asm"
-INCLUDE "engine/battle/move_effects/substitute.asm"
 INCLUDE "engine/menus/pc.asm"
 
 
@@ -170,7 +169,7 @@ INCLUDE "engine/battle/move_effects/focus_energy.asm"
 SECTION "Battle Engine 4", ROMX
 
 INCLUDE "engine/battle/move_effects/leech_seed.asm"
-
+INCLUDE "engine/battle/move_effects/substitute.asm"
 
 SECTION "Battle Engine 5", ROMX
 
@@ -384,12 +383,16 @@ SECTION "bank1E", ROMX
 INCLUDE "engine/battle/animations.asm"
 INCLUDE "engine/overworld/cut2.asm"
 INCLUDE "engine/overworld/dust_smoke.asm"
-INCLUDE "gfx/fishing.asm"
 INCLUDE "data/moves/animations.asm"
 INCLUDE "data/battle_anims/subanimations.asm"
 INCLUDE "data/battle_anims/frame_blocks.asm"
 INCLUDE "engine/movie/evolution.asm"
 INCLUDE "engine/overworld/elevator.asm"
-INCLUDE "engine/items/tm_prices.asm"
 
 INCLUDE "color/animations.asm"
+
+
+SECTION "Addon Extras", ROMX
+
+INCLUDE "engine/items/tm_prices.asm"
+INCLUDE "gfx/fishing.asm"

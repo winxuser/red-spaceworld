@@ -54,7 +54,7 @@ ROMX $4
 	"Battle Engine 1"
 ROMX $5
 	"NPC Sprites 2"
-	"Battle Engine 2"
+;	"Battle Engine 2"
 ROMX $6
 	"Maps 1"
 	"Play Time"
@@ -147,7 +147,7 @@ ROMX $1B
 	"Tilesets 3"
 ROMX $1C
 	"bank1C"
-	org $4a69
+;	org $4a69
 	"BattleTransition_BlackScreen"
 	org $5fb6
 	"InitPartyMenuBlkPacket"

@@ -280,11 +280,14 @@ DisplayTwoOptionMenu:
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
 	ld a, [wTwoOptionMenuID]
+	cp BOY_GIRL_MENU
+	jr z, .noYesMenu
 	cp NO_YES_MENU
 	jr nz, .notNoYesMenu
 ; No/Yes menu
 ; this menu type ignores the B button
 ; it only seems to be used when confirming the deletion of a save file
+.noYesMenu
 	xor a
 	ld [wTwoOptionMenuID], a
 	ld a, [wMiscFlags]
