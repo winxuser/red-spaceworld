@@ -491,6 +491,33 @@ SpritePaletteAssignments: ; Characters on the overworld
 	; 0x3c: SPRITE_SEEL
 	db SPR_PAL_BLUE
 
+	; Brock
+	db ATK_PAL_BROWN
+
+	; Misty
+	db ATK_PAL_BLUE
+
+	; Lt Surge
+	db ATK_PAL_YELLOW
+
+	; Erika
+	db ATK_PAL_GREEN
+
+	; Sabrina
+	db SPR_PAL_PURPLE
+
+	; Blaine
+	db ATK_PAL_RED
+
+	; Mikan
+	db SPR_PAL_RANDOM
+
+	; Swimmer F
+	db SPR_PAL_BLUE
+
+	; Swimmer M
+	db SPR_PAL_BLUE
+
 	; 0x3d: SPRITE_BALL
 	db SPR_PAL_ORANGE
 

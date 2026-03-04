@@ -109,7 +109,7 @@ ROMX $12
 	"Screen Effects"
 	"Maps 8"
 ROMX $13
-	"Trainer Pics"
+;	"Trainer Pics"
 	org $7d04
 	"Maps 9"
 	"Predefs"
