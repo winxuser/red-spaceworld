@@ -128,6 +128,12 @@ ChannelerPic::     INCBIN "gfx/gstrainers/channeler.pic"
 AgathaPic::        INCBIN "gfx/gstrainers/agatha.pic"
 LancePic::         INCBIN "gfx/gstrainers/lance.pic"
 
+SECTION "Trainer Pics 2", ROMX
+
+SwimmerFPic::      INCBIN "gfx/gstrainers/swimmer_f.pic" ; unused
+SwimmermPc::       INCBIN "gfx/gstrainers/swimmer_m.pic" ; unused
+MikanPic::         INCBIN "gfx/gstrainers/mikan.pic" ; unused
+
 
 ; Inserted pokemon images go here
 

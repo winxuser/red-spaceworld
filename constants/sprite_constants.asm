@@ -62,6 +62,15 @@
 	const SPRITE_BRUNO                   ; $3a
 	const SPRITE_LORELEI                 ; $3b
 	const SPRITE_SEEL                    ; $3c
+	const SPRITE_BROCK
+	const SPRITE_MISTY
+	const SPRITE_LT_SURGE
+	const SPRITE_ERIKA
+	const SPRITE_SABRINA
+	const SPRITE_BLAINE
+	const SPRITE_MIKAN
+	const SPRITE_SWIMMER_F
+	const SPRITE_SWIMMER_M
 DEF FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_POKE_BALL               ; $3d
 	const SPRITE_FOSSIL                  ; $3e

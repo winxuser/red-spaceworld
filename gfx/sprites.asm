@@ -71,3 +71,15 @@ AgathaSprite::           INCBIN "gfx/sprites/agatha.2bpp"
 BrunoSprite::            INCBIN "gfx/sprites/bruno.2bpp"
 LoreleiSprite::          INCBIN "gfx/sprites/lorelei.2bpp"
 SeelSprite::             INCBIN "gfx/sprites/seel.2bpp"
+
+SECTION "NPC Sprites 3", ROMX
+
+BrockSprite::            INCBIN "gfx/sprites/brock.2bpp"
+MistySprite::            INCBIN "gfx/sprites/misty.2bpp"
+LtSurgeSprite::          INCBIN "gfx/sprites/surge.2bpp"
+ErikaSprite::            INCBIN "gfx/sprites/erika.2bpp"
+SabrinaSprite::          INCBIN "gfx/sprites/sabrina.2bpp"
+BlaineSprite::           INCBIN "gfx/sprites/blaine.2bpp"
+MikanSprite::            INCBIN "gfx/sprites/mikan.2bpp"
+SwimmerfSprite::         INCBIN "gfx/sprites/swimmer_f.2bpp"
+SwimmermSprite::         INCBIN "gfx/sprites/swimmer_m.2bpp"
