@@ -52,38 +52,16 @@ PalletMovementScriptPointerTable::
 	dw PalletMovementScript_Done
 
 PalletMovementScript_OakMoveLeft:
-	ld a, [wXCoord]
-	sub $a
-	ld [wNumStepsToTake], a
-	jr z, .playerOnLeftTile
-; The player is on the right tile of the northern path out of Pallet Town and
-; Prof. Oak is below.
-; Make Prof. Oak step to the left.
-	ld b, 0
-	ld c, a
-	ld hl, wNPCMovementDirections2
-	ld a, NPC_MOVEMENT_LEFT
-	call FillMemory
-	ld [hl], $ff
-	ld a, [wSpriteIndex]
-	ldh [hSpriteIndex], a
-	ld de, wNPCMovementDirections2
-	call MoveSprite
-	ld a, $1
-	ld [wNPCMovementScriptFunctionNum], a
-	jr .done
-; The player is on the left tile of the northern path out of Pallet Town and
-; Prof. Oak is below.
-; Prof. Oak is already where he needs to be.
-.playerOnLeftTile
-	ld a, $3
-	ld [wNPCMovementScriptFunctionNum], a
-.done
-	ld hl, wStatusFlags7
-	set BIT_NO_MAP_MUSIC, [hl]
-	ld a, PAD_SELECT | PAD_START | PAD_CTRL_PAD
-	ld [wJoyIgnore], a
-	ret
+    ld a, [wXCoord]
+    sub $a
+    ld [wNumStepsToTake], a
+    ld a, $3
+    ld [wNPCMovementScriptFunctionNum], a
+    ld hl, wStatusFlags7
+    set BIT_NO_MAP_MUSIC, [hl]
+    ld a, PAD_SELECT | PAD_START | PAD_CTRL_PAD
+    ld [wJoyIgnore], a
+    ret
 
 PalletMovementScript_PlayerMoveLeft:
 	ld a, [wStatusFlags5]
@@ -128,20 +106,22 @@ PalletMovementScript_WalkToLab:
 	ret
 
 RLEList_ProfOakWalkToLab:
-	db NPC_MOVEMENT_DOWN, 5
-	db NPC_MOVEMENT_LEFT, 1
-	db NPC_MOVEMENT_DOWN, 5
-	db NPC_MOVEMENT_RIGHT, 3
-	db NPC_MOVEMENT_UP, 1
-	db NPC_CHANGE_FACING, 1
+;	db NPC_MOVEMENT_RIGHT, 3
+;	db NPC_MOVEMENT_DOWN, 3
+;	db NPC_MOVEMENT_RIGHT, 5
+;	db NPC_MOVEMENT_UP, 1
+;	db NPC_CHANGE_FACING, 1
+	db NPC_MOVEMENT_RIGHT, 7
+	db NPC_MOVEMENT_DOWN, 4
+	db NPC_MOVEMENT_RIGHT, 5
+	db NPC_MOVEMENT_UP, 2
 	db -1 ; end
 
 RLEList_PlayerWalkToLab:
 	db PAD_UP, 2
-	db PAD_RIGHT, 3
-	db PAD_DOWN, 5
-	db PAD_LEFT, 1
-	db PAD_DOWN, 6
+	db PAD_RIGHT, 5
+	db PAD_DOWN, 4
+	db PAD_RIGHT, 8
 	db -1 ; end
 
 PalletMovementScript_Done:

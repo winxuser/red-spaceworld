@@ -21,12 +21,12 @@ PalletTown_ScriptPointers:
 PalletTownDefaultScript:
 	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB
 	ret nz
-	ld a, [wYCoord]
-	cp 1 ; is player near north exit?
+	ld a, [wXCoord]
+	cp 1 ; is player near west exit?
 	ret nz
 	xor a
 	ldh [hJoyHeld], a
-	ld a, PLAYER_DIR_DOWN
+	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
 	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
@@ -63,19 +63,19 @@ PalletTownOakHeyWaitScript:
 PalletTownOakWalksToPlayerScript:
 	ld a, PALLETTOWN_OAK
 	ldh [hSpriteIndex], a
-	ld a, SPRITE_FACING_UP
+	ld a, SPRITE_FACING_LEFT
 	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	call Delay3
 	ld a, 1
-	ld [wYCoord], a
+	ld [wXCoord], a
 	ld a, 1
 	ldh [hNPCPlayerRelativePosPerspective], a
 	ld a, 1
 	swap a
 	ldh [hNPCSpriteOffset], a
 	predef CalcPositionOfPlayerRelativeToNPC
-	ld hl, hNPCPlayerYDistance
+	ld hl, hNPCPlayerXDistance
 	dec [hl]
 	predef FindPathToPlayer ; load Oak's movement into wNPCMovementDirections2
 	ld de, wNPCMovementDirections2
@@ -183,7 +183,7 @@ PalletTownOakText:
 	ld [wEmotionBubbleSpriteIndex], a ; player's sprite
 	ld [wWhichEmotionBubble], a ; EXCLAMATION_BUBBLE
 	predef EmotionBubble
-	ld a, PLAYER_DIR_DOWN
+	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
 	jp TextScriptEnd
 
