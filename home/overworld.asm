@@ -41,7 +41,7 @@ EnterMap::
 OverworldLoop::
 	call DelayFrame
 OverworldLoopLessDelay::
-	call DelayFrame
+;	call DelayFrame
 	call LoadGBPal
 	ld a, [wMovementFlags]
 	bit BIT_LEDGE_OR_FISHING, a
@@ -114,14 +114,14 @@ OverworldLoopLessDelay::
 	ld [wEnteringCableClub], a
 	jr z, .changeMap
 ; XXX can this code be reached?
-	predef TryLoadSaveFile
-	ld a, [wCurMap]
-	ld [wDestinationMap], a
-	call PrepareForSpecialWarp
-	ld a, [wCurMap]
-	call SwitchToMapRomBank
-	ld hl, wCurMapTileset
-	set BIT_NO_PREVIOUS_MAP, [hl]
+;	predef TryLoadSaveFile
+;	ld a, [wCurMap]
+;	ld [wDestinationMap], a
+;	call PrepareForSpecialWarp
+;	ld a, [wCurMap]
+;	call SwitchToMapRomBank
+;	ld hl, wCurMapTileset
+;	set BIT_NO_PREVIOUS_MAP, [hl]
 .changeMap
 	jp EnterMap
 .checkForOpponent
@@ -261,7 +261,7 @@ OverworldLoopLessDelay::
 	jp c, OverworldLoop
 
 .noCollision
-	ld a, $08
+	ld a, $10
 	ld [wWalkCounter], a
 	jr .moveAhead2
 
@@ -283,7 +283,22 @@ OverworldLoopLessDelay::
 	bit BIT_LEDGE_OR_FISHING, a
 	jr nz, .normalPlayerSpriteAdvancement
 	call DoBikeSpeedup
+	call DoBikeSpeedup
+	call DoBikeSpeedup
+	jr .notRunning
 .normalPlayerSpriteAdvancement
+	; surf at 2x walking speed
+	ld a, [wWalkBikeSurfState]
+	cp $02
+	jr z, .surfFaster
+	; Holding B makes you run at 2x walking speed
+	ld a, [hJoyHeld]
+	and PAD_B
+	jr z, .notRunning
+.surfFaster
+	call DoBikeSpeedup
+.notRunning
+	;original .normalPlayerSpriteAdvancement continues here
 	call AdvancePlayerSprite
 	ld a, [wWalkCounter]
 	and a
@@ -1467,7 +1482,10 @@ AdvancePlayerSprite::
 	ld [wXCoord], a
 .afterUpdateMapCoords
 	ld a, [wWalkCounter]
-	cp $07
+	push bc
+	ld b, $0F
+	cp b
+	pop bc
 	jp nz, .scrollBackgroundAndSprites
 ; if this is the first iteration of the animation
 	ld a, c
@@ -1614,8 +1632,8 @@ AdvancePlayerSprite::
 	ld b, a
 	ld a, [wSpritePlayerStateData1XStepVector]
 	ld c, a
-	sla b
-	sla c
+;	sla b
+;	sla c
 	ldh a, [hSCY]
 	add b
 	ldh [hSCY], a ; update background scroll Y
