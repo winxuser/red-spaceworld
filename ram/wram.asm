@@ -2189,6 +2189,8 @@ UNION
 wGrassRate:: db
 wGrassMons:: ds 10 * 2
 
+wGenderTemp::
+
 	ds 8
 
 wWaterRate:: db

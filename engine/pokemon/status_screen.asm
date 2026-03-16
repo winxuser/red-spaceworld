@@ -167,6 +167,9 @@ ENDC
 	ld de, wLoadedMonOTID
 	lb bc, LEADING_ZEROES | 2, 5
 	call PrintNumber ; ID Number
+	ld a, [wLoadedMonSpecies]
+	ld [wGenderTemp], a
+	call PrintGenderStatusScreen
 	ld d, STATUS_SCREEN_STATS_BOX
 	call PrintStatsBox
 	call Delay3
@@ -194,6 +197,28 @@ ENDC
 	ret z
 	ld a, [wWhichPokemon]
 	jp SkipFixedLengthTextEntries
+
+PrintGenderStatusScreen: ; called on status screen
+	; get gender
+	ld de, wLoadedMonDVs
+	callfar GetMonGender
+	ld a, [wGenderTemp]
+	and a
+	jr z, .noGender
+	dec a
+	jr z, .male
+	; else female
+	ld a, '♀'
+	jr .printSymbol
+.male
+	ld a, '♂'
+	jr .printSymbol
+.noGender
+	ld a, ' '
+.printSymbol
+	hlcoord 17, 2
+	ld [hl], a
+	ret
 
 OTPointers:
 	dw wPartyMonOT
