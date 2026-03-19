@@ -1,11 +1,11 @@
 	db DEX_HAPPA ; pokedex id
 
-	db  55,  40,  45,  50,  75
-	;   hp  atk  def  spd  spc
+	db  55,  40,  45,  40,  75,  50
+	;   hp  atk  def  spd  sat  sdf
 
 	db GRASS, GRASS ; type
-	db 35 ; catch rate
-	db 61 ; base exp
+	db 255 ; catch rate
+	db 64 ; base exp
 
 	INCBIN "gfx/pokemon/happa/front.pic", 0, 1 ; sprite dimensions
 	dw HappaPicFront, HappaPicBack

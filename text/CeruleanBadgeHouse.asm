@@ -87,7 +87,8 @@ _CeruleanBadgeHouseMarshBadgeText::
 
 _CeruleanBadgeHouseVolcanoBadgeText::
 	text "Your #MON's"
-	line "SPECIAL abilities"
+	line "SPCL.ATK and"
+	cont "SPCL.DEF"
 	cont "increase a bit."
 	prompt
 

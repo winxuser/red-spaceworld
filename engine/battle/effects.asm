@@ -382,7 +382,7 @@ StatModifierUpEffect:
 .ok
 	ld [hl], b
 	ld a, c
-	cp $4
+	cp NUM_STATS - 1 ; HP is not a modifiable stat through move effects, hence -1
 	jr nc, UpdateStatDone ; jump if mod affected is evasion/accuracy
 	push hl
 	ld hl, wBattleMonAttack + 1
@@ -562,7 +562,7 @@ StatModifierDownEffect:
 	cp 33 percent + 1 ; chance for side effects
 	jp nc, CantLowerAnymore
 	ld a, [de]
-	sub ATTACK_DOWN_SIDE_EFFECT ; map each stat to 0-3
+	sub ATTACK_DOWN_SIDE_EFFECT ; map each stat to 0-4
 	jr .decrementStatMod
 .nonSideEffect ; non-side effects only
 	push hl
@@ -601,7 +601,7 @@ StatModifierDownEffect:
 .ok
 	ld [hl], b ; save modified mod
 	ld a, c
-	cp $4
+	cp NUM_STATS - 1 ; HP is not a modifiable stat through move effects, hence -1
 	jr nc, UpdateLoweredStatDone ; jump for evasion/accuracy
 	push hl
 	push de

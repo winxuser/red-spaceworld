@@ -1,7 +1,7 @@
 	db DEX_HANARYU ; pokedex id
 
-	db  50,  60,  40,  50,  50
-	;   hp  atk  def  spd  spc
+	db  50,  60,  40,  40,  50,  50
+	;   hp  atk  def  spd  sat  sdf
 
 	db FIRE, FIRE ; type
 	db 45 ; catch rate

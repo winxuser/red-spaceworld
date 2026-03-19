@@ -20,7 +20,8 @@ MACRO box_struct
 \1AttackExp::  dw
 \1DefenseExp:: dw
 \1SpeedExp::   dw
-\1SpecialExp:: dw
+\1SpclAtkExp:: dw
+\1SpclDefExp:: dw
 \1DVs::        dw
 \1PP::         ds NUM_MOVES
 ENDM
@@ -33,7 +34,8 @@ MACRO party_struct
 \1Attack::     dw
 \1Defense::    dw
 \1Speed::      dw
-\1Special::    dw
+\1SpclAtk::    dw
+\1SpclDef::    dw
 ENDM
 
 MACRO battle_struct
@@ -54,7 +56,8 @@ MACRO battle_struct
 \1Attack::     dw
 \1Defense::    dw
 \1Speed::      dw
-\1Special::    dw
+\1SpclAtk::    dw
+\1SpclDef::    dw
 \1PP::         ds NUM_MOVES
 ENDM
 

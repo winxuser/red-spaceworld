@@ -1,7 +1,7 @@
 	db DEX_KURUSU ; pokedex id
 
-	db  45,  50,  50,  45,  50
-	;   hp  atk  def  spd  spc
+	db  45,  50,  50,  45,  50,  50
+	;   hp  atk  def  spd  sat  sdf
 
 	db WATER, WATER ; type
 	db 45 ; catch rate

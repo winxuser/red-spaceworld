@@ -94,7 +94,7 @@ TransformEffect_:
 	inc de
 	inc de
 	inc de
-; Attack, Defense, Speed, and Special stats
+; Attack, Defense, Speed, Spcl.Atk, and Spcl.Def stats
 	ld bc, (NUM_STATS - 1) * 2
 	call CopyData
 	ld bc, wBattleMonMoves - wBattleMonPP

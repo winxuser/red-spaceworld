@@ -270,19 +270,16 @@ PrintStatsBox:
 	ASSERT STATUS_SCREEN_STATS_BOX == 0
 	and a
 	jr nz, .LevelUpStatsBox ; battle or Rare Candy
-	hlcoord 0, 8
-	ld b, 8
-	ld c, 8
-	call TextBoxBorder
-	hlcoord 1, 9
+; Don't draw a border; status screen needs every line it can get here
+	hlcoord 1, 8 ; Start printing stats from here
 	ld bc, SCREEN_WIDTH + 5 ; one row down and 5 columns right
 	jr .PrintStats
 .LevelUpStatsBox
-	hlcoord 9, 2
-	ld b, 8
+	hlcoord 9, 0
+	ld b, 10
 	ld c, 9
 	call TextBoxBorder
-	hlcoord 11, 3
+	hlcoord 11, 1
 	ld bc, SCREEN_WIDTH + 4 ; one row down and 4 columns right
 .PrintStats
 	push bc
@@ -299,10 +296,12 @@ PrintStatsBox:
 	call .PrintStat
 	ld de, wLoadedMonSpeed
 	call .PrintStat
-	ld de, wLoadedMonSpecial
+	ld de, wLoadedMonSpclAtk
+	call .PrintStat
+	ld de, wLoadedMonSpclDef
 	jp PrintNumber
 
-.PrintStat:
+.PrintStat
 	push hl
 	call PrintNumber
 	pop hl
@@ -314,7 +313,8 @@ PrintStatsBox:
 	db   "ATTACK"
 	next "DEFENSE"
 	next "SPEED"
-	next "SPECIAL@"
+	next "SPCL.ATK"
+	next "SPCL.DEF@"
 
 StatusScreen2:
 	ldh a, [hTileAnimations]

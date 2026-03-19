@@ -1,10 +1,10 @@
 	db DEX_BORUBEA ; pokedex id
 
-	db  60,  70,  60,  60,  60
-	;   hp  atk  def  spd  spc
+	db  60,  70,  50,  50,  60,  50
+	;   hp  atk  def  spd  sat  sdf
 
 	db FIRE, FIRE ; type
-	db 45 ; catch rate
+	db 255 ; catch rate
 	db 100 ; base exp
 
 	INCBIN "gfx/pokemon/borubea/front.pic", 0, 1 ; sprite dimensions

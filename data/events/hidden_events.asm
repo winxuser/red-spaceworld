@@ -570,7 +570,7 @@ DEF ANY_FACING EQU $d0
 
 	hidden_events_for UNDERGROUND_PATH_NORTH_SOUTH
 	hidden_event  3,  4, HiddenItems, FULL_RESTORE
-	hidden_event  4, 34, HiddenItems, X_SPECIAL
+	hidden_event  4, 34, HiddenItems, X_SP_ATK
 	db -1 ; end
 
 	hidden_events_for UNDERGROUND_PATH_WEST_EAST

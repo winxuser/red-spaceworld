@@ -1,10 +1,10 @@
 	db DEX_HANARYU ; pokedex id
 
-	db  70,  65,  60,  50,  60
-	;   hp  atk  def  spd  spc
+	db  70,  65,  60,  60,  55,  50
+	;   hp  atk  def  spd  sat  sdf
 
 	db GRASS, GRASS ; type
-	db 45 ; catch rate
+	db 255 ; catch rate
 	db 100 ; base exp
 
 	INCBIN "gfx/pokemon/hanaryu/front.pic", 0, 1 ; sprite dimensions

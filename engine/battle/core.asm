@@ -4155,32 +4155,32 @@ GetDamageVarsForPlayerAttack:
 	pop bc
 	jr .scaleStats
 .specialAttack
-	ld hl, wEnemyMonSpecial
+	ld hl, wEnemyMonSpclDef
 	ld a, [hli]
 	ld b, a
-	ld c, [hl] ; bc = enemy special
+	ld c, [hl] ; bc = enemy special defense
 	ld a, [wEnemyBattleStatus3]
 	bit HAS_LIGHT_SCREEN_UP, a ; check for Light Screen
 	jr z, .specialAttackCritCheck
-; if the enemy has used Light Screen, double the enemy's special
+; if the enemy has used Light Screen, double the enemy's special defense
 	sla c
 	rl b
 ; reflect and light screen boosts do not cap the stat at MAX_STAT_VALUE, so weird things will happen during stats scaling
 ; if a Pokemon with 512 or more Defense has used Reflect, or if a Pokemon with 512 or more Special has used Light Screen
 .specialAttackCritCheck
-	ld hl, wBattleMonSpecial
+	ld hl, wBattleMonSpclAtk
 	ld a, [wCriticalHitOrOHKO]
 	and a ; check for critical hit
 	jr z, .scaleStats
-; in the case of a critical hit, reset the player's and enemy's specials to their base values
-	ld c, STAT_SPECIAL
+; in the case of a critical hit, reset the player's special attack and enemy's special defense to their base values
+	ld c, STAT_SPCLDEF
 	call GetEnemyMonStat
 	ldh a, [hProduct + 2]
 	ld b, a
 	ldh a, [hProduct + 3]
 	ld c, a
 	push bc
-	ld hl, wPartyMon1Special
+	ld hl, wPartyMon1SpclAtk
 	ld a, [wPlayerMonNumber]
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
@@ -4268,7 +4268,7 @@ GetDamageVarsForEnemyAttack:
 	pop bc
 	jr .scaleStats
 .specialAttack
-	ld hl, wBattleMonSpecial
+	ld hl, wBattleMonSpclDef
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
@@ -4281,12 +4281,12 @@ GetDamageVarsForEnemyAttack:
 ; reflect and light screen boosts do not cap the stat at MAX_STAT_VALUE, so weird things will happen during stats scaling
 ; if a Pokemon with 512 or more Defense has used Reflect, or if a Pokemon with 512 or more Special has used Light Screen
 .specialAttackCritCheck
-	ld hl, wEnemyMonSpecial
+	ld hl, wEnemyMonSpclAtk
 	ld a, [wCriticalHitOrOHKO]
 	and a ; check for critical hit
 	jr z, .scaleStats
-; in the case of a critical hit, reset the player's and enemy's specials to their base values
-	ld hl, wPartyMon1Special
+; in the case of a critical hit, reset the player's special defense and enemy's special attack to their base values
+	ld hl, wPartyMon1SpclDef
 	ld a, [wPlayerMonNumber]
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
@@ -4294,7 +4294,7 @@ GetDamageVarsForEnemyAttack:
 	ld b, a
 	ld c, [hl]
 	push bc
-	ld c, STAT_SPECIAL
+	ld c, STAT_SPCLATK
 	call GetEnemyMonStat
 	ld hl, hProduct + 2
 	pop bc
@@ -4375,7 +4375,7 @@ GetEnemyMonStat:
 	ld [de], a
 	pop bc
 	ld b, $0
-	ld hl, wLoadedMonSpeedExp - $b ; this base address makes CalcStat look in [wLoadedMonSpeedExp] for DVs
+	ld hl, wLoadedMonSpeedExp - $d ; this base address makes CalcStat look in [wLoadedMonSpeedExp] for DVs
 	call CalcStat
 	pop de
 	ret
@@ -4405,7 +4405,7 @@ CalculateDamage:
 ; Multi-hit attacks may or may not have 0 bp.
 	cp TWO_TO_FIVE_ATTACKS_EFFECT
 	jr z, .skipbp
-	cp EFFECT_1E
+	cp EFFECT_20
 	jr z, .skipbp
 
 ; Calculate OHKO damage based on remaining HP.
@@ -6106,10 +6106,9 @@ LoadEnemyMonData:
 	ld [de], a
 	inc de
 	ld b, $0
-	ld hl, wEnemyMonHP
-	push hl
+	ld hl, wEnemyMonHP - 2 ; CalcStats will now add 13 bytes to this value instead of 11 to find DVs, so we adjust by subtracting 2 ...
 	call CalcStats
-	pop hl
+	ld hl, wEnemyMonHP     ; ... and now we restore the expected value
 	ld a, [wIsInBattle]
 	cp $2 ; is it a trainer battle?
 	jr z, .copyHPAndStatusFromPartyData
@@ -6481,7 +6480,7 @@ CalculateModifiedStats:
 	jr nz, .loop
 	ret
 
-; calculate modified stat for stat c (0 = attack, 1 = defense, 2 = speed, 3 = special)
+; calculate modified stat for stat c (0 = attack, 1 = defense, 2 = speed, 3 = spcl.atk, 4 = spcl.def)
 CalculateModifiedStat:
 	push bc
 	push bc
@@ -6573,7 +6572,7 @@ ApplyBadgeStatBoosts:
 ; Boulder (bit 0) - attack
 ; Thunder (bit 2) - defense
 ; Soul (bit 4) - speed
-; Volcano (bit 6) - special
+; Volcano (bit 6) - special attack
 .loop
 	srl b
 	call c, .applyBoostToStat
@@ -6582,7 +6581,11 @@ ApplyBadgeStatBoosts:
 	srl b
 	dec c
 	jr nz, .loop
-	ret
+; Special case added for special defense
+	ld a, [wObtainedBadges]
+	bit BIT_VOLCANOBADGE, a ; checks same badge as special attack, but can be any of them
+	ret z                   ; return immediately if that badge is not obtained
+; fall-through intended
 
 ; multiply stat at hl by 1.125
 ; cap stat at MAX_STAT_VALUE

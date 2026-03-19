@@ -1,7 +1,7 @@
 	db DEX_ARBOK ; pokedex id
 
-	db  60,  85,  69,  80,  65
-	;   hp  atk  def  spd  spc
+	db  60,  85,  69,  80,  85,  65
+	;   hp  atk  def  spd  sat  sdf
 
 	db POISON, POISON ; type
 	db 90 ; catch rate

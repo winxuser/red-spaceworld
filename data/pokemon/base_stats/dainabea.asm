@@ -1,7 +1,7 @@
 	db DEX_DAINABEA ; pokedex id
 
-	db  70,  80,  60, 60,  70
-	;   hp  atk  def  spd  spc
+	db  70,  80,  60,  60,  70,  50
+	;   hp  atk  def  spd  sat  sdf
 
 	db FIRE, FIRE ; type
 	db 45 ; catch rate

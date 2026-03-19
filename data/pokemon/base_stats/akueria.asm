@@ -1,10 +1,10 @@
 	db DEX_AKUERIA ; pokedex id
 
-	db  75,  60, 70,  65,  60
-	;   hp  atk  def  spd  spc
+	db  75,  60,  70,  65,  60,  50
+	;   hp  atk  def  spd  sat  sdf
 
 	db WATER, WATER ; type
-	db 45 ; catch rate
+	db 255 ; catch rate
 	db 100 ; base exp
 
 	INCBIN "gfx/pokemon/akueria/front.pic", 0, 1 ; sprite dimensions
