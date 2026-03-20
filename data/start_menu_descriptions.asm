@@ -8,6 +8,17 @@ StartMenuDescriptionTable:
 	dw .Option
 	dw .Exit
 
+.GotTownMap:
+; descriptions if the player has the town map
+	dw .Pokedex
+	dw .Pokemon
+	dw .Item
+	dw .Map
+	dw .Player
+	dw .Save
+	dw .Option
+	dw .Exit
+
 .LinkTable:
 ; descriptions for link mode
 	dw .Pokedex
@@ -29,6 +40,10 @@ StartMenuDescriptionTable:
 .Item:
 	db "Contains"
 	next "items@"
+
+.Map:
+	db "Show"
+	next "location@"
 
 .Player:
 	db "Your own"
