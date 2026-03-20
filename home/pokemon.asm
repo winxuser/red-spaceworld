@@ -159,14 +159,14 @@ LoadFrontSpriteByMonIndex::
 ;	add hl, bc
 
 ;	ld a, BANK(CryData)
-;	call BankswitchHome
+;	rst _BankswitchHome
 ;	ld a, [hli]
 ;	ld b, a ; cry id
 ;	ld a, [hli]
 ;	ld [wFrequencyModifier], a
 ;	ld a, [hl]
 ;	ld [wTempoModifier], a
-;	call BankswitchBack
+;	rst _BankswitchBack
 
 	; Cry headers have 3 channels,
 	; and start from index CRY_SFX_START,

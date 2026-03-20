@@ -2431,7 +2431,7 @@ ResetUsingStrengthOutOfBattleBit:
 ForceBikeOrSurf::
 	ld b, BANK(RedSprite)
 	ld hl, LoadPlayerSpriteGraphics ; in bank 0
-	call Bankswitch
+	rst _Bankswitch
 	jp PlayDefaultMusic ; update map/player state?
 
 CheckForUserInterruption::
