@@ -440,8 +440,13 @@ wSimulatedJoypadStatesEnd::
 NEXTU
 wUnusedFlag::
 wBoostExpByExpAll:: db
+wEggRemainingSteps:: db
+wIsEggInDaycare::
+		; $00 = no
+		; $01 = yes
+		ds 0
 
-	ds 59
+	ds 57
 
 wNPCMovementDirections2:: ds 10
 ; used in Pallet Town scripted movement

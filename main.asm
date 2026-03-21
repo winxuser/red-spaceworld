@@ -397,4 +397,4 @@ SECTION "Addon Extras", ROMX
 INCLUDE "engine/items/tm_prices.asm"
 INCLUDE "gfx/fishing.asm"
 INCLUDE "engine/pokemon/mon_gender.asm"
-
+INCLUDE "data/pokemon/breeding_list.asm"

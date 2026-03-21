@@ -310,6 +310,17 @@ OverworldLoopLessDelay::
 ; step counting
 	ld hl, wStepCounter
 	dec [hl]
+; Egg step counter code
+	ld a, [wEggRemainingSteps]
+	and a
+	jr z, .skipEggCount
+	dec a
+	jr nz, .skipEggCount
+   	ld a, 1
+   	ld [wIsEggInDaycare], a ; Spawn Egg
+.skipEggCount
+	ld [wEggRemainingSteps], a
+;Back to vanilla
 	ld a, [wStatusFlags2]
 	bit BIT_WILD_ENCOUNTER_COOLDOWN, a
 	jr z, .doneStepCounting
