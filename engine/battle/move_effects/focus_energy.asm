@@ -10,10 +10,11 @@ FocusEnergyEffect_:
 	set GETTING_PUMPED, [hl] ; mon is now using focus energy
 	callfar PlayCurrentMoveAnimation
 	ld hl, GettingPumpedText
-	jp PrintText
+	rst _PrintText
+	ret
 .alreadyUsing
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrame
 	jpfar PrintButItFailedText_
 
 GettingPumpedText:

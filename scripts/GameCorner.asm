@@ -142,7 +142,7 @@ GameCornerClerk1Text:
 	; Show player's coins
 	call GameCornerDrawCoinBox
 	ld hl, .DoYouNeedSomeGameCoins
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -199,8 +199,8 @@ GameCornerClerk1Text:
 .no_coin_case
 	ld hl, .DontHaveCoinCase
 .print_ret
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .DoYouNeedSomeGameCoins:
 	text_far _GameCornerClerk1DoYouNeedSomeGameCoinsText
@@ -239,7 +239,7 @@ GameCornerFishingGuruText:
 	CheckEvent EVENT_GOT_10_COINS
 	jr nz, .alreadyGotNpcCoins
 	ld hl, .WantToPlayText
-	call PrintText
+	rst _PrintText
 	ld b, COIN_CASE
 	call IsItemInBag
 	jr z, .dontHaveCoinCase
@@ -268,8 +268,8 @@ GameCornerFishingGuruText:
 .dontHaveCoinCase
 	ld hl, GameCornerOopsForgotCoinCaseText
 .print_ret
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .WantToPlayText:
 	text_far _GameCornerFishingGuruWantToPlayText
@@ -299,8 +299,8 @@ GameCornerGymGuideText:
 	jr z, .not_defeated
 	ld hl, GameCornerGymGuideTheyOfferRarePokemonText
 .not_defeated
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 GameCornerGymGuideChampInMakingText:
 	text_far _GameCornerGymGuideChampInMakingText
@@ -319,7 +319,7 @@ GameCornerClerk2Text:
 	CheckEvent EVENT_GOT_20_COINS_2
 	jr nz, .alreadyGotNpcCoins
 	ld hl, .WantSomeCoinsText
-	call PrintText
+	rst _PrintText
 	ld b, COIN_CASE
 	call IsItemInBag
 	jr z, .dontHaveCoinCase
@@ -346,8 +346,8 @@ GameCornerClerk2Text:
 .dontHaveCoinCase
 	ld hl, GameCornerOopsForgotCoinCaseText
 .print_ret
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .WantSomeCoinsText:
 	text_far _GameCornerClerk2WantSomeCoinsText
@@ -371,7 +371,7 @@ GameCornerGentlemanText:
 	CheckEvent EVENT_GOT_20_COINS
 	jr nz, .alreadyGotNpcCoins
 	ld hl, .ThrowingMeOffText
-	call PrintText
+	rst _PrintText
 	ld b, COIN_CASE
 	call IsItemInBag
 	jr z, .dontHaveCoinCase
@@ -398,8 +398,8 @@ GameCornerGentlemanText:
 .dontHaveCoinCase
 	ld hl, GameCornerOopsForgotCoinCaseText
 .print_ret
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .ThrowingMeOffText:
 	text_far _GameCornerGentlemanThrowingMeOffText
@@ -421,7 +421,7 @@ GameCornerGentlemanText:
 GameCornerRocketText:
 	text_asm
 	ld hl, .ImGuardingThisPosterText
-	call PrintText
+	rst _PrintText
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
@@ -438,7 +438,7 @@ GameCornerRocketText:
 	ldh [hJoyReleased], a
 	ld a, SCRIPT_GAMECORNER_ROCKET_BATTLE
 	ld [wGameCornerCurScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .ImGuardingThisPosterText:
 	text_far _GameCornerRocketImGuardingThisPosterText
@@ -457,25 +457,25 @@ GameCornerPosterText:
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, .SwitchBehindPosterText
-	call PrintText
+	rst _PrintText
 	call WaitForSoundToFinish
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 	SetEvent EVENT_FOUND_ROCKET_HIDEOUT
 	ld a, $43
 	ld [wNewTileBlockID], a
 	lb bc, 2, 8
 	predef ReplaceTileBlock
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .SwitchBehindPosterText:
 	text_far _GameCornerPosterSwitchBehindPosterText
 	text_asm
 	ld a, SFX_SWITCH
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 GameCornerOopsForgotCoinCaseText:
 	text_far _GameCornerOopsForgotCoinCaseText

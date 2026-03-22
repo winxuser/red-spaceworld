@@ -237,7 +237,7 @@ Paragraph::
 	lb bc, 4, 18
 	call ClearScreenArea
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrame
 	pop de
 	hlcoord 1, 14
 	jp NextChar
@@ -252,7 +252,7 @@ PageChar::
 	lb bc, 7, 18
 	call ClearScreenArea
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrame
 	pop de
 	pop hl
 	hlcoord 1, 11
@@ -497,7 +497,7 @@ TextCommand_PAUSE::
 	and PAD_A | PAD_B
 	jr nz, .done
 	ld c, 30 ; half a second
-	call DelayFrames
+	rst _DelayFrame
 .done
 	pop bc
 	pop hl
@@ -527,7 +527,7 @@ TextCommand_SOUND::
 	cp TX_SOUND_CRY_DEWGONG
 	jr z, .pokemonCry
 	ld a, [hl]
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 	pop hl
 	pop bc
@@ -573,7 +573,7 @@ TextCommand_DOTS::
 	and PAD_A | PAD_B
 	jr nz, .next ; if so, skip the delay
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrame
 .next
 	dec d
 	jr nz, .loop

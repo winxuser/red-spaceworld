@@ -44,7 +44,8 @@ HazeEffect_:
 	ld hl, PlayCurrentMoveAnimation
 	call CallBankF
 	ld hl, StatusChangesEliminatedText
-	jp PrintText
+	rst _PrintText
+	ret
 
 CureVolatileStatuses:
 	res CONFUSED, [hl]

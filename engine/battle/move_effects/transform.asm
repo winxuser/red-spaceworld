@@ -68,7 +68,7 @@ TransformEffect_:
 	inc de
 	inc bc
 	inc bc
-	call CopyData
+	rst _CopyData
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .next
@@ -96,7 +96,7 @@ TransformEffect_:
 	inc de
 ; Attack, Defense, Speed, Spcl.Atk, and Spcl.Def stats
 	ld bc, (NUM_STATS - 1) * 2
-	call CopyData
+	rst _CopyData
 	ld bc, wBattleMonMoves - wBattleMonPP
 	add hl, bc ; ld hl, wBattleMonMoves
 	ld b, NUM_MOVES
@@ -131,7 +131,8 @@ TransformEffect_:
 	ld de, wPlayerMonStatMods
 	call .copyBasedOnTurn ; stat mods
 	ld hl, TransformedText
-	jp PrintText
+	rst _PrintText
+	ret
 
 .copyBasedOnTurn
 	ldh a, [hWhoseTurn]

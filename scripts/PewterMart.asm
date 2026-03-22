@@ -13,8 +13,8 @@ PewterMart_TextPointers:
 PewterMartYoungsterText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _PewterMartYoungsterText
@@ -23,9 +23,12 @@ PewterMartYoungsterText:
 PewterMartSuperNerdText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _PewterMartSuperNerdText
 	text_end
+
+PewterMartClerkText:
+	script_mart POKE_BALL, POTION, ESCAPE_ROPE, ANTIDOTE, BURN_HEAL, AWAKENING, PARLYZ_HEAL

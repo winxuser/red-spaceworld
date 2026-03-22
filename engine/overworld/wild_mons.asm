@@ -17,7 +17,7 @@ LoadWildData::
 	push hl
 	ld de, wGrassMons ; otherwise, load grass data
 	ld bc, $18 ; dereknote: changed from $14 to $18 to accomodate 2 more wild encounter slots per map 
-	call CopyData
+	rst _CopyData
 	pop hl
 	ld bc, $18 ; dereknote: changed from $14 to $18 to accomodate 2 more wild encounter slots per map
 	add hl, bc

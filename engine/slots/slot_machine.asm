@@ -7,7 +7,7 @@ PromptUserToPlaySlots:
 	ld hl, DisplayTextIDInit
 	rst _Bankswitch
 	ld hl, PlaySlotMachineText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -65,7 +65,7 @@ MainSlotMachineLoop:
 	ld [hl], a
 	call SlotMachine_PrintPayoutCoins
 	ld hl, BetHowManySlotMachineText
-	call PrintText
+	rst _PrintText
 	call SaveScreenTilesToBuffer1
 .loop
 	ld a, PAD_A | PAD_B
@@ -104,7 +104,7 @@ MainSlotMachineLoop:
 	cp c
 	jr nc, .skip1
 	ld hl, NotEnoughCoinsSlotMachineText
-	call PrintText
+	rst _PrintText
 	jr .loop
 .skip1
 	call LoadScreenTilesFromBuffer1
@@ -118,9 +118,9 @@ MainSlotMachineLoop:
 	ld [hl], a
 	call WaitForSoundToFinish
 	ld a, SFX_SLOTS_NEW_SPIN
-	call PlaySound
+	rst _PlaySound
 	ld hl, StartSlotMachineText
-	call PrintText
+	rst _PrintText
 	call SlotMachine_SpinWheels
 	call SlotMachine_CheckForMatches
 	ld hl, wPlayerCoins
@@ -128,12 +128,12 @@ MainSlotMachineLoop:
 	or [hl]
 	jr nz, .skip2
 	ld hl, OutOfCoinsSlotMachineText
-	call PrintText
+	rst _PrintText
 	ld c, 60
 	jp DelayFrames
 .skip2
 	ld hl, OneMoreGoSlotMachineText
-	call PrintText
+	rst _PrintText
 	hlcoord 14, 12
 	lb bc, 13, 15
 	xor a ; YES_NO_MENU
@@ -210,7 +210,7 @@ SlotMachine_SpinWheels:
 	call SlotMachine_AnimWheel2
 	call SlotMachine_AnimWheel3
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrame
 	pop bc
 	dec c
 	jr nz, .loop1
@@ -226,7 +226,7 @@ SlotMachine_SpinWheels:
 	xor $1
 	inc a
 	ld c, a
-	call DelayFrames
+	rst _DelayFrame
 	jr .loop2
 
 ; Note that the wheels can only stop when a symbol is centred in the wheel
@@ -409,7 +409,7 @@ SlotMachine_CheckForMatches:
 	jr nz, .rollWheel3DownByOneSymbol
 .noMatch
 	ld hl, NotThisTimeText
-	call PrintText
+	rst _PrintText
 .done
 	xor a
 	ld [wSFXPriority], a
@@ -449,7 +449,7 @@ SlotMachine_CheckForMatches:
 	ld l, a
 	ld de, wStringBuffer
 	ld bc, 4 ; every SlotReward*Text is at most 4 bytes
-	call CopyData
+	rst _CopyData
 	pop hl
 	ld de, .flashScreenLoop
 	push de
@@ -460,7 +460,7 @@ SlotMachine_CheckForMatches:
 	xor $40
 	ldh [rBGP], a
 	ld c, 5
-	call DelayFrames
+	rst _DelayFrame
 	dec b
 	jr nz, .flashScreenLoop
 	ld hl, wPayoutCoins
@@ -469,7 +469,7 @@ SlotMachine_CheckForMatches:
 	ld [hl], e
 	call SlotMachine_PrintPayoutCoins
 	ld hl, SymbolLinedUpSlotMachineText
-	call PrintText
+	rst _PrintText
 	call WaitForTextScrollButtonPress
 	call SlotMachine_PayCoinsToPlayer
 	call SlotMachine_PrintPayoutCoins
@@ -587,7 +587,7 @@ SlotReward15Func:
 
 SlotReward100Func:
 	ld a, SFX_GET_KEY_ITEM
-	call PlaySound
+	rst _PlaySound
 	xor a
 	ld [wSlotMachineFlags], a
 	ld b, $8
@@ -596,9 +596,9 @@ SlotReward100Func:
 
 SlotReward300Func:
 	ld hl, YeahText
-	call PrintText
+	rst _PrintText
 	ld a, SFX_GET_ITEM_2
-	call PlaySound
+	rst _PlaySound
 	call Random
 	cp $80
 	ld a, 0
@@ -693,7 +693,7 @@ SlotMachine_PayCoinsToPlayer:
 	call SlotMachine_PrintCreditCoins
 	call SlotMachine_PrintPayoutCoins
 	ld a, SFX_SLOTS_REWARD
-	call PlaySound
+	rst _PlaySound
 	ld a, 1
 	ld [wSFXPriority], a
 	ld a, [wAnimCounter]
@@ -711,7 +711,7 @@ SlotMachine_PayCoinsToPlayer:
 	jr nc, .skip2
 	srl c ; c = 4 (make the the coins transfer faster if the symbol was 7 or bar)
 .skip2
-	call DelayFrames
+	rst _DelayFrame
 	jr .loop
 
 SlotMachine_PutOutLitBalls:
@@ -870,7 +870,7 @@ LoadSlotMachineTiles:
 	ld hl, SlotMachineMap
 	decoord 0, 0
 	ld bc, SlotMachineMapEnd - SlotMachineMap
-	call CopyData
+	rst _CopyData
 	call EnableLCD
 	ld hl, wSlotMachineWheel1Offset
 	ld a, $1c

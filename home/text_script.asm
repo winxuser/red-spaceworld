@@ -141,7 +141,7 @@ CloseTextDisplay::
 DisplayPokemartDialogue::
 	push hl
 	ld hl, PokemartGreetingText
-	call PrintText
+	rst _PrintText
 	pop hl
 	inc hl
 	call LoadItemList
@@ -187,7 +187,7 @@ DisplaySafariGameOverText::
 
 DisplayPokemonFaintedText::
 	ld hl, PokemonFaintedText
-	call PrintText
+	rst _PrintText
 	jp AfterDisplayingTextID
 
 PokemonFaintedText::
@@ -196,7 +196,7 @@ PokemonFaintedText::
 
 DisplayPlayerBlackedOutText::
 	ld hl, PlayerBlackedOutText
-	call PrintText
+	rst _PrintText
 	ld a, [wStatusFlags6]
 	res BIT_ALWAYS_ON_BIKE, a
 	ld [wStatusFlags6], a
@@ -208,7 +208,7 @@ PlayerBlackedOutText::
 
 DisplayRepelWoreOffText::
 	ld hl, RepelWoreOffText
-	call PrintText
+	rst _PrintText
 	jp AfterDisplayingTextID
 
 RepelWoreOffText::

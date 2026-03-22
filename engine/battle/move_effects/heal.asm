@@ -25,7 +25,7 @@ HealEffect_:
 	push de
 	push af
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrame
 	ld hl, wBattleMonStatus
 	ldh a, [hWhoseTurn]
 	and a
@@ -39,7 +39,7 @@ HealEffect_:
 	jr z, .printRestText
 	ld hl, FellAsleepBecameHealthyText ; if mon had an status
 .printRestText
-	call PrintText
+	rst _PrintText
 	pop af
 	pop de
 	pop hl
@@ -100,10 +100,11 @@ HealEffect_:
 	ld hl, DrawHUDsAndHPBars
 	call EffectCallBattleCore
 	ld hl, RegainedHealthText
-	jp PrintText
+	rst _PrintText
+	ret
 .failed
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrame
 	ld hl, PrintButItFailedText_
 	jp EffectCallBattleCore
 

@@ -51,7 +51,7 @@ HallOfFameResetEventsAndSaveScript:
 	ld b, 5
 .delayLoop
 	ld c, 600 / 5
-	call DelayFrames
+	rst _DelayFrame
 	dec b
 	jr nz, .delayLoop
 	call WaitForTextScrollButtonPress

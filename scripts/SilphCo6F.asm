@@ -71,14 +71,15 @@ SilphCo6FBeatGiovanniPrintDEOrPrintHLScript:
 	ld h, d
 	ld l, e
 .print_text
-	jp PrintText
+	rst _PrintText
+	ret
 
 SilphCo6FSilphWorkerM1Text:
 	text_asm
 	ld hl, .TookOverTheBuildingText
 	ld de, .BackToWorkText
 	call SilphCo6FBeatGiovanniPrintDEOrPrintHLScript
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .TookOverTheBuildingText:
 	text_far _SilphCo6FSilphWorkerM1TookOverTheBuildingText
@@ -93,7 +94,7 @@ SilphCo6FSilphWorkerM2Text:
 	ld hl, .HelpMePleaseText
 	ld de, .WeGotEngagedText
 	call SilphCo6FBeatGiovanniPrintDEOrPrintHLScript
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .HelpMePleaseText:
 	text_far _SilphCo6FSilphWorkerMHelpMePleaseText
@@ -108,7 +109,7 @@ SilphCo6FSilphWorkerF1Text:
 	ld hl, .SuchACowardText
 	ld de, .HaveToMarryHimText
 	call SilphCo6FBeatGiovanniPrintDEOrPrintHLScript
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .SuchACowardText:
 	text_far _SilphCo6FSilphWorkerF1SuchACowardText
@@ -123,7 +124,7 @@ SilphCo6FSilphWorkerF2Text:
 	ld hl, .TeamRocketConquerWorldText
 	ld de, .TeamRocketRanText
 	call SilphCo6FBeatGiovanniPrintDEOrPrintHLScript
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .TeamRocketConquerWorldText:
 	text_far _SilphCo6FSilphWorkerF2TeamRocketConquerWorldText
@@ -138,7 +139,7 @@ SilphCo6FSilphWorkerM3Text:
 	ld hl, .TargetedSilphText
 	ld de, .WorkForSilphText
 	call SilphCo6FBeatGiovanniPrintDEOrPrintHLScript
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .TargetedSilphText:
 	text_far _SilphCo6FSilphWorkerM3TargetedSilphText
@@ -152,7 +153,7 @@ SilphCo6FRocket1Text:
 	text_asm
 	ld hl, SilphCo6TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo6FRocket1BattleText:
 	text_far _SilphCo6FRocket1BattleText
@@ -170,7 +171,7 @@ SilphCo6FScientistText:
 	text_asm
 	ld hl, SilphCo6TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo6FScientistBattleText:
 	text_far _SilphCo6FScientistBattleText
@@ -188,7 +189,7 @@ SilphCo6FRocket2Text:
 	text_asm
 	ld hl, SilphCo6TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo6FRocket2BattleText:
 	text_far _SilphCo6FRocket2BattleText

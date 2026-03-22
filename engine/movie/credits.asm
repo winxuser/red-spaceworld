@@ -2,7 +2,7 @@ HallOfFamePC:
 	farcall AnimateHallOfFame
 	call ClearScreen
 	ld c, 100
-	call DelayFrames
+	rst _DelayFrame
 	call DisableLCD
 	ld hl, vFont
 	ld bc, ($80 tiles) / 2
@@ -27,7 +27,7 @@ HallOfFamePC:
 	ld a, MUSIC_CREDITS
 	call PlayMusic
 	ld c, 128
-	call DelayFrames
+	rst _DelayFrame
 	xor a
 	ld [wUnusedCreditsByte], a ; not read
 	ld [wNumCreditsMonsDisplayed], a
@@ -40,7 +40,7 @@ FadeInCredits:
 	ld a, [hli]
 	ldh [rBGP], a
 	ld c, 5
-	call DelayFrames
+	rst _DelayFrame
 	dec b
 	jr nz, .loop
 	ret
@@ -224,7 +224,7 @@ Credits:
 .showTextAndShowMon
 	ld c, 110
 .next1
-	call DelayFrames
+	rst _DelayFrame
 	call DisplayCreditsMon
 	jr .nextCreditsScreen
 .fadeInText
@@ -234,7 +234,7 @@ Credits:
 .showText
 	ld c, 140
 .next2
-	call DelayFrames
+	rst _DelayFrame
 	jr .nextCreditsScreen
 .showCopyrightText
 	push de
@@ -244,7 +244,7 @@ Credits:
 	jr .nextCreditsCommand
 .showTheEnd
 	ld c, 16
-	call DelayFrames
+	rst _DelayFrame
 	call FillMiddleOfScreenWithWhite
 	pop de
 	ld de, TheEndGfx

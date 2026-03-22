@@ -41,7 +41,7 @@ VermilionDockSSAnneLeavesScript:
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wJoyIgnore], a
 ;	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	ld c, 0 ; BANK(Music_Surfing)
 	ld a, MUSIC_SURFING
 	call PlayMusic
@@ -49,7 +49,7 @@ VermilionDockSSAnneLeavesScript:
 	xor a
 	ld [wSpritePlayerStateData1ImageIndex], a
 	ld c, 120
-	call DelayFrames
+	rst _DelayFrame
 	ld b, HIGH(vBGMap1)
 	call CopyScreenTileBufferToVRAM
 	hlcoord 0, 10
@@ -202,9 +202,9 @@ endr
 	ld [hl], a
 
 	ld a, SFX_SS_ANNE_HORN
-	call PlaySound
+	rst _PlaySound
 	ld c, 120
-	call DelayFrames
+	rst _DelayFrame
 	ret
 
 VermilionDock_TextPointers:

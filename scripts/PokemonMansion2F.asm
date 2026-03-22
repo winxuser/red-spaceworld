@@ -75,7 +75,7 @@ PokemonMansion2FSuperNerdText:
 	text_asm
 	ld hl, Mansion2TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonMansion2FSuperNerdBattleText:
 	text_far _PokemonMansion2FSuperNerdBattleText
@@ -100,7 +100,7 @@ PokemonMansion2FDiary2Text:
 PokemonMansion2FSwitchText:
 	text_asm
 	ld hl, .Text
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -110,18 +110,18 @@ PokemonMansion2FSwitchText:
 	ld hl, wCurrentMapScriptFlags
 	set BIT_CUR_MAP_LOADED_1, [hl]
 	ld hl, .PressedText
-	call PrintText
+	rst _PrintText
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst _PlaySound
 	CheckAndSetEvent EVENT_MANSION_SWITCH_ON
 	jr z, .done
 	ResetEventReuseHL EVENT_MANSION_SWITCH_ON
 	jr .done
 .not_pressed
 	ld hl, .NotPressed
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .Text:
 	text_far _PokemonMansion2FSwitchText

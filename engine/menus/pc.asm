@@ -1,9 +1,9 @@
 ActivatePC::
 	call SaveScreenTilesToBuffer2
 	ld a, SFX_TURN_ON_PC
-	call PlaySound
+	rst _PlaySound
 	ld hl, TurnedOnPC1Text
-	call PrintText
+	rst _PrintText
 	call WaitForSoundToFinish
 	ld hl, wMiscFlags
 	set BIT_USING_GENERIC_PC, [hl]
@@ -52,27 +52,27 @@ PCMainMenu:
 	res BIT_NO_MENU_BUTTON_SOUND, [hl]
 	set BIT_USING_GENERIC_PC, [hl]
 	ld a, SFX_ENTER_PC
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld hl, AccessedMyPCText
-	call PrintText
+	rst _PrintText
 	farcall PlayerPC
 	jr ReloadMainMenu
 OaksPC:
 	ld a, SFX_ENTER_PC
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 	farcall OpenOaksPC
 	jr ReloadMainMenu
 PKMNLeague:
 	ld a, SFX_ENTER_PC
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 	farcall PKMNLeaguePC
 	jr ReloadMainMenu
 BillsPC:
 	ld a, SFX_ENTER_PC
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 	CheckEvent EVENT_MET_BILL
 	jr nz, .billsPC ;if you've met bill, use that bill's instead of someone's
@@ -81,7 +81,7 @@ BillsPC:
 .billsPC
 	ld hl, AccessedBillsPCText
 .printText
-	call PrintText
+	rst _PrintText
 	farcall BillsPC_
 ReloadMainMenu:
 	xor a
@@ -91,7 +91,7 @@ ReloadMainMenu:
 	jp PCMainMenu
 LogOff:
 	ld a, SFX_TURN_OFF_PC
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 	ld hl, wMiscFlags
 	res BIT_USING_GENERIC_PC, [hl]

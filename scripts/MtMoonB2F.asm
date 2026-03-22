@@ -187,11 +187,11 @@ MtMoonB2FSuperNerdText:
 	CheckEitherEventSet EVENT_GOT_DOME_FOSSIL, EVENT_GOT_HELIX_FOSSIL, 1
 	jr nz, .got_a_fossil
 	ld hl, MtMoonB2fSuperNerdEachTakeOneText
-	call PrintText
+	rst _PrintText
 	jr .done
 .beat_super_nerd
 	ld hl, MtMoonB2FSuperNerdTheyreBothMineText
-	call PrintText
+	rst _PrintText
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
@@ -208,40 +208,40 @@ MtMoonB2FSuperNerdText:
 	jr .done
 .got_a_fossil
 	ld hl, MtMoonB2FSuperNerdTheresAPokemonLabText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoonB2FRocket1Text:
 	text_asm
 	ld hl, MtMoon3TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoonB2FRocket2Text:
 	text_asm
 	ld hl, MtMoon3TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoonB2FRocket3Text:
 	text_asm
 	ld hl, MtMoon3TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoonB2FRocket4Text:
 	text_asm
 	ld hl, MtMoon3TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 MtMoonB2FDomeFossilText:
 	text_asm
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, .YouWantText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -258,7 +258,7 @@ MtMoonB2FDomeFossilText:
 	ld [wMtMoonB2FCurScript], a
 	ld [wCurMapScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .YouWantText:
 	text_far _MtMoonB2FDomeFossilYouWantText
@@ -269,7 +269,7 @@ MtMoonB2FHelixFossilText:
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, .YouWantText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -286,7 +286,7 @@ MtMoonB2FHelixFossilText:
 	ld [wMtMoonB2FCurScript], a
 	ld [wCurMapScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .YouWantText:
 	text_far _MtMoonB2FHelixFossilYouWantText
@@ -294,7 +294,8 @@ MtMoonB2FHelixFossilText:
 
 MtMoonB2FReceivedFossilText:
 	ld hl, .Text
-	jp PrintText
+	rst _PrintText
+	ret
 
 .Text:
 	text_far _MtMoonB2FReceivedFossilText
@@ -304,8 +305,8 @@ MtMoonB2FReceivedFossilText:
 
 MtMoonB2FYouHaveNoRoomText:
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _MtMoonB2FYouHaveNoRoomText

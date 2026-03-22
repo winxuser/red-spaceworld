@@ -79,7 +79,7 @@ BillsHouseBillExitsMachineScript:
 	ld [wToggleableObjectIndex], a
 	predef ShowObject
 	ld c, 8
-	call DelayFrames
+	rst _DelayFrame
 	ld a, BILLSHOUSE_BILL1
 	ldh [hSpriteIndex], a
 	ld de, .BillExitMachineMovement
@@ -129,23 +129,23 @@ BillsHouseActivatePCScript:
 BillsHouseBillPokemonText:
 	text_asm
 	ld hl, .ImNotAPokemonText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .answered_no
 .use_machine
 	ld hl, .UseSeparationSystemText
-	call PrintText
+	rst _PrintText
 	ld a, SCRIPT_BILLSHOUSE_POKEMON_WALK_TO_MACHINE
 	ld [wBillsHouseCurScript], a
 	jr .text_script_end
 .answered_no
 	ld hl, .NoYouGottaHelpText
-	call PrintText
+	rst _PrintText
 	jr .use_machine
 .text_script_end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .ImNotAPokemonText:
 	text_far _BillsHouseBillImNotAPokemonText
@@ -164,12 +164,12 @@ BillsHouseBillSSTicketText:
 	CheckEvent EVENT_GOT_SS_TICKET
 	jr nz, .got_ss_ticket
 	ld hl, .ThankYouText
-	call PrintText
+	rst _PrintText
 	lb bc, S_S_TICKET, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, .SSTicketReceivedText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_SS_TICKET
 	ld a, TOGGLE_CERULEAN_GUARD_1
 	ld [wToggleableObjectIndex], a
@@ -179,13 +179,13 @@ BillsHouseBillSSTicketText:
 	predef HideObject
 .got_ss_ticket
 	ld hl, .WhyDontYouGoInsteadOfMeText
-	call PrintText
+	rst _PrintText
 	jr .text_script_end
 .bag_full
 	ld hl, .SSTicketNoRoomText
-	call PrintText
+	rst _PrintText
 .text_script_end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .ThankYouText:
 	text_far _BillsHouseBillThankYouText
@@ -208,8 +208,8 @@ BillsHouseBillSSTicketText:
 BillsHouseBillCheckOutMyRarePokemonText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _BillsHouseBillCheckOutMyRarePokemonText

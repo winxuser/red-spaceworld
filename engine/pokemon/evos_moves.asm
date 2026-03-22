@@ -118,9 +118,9 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call GetPartyMonName
 	call CopyToStringBuffer
 	ld hl, IsEvolvingText
-	call PrintText
+	rst _PrintText
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrame
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 	hlcoord 0, 0
@@ -134,7 +134,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	callfar EvolveMon
 	jp c, CancelledEvolution
 	ld hl, EvolvedText
-	call PrintText
+	rst _PrintText
 	pop hl
 	ld a, [hl]
 	ld [wCurSpecies], a
@@ -152,7 +152,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	ld c, 40
-	call DelayFrames
+	rst _DelayFrame
 	call ClearScreen
 	call RenameEvolvedMon
 	ld a, [wPokedexNum]
@@ -166,7 +166,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld bc, BASE_DATA_SIZE
 	call AddNTimes
 	ld de, wMonHeader
-	call CopyData
+	rst _CopyData
 	ld a, [wCurSpecies]
 	ld [wMonHIndex], a
 	pop af
@@ -204,7 +204,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld [hl], a
 	dec hl
 	pop bc
-	call CopyData
+	rst _CopyData
 	ld a, [wCurSpecies]
 	ld [wPokedexNum], a
 	xor a
@@ -292,7 +292,7 @@ RenameEvolvedMon:
 
 CancelledEvolution:
 	ld hl, StoppedEvolvingText
-	call PrintText
+	rst _PrintText
 	call ClearScreen
 	pop hl
 	call Evolution_ReloadTilesetTilePatterns

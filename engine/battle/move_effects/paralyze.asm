@@ -34,14 +34,14 @@ ParalyzeEffect_:
 	set PAR, [hl]
 	callfar QuarterSpeedDueToParalysis
 	ld c, 30
-	call DelayFrames
+	rst _DelayFrame
 	callfar PlayCurrentMoveAnimation
 	jpfar PrintMayNotAttackText
 .didntAffect
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrame
 	jpfar PrintDidntAffectText
 .doesntAffect
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrame
 	jpfar PrintDoesntAffectText

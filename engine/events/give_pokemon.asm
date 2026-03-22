@@ -34,12 +34,12 @@ _GivePokemon::
 	ld [hli], a
 	ld [hl], '@'
 	ld hl, SentToBoxText
-	call PrintText
+	rst _PrintText
 	scf
 	ret
 .boxFull
 	ld hl, BoxIsFullText
-	call PrintText
+	rst _PrintText
 	and a
 	ret
 .addToParty
@@ -66,7 +66,8 @@ SetPokedexOwnedFlag:
 	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld hl, GotMonText
-	jp PrintText
+	rst _PrintText
+	ret
 
 GotMonText:
 	text_far _GotMonText

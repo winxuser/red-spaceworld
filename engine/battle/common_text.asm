@@ -20,13 +20,13 @@ PrintBeginningBattleText:
 .trainerBattle
 	call .playSFX
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrame
 	ld hl, TrainerWantsToFightText
 .wildBattle
 	push hl
 	callfar DrawAllPokeballs
 	pop hl
-	call PrintText
+	rst _PrintText
 	jr .done
 .pokemonTower
 	ld b, SILPH_SCOPE
@@ -42,22 +42,22 @@ PrintBeginningBattleText:
 	jr .notPokemonTower
 .noSilphScope
 	ld hl, EnemyAppearedText
-	call PrintText
+	rst _PrintText
 	ld hl, GhostCantBeIDdText
-	call PrintText
+	rst _PrintText
 	jr .done
 .isMarowak
 	ld a, b
 	and a
 	jr z, .noSilphScope
 	ld hl, EnemyAppearedText
-	call PrintText
+	rst _PrintText
 	ld hl, UnveiledGhostText
-	call PrintText
+	rst _PrintText
 	callfar LoadEnemyMonData
 	callfar MarowakAnim
 	ld hl, WildMonAppearedText
-	call PrintText
+	rst _PrintText
 
 .playSFX
 ;	xor a
@@ -65,7 +65,7 @@ PrintBeginningBattleText:
 ;	ld a, $80
 ;	ld [wTempoModifier], a
 	ld a, SFX_SILPH_SCOPE
-	call PlaySound
+	rst _PlaySound
 	jp WaitForSoundToFinish
 .done
 	ret
@@ -135,7 +135,8 @@ PrintSendOutMonMessage:
 	jr nc, .printText
 	ld hl, EnemysWeakText ; 0% - 9%
 .printText
-	jp PrintText
+	rst _PrintText
+	ret
 
 GoText:
 	text_far _GoText
@@ -166,7 +167,8 @@ PlayerMon1Text:
 
 RetreatMon:
 	ld hl, PlayerMon2Text
-	jp PrintText
+	rst _PrintText
+	ret
 
 PlayerMon2Text:
 	text_far _PlayerMon2Text

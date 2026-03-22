@@ -34,9 +34,9 @@ AnimateHealingMachine:
 .partyLoop
 	call CopyHealingMachineOAM
 	ld a, SFX_HEALING_MACHINE
-	call PlaySound
+	rst _PlaySound
 	ld c, 30
-	call DelayFrames
+	rst _DelayFrame
 	dec b
 	jr nz, .partyLoop
 ;	ld a, [wAudioROMBank]
@@ -45,7 +45,7 @@ AnimateHealingMachine:
 ;	jr nz, .next
 ;	ld a, SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
-;	call PlaySound
+;	rst _PlaySound
 ;	ld a, 0 ; BANK(Music_PkmnHealed)
 ;	ld [wAudioROMBank], a
 ;.next
@@ -63,7 +63,7 @@ AnimateHealingMachine:
 ;	jr z, .waitLoop2 ; if so, check gain
 
 	ld c, 32
-	call DelayFrames
+	rst _DelayFrame
 	pop af
 	ldh [rOBP1], a
 	pop hl
@@ -95,7 +95,7 @@ FlashSprite8Times:
 	xor d
 	ldh [rOBP1], a
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrame
 	dec b
 	jr nz, .loop
 	ret

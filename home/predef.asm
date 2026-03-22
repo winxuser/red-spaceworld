@@ -1,5 +1,5 @@
 Predef::
-; Call predefined function a.
+; call Predefined function a.
 ; To preserve other registers, have the
 ; destination call GetPredefRegisters.
 

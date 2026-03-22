@@ -27,7 +27,7 @@ DoInGameTradeDialogue:
 	push af
 	ld de, wInGameTradeMonNick
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	pop af
 	ld l, a
 	ld h, 0
@@ -68,7 +68,7 @@ DoInGameTradeDialogue:
 	call InGameTrade_DoTrade
 	jr c, .printText
 	ld hl, TradedForText
-	call PrintText
+	rst _PrintText
 .printText
 	ld hl, wInGameTradeTextPointerTableIndex
 	ld a, [hld] ; wInGameTradeTextPointerTableIndex
@@ -82,7 +82,8 @@ DoInGameTradeDialogue:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jp PrintText
+	rst _PrintText
+	ret
 
 ; copies name of species a to hl
 InGameTrade_GetMonName:
@@ -125,7 +126,7 @@ InGameTrade_DoTrade:
 	ld b, FLAG_SET
 	predef FlagActionPredef
 	ld hl, ConnectCableText
-	call PrintText
+	rst _PrintText
 	ld a, [wWhichPokemon]
 	push af
 	ld a, [wCurEnemyLevel]
@@ -168,7 +169,7 @@ InGameTrade_RestoreScreen:
 	call Delay3
 	call LoadGBPal
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrame
 	farjp LoadWildData
 
 InGameTrade_PrepareTradeData:
@@ -204,7 +205,7 @@ InGameTrade_PrepareTradeData:
 InGameTrade_CopyData:
 	push hl
 	push bc
-	call CopyData
+	rst _CopyData
 	pop bc
 	pop hl
 	ret
@@ -215,13 +216,13 @@ InGameTrade_CopyDataToReceivedMon:
 	call InGameTrade_GetReceivedMonPointer
 	ld hl, wInGameTradeMonNick
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld hl, wPartyMonOT
 	ld bc, NAME_LENGTH
 	call InGameTrade_GetReceivedMonPointer
 	ld hl, InGameTrade_TrainerString
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld hl, wPartyMon1OTID
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call InGameTrade_GetReceivedMonPointer

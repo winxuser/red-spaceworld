@@ -146,19 +146,19 @@ SilphCo9FNurseText:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .beat_giovanni
 	ld hl, .YouLookTiredText
-	call PrintText
+	rst _PrintText
 	predef HealParty
 	call GBFadeOutToWhite
 	call Delay3
 	call GBFadeInFromWhite
 	ld hl, .DontGiveUpText
-	call PrintText
+	rst _PrintText
 	jr .text_script_end
 .beat_giovanni
 	ld hl, .ThankYouText
-	call PrintText
+	rst _PrintText
 .text_script_end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .YouLookTiredText:
 	text_far SilphCo9FNurseYouLookTiredText
@@ -176,19 +176,19 @@ SilphCo9FRocket1Text:
 	text_asm
 	ld hl, SilphCo9TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo9FScientistText:
 	text_asm
 	ld hl, SilphCo9TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo9FRocket2Text:
 	text_asm
 	ld hl, SilphCo9TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo9FRocket1BattleText:
 	text_far _SilphCo9FRocket1BattleText

@@ -32,10 +32,10 @@ SafariZoneGameOver:
 	xor a
 	ld [wMusicFade], a
 	dec a ; SFX_STOP_ALL_MUSIC
-	call PlaySound
+	rst _PlaySound
 	ld c, 0 ; BANK(SFX_Safari_Zone_PA)
 	ld a, SFX_SAFARI_ZONE_PA
-	call PlaySound
+	rst _PlaySound
 
 	call WaitForSoundToFinish
 ;.waitForMusicToPlay
@@ -63,7 +63,8 @@ PrintSafariGameOverText::
 	xor a
 	ld [wJoyIgnore], a
 	ld hl, SafariGameOverText
-	jp PrintText
+	rst _PrintText
+	ret
 
 SafariGameOverText:
 	text_asm
@@ -71,11 +72,11 @@ SafariGameOverText:
 	and a
 	jr z, .noMoreSafariBalls
 	ld hl, TimesUpText
-	call PrintText
+	rst _PrintText
 .noMoreSafariBalls
 	ld hl, GameOverText
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 TimesUpText:
 	text_far _TimesUpText

@@ -41,7 +41,7 @@ SetPal_BattleAfterBlack:
 	and LCDC_ON
 	jr z, .doneDelay
 	ld c, 3
-	call DelayFrames
+	rst _DelayFrame
 .doneDelay
 
 	; Update palettes (AFTER frame delay, so the tilemap is updated after player/enemy
@@ -73,7 +73,7 @@ SetPal_Battle:
 	and LCDC_ON
 	jr z, .doneDelay
 	ld c, 3
-	call DelayFrames
+	rst _DelayFrame
 .doneDelay
 	ret
 
@@ -642,7 +642,7 @@ SetPal_Overworld:
 	and LCDC_ON
 	jr z, .doneDelay
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrame
 .doneDelay:
 
 	ld a, 2
@@ -884,7 +884,7 @@ ENDC
 
 	; Wait 2 frames before updating palettes
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrame
 
 	ld a, 1
 	ld [W2_ForceBGPUpdate], a ; Signal to update palettes

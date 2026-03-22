@@ -100,8 +100,8 @@ SilphCo8FSilphWorkerMText:
 	jr nz, .beat_giovanni
 	ld hl, .SilphIsFinishedText
 .beat_giovanni
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .SilphIsFinishedText:
 	text_far __SilphCo8FSilphWorkerMThanksForSavingUsText
@@ -115,19 +115,19 @@ SilphCo8FRocket1Text:
 	text_asm
 	ld hl, SilphCo8TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo8FScientistText:
 	text_asm
 	ld hl, SilphCo8TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo8FRocket2Text:
 	text_asm
 	ld hl, SilphCo8TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo8FRocket1BattleText:
 	text_far _SilphCo8FRocket1BattleText

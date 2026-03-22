@@ -33,7 +33,7 @@ PrepareOakSpeech:
 	ld hl, DebugNewGamePlayerName
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld hl, DebugNewGameRivalName
 	ld de, wRivalName
 	ld bc, NAME_LENGTH
@@ -41,7 +41,7 @@ PrepareOakSpeech:
 
 OakSpeech:
 	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
+	rst _PlaySound
 	ld a, 0 ; BANK(Music_Routes2)
 	ld c, a
 	ld a, MUSIC_ROUTES2
@@ -74,7 +74,7 @@ ENDC
 	;bit BIT_DEBUG_MODE, a
 	;jp nz, .skipSpeech
 	ld hl, BoyGirlText  ; added to the same file as the other oak text
-  	call PrintText     ; show this text
+  	rst _PrintText     ; show this text
   	call BoyGirlChoice ; added routine at the end of this file
    	ld a, [wCurrentMenuItem]
    	ld [wPlayerGender], a ; store player's gender. 00 for boy, 01 for girl
@@ -84,7 +84,7 @@ ENDC
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl, OakSpeechText1
-	call PrintText
+	rst _PrintText
 	call GBFadeOutToWhite
 	;call ClearScreen
 	call GetNidorinoPalID ; HAX
@@ -96,7 +96,7 @@ ENDC
 	call LoadFlippedFrontSpriteByMonIndex
 	call MovePicLeft
 	ld hl, OakSpeechText2
-	call PrintText
+	rst _PrintText
 	call GBFadeOutToWhite
 	call GetRedPalID ; HAX
 	ld de, RedPicFront
@@ -110,7 +110,7 @@ ENDC
 	call IntroDisplayPicCenteredOrUpperRight
 	call MovePicLeft
 	ld hl, IntroducePlayerText
-	call PrintText
+	rst _PrintText
 	call ChoosePlayerName
 	call GBFadeOutToWhite
 	call GetRivalPalID ; HAX
@@ -119,7 +119,7 @@ ENDC
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl, IntroduceRivalText
-	call PrintText
+	rst _PrintText
 	call ChooseRivalName
 .skipSpeech
 	call GBFadeOutToWhite
@@ -138,12 +138,12 @@ ENDC
 	and a ; ???
 	jr nz, .next
 	ld hl, OakSpeechText3
-	call PrintText
+	rst _PrintText
 .next
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, SFX_SHRINK
-	call PlaySound
+	rst _PlaySound
 	pop af
 ; bug: switching ROM Bank should not happen outside of Home Bank
 ; This code does nothing, as PlaySound does all necessary Bank switch
@@ -151,7 +151,7 @@ ENDC
 	ldh [hLoadedROMBank], a
 	ld [rROMB], a
 	ld c, 4
-	call DelayFrames
+	rst _DelayFrame
 	ld de, RedSprite
 	ld hl, vSprites
 	lb bc, BANK(RedSprite), $0C
@@ -167,7 +167,7 @@ ENDC
 	lb bc, BANK(ShrinkPic1), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	ld c, 4
-	call DelayFrames
+	rst _DelayFrame
 	ld de, ShrinkPic2
 	lb bc, BANK(ShrinkPic2), $00
 	call IntroDisplayPicCenteredOrUpperRight
@@ -188,7 +188,7 @@ ENDC
 	ldh [hLoadedROMBank], a
 	ld [rROMB], a
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrame
 	hlcoord 6, 5
 	ld b, 7
 	ld c, 7
@@ -197,7 +197,7 @@ ENDC
 	ld a, 1
 	ld [wUpdateSpritesEnabled], a
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrame
 	call GBFadeOutToWhite
 	jp ClearScreen
 
@@ -235,7 +235,7 @@ FadeInIntroPic:
 	ld a, [hli]
 	ldh [rBGP], a
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrame
 	dec b
 	jr nz, .next
 	ret
@@ -276,7 +276,7 @@ IntroDisplayPicCenteredOrUpperRight:
 	ld hl, sSpriteBuffer1
 	ld de, sSpriteBuffer0
 	ld bc, 2 * SPRITEBUFFERSIZE
-	call CopyData
+	rst _CopyData
 	ld de, vFrontPic
 	call InterlaceMergeSpriteBuffers
 	pop bc

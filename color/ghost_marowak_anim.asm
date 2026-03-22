@@ -7,7 +7,7 @@ CopyMonPicFromBGToSpriteVRAM:
 	ld hl, W2_BgPaletteData + 1 * 8 ; bg palette 1 (enemy)
 	ld de, W2_SprPaletteData + 4 * 8 ; spr palette 4
 	ld bc, 8
-	call CopyData
+	rst _CopyData
 
 	; Ghost/marowak palette fade effect uses OBP1
 	ld a, 1

@@ -31,27 +31,27 @@ BluesHouseDaisySittingText:
 	CheckEvent EVENT_GOT_POKEDEX
 	jr nz, .give_town_map
 	ld hl, BluesHouseDaisyRivalAtLabText
-	call PrintText
+	rst _PrintText
 	jr .done
 
 .give_town_map
 	ld hl, BluesHouseDaisyOfferMapText
-	call PrintText
+	rst _PrintText
 	ld a, TOGGLE_TOWN_MAP
 	ld [wToggleableObjectIndex], a
 	predef HideObject
 	ld hl, GotMapText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_TOWN_MAP
 	jr .done
 
 .got_town_map
 	ld hl, BluesHouseDaisyUseMapText
-	call PrintText
+	rst _PrintText
 	jr .done
 
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 BluesHouseDaisyRivalAtLabText:
 	text_far _BluesHouseDaisyRivalAtLabText

@@ -43,14 +43,14 @@ PlayIntroScene:
 
 ; hip
 	ld a, SFX_INTRO_HIP
-	call PlaySound
+	rst _PlaySound
 	xor a
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation1
 	call AnimateIntroNidorino
 ; hop
 	ld a, SFX_INTRO_HOP
-	call PlaySound
+	rst _PlaySound
 	ld de, IntroNidorinoAnimation2
 	call AnimateIntroNidorino
 	ld c, 10
@@ -59,12 +59,12 @@ PlayIntroScene:
 
 ; hip
 	ld a, SFX_INTRO_HIP
-	call PlaySound
+	rst _PlaySound
 	ld de, IntroNidorinoAnimation1
 	call AnimateIntroNidorino
 ; hop
 	ld a, SFX_INTRO_HOP
-	call PlaySound
+	rst _PlaySound
 	ld de, IntroNidorinoAnimation2
 	call AnimateIntroNidorino
 	ld c, 30
@@ -75,7 +75,7 @@ PlayIntroScene:
 	ld b, TILEMAP_GENGAR_INTRO_2
 	call IntroCopyTiles
 	ld a, SFX_INTRO_RAISE
-	call PlaySound
+	rst _PlaySound
 	lb de, 8 / 2, MOVE_GENGAR_LEFT
 	call IntroMoveMon
 	ld c, 30
@@ -86,12 +86,12 @@ PlayIntroScene:
 	ld b, TILEMAP_GENGAR_INTRO_3
 	call IntroCopyTiles
 	ld a, SFX_INTRO_CRASH
-	call PlaySound
+	rst _PlaySound
 	lb de, 16 / 2, MOVE_GENGAR_RIGHT
 	call IntroMoveMon
 ; hip
 	ld a, SFX_INTRO_HIP
-	call PlaySound
+	rst _PlaySound
 	ld a, (FightIntroFrontMon2 - FightIntroFrontMon) / TILE_SIZE
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation3
@@ -110,14 +110,14 @@ PlayIntroScene:
 
 ; hip
 	ld a, SFX_INTRO_HIP
-	call PlaySound
+	rst _PlaySound
 	xor a
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation4
 	call AnimateIntroNidorino
 ; hop
 	ld a, SFX_INTRO_HOP
-	call PlaySound
+	rst _PlaySound
 	ld de, IntroNidorinoAnimation5
 	call AnimateIntroNidorino
 	ld c, 20
@@ -134,7 +134,7 @@ PlayIntroScene:
 
 ; lunge
 	ld a, SFX_INTRO_LUNGE
-	call PlaySound
+	rst _PlaySound
 	ld a, (FightIntroFrontMon3 - FightIntroFrontMon) / TILE_SIZE
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation7
@@ -152,7 +152,7 @@ AnimateIntroNidorino:
 	ld c, 6 * 6
 	call UpdateIntroNidorinoOAM
 	ld c, 5
-	call DelayFrames
+	rst _DelayFrame
 	pop de
 	inc de
 	jr AnimateIntroNidorino
@@ -309,7 +309,7 @@ PlayShootingStar:
 	ldpal a, SHADE_BLACK, SHADE_DARK, SHADE_LIGHT, SHADE_WHITE
 	ldh [rBGP], a
 	ld c, 180
-	call DelayFrames
+	rst _DelayFrame
 	call ClearScreen
 	call DisableLCD
 	xor a
@@ -321,14 +321,14 @@ PlayShootingStar:
 	res B_LCDC_WINDOW, [hl]
 	set B_LCDC_BG_MAP, [hl]
 	ld c, 64
-	call DelayFrames
+	rst _DelayFrame
 	farcall AnimateShootingStar
 	push af
 	; A `call LoadPresentsGraphic` here was removed in localization
 	pop af
 	jr c, .next ; skip the delay if the user interrupted the animation
 	ld c, 40
-	call DelayFrames
+	rst _DelayFrame
 .next
 ;	ld a, 0 ; BANK(Music_IntroBattle)
 ;	ld [wAudioROMBank], a

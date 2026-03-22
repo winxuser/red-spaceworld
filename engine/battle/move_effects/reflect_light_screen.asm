@@ -25,10 +25,11 @@ ReflectLightScreenEffect_:
 	ld hl, PlayCurrentMoveAnimation
 	call EffectCallBattleCore
 	pop hl
-	jp PrintText
+	rst _PrintText
+	ret
 .moveFailed
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrame
 	ld hl, PrintButItFailedText_
 	jp EffectCallBattleCore
 
@@ -42,4 +43,5 @@ ReflectGainedArmorText:
 
 EffectCallBattleCore:
 	ld b, BANK(BattleCore)
-	jp Bankswitch
+	rst _Bankswitch
+	ret

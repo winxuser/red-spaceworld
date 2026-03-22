@@ -2,7 +2,7 @@ AnimateHallOfFame:
 	call HoFFadeOutScreenAndMusic
 	call ClearScreen
 	ld c, 100
-	call DelayFrames
+	rst _DelayFrame
 	call LoadFontTilePatterns
 	call LoadTextBoxTilePatterns
 	call DisableLCD
@@ -56,7 +56,7 @@ AnimateHallOfFame:
 	call HoFShowMonOrPlayer
 	call HoFDisplayAndRecordMonInfo
 	ld c, 80
-	call DelayFrames
+	rst _DelayFrame
 	hlcoord 2, 13
 	ld b, 3
 	ld c, 14
@@ -65,7 +65,7 @@ AnimateHallOfFame:
 	ld de, HallOfFameText
 	call PlaceString
 	ld c, 180
-	call DelayFrames
+	rst _DelayFrame
 	call GBFadeOutToWhite
 	pop bc
 	pop hl
@@ -197,7 +197,7 @@ HoFLoadPlayerPics:
 	ld hl, sSpriteBuffer1
 	ld de, sSpriteBuffer0
 	ld bc, 2 * SPRITEBUFFERSIZE
-	call CopyData
+	rst _CopyData
 	ld de, vFrontPic
 	call InterlaceMergeSpriteBuffers
 	ld a, [wPlayerGender] ; new gender check
@@ -274,7 +274,7 @@ HoFDisplayPlayerStats:
 	ld hl, wDexRatingText
 
 HoFPrintTextAndDelay:
-	call PrintText
+	rst _PrintText
 	ld c, 120
 	jp DelayFrames
 

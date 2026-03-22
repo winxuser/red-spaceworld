@@ -100,11 +100,11 @@ CeruleanGymMistyText:
 	jr .done
 .afterBeat
 	ld hl, .TM11ExplanationText
-	call PrintText
+	rst _PrintText
 	jr .done
 .beforeBeat
 	ld hl, .PreBattleText
-	call PrintText
+	rst _PrintText
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
@@ -122,7 +122,7 @@ CeruleanGymMistyText:
 	ld a, SCRIPT_CERULEANGYM_MISTY_POST_BATTLE
 	ld [wCeruleanGymCurScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .PreBattleText:
 	text_far _CeruleanGymMistyPreBattleText
@@ -155,7 +155,7 @@ CeruleanGymCooltrainerFText:
 	text_asm
 	ld hl, CeruleanGymTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanGymBattleText1:
 	text_far _CeruleanGymBattleText1
@@ -173,7 +173,7 @@ CeruleanGymSwimmerText:
 	text_asm
 	ld hl, CeruleanGymTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CeruleanGymBattleText2:
 	text_far _CeruleanGymBattleText2
@@ -192,13 +192,13 @@ CeruleanGymGymGuideText:
 	CheckEvent EVENT_BEAT_MISTY
 	jr nz, .afterBeat
 	ld hl, .ChampInMakingText
-	call PrintText
+	rst _PrintText
 	jr .done
 .afterBeat
 	ld hl, .BeatMistyText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .ChampInMakingText:
 	text_far _CeruleanGymGymGuideChampInMakingText

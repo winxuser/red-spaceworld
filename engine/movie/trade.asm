@@ -191,7 +191,7 @@ LoadTradingGFXAndMonNames:
 	ld hl, wNameBuffer
 	ld de, wStringBuffer
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld a, [wTradedEnemyMonSpecies]
 	ld [wNamedObjectIndex], a
 	jp GetMonName
@@ -205,11 +205,11 @@ Trade_SwapNames:
 	ld hl, wPlayerName
 	ld de, wBuffer
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld hl, wLinkEnemyTrainerName
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld hl, wBuffer
 	ld de, wLinkEnemyTrainerName
 	ld bc, NAME_LENGTH
@@ -292,7 +292,7 @@ Trade_DrawOpenEndOfLinkCable:
 	call CopyTileIDsFromList_ZeroBaseTileID
 	call Trade_CopyTileMapToVRAM
 	ld a, SFX_HEAL_HP
-	call PlaySound
+	rst _PlaySound
 	ld c, 20
 .loop
 	ldh a, [hSCX]
@@ -306,7 +306,7 @@ Trade_AnimateBallEnteringLinkCable:
 	ld a, TRADE_BALL_SHAKE_ANIM
 	call Trade_ShowAnimation
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrame
 	ld a, %11100100
 	ldh [rOBP0], a
 	xor a
@@ -337,7 +337,7 @@ Trade_AnimateBallEnteringLinkCable:
 	cp $a0
 	jr nc, .ballSpriteReachedEdgeOfScreen
 	ld a, SFX_TINK
-	call PlaySound
+	rst _PlaySound
 	jr .moveBallInsideLinkCableLoop
 .ballSpriteReachedEdgeOfScreen
 	call ClearSprites
@@ -673,7 +673,7 @@ Trade_AnimMonMoveVertical:
 	call Trade_AddOffsetsToOAMCoords
 	call Trade_AnimCircledMon
 	ld c, 8
-	call DelayFrames
+	rst _DelayFrame
 	dec d
 	jr nz, .loop
 	ret
@@ -779,7 +779,7 @@ Trade_SlideTextBoxOffScreen:
 ; after Trade_ShowEnemyMon in the external clock sequence, there is a mon pic
 ; above the text box and it is also scrolled off the screen.
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrame
 .loop
 	call DelayFrame
 	ldh a, [rWX]
@@ -790,16 +790,16 @@ Trade_SlideTextBoxOffScreen:
 	jr nz, .loop
 	call Trade_ClearTileMap
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrame
 	ld a, $7
 	ldh [rWX], a
 	ret
 
 PrintTradeWentToText:
 	ld hl, TradeWentToText
-	call PrintText
+	rst _PrintText
 	ld c, 200
-	call DelayFrames
+	rst _DelayFrame
 	jp Trade_SlideTextBoxOffScreen
 
 TradeWentToText:
@@ -808,10 +808,10 @@ TradeWentToText:
 
 PrintTradeForSendsText:
 	ld hl, TradeForText
-	call PrintText
+	rst _PrintText
 	call Trade_Delay80
 	ld hl, TradeSendsText
-	call PrintText
+	rst _PrintText
 	jp Trade_Delay80
 
 TradeForText:
@@ -824,10 +824,10 @@ TradeSendsText:
 
 PrintTradeFarewellText:
 	ld hl, TradeWavesFarewellText
-	call PrintText
+	rst _PrintText
 	call Trade_Delay80
 	ld hl, TradeTransferredText
-	call PrintText
+	rst _PrintText
 	call Trade_Delay80
 	jp Trade_SlideTextBoxOffScreen
 
@@ -841,7 +841,7 @@ TradeTransferredText:
 
 PrintTradeTakeCareText:
 	ld hl, TradeTakeCareText
-	call PrintText
+	rst _PrintText
 	jp Trade_Delay80
 
 TradeTakeCareText:
@@ -850,10 +850,10 @@ TradeTakeCareText:
 
 PrintTradeWillTradeText:
 	ld hl, TradeWillTradeText
-	call PrintText
+	rst _PrintText
 	call Trade_Delay80
 	ld hl, TradeforText
-	call PrintText
+	rst _PrintText
 	jp Trade_Delay80
 
 TradeWillTradeText:

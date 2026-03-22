@@ -12,7 +12,7 @@ DaycareGentlemanText:
 	and a
 	jp nz, .daycareInUse
 	ld hl, .IntroText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -23,7 +23,7 @@ DaycareGentlemanText:
 	ld hl, .OnlyHaveOneMonText
 	jp z, .done
 	ld hl, .WhichMonText
-	call PrintText
+	rst _PrintText
 	xor a
 	ld [wUpdateSpritesEnabled], a
 	ld [wPartyMenuTypeOrMessageID], a
@@ -45,7 +45,7 @@ DaycareGentlemanText:
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	ld hl, .WillLookAfterMonText
-	call PrintText
+	rst _PrintText
 	ld a, 1
 	ld [wDayCareInUse], a
 	ld a, PARTY_TO_DAYCARE
@@ -69,7 +69,7 @@ DaycareGentlemanText:
 	call GetBabyID
 ; Skip calculating custom DVs
 	ld hl, .EggOfferText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -84,7 +84,7 @@ DaycareGentlemanText:
 	jp .noEgg
 .declineEgg
 	ld hl, .DeclineEggText
-	call PrintText ; Then check on Pokemon
+	rst _PrintText ; Then check on Pokemon
 .noEgg
 	call SetEggSteps
 .cannot
@@ -128,7 +128,7 @@ DaycareGentlemanText:
 	ld hl, .MonHasGrownText
 
 .next
-	call PrintText
+	rst _PrintText
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
 	ld hl, .NoRoomForMonText
@@ -157,7 +157,7 @@ DaycareGentlemanText:
 	dec b
 	jr nz, .calcPriceLoop
 	ld hl, .OweMoneyText
-	call PrintText
+	rst _PrintText
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -192,7 +192,7 @@ DaycareGentlemanText:
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, .HeresYourMonText
-	call PrintText
+	rst _PrintText
 	ld a, DAYCARE_TO_PARTY
 	ld [wMoveMonType], a
 	call MoveMon
@@ -236,8 +236,8 @@ DaycareGentlemanText:
 	ld [wDayCareMonBoxLevel], a
 
 .done
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .IntroText:
 	text_far _DaycareGentlemanIntroText

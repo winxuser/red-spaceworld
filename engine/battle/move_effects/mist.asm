@@ -10,7 +10,8 @@ MistEffect_:
 	set PROTECTED_BY_MIST, [hl] ; mon is now protected by mist
 	callfar PlayCurrentMoveAnimation
 	ld hl, ShroudedInMistText
-	jp PrintText
+	rst _PrintText
+	ret
 .mistAlreadyInUse
 	jpfar PrintButItFailedText_
 

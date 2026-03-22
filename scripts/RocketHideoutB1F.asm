@@ -21,7 +21,7 @@ RocketHideoutB1FDoorCallbackScript:
 	jr .set_door_block
 .play_sound_door_open
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst _PlaySound
 	; BUG: should be SetEvent to avoid the SFX playing every time you enter the map
 	CheckEventHL EVENT_ENTERED_ROCKET_HIDEOUT
 .door_open
@@ -65,31 +65,31 @@ RocketHideoutB1FRocket1Text:
 	text_asm
 	ld hl, RocketHideout1TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideoutB1FRocket2Text:
 	text_asm
 	ld hl, RocketHideout1TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideoutB1FRocket3Text:
 	text_asm
 	ld hl, RocketHideout1TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideoutB1FRocket4Text:
 	text_asm
 	ld hl, RocketHideout1TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideoutB1FRocket5Text:
 	text_asm
 	ld hl, RocketHideout1TrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideoutB1FRocket5EndBattleText:
 	text_far _RocketHideoutB1FRocket5EndBattleText

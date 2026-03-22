@@ -120,32 +120,32 @@ PokemonTower6FChanneler1Text:
 	text_asm
 	ld hl, PokemonTower6TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower6FChanneler2Text:
 	text_asm
 	ld hl, PokemonTower6TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower6FChanneler3Text:
 	text_asm
 	ld hl, PokemonTower6TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonTower6FMarowakDepartedText:
 	text_asm
 	ld hl, PokemonTower6FGhostWasCubonesMotherText
-	call PrintText
+	rst _PrintText
 	ld a, RESTLESS_SOUL
 	call PlayCry
 	call WaitForSoundToFinish
 	ld c, 30
-	call DelayFrames
+	rst _DelayFrame
 	ld hl, PokemonTower6FSoulWasCalmedText
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 PokemonTower6FGhostWasCubonesMotherText:
 	text_far _PokemonTower6FGhostWasCubonesMotherText

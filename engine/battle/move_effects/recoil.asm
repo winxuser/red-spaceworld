@@ -64,7 +64,8 @@ RecoilEffect_:
 	ld [wHPBarType], a
 	predef UpdateHPBar2
 	ld hl, HitWithRecoilText
-	jp PrintText
+	rst _PrintText
+	ret
 HitWithRecoilText:
 	text_far _HitWithRecoilText
 	text_end

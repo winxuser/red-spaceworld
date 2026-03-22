@@ -27,7 +27,7 @@ RocketHideoutB2FDefaultScript:
 	set BIT_SPINNING, [hl]
 	call StartSimulatingJoypadStates
 	ld a, SFX_ARROW_TILES
-	call PlaySound
+	rst _PlaySound
 	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld a, SCRIPT_ROCKETHIDEOUTB2F_PLAYER_SPINNING
@@ -288,7 +288,7 @@ RocketHideoutB2FRocketText:
 	text_asm
 	ld hl, RocketHideout2TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideoutB2FRocketBattleText:
 	text_far _RocketHideoutB2FRocketBattleText

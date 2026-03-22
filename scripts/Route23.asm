@@ -154,43 +154,43 @@ Route23Guard1Text:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_EARTHBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23CheckForBadgeScript
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route23Guard2Text:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_VOLCANOBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23CheckForBadgeScript
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route23Swimmer1Text:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_MARSHBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23CheckForBadgeScript
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route23Swimmer2Text:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_SOULBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23CheckForBadgeScript
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route23Guard3Text:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_RAINBOWBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23CheckForBadgeScript
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route23Guard4Text:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_THUNDERBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23CheckForBadgeScript
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route23Guard5Text:
 	text_asm
 	EventFlagBit a, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23CheckForBadgeScript
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route23CheckForBadgeScript:
 	ld [wWhichBadge], a
@@ -205,14 +205,14 @@ Route23CheckForBadgeScript:
 	and a
 	jr nz, .have_badge
 	ld hl, Route23YouDontHaveTheBadgeYetText
-	call PrintText
+	rst _PrintText
 	call Route23MovePlayerDownScript
 	ld a, SCRIPT_ROUTE23_PLAYER_MOVING
 	ld [wRoute23CurScript], a
 	ret
 .have_badge
 	ld hl, Route23OhThatIsTheBadgeText
-	call PrintText
+	rst _PrintText
 	ld a, [wWhichBadge]
 	ld c, a
 	ld b, FLAG_SET
@@ -224,7 +224,8 @@ Route23CheckForBadgeScript:
 
 Route23PrintOhThatsTheBadgeTextScript: ; unreferenced
 	ld hl, Route23OhThatIsTheBadgeText
-	jp PrintText
+	rst _PrintText
+	ret
 
 Route23YouDontHaveTheBadgeYetText:
 	text_far _Route23YouDontHaveTheBadgeYetText
@@ -232,7 +233,7 @@ Route23YouDontHaveTheBadgeYetText:
 	ld a, SFX_DENIED
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route23OhThatIsTheBadgeText:
 	text_far _Route23OhThatIsTheBadgeText

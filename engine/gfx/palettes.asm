@@ -354,7 +354,7 @@ CopyGfxToSuperNintendoVRAM:
 	jr .next
 .notCopyingTileData
 	ld bc, 256 tiles
-	call CopyData
+	rst _CopyData
 .next
 	ld hl, vBGMap0
 	ld de, TILEMAP_WIDTH - SCREEN_WIDTH

@@ -29,7 +29,7 @@ ENDC
 	ret nc
 	ld a, SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	ld c, 0 ; BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
@@ -85,7 +85,7 @@ PokemonTower2FDefeatedRivalScript:
 	call MoveSprite
 	ld a, SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	farcall Music_RivalAlternateStart
 	ld a, SCRIPT_POKEMONTOWER2F_RIVAL_EXITS
 	ld [wPokemonTower2FCurScript], a
@@ -139,11 +139,11 @@ PokemonTower2FRivalText:
 	CheckEvent EVENT_BEAT_POKEMON_TOWER_RIVAL
 	jr z, .do_battle
 	ld hl, .HowsYourDexText
-	call PrintText
+	rst _PrintText
 	jr .text_script_end
 .do_battle
 	ld hl, .WhatBringsYouHereText
-	call PrintText
+	rst _PrintText
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
@@ -191,7 +191,7 @@ PokemonTower2FRivalText:
 	ld [wPokemonTower2FCurScript], a
 	ld [wCurMapScript], a
 .text_script_end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .WhatBringsYouHereText:
 	text_far _PokemonTower2FRivalWhatBringsYouHereText

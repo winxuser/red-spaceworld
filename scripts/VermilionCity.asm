@@ -109,7 +109,7 @@ VermilionCityPlayerMovingUp1Script:
 	and a
 	ret nz
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrame
 	ld a, SCRIPT_VERMILIONCITY_DEFAULT
 	ld [wVermilionCityCurScript], a
 	ret
@@ -139,13 +139,13 @@ VermilionCityGambler1Text:
 	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .ship_departed
 	ld hl, .DidYouSeeText
-	call PrintText
+	rst _PrintText
 	jr .text_script_end
 .ship_departed
 	ld hl, .SSAnneDepartedText
-	call PrintText
+	rst _PrintText
 .text_script_end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .DidYouSeeText:
 	text_far _VermilionCityGambler1DidYouSeeText
@@ -167,30 +167,30 @@ VermilionCitySailor1Text:
 	jr nc, .greet_player_and_check_ticket
 .greet_player
 	ld hl, .WelcomeToSSAnneText
-	call PrintText
+	rst _PrintText
 	jr .end
 .greet_player_and_check_ticket
 	ld hl, .DoYouHaveATicketText
-	call PrintText
+	rst _PrintText
 	ld b, S_S_TICKET
 	predef GetQuantityOfItemInBag
 	ld a, b
 	and a
 	jr nz, .player_has_ticket
 	ld hl, .YouNeedATicketText
-	call PrintText
+	rst _PrintText
 	jr .end
 .player_has_ticket
 	ld hl, .FlashedTicketText
-	call PrintText
+	rst _PrintText
 	ld a, SCRIPT_VERMILIONCITY_PLAYER_ALLOWED_TO_PASS
 	ld [wVermilionCityCurScript], a
 	jr .end
 .ship_departed
 	ld hl, .ShipSetSailText
-	call PrintText
+	rst _PrintText
 .end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .inFrontOfOrBehindGuardCoords
 	dbmapcoord 19, 29 ; in front of guard

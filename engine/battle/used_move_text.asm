@@ -1,6 +1,7 @@
 DisplayUsedMoveText:
 	ld hl, UsedMoveText
-	jp PrintText
+	rst _PrintText
+	ret
 
 UsedMoveText:
 	text_far _ActorNameText

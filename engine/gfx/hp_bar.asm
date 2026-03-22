@@ -145,7 +145,7 @@ UpdateHPBar_AnimateHPBar:
 	ld d, $6
 	call DrawHPBarWithColor ; HAX: call changed to update color as well
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrame
 	pop de
 	ld a, [wHPBarDelta] ; +1 or -1
 	add e

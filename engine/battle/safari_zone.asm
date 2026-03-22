@@ -25,7 +25,8 @@ PrintSafariZoneBattleText:
 	push hl
 	call LoadScreenTilesFromBuffer1
 	pop hl
-	jp PrintText
+	rst _PrintText
+	ret
 
 SafariZoneEatingText:
 	text_far _SafariZoneEatingText

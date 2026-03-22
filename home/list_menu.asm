@@ -53,7 +53,7 @@ DisplayListMenuID::
 	ld a, PAD_A | PAD_B | PAD_SELECT
 	ld [wMenuWatchedKeys], a
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrame
 
 DisplayListMenuIDLoop::
 	xor a
@@ -69,7 +69,7 @@ DisplayListMenuIDLoop::
 	ld a, '▶'
 	ldcoord_a 5, 4 ; place menu cursor in front of first menu entry
 	ld c, 80
-	call DelayFrames
+	rst _DelayFrame
 	xor a
 	ld [wCurrentMenuItem], a
 	hlcoord 5, 4

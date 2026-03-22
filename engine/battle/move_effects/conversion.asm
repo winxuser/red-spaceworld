@@ -22,7 +22,8 @@ ConversionEffect_:
 	ld hl, PlayCurrentMoveAnimation
 	call CallBankF
 	ld hl, ConvertedTypeText
-	jp PrintText
+	rst _PrintText
+	ret
 
 ConvertedTypeText:
 	text_far _ConvertedTypeText
@@ -32,4 +33,5 @@ PrintButItFailedText:
 	ld hl, PrintButItFailedText_
 CallBankF:
 	ld b, BANK(PrintButItFailedText_)
-	jp Bankswitch
+	rst _Bankswitch
+	ret

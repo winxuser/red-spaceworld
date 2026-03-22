@@ -21,7 +21,7 @@ DisplayTownMap:
 	ld hl, wShadowOAMSprite00
 	ld de, wShadowOAMBackupSprite00
 	ld bc, OBJ_SIZE * 4
-	call CopyData
+	rst _CopyData
 	ld hl, vSprites tile BIRD_BASE_TILE
 	ld de, TownMapCursor
 	lb bc, BANK(TownMapCursor), (TownMapCursorEnd - TownMapCursor) / TILE_1BPP_SIZE
@@ -65,7 +65,7 @@ DisplayTownMap:
 	ld hl, wShadowOAMSprite04
 	ld de, wShadowOAMBackupSprite04
 	ld bc, OBJ_SIZE * 4
-	call CopyData
+	rst _CopyData
 .inputLoop
 	call TownMapSpriteBlinkingAnimation
 	call JoypadLowSensitivity
@@ -74,7 +74,7 @@ DisplayTownMap:
 	and PAD_A | PAD_B | PAD_UP | PAD_DOWN
 	jr z, .inputLoop
 	ld a, SFX_TINK
-	call PlaySound
+	rst _PlaySound
 	bit B_PAD_UP, b
 	jr nz, .pressedUp
 	bit B_PAD_DOWN, b
@@ -181,7 +181,7 @@ LoadTownMap_Fly::
 	ld de, wNameBuffer
 	call PlaceString
 	ld c, 15
-	call DelayFrames
+	rst _DelayFrame
 	hlcoord 18, 0
 	ld [hl], '▲'
 	hlcoord 19, 0
@@ -199,7 +199,7 @@ LoadTownMap_Fly::
 	bit B_PAD_A, b
 	jr nz, .pressedA
 	ld a, SFX_TINK
-	call PlaySound
+	rst _PlaySound
 	bit B_PAD_UP, b
 	jr nz, .pressedUp
 	bit B_PAD_DOWN, b
@@ -207,7 +207,7 @@ LoadTownMap_Fly::
 	jr .pressedB
 .pressedA
 	ld a, SFX_HEAL_AILMENT
-	call PlaySound
+	rst _PlaySound
 	ld a, [hl]
 	ld [wDestinationMap], a
 	ld hl, wStatusFlags6
@@ -594,7 +594,7 @@ GetMapName::
 	call LoadTownMapEntry
 	ld de, wNameBuffer
 	ld bc, NAME_BUFFER_LENGTH
-	call CopyData
+	rst _CopyData
 	ret
 
 INCLUDE "data/maps/town_map_entries.asm"
@@ -616,7 +616,7 @@ TownMapSpriteBlinkingAnimation::
 	ld hl, wShadowOAMBackup
 	ld de, wShadowOAM
 	ld bc, (OAM_COUNT - 4) * 4
-	call CopyData
+	rst _CopyData
 	xor a
 	jr .done
 .hideSprites

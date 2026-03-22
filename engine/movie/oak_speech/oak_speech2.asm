@@ -45,7 +45,8 @@ ChoosePlayerName:
 	call IntroDisplayPicCenteredOrUpperRight
 .done
 	ld hl, YourNameIsText
-	jp PrintText
+	rst _PrintText
+	ret
 
 YourNameIsText:
 	text_far _YourNameIsText
@@ -79,7 +80,8 @@ ChooseRivalName:
 	call IntroDisplayPicCenteredOrUpperRight
 .done
 	ld hl, HisNameIsText
-	jp PrintText
+	rst _PrintText
+	ret
 
 HisNameIsText:
 	text_far _HisNameIsText
@@ -91,11 +93,11 @@ OakSpeechSlidePicLeft:
 	lb bc, 12, 11
 	call ClearScreenArea ; clear the name list text box
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrame
 	pop de
 	ld hl, wNameBuffer
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	call Delay3
 	hlcoord 12, 4
 	lb de, 6, 6 * SCREEN_WIDTH + 5

@@ -1,9 +1,3 @@
-TextScriptEndingText::
-	text_end
-
-TextScriptEnd::
-	ld hl, TextScriptEndingText
-	ret
 
 ExclamationText::
 	text_far _ExclamationText
@@ -28,4 +22,4 @@ PokeCenterSignText::
 PickUpItemText::
 	text_asm
 	predef PickUpItem
-	jp TextScriptEnd
+	rst TextScriptEnd

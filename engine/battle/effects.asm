@@ -44,7 +44,8 @@ SleepEffect:
 	and SLP_MASK
 	jr z, .notAlreadySleeping ; can't affect a mon that is already asleep
 	ld hl, AlreadyAsleepText
-	jp PrintText
+	rst _PrintText
+	ret
 .notAlreadySleeping
 	ld a, b
 	and a
@@ -63,7 +64,8 @@ SleepEffect:
 	ld [de], a
 	call PlayCurrentMoveAnimation2
 	ld hl, FellAsleepText
-	jp PrintText
+	rst _PrintText
+	ret
 .didntAffect
 	jp PrintDidntAffectText
 
@@ -148,17 +150,19 @@ PoisonEffect:
 	jr z, .regularPoisonEffect
 	ld a, b
 	call PlayBattleAnimation2
-	jp PrintText
+	rst _PrintText
+	ret
 .regularPoisonEffect
 	call PlayCurrentMoveAnimation2
-	jp PrintText
+	rst _PrintText
+	ret
 .noEffect
 	ld a, [de]
 	cp POISON_EFFECT
 	ret nz
 .didntAffect
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrame
 	jp PrintDidntAffectText
 
 PoisonedText:
@@ -244,7 +248,8 @@ FreezeBurnParalyzeEffect:
 	ld a, ENEMY_HUD_SHAKE_ANIM
 	call PlayBattleAnimation
 	ld hl, BurnedText
-	jp PrintText
+	rst _PrintText
+	ret
 .freeze1
 	call ClearHyperBeam ; resets hyper beam (recharge) condition from target
 	ld a, 1 << FRZ
@@ -252,7 +257,8 @@ FreezeBurnParalyzeEffect:
 	ld a, ENEMY_HUD_SHAKE_ANIM
 	call PlayBattleAnimation
 	ld hl, FrozenText
-	jp PrintText
+	rst _PrintText
+	ret
 .opponentAttacker
 	ld a, [wBattleMonStatus] ; mostly same as above with addresses swapped for opponent
 	and a
@@ -293,13 +299,15 @@ FreezeBurnParalyzeEffect:
 	ld [wBattleMonStatus], a
 	call HalveAttackDueToBurn
 	ld hl, BurnedText
-	jp PrintText
+	rst _PrintText
+	ret
 .freeze2
 ; hyper beam bits aren't reset for opponent's side
 	ld a, 1 << FRZ
 	ld [wBattleMonStatus], a
 	ld hl, FrozenText
-	jp PrintText
+	rst _PrintText
+	ret
 
 BurnedText:
 	text_far _BurnedText
@@ -342,7 +350,8 @@ CheckDefrost:
 	ld [hl], a
 	ld hl, FireDefrostedText
 .common
-	jp PrintText
+	rst _PrintText
+	ret
 
 FireDefrostedText:
 	text_far _FireDefrostedText
@@ -499,7 +508,7 @@ UpdateStatDone:
 	call z, ApplyBadgeStatBoosts ; whenever the player uses a stat-up move, badge boosts get reapplied again to every stat,
 	                             ; even to those not affected by the stat-up move (will be boosted further)
 	ld hl, MonsStatsRoseText
-	call PrintText
+	rst _PrintText
 
 ; these shouldn't be here
 	call QuarterSpeedDueToParalysis ; apply speed penalty to the player whose turn is not, if it's paralyzed
@@ -511,7 +520,8 @@ RestoreOriginalStatModifier:
 
 PrintNothingHappenedText:
 	ld hl, NothingHappenedText
-	jp PrintText
+	rst _PrintText
+	ret
 
 MonsStatsRoseText:
 	text_far _MonsStatsRoseText
@@ -689,7 +699,7 @@ UpdateLoweredStatDone:
 	call nz, ApplyBadgeStatBoosts ; whenever the opponent uses a stat-down move, badge boosts get reapplied again to every stat,
 	                              ; even to those not affected by the stat-down move (will be boosted further)
 	ld hl, MonsStatsFellText
-	call PrintText
+	rst _PrintText
 
 ; These where probably added given that a stat-down move affecting speed or attack will override
 ; the stat penalties from paralysis and burn respectively.
@@ -707,7 +717,8 @@ CantLowerAnymore:
 	cp ATTACK_DOWN_SIDE_EFFECT
 	ret nc
 	ld hl, NothingHappenedText
-	jp PrintText
+	rst _PrintText
+	ret
 
 MoveMissed:
 	ld a, [de]
@@ -831,7 +842,7 @@ SwitchAndTeleportEffect:
 	cp b ; is rand[0, playerLevel + enemyLevel] >= (enemyLevel / 4)?
 	jr nc, .playerMoveWasSuccessful ; if so, allow teleporting
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrame
 	ld a, [wPlayerMoveNum]
 	cp TELEPORT
 	jp nz, PrintDidntAffectText
@@ -846,7 +857,7 @@ SwitchAndTeleportEffect:
 	jr .playAnimAndPrintText
 .notWildBattle1
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrame
 	ld hl, IsUnaffectedText
 	ld a, [wPlayerMoveNum]
 	cp TELEPORT
@@ -873,7 +884,7 @@ SwitchAndTeleportEffect:
 	cp b
 	jr nc, .enemyMoveWasSuccessful
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrame
 	ld a, [wEnemyMoveNum]
 	cp TELEPORT
 	jp nz, PrintDidntAffectText
@@ -888,7 +899,7 @@ SwitchAndTeleportEffect:
 	jr .playAnimAndPrintText
 .notWildBattle2
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrame
 	ld hl, IsUnaffectedText
 	ld a, [wEnemyMoveNum]
 	cp TELEPORT
@@ -898,7 +909,7 @@ SwitchAndTeleportEffect:
 	push af
 	call PlayBattleAnimation
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrame
 	pop af
 	ld hl, RanFromBattleText
 	cp TELEPORT
@@ -908,7 +919,8 @@ SwitchAndTeleportEffect:
 	jr z, .printText
 	ld hl, WasBlownAwayText
 .printText
-	jp PrintText
+	rst _PrintText
+	ret
 
 RanFromBattleText:
 	text_far _RanFromBattleText
@@ -1027,7 +1039,8 @@ ChargeEffect:
 	ld a, [de]
 	ld [wChargeMoveNum], a
 	ld hl, ChargeMoveEffectText
-	jp PrintText
+	rst _PrintText
+	ret
 
 ChargeMoveEffectText:
 	text_far _ChargeMoveEffectText
@@ -1149,7 +1162,8 @@ ConfusionSideEffectSuccess:
 	cp CONFUSION_SIDE_EFFECT
 	call nz, PlayCurrentMoveAnimation2
 	ld hl, BecameConfusedText
-	jp PrintText
+	rst _PrintText
+	ret
 
 BecameConfusedText:
 	text_far _BecameConfusedText
@@ -1159,7 +1173,7 @@ ConfusionEffectFailed:
 	cp CONFUSION_SIDE_EFFECT
 	ret z
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrame
 	jp ConditionalPrintButItFailed
 
 ParalyzeEffect:
@@ -1202,7 +1216,7 @@ RageEffect:
 
 MimicEffect:
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrame
 	call MoveHitTest
 	ld a, [wMoveMissed]
 	and a
@@ -1268,7 +1282,8 @@ MimicEffect:
 	call GetMoveName
 	call PlayCurrentMoveAnimation
 	ld hl, MimicLearnedMoveText
-	jp PrintText
+	rst _PrintText
+	ret
 .mimicMissed
 	jp PrintButItFailedText_
 
@@ -1360,7 +1375,8 @@ DisableEffect:
 	ld [hl], a
 	call GetMoveName
 	ld hl, MoveWasDisabledText
-	jp PrintText
+	rst _PrintText
+	ret
 .moveMissedPopHL
 	pop hl
 .moveMissed
@@ -1394,7 +1410,8 @@ NothingHappenedText:
 
 PrintNoEffectText:
 	ld hl, NoEffectText
-	jp PrintText
+	rst _PrintText
+	ret
 
 NoEffectText:
 	text_far _NoEffectText
@@ -1407,7 +1424,8 @@ ConditionalPrintButItFailed:
 
 PrintButItFailedText_:
 	ld hl, ButItFailedText
-	jp PrintText
+	rst _PrintText
+	ret
 
 ButItFailedText:
 	text_far _ButItFailedText
@@ -1415,7 +1433,8 @@ ButItFailedText:
 
 PrintDidntAffectText:
 	ld hl, DidntAffectText
-	jp PrintText
+	rst _PrintText
+	ret
 
 DidntAffectText:
 	text_far _DidntAffectText
@@ -1427,7 +1446,8 @@ IsUnaffectedText:
 
 PrintMayNotAttackText:
 	ld hl, ParalyzedMayNotAttackText
-	jp PrintText
+	rst _PrintText
+	ret
 
 ParalyzedMayNotAttackText:
 	text_far _ParalyzedMayNotAttackText

@@ -27,7 +27,7 @@ SSAnne2FDefaultScript:
 	ret nc
 	ld a, SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	ld c, 0 ; BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
@@ -167,7 +167,7 @@ SSAnne2FRivalAfterBattleScript:
 	call MoveSprite
 	ld a, SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	farcall Music_RivalAlternateStart
 	ld a, SCRIPT_SSANNE2F_RIVAL_EXIT
 	ld [wSSAnne2FCurScript], a
@@ -210,14 +210,14 @@ SSAnne2FWaiterText:
 SSAnne2FRivalText:
 	text_asm
 	ld hl, .Text
-	call PrintText
+	rst _PrintText
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ld hl, SSAnne2FRivalDefeatedText
 	ld de, SSAnne2FRivalVictoryText
 	call SaveEndBattleTextPointers
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .Text:
 	text_far _SSAnne2FRivalText

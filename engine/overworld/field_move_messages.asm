@@ -2,9 +2,10 @@ PrintStrengthText:
 	ld hl, wStatusFlags1
 	set BIT_STRENGTH_ACTIVE, [hl]
 	ld hl, UsedStrengthText
-	call PrintText
+	rst _PrintText
 	ld hl, CanMoveBouldersText
-	jp PrintText
+	rst _PrintText
+	ret
 
 UsedStrengthText:
 	text_far _UsedStrengthText
@@ -12,7 +13,7 @@ UsedStrengthText:
 	ld a, [wCurPartySpecies]
 	call PlayCry
 	call Delay3
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CanMoveBouldersText:
 	text_far _CanMoveBouldersText
@@ -43,7 +44,8 @@ IsSurfingAllowed:
 	ld hl, wStatusFlags1
 	res BIT_SURF_ALLOWED, [hl]
 	ld hl, CyclingIsFunText
-	jp PrintText
+	rst _PrintText
+	ret
 
 SeafoamIslandsB4FStairsCoords:
 	dbmapcoord  7, 11

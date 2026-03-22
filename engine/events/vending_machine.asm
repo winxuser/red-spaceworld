@@ -1,6 +1,6 @@
 VendingMachineMenu::
 	ld hl, VendingMachineText1
-	call PrintText
+	rst _PrintText
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -44,7 +44,8 @@ VendingMachineMenu::
 	call HasEnoughMoney
 	jr nc, .enoughMoney
 	ld hl, VendingMachineText4
-	jp PrintText
+	rst _PrintText
+	ret
 .enoughMoney
 	call LoadVendingMachineItem
 	ldh a, [hVendingMachineItem]
@@ -56,16 +57,16 @@ VendingMachineMenu::
 	ld b, 60 ; number of times to play the "brrrrr" sound
 .playDeliverySound
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrame
 	push bc
 	ld a, SFX_PUSH_BOULDER
-	call PlaySound
+	rst _PlaySound
 	pop bc
 	dec b
 	jr nz, .playDeliverySound
 
 	ld hl, VendingMachineText5
-	call PrintText
+	rst _PrintText
 	ld hl, hVendingMachinePrice + 2
 	ld de, wPlayerMoney + 2
 	ld c, $3
@@ -75,10 +76,12 @@ VendingMachineMenu::
 	jp DisplayTextBoxID
 .BagFull
 	ld hl, VendingMachineText6
-	jp PrintText
+	rst _PrintText
+	ret
 .notThirsty
 	ld hl, VendingMachineText7
-	jp PrintText
+	rst _PrintText
+	ret
 
 VendingMachineText1:
 	text_far _VendingMachineText1

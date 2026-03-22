@@ -71,7 +71,7 @@ ENDC
 	jr z, .walking
 	ld a, SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 .walking
 	ld c, 0 ; BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
@@ -198,7 +198,7 @@ CeruleanCityRivalDefeatedScript:
 	call DisplayTextID
 	ld a, SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	farcall Music_RivalAlternateStart
 	ld a, CERULEANCITY_RIVAL
 	ldh [hSpriteIndex], a
@@ -279,13 +279,13 @@ CeruleanCityRivalText:
 	jr z, .PreBattle
 	; or talk about bill
 	ld hl, CeruleanCityRivalIWentToBillsText
-	call PrintText
+	rst _PrintText
 	jr .end
 .PreBattle
 	ld hl, .PreBattleText
-	call PrintText
+	rst _PrintText
 .end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .PreBattleText:
 	text_far _CeruleanCityRivalPreBattleText
@@ -308,7 +308,7 @@ CeruleanCityRocketText:
 	CheckEvent EVENT_BEAT_CERULEAN_ROCKET_THIEF
 	jr nz, .beatRocketThief
 	ld hl, .Text
-	call PrintText
+	rst _PrintText
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
@@ -321,24 +321,24 @@ CeruleanCityRocketText:
 	call InitBattleEnemyParameters
 	ld a, SCRIPT_CERULEANCITY_ROCKET_DEFEATED
 	ld [wCeruleanCityCurScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 .beatRocketThief
 	ld hl, .IllReturnTheTMText
-	call PrintText
+	rst _PrintText
 	lb bc, TM_DIG, 1
 	call GiveItem
 	jr c, .Success
 	ld hl, .TM28NoRoomText
-	call PrintText
+	rst _PrintText
 	jr .Done
 .Success
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, .ReceivedTM28Text
-	call PrintText
+	rst _PrintText
 	farcall CeruleanHideRocket
 .Done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .Text:
 	text_far _CeruleanCityRocketText
@@ -385,20 +385,20 @@ CeruleanCityCooltrainerF1Text:
 	cp 180 ; 76/256 chance of 1st dialogue
 	jr c, .notFirstText
 	ld hl, .SlowbroUseSonicboomText
-	call PrintText
+	rst _PrintText
 	jr .end
 .notFirstText
 	cp 100 ; 80/256 chance of 2nd dialogue
 	jr c, .notSecondText
 	ld hl, .SlowbroPunchText
-	call PrintText
+	rst _PrintText
 	jr .end
 .notSecondText
 	; 100/256 chance of 3rd dialogue
 	ld hl, .SlowbroWithdrawText
-	call PrintText
+	rst _PrintText
 .end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .SlowbroUseSonicboomText:
 	text_far _CeruleanCityCooltrainerF1SlowbroUseSonicboomText
@@ -418,26 +418,26 @@ CeruleanCitySlowbroText:
 	cp 180 ; 76/256 chance of 1st dialogue
 	jr c, .notFirstText
 	ld hl, .TookASnoozeText
-	call PrintText
+	rst _PrintText
 	jr .end
 .notFirstText
 	cp 120 ; 60/256 chance of 2nd dialogue
 	jr c, .notSecondText
 	ld hl, .IsLoafingAroundText
-	call PrintText
+	rst _PrintText
 	jr .end
 .notSecondText
 	cp 60 ; 60/256 chance of 3rd dialogue
 	jr c, .notThirdText
 	ld hl, .TurnedAwayText
-	call PrintText
+	rst _PrintText
 	jr .end
 .notThirdText
 	; 60/256 chance of 4th dialogue
 	ld hl, .IgnoredOrdersText
-	call PrintText
+	rst _PrintText
 .end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .TookASnoozeText:
 	text_far _CeruleanCitySlowbroTookASnoozeText

@@ -24,12 +24,14 @@ LeechSeedEffect_:
 	set SEEDED, [hl]
 	callfar PlayCurrentMoveAnimation
 	ld hl, WasSeededText
-	jp PrintText
+	rst _PrintText
+	ret
 .moveMissed
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrame
 	ld hl, EvadedAttackText
-	jp PrintText
+	rst _PrintText
+	ret
 
 WasSeededText:
 	text_far _WasSeededText

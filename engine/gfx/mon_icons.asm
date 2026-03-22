@@ -45,7 +45,7 @@ GetAnimationSpeed:
 	ld hl, wMonPartySpritesSavedOAM
 	ld de, wShadowOAM
 	ld bc, OBJ_SIZE * 4 * PARTY_LENGTH
-	call CopyData
+	rst _CopyData
 	pop bc
 	xor a
 	jr .incTimer

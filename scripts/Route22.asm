@@ -93,7 +93,7 @@ Route22FirstRivalBattleScript:
 	jr z, .walking
 	ld a, SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 .walking
 	ld c, 0 ; BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
@@ -177,7 +177,7 @@ Route22Rival1AfterBattleScript:
 	call DisplayTextID
 	ld a, SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	farcall Music_RivalAlternateStart
 	ld a, [wSavedCoordIndex]
 	cp 1 ; index of second, lower entry in Route22DefaultScript.Route22RivalBattleCoords
@@ -251,11 +251,11 @@ Route22SecondRivalBattleScript:
 	jr z, .walking
 	ld a, SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 .walking
 	ld a, SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	farcall Music_RivalAlternateTempo
 	ld a, ROUTE22_RIVAL2
 	ldh [hSpriteIndex], a
@@ -341,7 +341,7 @@ Route22Rival2AfterBattleScript:
 	call DisplayTextID
 	ld a, SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	farcall Music_RivalAlternateStartAndTempo
 	ld a, [wSavedCoordIndex]
 	cp 1 ; index of second, lower entry in Route22DefaultScript.Route22RivalBattleCoords
@@ -400,26 +400,26 @@ Route22Rival1Text:
 	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_1ST_BATTLE
 	jr z, .before_battle
 	ld hl, Route22RivalAfterBattleText1
-	call PrintText
+	rst _PrintText
 	jr .text_script_end
 .before_battle
 	ld hl, Route22RivalBeforeBattleText1
-	call PrintText
+	rst _PrintText
 .text_script_end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route22Rival2Text:
 	text_asm
 	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_2ND_BATTLE
 	jr z, .before_battle
 	ld hl, Route22RivalAfterBattleText2
-	call PrintText
+	rst _PrintText
 	jr .text_script_end
 .before_battle
 	ld hl, Route22RivalBeforeBattleText2
-	call PrintText
+	rst _PrintText
 .text_script_end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 Route22RivalBeforeBattleText1:
 	text_far _Route22RivalBeforeBattleText1

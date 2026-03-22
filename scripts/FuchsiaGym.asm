@@ -114,11 +114,11 @@ FuchsiaGymKogaText:
 	jr .done
 .afterBeat
 	ld hl, .PostBattleAdviceText
-	call PrintText
+	rst _PrintText
 	jr .done
 .beforeBeat
 	ld hl, .BeforeBattleText
-	call PrintText
+	rst _PrintText
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
@@ -136,7 +136,7 @@ FuchsiaGymKogaText:
 	ld a, SCRIPT_FUCHSIAGYM_KOGA_POST_BATTLE
 	ld [wFuchsiaGymCurScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .BeforeBattleText:
 	text_far _FuchsiaGymKogaBeforeBattleText
@@ -168,7 +168,7 @@ FuchsiaGymRocker1Text:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymRocker1BattleText:
 	text_far _FuchsiaGymRocker1BattleText
@@ -186,7 +186,7 @@ FuchsiaGymRocker2Text:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymRocker2BattleText:
 	text_far _FuchsiaGymRocker2BattleText
@@ -204,7 +204,7 @@ FuchsiaGymRocker3Text:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymRocker3BattleText:
 	text_far _FuchsiaGymRocker3BattleText
@@ -222,7 +222,7 @@ FuchsiaGymRocker4Text:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymRocker4BattleText:
 	text_far _FuchsiaGymRocker4BattleText
@@ -240,7 +240,7 @@ FuchsiaGymRocker5Text:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader4
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymRocker5BattleText:
 	text_far _FuchsiaGymRocker5BattleText
@@ -258,7 +258,7 @@ FuchsiaGymRocker6Text:
 	text_asm
 	ld hl, FuchsiaGymTrainerHeader5
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FuchsiaGymRocker6BattleText:
 	text_far _FuchsiaGymRocker6BattleText
@@ -279,8 +279,8 @@ FuchsiaGymGymGuideText:
 	jr nz, .afterBeat
 	ld hl, .ChampInMakingText
 .afterBeat
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .ChampInMakingText:
 	text_far _FuchsiaGymGymGuideChampInMakingText

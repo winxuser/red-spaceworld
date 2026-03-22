@@ -346,7 +346,7 @@ BattleTransition_FlashScreen_:
 	jr z, .done
 	ldh [rBGP], a
 	ld c, 2
-	call DelayFrames
+	rst _DelayFrame
 	jr .loop
 .done
 	dec b
@@ -394,7 +394,7 @@ BattleTransition_Shrink:
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	ld c, 6
-	call DelayFrames
+	rst _DelayFrame
 	pop bc
 	dec c
 	jr nz, .loop
@@ -445,7 +445,7 @@ BattleTransition_CopyTiles1:
 	push hl
 	push de
 	ld bc, SCREEN_WIDTH
-	call CopyData
+	rst _CopyData
 	pop hl
 	pop de
 	ld a, [wBattleTransitionCopyTilesOffset]

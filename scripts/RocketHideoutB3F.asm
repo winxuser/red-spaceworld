@@ -27,7 +27,7 @@ RocketHideoutB3FDefaultScript:
 	set BIT_SPINNING, [hl]
 	call StartSimulatingJoypadStates
 	ld a, SFX_ARROW_TILES
-	call PlaySound
+	rst _PlaySound
 	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld a, SCRIPT_ROCKETHIDEOUTB3F_PLAYER_SPINNING
@@ -144,7 +144,7 @@ RocketHideoutB3FRocket1Text:
 	text_asm
 	ld hl, RocketHideout3TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideoutB3FRocket1BattleText:
 	text_far _RocketHideoutB3FRocket1BattleText
@@ -162,7 +162,7 @@ RocketHideoutB3FRocket2Text:
 	text_asm
 	ld hl, RocketHideout3TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideoutB3FRocket2BattleText:
 	text_far _RocketHideout3BattleText

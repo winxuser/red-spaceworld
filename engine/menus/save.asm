@@ -15,9 +15,9 @@ TryLoadSaveFile:
 	push hl
 	set BIT_NO_TEXT_DELAY, [hl]
 	ld hl, FileDataDestroyedText
-	call PrintText
+	rst _PrintText
 	ld c, 100
-	call DelayFrames
+	rst _DelayFrame
 	pop hl
 	res BIT_NO_TEXT_DELAY, [hl]
 	ld a, $1 ; bad checksum
@@ -60,17 +60,17 @@ LoadMainData:
 	ld hl, sPlayerName
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld hl, sMainData
 	ld de, wMainDataStart
 	ld bc, wMainDataEnd - wMainDataStart
-	call CopyData
+	rst _CopyData
 	ld hl, wCurMapTileset
 	set BIT_NO_PREVIOUS_MAP, [hl]
 	ld hl, sSpriteData
 	ld de, wSpriteDataStart
 	ld bc, wSpriteDataEnd - wSpriteDataStart
-	call CopyData
+	rst _CopyData
 	ld a, [sTileAnimations]
 	ldh [hTileAnimations], a
 
@@ -78,7 +78,7 @@ LoadMainData:
 	ld hl, sCurBoxData
 	ld de, wBoxDataStart
 	ld bc, wBoxDataEnd - wBoxDataStart
-	call CopyData
+	rst _CopyData
 
 	and a
 	jp GoodCheckSum
@@ -100,7 +100,7 @@ LoadCurrentBoxData:
 	ld hl, sCurBoxData
 	ld de, wBoxDataStart
 	ld bc, wBoxDataEnd - wBoxDataStart
-	call CopyData
+	rst _CopyData
 	and a
 	jp GoodCheckSum
 
@@ -121,11 +121,11 @@ LoadPartyAndDexData:
 	ld hl, sPartyData
 	ld de, wPartyDataStart
 	ld bc, wPartyDataEnd - wPartyDataStart
-	call CopyData
+	rst _CopyData
 	ld hl, sMainData
 	ld de, wPokedexOwned
 	ld bc, wPokedexSeenEnd - wPokedexOwned
-	call CopyData
+	rst _CopyData
 	and a
 	jp GoodCheckSum
 
@@ -171,9 +171,9 @@ SaveMenu:
 	ld de, NowSavingString
 	call PlaceString
 	ld c, 120
-	call DelayFrames
+	rst _DelayFrame
 	ld hl, GameSavedText
-	call PrintText
+	rst _PrintText
 	ld a, SFX_SAVE
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
@@ -184,7 +184,7 @@ NowSavingString:
 	db "Now saving...@"
 
 SaveTheGame_YesOrNo:
-	call PrintText
+	rst _PrintText
 	hlcoord 0, 7
 	lb bc, 8, 1
 	ld a, TWO_OPTION_MENU
@@ -216,21 +216,21 @@ SaveMainData:
 	ld hl, wPlayerName
 	ld de, sPlayerName
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld hl, wMainDataStart
 	ld de, sMainData
 	ld bc, wMainDataEnd - wMainDataStart
-	call CopyData
+	rst _CopyData
 	ld hl, wSpriteDataStart
 	ld de, sSpriteData
 	ld bc, wSpriteDataEnd - wSpriteDataStart
-	call CopyData
+	rst _CopyData
 
 ; this part is redundant, SaveCurrentBoxData is always called next
 	ld hl, wBoxDataStart
 	ld de, sCurBoxData
 	ld bc, wBoxDataEnd - wBoxDataStart
-	call CopyData
+	rst _CopyData
 
 	ldh a, [hTileAnimations]
 	ld [sTileAnimations], a
@@ -253,7 +253,7 @@ SaveCurrentBoxData:
 	ld hl, wBoxDataStart
 	ld de, sCurBoxData
 	ld bc, wBoxDataEnd - wBoxDataStart
-	call CopyData
+	rst _CopyData
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
 	call CalcCheckSum
@@ -273,11 +273,11 @@ SavePartyAndDexData:
 	ld hl, wPartyDataStart
 	ld de, sPartyData
 	ld bc, wPartyDataEnd - wPartyDataStart
-	call CopyData
+	rst _CopyData
 	ld hl, wPokedexOwned ; pokédex only
 	ld de, sMainData
 	ld bc, wPokedexSeenEnd - wPokedexOwned
-	call CopyData
+	rst _CopyData
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
 	call CalcCheckSum
@@ -357,7 +357,7 @@ BoxSRAMPointerTable:
 
 ChangeBox::
 	ld hl, WhenYouChangeBoxText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -415,7 +415,7 @@ CopyBoxToOrFromSRAM:
 	ld a, b
 	ld [rRAMB], a
 	ld bc, wBoxDataEnd - wBoxDataStart
-	call CopyData
+	rst _CopyData
 	pop hl
 
 ; mark the source box as an empty box
@@ -456,7 +456,7 @@ DisplayChangeBoxMenu:
 	ld c, 9
 	call TextBoxBorder
 	ld hl, ChooseABoxText
-	call PrintText
+	rst _PrintText
 	hlcoord 11, 0
 	ld b, 12
 	ld c, 7
@@ -694,7 +694,7 @@ HallOfFame_Copy:
 	ld [rBMODE], a
 	xor a
 	ld [rRAMB], a
-	call CopyData
+	rst _CopyData
 	xor a
 	ld [rBMODE], a
 	ld [rRAMG], a
