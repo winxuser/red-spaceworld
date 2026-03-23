@@ -565,6 +565,11 @@ ItemUseBall:
 	ld hl, ItemUseBallText08
 .printTransferredToPCText
 	rst _PrintText
+	ld a, [wBoxCount] ; is box full?
+	cp MONS_PER_BOX
+	jr z, .done
+	ld hl, BoxFullReminderTXT
+	rst _PrintText
 	jr .done
 
 .oldManCaughtMon
@@ -584,6 +589,11 @@ ItemUseBall:
 	inc a
 	ld [wItemQuantity], a
 	jp RemoveItemFromInventory
+
+;joenote - add a reminder that the box is full
+BoxFullReminderTXT:
+	text_far _BoxIsFullReminderText
+	text_end
 
 ItemUseBallText00:
 ;"It dodged the thrown ball!"
