@@ -203,6 +203,28 @@ Route16Biker6AfterBattleText:
 	text_end
 
 Route16SnorlaxText:
+	text_asm
+	ld b, POKE_FLUTE
+	call IsItemInBag
+	ld hl, Route16Snorlax2Text
+	jr z, .end
+	ld hl, Route16UsePokeFluteText
+	rst _PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	ld hl, Route16Snorlax2Text
+	jr nz, .end
+	ld a, POKE_FLUTE
+	ld [wCurItem], a
+	call UseItem
+	jr .end2
+.end
+	rst _PrintText
+.end2
+	rst TextScriptEnd
+
+Route16Snorlax2Text:
 	text_far _Route16Text7
 	text_end
 
@@ -221,3 +243,8 @@ Route16CyclingRoadSignText:
 Route16SignText:
 	text_far _Route16SignText
 	text_end
+
+Route16UsePokeFluteText:
+	text_far _Route16UsePokeFluteText
+	text_end
+

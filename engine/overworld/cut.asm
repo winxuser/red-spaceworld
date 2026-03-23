@@ -68,10 +68,6 @@ UsedCut:
 	call UpdateSprites
 	jp RedrawMapView
 
-UsedCutText:
-	text_far _UsedCutText
-	text_end
-
 InitCutAnimOAM:
 	xor a
 	ld [wWhichAnimationOffsets], a

@@ -749,9 +749,6 @@ ItemUseSurfboard:
 	ld [wSimulatedJoypadStatesIndex], a
 	ret
 
-SurfingGotOnText:
-	text_far _SurfingGotOnText
-	text_end
 
 SurfingNoPlaceToGetOffText:
 	text_far _SurfingNoPlaceToGetOffText

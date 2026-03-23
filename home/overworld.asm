@@ -39,9 +39,9 @@ EnterMap::
 	ld [wJoyIgnore], a
 
 OverworldLoop::
-	call DelayFrame
+	rst _DelayFrame
 OverworldLoopLessDelay::
-;	call DelayFrame
+;	rst _DelayFrame
 	call LoadGBPal
 	ld a, [wMovementFlags]
 	bit BIT_LEDGE_OR_FISHING, a
@@ -87,6 +87,8 @@ OverworldLoopLessDelay::
 	jp nz, .noDirectionButtonsPressed
 	call IsPlayerCharacterBeingControlledByGame
 	jr nz, .checkForOpponent
+	callfar CheckForFlash ; jp OverworldLoop if succeeds
+	callfar CheckForCut ; jp OverworldLoop if succeeds
 	call CheckForHiddenEventOrBookshelfOrCardKeyDoor
 	ldh a, [hItemAlreadyFound]
 	and a
@@ -94,7 +96,9 @@ OverworldLoopLessDelay::
 	call IsSpriteOrSignInFrontOfPlayer
 	ldh a, [hTextID]
 	and a
-	jp z, OverworldLoop
+	jr nz, .displayDialogue ; checks for Strength via BoulderText
+	callfar CheckForSurf ; jp OverworldLoop if succeeds
+	jp OverworldLoop
 .displayDialogue
 	predef GetTileAndCoordsInFrontOfPlayer
 	call UpdateSprites
@@ -1367,9 +1371,10 @@ CheckForTilePairCollisions::
 	jr .retry
 .currentTileMatchesFirstInPair
 	inc hl
-	ld a, [hl]
+	ld a, [hli]
 	cp c
 	jr z, .foundMatch
+	inc hl
 	jr .tilePairCollisionLoop
 .currentTileMatchesSecondInPair
 	dec hl
@@ -2449,7 +2454,7 @@ ForceBikeOrSurf::
 CheckForUserInterruption::
 ; Return carry if Up+Select+B, Start or A are pressed in c frames.
 ; Used only in the intro and title screen.
-	call DelayFrame
+	rst _DelayFrame
 
 	push bc
 	call JoypadLowSensitivity
