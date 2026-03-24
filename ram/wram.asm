@@ -2106,7 +2106,10 @@ wObtainedHiddenCoinsFlags:: flag_array MAX_HIDDEN_COINS
 ; $02 = surfing
 wWalkBikeSurfState:: db
 
-	ds 10
+	ds 6
+
+; marcelnote - shinpokered xorshift RNG
+wRandomSeed:: ds 4
 
 wTownVisitedFlag:: flag_array NUM_CITY_MAPS
 
