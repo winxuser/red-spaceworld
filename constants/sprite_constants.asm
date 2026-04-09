@@ -71,6 +71,7 @@
 	const SPRITE_MIKAN
 	const SPRITE_SWIMMER_F
 	const SPRITE_SWIMMER_M
+	const SPRITE_BERRY_TREE
 DEF FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_POKE_BALL               ; $3d
 	const SPRITE_FOSSIL                  ; $3e

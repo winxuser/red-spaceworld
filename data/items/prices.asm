@@ -84,6 +84,15 @@ ItemPrices::
 	bcd3 0     ; MAX_ETHER
 	bcd3 0     ; ELIXER
 	bcd3 0     ; MAX_ELIXER
+	bcd3 10    ; BERRY
+	bcd3 10    ; GOLD_BERRY
+	bcd3 10    ; MYSTERYBERRY
+	bcd3 10    ; PSNCUREBERRY
+	bcd3 10    ; ICE_BERRY
+	bcd3 10    ; BURNT_BERRY
+	bcd3 10    ; MINT_BERRY
+	bcd3 10    ; PRZCUREBERRY
+	bcd3 10    ; MIRACLEBERRY
 	assert_table_length NUM_ITEMS
 	bcd3 0     ; FLOOR_B2F
 	bcd3 0     ; FLOOR_B1F

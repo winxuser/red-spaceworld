@@ -314,6 +314,14 @@ OverworldLoopLessDelay::
 ; step counting
 	ld hl, wStepCounter
 	dec [hl]
+; berry steps
+	ld hl, wBerryStepCounter
+	inc [hl]
+	ld a, [hli]
+	and a
+	jp nz, .originalRoutine
+	inc [hl]
+	callfar BerryReset
 ; Egg step counter code
 	ld a, [wEggRemainingSteps]
 	and a
@@ -324,7 +332,7 @@ OverworldLoopLessDelay::
    	ld [wIsEggInDaycare], a ; Spawn Egg
 .skipEggCount
 	ld [wEggRemainingSteps], a
-;Back to vanilla
+.originalRoutine
 	ld a, [wStatusFlags2]
 	bit BIT_WILD_ENCOUNTER_COOLDOWN, a
 	jr z, .doneStepCounting

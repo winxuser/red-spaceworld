@@ -400,4 +400,4 @@ INCLUDE "engine/pokemon/mon_gender.asm"
 INCLUDE "data/pokemon/breeding_list.asm"
 INCLUDE "engine/pokemon/calc_stats.asm"
 INCLUDE "engine/overworld/hms_overworld.asm" ; new, testing
-
+INCLUDE "engine/overworld/berrytree.asm"

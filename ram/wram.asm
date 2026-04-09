@@ -615,6 +615,11 @@ wEngagedTrainerClass:: db
 wEngagedTrainerSet:: db
 ENDU
 
+wBerryTreeFlags::
+	ds 2
+wBerryStepCounter::
+	ds 2
+wCurBerryTree::
 	ds 1
 
 wNPCMovementDirections2Index::

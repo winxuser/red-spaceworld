@@ -188,6 +188,7 @@ PewterCity_TextPointers:
 	dw_const PewterCitySuperNerd1Text,             TEXT_PEWTERCITY_SUPER_NERD1
 	dw_const PewterCitySuperNerd2Text,             TEXT_PEWTERCITY_SUPER_NERD2
 	dw_const PewterCityYoungsterText,              TEXT_PEWTERCITY_YOUNGSTER
+	dw_const PewterCityTreeText,                   TEXT_PEWTERCITY_BERRY_TREE
 	dw_const PewterCityTrainerTipsText,            TEXT_PEWTERCITY_TRAINER_TIPS
 	dw_const PewterCityPoliceNoticeSignText,       TEXT_PEWTERCITY_POLICE_NOTICE_SIGN
 	dw_const MartSignText,                         TEXT_PEWTERCITY_MART_SIGN
@@ -326,3 +327,10 @@ PewterCityGymSignText:
 PewterCitySignText:
 	text_far _PewterCitySignText
 	text_end
+
+PewterCityTreeText:
+	text_asm
+	ld a, 2 ; Which berry tree
+	ld [wCurBerryTree], a
+	callfar BerryTreeScript
+	rst TextScriptEnd

@@ -37,7 +37,6 @@ PickUpItem:
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, FoundItemText
 	jr .print
-
 .BagFull
 	ld hl, NoMoreRoomForItemText
 .print

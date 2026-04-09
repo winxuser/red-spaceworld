@@ -19,6 +19,8 @@ ViridianForest_TextPointers:
 	dw_const ViridianForestYoungster2Text,      TEXT_VIRIDIANFOREST_YOUNGSTER2
 	dw_const ViridianForestYoungster3Text,      TEXT_VIRIDIANFOREST_YOUNGSTER3
 	dw_const ViridianForestYoungster4Text,      TEXT_VIRIDIANFOREST_YOUNGSTER4
+	dw_const ViridianForestTree1Text,           TEXT_VIRIDIANFOREST_BERRY_TREE1
+	dw_const ViridianForestTree2Text,           TEXT_VIRIDIANFOREST_BERRY_TREE2
 	dw_const PickUpItemText,                    TEXT_VIRIDIANFOREST_ANTIDOTE
 	dw_const PickUpItemText,                    TEXT_VIRIDIANFOREST_POTION
 	dw_const PickUpItemText,                    TEXT_VIRIDIANFOREST_POKE_BALL
@@ -125,3 +127,17 @@ ViridianForestTrainerTips4Text:
 ViridianForestLeavingSignText:
 	text_far _ViridianForestLeavingSignText
 	text_end
+
+ViridianForestTree1Text:
+	text_asm
+	ld a, 13 ; Which berry tree
+	ld [wCurBerryTree], a
+	callfar BerryTreeScript
+	rst TextScriptEnd
+
+ViridianForestTree2Text:
+	text_asm
+	ld a, 2 ; Which berry tree
+	ld [wCurBerryTree], a
+	callfar BerryTreeScript
+	rst TextScriptEnd

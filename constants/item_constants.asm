@@ -94,6 +94,15 @@ DEF SAFARI_ROCK EQU CASCADEBADGE ; overload
 	const MAX_ETHER     ; $51
 	const ELIXER        ; $52
 	const MAX_ELIXER    ; $53
+	const BERRY
+	const GOLD_BERRY
+	const MYSTERYBERRY
+	const PSNCUREBERRY
+	const ICE_BERRY
+	const BURNT_BERRY
+	const MINT_BERRY
+	const PRZCUREBERRY
+	const MIRACLEBERRY
 DEF NUM_ITEMS EQU const_value - 1
 
 ; elevator floors use item IDs (see scripts/CeladonMartElevator.asm and scripts/SilphCoElevator.asm)

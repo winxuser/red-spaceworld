@@ -1,6 +1,7 @@
 	object_const_def
 	const_export CINNABARISLAND_GIRL
 	const_export CINNABARISLAND_GAMBLER
+	const_export CINNABARISLAND_BERRY_TREE
 
 CinnabarIsland_Object:
 	db $21 ; border block
@@ -22,5 +23,6 @@ CinnabarIsland_Object:
 	def_object_events
 	object_event 12,  5, SPRITE_GIRL, WALK, LEFT_RIGHT, TEXT_CINNABARISLAND_GIRL
 	object_event 14,  6, SPRITE_GAMBLER, STAY, NONE, TEXT_CINNABARISLAND_GAMBLER
+	object_event 10,  1, SPRITE_BERRY_TREE, STAY, DOWN, TEXT_CINNABARISLAND_BERRY_TREE
 
 	def_warps_to CINNABAR_ISLAND

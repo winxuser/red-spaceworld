@@ -55,6 +55,7 @@ CinnabarIsland_TextPointers:
 	def_text_pointers
 	dw_const CinnabarIslandGirlText,           TEXT_CINNABARISLAND_GIRL
 	dw_const CinnabarIslandGamblerText,        TEXT_CINNABARISLAND_GAMBLER
+	dw_const CinnabarIslandTreeText,           TEXT_CINNABARISLAND_BERRY_TREE
 	dw_const CinnabarIslandSignText,           TEXT_CINNABARISLAND_SIGN
 	dw_const MartSignText,                     TEXT_CINNABARISLAND_MART_SIGN
 	dw_const PokeCenterSignText,               TEXT_CINNABARISLAND_POKECENTER_SIGN
@@ -85,3 +86,10 @@ CinnabarIslandPokemonLabSignText:
 CinnabarIslandGymSignText:
 	text_far _CinnabarIslandGymSignText
 	text_end
+
+CinnabarIslandTreeText:
+	text_asm
+	ld a, 1 ; Which berry tree
+	ld [wCurBerryTree], a
+	callfar BerryTreeScript
+	rst TextScriptEnd

@@ -84,4 +84,13 @@ KeyItemFlags:
 	dbit FALSE ; MAX_ETHER
 	dbit FALSE ; ELIXER
 	dbit FALSE ; MAX_ELIXER
+	dbit FALSE   ; BERRY
+	dbit FALSE   ; GOLD_BERRY
+	dbit FALSE   ; MYSTERYBERRY
+	dbit FALSE   ; PSNCUREBERRY
+	dbit FALSE   ; ICE_BERRY
+	dbit FALSE   ; BURNT_BERRY
+	dbit FALSE   ; MINT_BERRY
+	dbit FALSE   ; PRZCUREBERRY
+	dbit FALSE   ; MIRACLEBERRY
 	end_bit_array NUM_ITEMS

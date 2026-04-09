@@ -518,6 +518,9 @@ SpritePaletteAssignments: ; Characters on the overworld
 	; Swimmer M
 	db SPR_PAL_BLUE
 
+	; Berry Tree
+	db SPR_PAL_TREE
+
 	; 0x3d: SPRITE_BALL
 	db SPR_PAL_ORANGE
 

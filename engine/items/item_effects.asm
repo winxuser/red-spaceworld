@@ -101,6 +101,15 @@ ItemUsePtrTable:
 	dw ItemUsePPRestore  ; MAX_ETHER
 	dw ItemUsePPRestore  ; ELIXER
 	dw ItemUsePPRestore  ; MAX_ELIXER
+	dw ItemUseMedicine   ; BERRY
+	dw ItemUseMedicine   ; SITRUS_BERRY
+	dw ItemUsePPRestore  ; MYSTERYBERRY
+	dw ItemUseMedicine   ; PSNCUREBERRY
+	dw ItemUseMedicine   ; ICE_BERRY
+	dw ItemUseMedicine   ; ASPEAR_BERRY
+	dw ItemUseMedicine   ; CHESTO_BERRY
+	dw ItemUseMedicine   ; CHERI_BERRY
+	dw ItemUseMedicine   ; LUM_BERRY
 
 ItemUseBall:
 
@@ -868,14 +877,18 @@ ItemUseMedicine:
 	jr z, ItemUseMedicine ; if so, force another choice
 .checkItemType
 	ld a, [wCurItem]
+	cp a, PSNCUREBERRY
+	jp nc, .cureStatusAilment
+	cp a, BERRY
+	jp nc, .healHP
 	cp REVIVE
-	jr nc, .healHP ; if it's a Revive or Max Revive
+	jp nc, .healHP ; if it's a Revive or Max Revive
 	cp FULL_HEAL
-	jr z, .cureStatusAilment ; if it's a Full Heal
+	jp z, .cureStatusAilment ; if it's a Full Heal
 	cp HP_UP
 	jp nc, .useVitamin ; if it's a vitamin or Rare Candy
 	cp FULL_RESTORE
-	jr nc, .healHP ; if it's a Full Restore or one of the potions
+	jp nc, .healHP ; if it's a Full Restore or one of the potions
 ; fall through if it's one of the status-specific healing items
 .cureStatusAilment
 	ld bc, MON_STATUS
@@ -884,17 +897,29 @@ ItemUseMedicine:
 	lb bc, ANTIDOTE_MSG, 1 << PSN
 	cp ANTIDOTE
 	jr z, .checkMonStatus
+	cp PSNCUREBERRY
+	jr z, .checkMonStatus
 	lb bc, BURN_HEAL_MSG, 1 << BRN
 	cp BURN_HEAL
+	jr z, .checkMonStatus
+	cp ICE_BERRY
 	jr z, .checkMonStatus
 	lb bc, ICE_HEAL_MSG, 1 << FRZ
 	cp ICE_HEAL
 	jr z, .checkMonStatus
+	cp BURNT_BERRY
+	jr z, .checkMonStatus
 	lb bc, AWAKENING_MSG, SLP_MASK
 	cp AWAKENING
 	jr z, .checkMonStatus
+	cp MINT_BERRY
+	jr z, .checkMonStatus
 	lb bc, PARALYZ_HEAL_MSG, 1 << PAR
 	cp PARLYZ_HEAL
+	jr z, .checkMonStatus
+	cp PRZCUREBERRY
+	jr z, .checkMonStatus
+	cp MIRACLEBERRY
 	jr z, .checkMonStatus
 	lb bc, FULL_HEAL_MSG, $ff ; Full Heal
 .checkMonStatus
@@ -1086,6 +1111,12 @@ ItemUseMedicine:
 	jr .addHealAmount
 .notUsingSoftboiled2
 	ld a, [wCurItem]
+	cp GOLD_BERRY
+	ld b, 30
+	jr z, .addHealAmount
+	cp BERRY
+	ld b, 10
+	jr z, .addHealAmount
 	cp SODA_POP
 	ld b, 60 ; Soda Pop heal amount
 	jr z, .addHealAmount
@@ -1207,6 +1238,8 @@ ItemUseMedicine:
 	pop hl
 .skipRemovingItem
 	ld a, [wCurItem]
+	cp PSNCUREBERRY
+	jr nc, .playStatusAilmentCuringSound
 	cp FULL_RESTORE
 	jr c, .playStatusAilmentCuringSound
 	cp FULL_HEAL
@@ -1989,7 +2022,9 @@ ItemUsePPRestore:
 .chooseMove
 	ld a, [wPPRestoreItem]
 	cp ELIXER
-	jp nc, .useElixir ; if Elixir or Max Elixir
+	jp z, .useElixir ; if Elixir or Max Elixir
+	cp MAX_ELIXER
+	jp z, .useElixir
 	ld a, $02
 	ld [wMoveMenuType], a
 	ld hl, RaisePPWhichTechniqueText

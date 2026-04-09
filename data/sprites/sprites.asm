@@ -76,6 +76,7 @@ SpriteSheetPointerTable:
 	overworld_sprite MikanSprite, 12            ; SPRITE_MIKAN
 	overworld_sprite SwimmerfSprite, 12         ; SPRITE_SWIMMER_F
 	overworld_sprite SwimmermSprite, 12         ; SPRITE_SWIMMER_M
+	overworld_sprite BerryTreeSprite, 12        ; SPRITE_BERRY_TREE
 	overworld_sprite PokeBallSprite, 4          ; SPRITE_POKE_BALL
 	overworld_sprite FossilSprite, 4            ; SPRITE_FOSSIL
 	overworld_sprite BoulderSprite, 4           ; SPRITE_BOULDER

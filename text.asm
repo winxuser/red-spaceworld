@@ -261,6 +261,7 @@ INCLUDE "text/CinnabarIsland.asm"
 INCLUDE "text/SaffronCity.asm"
 
 INCLUDE "data/text/text_6.asm"
+INCLUDE "text/BerryHouse.asm"
 
 
 SECTION "Text 11", ROMX
