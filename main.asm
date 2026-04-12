@@ -117,8 +117,8 @@ ENDC
 SECTION "Battle Engine 2", ROMX
 
 INCLUDE "engine/gfx/load_pokedex_tiles.asm"
-INCLUDE "engine/overworld/map_sprites.asm"
-INCLUDE "engine/overworld/emotion_bubbles.asm"
+;INCLUDE "engine/overworld/map_sprites.asm"
+;INCLUDE "engine/overworld/emotion_bubbles.asm"
 INCLUDE "engine/events/evolve_trade.asm"
 INCLUDE "engine/menus/pc.asm"
 
@@ -206,11 +206,7 @@ INCLUDE "engine/battle/unused_stats_functions.asm"
 INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
 INCLUDE "engine/battle/trainer_ai.asm"
 INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
-INCLUDE "gfx/trade.asm"
 INCLUDE "engine/pokemon/evos_moves.asm"
-INCLUDE "engine/battle/move_effects/heal.asm"
-INCLUDE "engine/battle/move_effects/transform.asm"
-INCLUDE "engine/battle/move_effects/reflect_light_screen.asm"
 
 INCLUDE "color/draw_hud_pokeball_gfx.asm"
 
@@ -388,12 +384,20 @@ INCLUDE "data/battle_anims/subanimations.asm"
 INCLUDE "data/battle_anims/frame_blocks.asm"
 INCLUDE "engine/movie/evolution.asm"
 INCLUDE "engine/overworld/elevator.asm"
-
 INCLUDE "color/animations.asm"
+
+
+SECTION "Map Sprites", ROMX
+
+INCLUDE "engine/overworld/map_sprites.asm"
+INCLUDE "engine/overworld/emotion_bubbles.asm"
 
 
 SECTION "Addon Extras", ROMX
 
+INCLUDE "engine/battle/move_effects/heal.asm"
+INCLUDE "engine/battle/move_effects/transform.asm"
+INCLUDE "engine/battle/move_effects/reflect_light_screen.asm"
 INCLUDE "engine/items/tm_prices.asm"
 INCLUDE "gfx/fishing.asm"
 INCLUDE "engine/pokemon/mon_gender.asm"
@@ -401,3 +405,4 @@ INCLUDE "data/pokemon/breeding_list.asm"
 INCLUDE "engine/pokemon/calc_stats.asm"
 INCLUDE "engine/overworld/hms_overworld.asm" ; new, testing
 INCLUDE "engine/overworld/berrytree.asm"
+INCLUDE "gfx/trade.asm"

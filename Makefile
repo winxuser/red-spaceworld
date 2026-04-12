@@ -150,7 +150,7 @@ pokeblue_debug.gbc: RGBLINKFLAGS += -p 0xff
 pokered_vc.gbc:     RGBLINKFLAGS += -p 0x00
 pokeblue_vc.gbc:    RGBLINKFLAGS += -p 0x00
 
-RGBFIXFLAGS += -Cjv -n 0 -k 01 -l 0x33 -m MBC5+RAM+BATTERY -r 03
+RGBFIXFLAGS += -Cjv -n 0x08 -k 01 -l 0x33 -m MBC5+RAM+BATTERY -r 03
 pokered.gbc:        RGBFIXFLAGS += -p 0x00 -t "POKEMON RED"
 pokeblue.gbc:       RGBFIXFLAGS += -p 0x00 -t "POKEMON BLUE"
 pokeblue_debug.gbc: RGBFIXFLAGS += -p 0xff -t "POKEMON BLUE"
@@ -162,9 +162,12 @@ pokeblue_vc.gbc:    RGBFIXFLAGS += -p 0x00 -t "POKEMON BLUE"
 	$(RGBFIX) $(RGBFIXFLAGS) $@
 
 	@echo ""
-	@echo "================ ROM INFO ================="
-	@size=$$(stat -c%s $@); \
+	@echo "================ ROM HEALTH REPORT ================="; \
+	size=$$(stat -c%s $@); \
 	banks=$$((size / 16384)); \
+	remainder=$$((size % 16384)); \
+	mb=$$((size / 1048576)); \
+	mb_frac=$$(( (size % 1048576) * 100 / 1048576 )); \
 	mapper_byte=$$(xxd -p -l 1 -s 0x147 $@); \
 	case $$mapper_byte in \
 		19|1a|1b) mapper="MBC5"; max=512 ;; \
@@ -172,35 +175,34 @@ pokeblue_vc.gbc:    RGBFIXFLAGS += -p 0x00 -t "POKEMON BLUE"
 		01|02|03) mapper="MBC1"; max=125 ;; \
 		*) mapper="Unknown"; max=0 ;; \
 	esac; \
-	printf "ROM File:            %s\n" "$@"; \
-	printf "ROM Size:            %d bytes\n" "$$size"; \
-	printf "Bank Size:           16384 bytes (16KB)\n"; \
-	printf "Banks Used:          %d\n" "$$banks"; \
-	printf "Mapper:              %s\n" "$$mapper"; \
+	echo "ROM File:            $@"; \
+	echo "ROM Size:            $$size bytes"; \
+	printf "ROM Size (MB):       %d.%02d MB\n" "$$mb" "$$mb_frac"; \
+	echo "Bank Size:           16 KB"; \
+	echo "Banks Used:          $$banks"; \
+	echo "Mapper:              $$mapper"; \
 	if [ $$max -gt 0 ]; then \
 		percent=$$((banks * 100 / max)); \
-		printf "Max Banks:           %d\n" "$$max"; \
-		printf "ROM Usage:           %d%%\n" "$$percent"; \
+		echo "Max Banks:           $$max"; \
+		echo "ROM Usage:           $$percent%"; \
 	fi; \
-	\
 	echo ""; \
-	echo "--------- BANK USAGE (from .map) ---------"; \
-	grep "^ROMX bank" $*.map | awk '{print $$3}' | sort -u | tail -n1 | \
-	awk '{printf "Highest Bank Used:   %s\n", $$1}'; \
-	\
-	total_sections=$$(grep -c "^SECTION:" $*.map); \
-	printf "Total Sections:      %d\n" "$$total_sections"; \
-	\
+	echo "----------- BANK HEALTH --------------------------"; \
+	highest=$$(grep "^ROMX bank" $*.map | awk '{print $$2}' | sort -n | tail -n1); \
+	echo "Highest Bank Used:   $$highest"; \
+	total_sections=$$(grep -c "SECTION" $*.map); \
+	echo "Total Sections:      $$total_sections"; \
 	sram_banks=$$(grep -c '^SRAM' layout.link); \
-	printf "SRAM Banks Defined:  %d\n" "$$sram_banks"; \
-	\
-	if [ "$$mapper" = "MBC3" ] && [ $$banks -gt 128 ]; then \
-		echo "WARNING: Exceeded MBC3 bank limit!"; \
+	echo "SRAM Banks Defined:  $$sram_banks"; \
+	echo ""; \
+	echo "----------- WARNINGS -----------------------------"; \
+	if [ $$remainder -ne 0 ]; then \
+		echo "WARNING: ROM is not bank-aligned"; \
 	fi; \
 	if [ "$$mapper" = "MBC5" ] && [ $$banks -gt 480 ]; then \
-		echo "WARNING: Nearing MBC5 limit!"; \
+		echo "WARNING: Approaching MBC5 limit"; \
 	fi; \
-	echo "============================================"
+	echo "=================================================="
 
 
 ### Misc file-specific graphics rules

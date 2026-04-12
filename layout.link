@@ -38,6 +38,7 @@ ROM0
 	org $1665
 	"LoadMonFrontSprite"
 	org $1dd9
+	"JpPoint"
 ROMX $1
 	"bank1"
 ROMX $2
@@ -54,7 +55,7 @@ ROMX $4
 	"Battle Engine 1"
 ROMX $5
 	"NPC Sprites 2"
-;	"Battle Engine 2"
+	"Battle Engine 2"
 ROMX $6
 	"Maps 1"
 	"Play Time"
@@ -109,11 +110,12 @@ ROMX $12
 	"Screen Effects"
 	"Maps 8"
 ROMX $13
-;	"Trainer Pics"
+	"Trainer Pics"
 	org $7d04
 	"Maps 9"
 	"Predefs"
 ROMX $14
+	"Trainer Pics 2"
 	"Maps 10"
 	"Battle Engine 8"
 	"Hidden Events 2"
@@ -147,7 +149,7 @@ ROMX $1B
 	"Tilesets 3"
 ROMX $1C
 	"bank1C"
-;	org $4a69
+	org $4a69
 	"BattleTransition_BlackScreen"
 	org $5fb6
 	"InitPartyMenuBlkPacket"
@@ -213,10 +215,15 @@ ROMX $36
 ROMX $37
 	"Pics 12"
 ROMX $38
+	"Pics 13"
 ROMX $39
+	"Pics 14"
 ROMX $3A
+	"Pics 15"
 ROMX $3B
+	"Addon Extras"
 ROMX $3C
+	"Pokédex Text 2"
 ROMX $3D
 ROMX $3E
 ROMX $3F
@@ -292,6 +299,153 @@ ROMX $7C
 ROMX $7D
 ROMX $7E
 ROMX $7F
+
+; ===== MBC5 EXPANSION BANKS =====
+
+ROMX $80
+ROMX $81
+ROMX $82
+ROMX $83
+ROMX $84
+ROMX $85
+ROMX $86
+ROMX $87
+
+ROMX $88
+ROMX $89
+ROMX $8A
+ROMX $8B
+ROMX $8C
+ROMX $8D
+ROMX $8E
+ROMX $8F
+
+ROMX $90
+ROMX $91
+ROMX $92
+ROMX $93
+ROMX $94
+ROMX $95
+ROMX $96
+ROMX $97
+
+ROMX $98
+ROMX $99
+ROMX $9A
+ROMX $9B
+ROMX $9C
+ROMX $9D
+ROMX $9E
+ROMX $9F
+
+ROMX $A0
+ROMX $A1
+ROMX $A2
+ROMX $A3
+ROMX $A4
+ROMX $A5
+ROMX $A6
+ROMX $A7
+
+ROMX $A8
+ROMX $A9
+ROMX $AA
+ROMX $AB
+ROMX $AC
+ROMX $AD
+ROMX $AE
+ROMX $AF
+
+ROMX $B0
+ROMX $B1
+ROMX $B2
+ROMX $B3
+ROMX $B4
+ROMX $B5
+ROMX $B6
+ROMX $B7
+
+ROMX $B8
+ROMX $B9
+ROMX $BA
+ROMX $BB
+ROMX $BC
+ROMX $BD
+ROMX $BE
+ROMX $BF
+
+ROMX $C0
+ROMX $C1
+ROMX $C2
+ROMX $C3
+ROMX $C4
+ROMX $C5
+ROMX $C6
+ROMX $C7
+
+ROMX $C8
+ROMX $C9
+ROMX $CA
+ROMX $CB
+ROMX $CC
+ROMX $CD
+ROMX $CE
+ROMX $CF
+
+ROMX $D0
+ROMX $D1
+ROMX $D2
+ROMX $D3
+ROMX $D4
+ROMX $D5
+ROMX $D6
+ROMX $D7
+
+ROMX $D8
+ROMX $D9
+ROMX $DA
+ROMX $DB
+ROMX $DC
+ROMX $DD
+ROMX $DE
+ROMX $DF
+
+ROMX $E0
+ROMX $E1
+ROMX $E2
+ROMX $E3
+ROMX $E4
+ROMX $E5
+ROMX $E6
+ROMX $E7
+
+ROMX $E8
+ROMX $E9
+ROMX $EA
+ROMX $EB
+ROMX $EC
+ROMX $ED
+ROMX $EE
+ROMX $EF
+
+ROMX $F0
+ROMX $F1
+ROMX $F2
+ROMX $F3
+ROMX $F4
+ROMX $F5
+ROMX $F6
+ROMX $F7
+
+ROMX $F8
+ROMX $F9
+ROMX $FA
+ROMX $FB
+ROMX $FC
+ROMX $FD
+ROMX $FE
+ROMX $FF
+
 WRAM0
 	"Audio RAM"
 	org $c100
@@ -303,7 +457,7 @@ WRAM0
 	"Party Data"
 	"Main Data"
 	"Current Box Data"
-;	org $df00
+	org $df00
 	"Stack"
 VRAM
 	"VRAM"
