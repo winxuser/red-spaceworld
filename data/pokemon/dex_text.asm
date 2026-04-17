@@ -650,6 +650,22 @@ _AkueriaDexEntry::
 	page "igation"
 	dex
 
+_HohoDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
+_BoboDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
 _DoduoDexEntry::
 	text "A bird that makes"
 	next "up for its poor"
@@ -740,6 +756,30 @@ _KrabbyDexEntry::
 	next "sideways"
 	dex
 
+_PachimeDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
+_MokokoDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
+_DenryuDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
 _VulpixDexEntry::
 	text "At the time of"
 	next "birth, it has"
@@ -778,6 +818,22 @@ _RaichuDexEntry::
 	page "itself from its"
 	next "own high voltage"
 	next "power"
+	dex
+
+_MikonDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
+_MonjaDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
 	dex
 
 _DratiniDexEntry::
@@ -838,6 +894,22 @@ _SeadraDexEntry::
 	page "its wing-like"
 	next "pectoral fins and"
 	next "stout tail"
+	dex
+
+_JaranraDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
+_HaneiDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
 	dex
 
 _SandshrewDexEntry::
@@ -1030,6 +1102,14 @@ _BeedrillDexEntry::
 	next "and tail"
 	dex
 
+_PukuDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
 _DodrioDexEntry::
 	text "Uses its three"
 	next "brains to execute"
@@ -1080,6 +1160,22 @@ _DewgongDexEntry::
 	next "cold waters"
 	dex
 
+_ShibirefuguDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
+_PichuDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
 _CaterpieDexEntry::
 	text "Its short feet"
 	next "are tipped with"
@@ -1118,6 +1214,14 @@ _MachampDexEntry::
 	page "that can send the"
 	next "victim clear over"
 	next "the horizon"
+	dex
+
+_PyDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
 	dex
 
 _GolduckDexEntry::
@@ -1180,6 +1284,22 @@ _MagikarpDexEntry::
 	next "that exist today"
 	dex
 
+_PupurinDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
+_MizuoDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
 _MukDexEntry::
 	text "Thickly covered"
 	next "with a filthy,"
@@ -1188,6 +1308,14 @@ _MukDexEntry::
 	page "is so toxic, even"
 	next "its footprints"
 	next "contain poison"
+	dex
+
+_NeitiDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
 	dex
 
 _KinglerDexEntry::
@@ -1208,6 +1336,14 @@ _CloysterDexEntry::
 	page "volleys. Its"
 	next "innards have"
 	next "never been seen"
+	dex
+
+_NeitioDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
 	dex
 
 _ElectrodeDexEntry::
@@ -1258,6 +1394,14 @@ _MarowakDexEntry::
 	page "bone skillfully"
 	next "like a boomerang"
 	next "to KO targets"
+	dex
+
+_GyopinDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
 	dex
 
 _HaunterDexEntry::
@@ -1350,6 +1494,14 @@ _TentacruelDexEntry::
 	next "immobilize prey"
 	dex
 
+_MariruDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
 _GoldeenDexEntry::
 	text "Its tail fin"
 	next "billows like an"
@@ -1368,6 +1520,38 @@ _SeakingDexEntry::
 	page "swimming power-"
 	next "fully up rivers"
 	next "and creeks"
+	dex
+
+_ManboDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
+_IkariDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
+_GurotesuDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
+	dex
+
+_EkushinguDexEntry::
+	text "Newly discovered"
+	next "pokemon, current-"
+	next "ly under invest-"
+
+	page "igation"
 	dex
 
 _PonytaDexEntry::

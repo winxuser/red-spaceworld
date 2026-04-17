@@ -93,4 +93,6 @@ KeyItemFlags:
 	dbit FALSE   ; MINT_BERRY
 	dbit FALSE   ; PRZCUREBERRY
 	dbit FALSE   ; MIRACLEBERRY
+	dbit FALSE   ; HEART_STONE
+	dbit FALSE   ; METAL_COAT
 	end_bit_array NUM_ITEMS

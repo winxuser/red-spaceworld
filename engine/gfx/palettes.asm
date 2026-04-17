@@ -82,8 +82,19 @@ IF GEN_2_GRAPHICS ; Trainers are given individualized palettes
 	ld a, PAL_HERO
 	ret z
 
-	ld a, [wTrainerClass] ; Get trainer ID
+	ld a, [wTrainerClass]
+	sub OPP_ID_OFFSET
+	cp NUM_TRAINERS + 1
+	jr c, .ok
+	ld a, 0
+
+	.ok
+	ld c, a
+	ld b, 0
 	ld hl, TrainerPalettes
+	add hl, bc
+	ld a, [hl]
+	ret
 ELSE
 	; Trainers are given a single palette (PAL_MEWMON)
 	; However, check specifically for the player's sprite in linked battle
@@ -102,7 +113,7 @@ ENDC
 	add hl, de
 	ld a, [hl]
 	ret
-	
+
 
 DetermineBackSpritePaletteID:
 	ld [wPokedexNum], a

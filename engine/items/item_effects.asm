@@ -110,6 +110,8 @@ ItemUsePtrTable:
 	dw ItemUseMedicine   ; CHESTO_BERRY
 	dw ItemUseMedicine   ; CHERI_BERRY
 	dw ItemUseMedicine   ; LUM_BERRY
+	dw ItemUseEvoStone   ; HEART_STONE
+	dw ItemUseEvoStone   ; METAL_COAT
 
 ItemUseBall:
 

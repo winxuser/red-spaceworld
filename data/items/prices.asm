@@ -93,6 +93,8 @@ ItemPrices::
 	bcd3 10    ; MINT_BERRY
 	bcd3 10    ; PRZCUREBERRY
 	bcd3 10    ; MIRACLEBERRY
+	bcd3 2100  ; HEART_STONE
+	bcd3 2100  ; METAL_COAT
 	assert_table_length NUM_ITEMS
 	bcd3 0     ; FLOOR_B2F
 	bcd3 0     ; FLOOR_B1F

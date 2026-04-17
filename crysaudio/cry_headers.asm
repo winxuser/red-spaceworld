@@ -166,7 +166,34 @@ PokemonCries::
 	mon_cry CRY_TOTODILE,   1132,  232 ; TOTODILE
 	mon_cry CRY_TOTODILE,   1088,  272 ; CROCONAW
 	mon_cry CRY_TOTODILE,   1020,  384 ; FERALIGATR
-;	mon_cry CRY_SENTRET,     138,  184 ; SENTRET
+	mon_cry CRY_HOOTHOOT,    145,  216 ; HOHO
+	mon_cry CRY_HOOTHOOT,      0,  416 ; NOCTOWL
+	mon_cry CRY_MAREEP,       34,  216 ; MAREEP
+	mon_cry CRY_MAREEP,       -7,  384 ; FLAAFFY
+	mon_cry CRY_AMPHAROS,   -124,  232 ; AMPHAROS
+	mon_cry CRY_NIDORAN_M,     0,  256 ; MIKON
+	mon_cry CRY_GOLEM,         0,  256 ; MONJA
+	mon_cry CRY_GOLEM,      1020,  251 ; JARANRA
+	mon_cry CRY_PARAS,         2,  160 ; HANEI
+	mon_cry CRY_SLOWKING,    352,  224 ; PUKU
+	mon_cry CRY_SLOWKING,    351,  224 ; SHIBIREFUGU
+	mon_cry CRY_PICHU,         0,  320 ; PICHU
+	mon_cry CRY_CLEFFA,       97,  145 ; PY
+	mon_cry CRY_CHIKORITA,   232,  232 ; Pupurin
+	mon_cry CRY_WOOPER,     -198,  320 ; Mizuo
+	mon_cry CRY_NATU,       -103,  256 ; Neiti
+	mon_cry CRY_NATU,       -167,  360 ; Neitio
+	mon_cry CRY_CATERPIE,    128,  192 ; Gyopin
+	mon_cry CRY_MARILL,      283,  288 ; Mariru
+	mon_cry CRY_CLEFAIRY,    153,  144 ; Manbo
+	mon_cry CRY_CATERPIE,     16,  383 ; Ikari
+	mon_cry CRY_DUNSPARCE,     0,  384 ; Gurotesu
+	mon_cry CRY_SQUIRTLE,    -16,  320 ; Ekushingu
+	mon_cry CRY_PARAS,        32,  170 ; Para
+	mon_cry CRY_SPINARAK,     17,  512 ; Kokumo
+	mon_cry CRY_SPINARAK,   -174,  482 ; Tsuheddo
+	mon_cry CRY_AMPHAROS,   2217,  384 ; Yoroidori
+	mon_cry CRY_PIDGEY,      222,  383 ; Animon
 ;	mon_cry CRY_SENTRET,     107,  258 ; FURRET
 ;	mon_cry CRY_HOOTHOOT,    145,  216 ; HOOTHOOT
 ;	mon_cry CRY_HOOTHOOT,      0,  416 ; NOCTOWL

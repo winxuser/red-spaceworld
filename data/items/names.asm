@@ -93,6 +93,8 @@ ItemNames::
 	li "MINT BERRY"
 	li "PRZCUREBERRY"
 	li "MIRACLEBERRY"
+	li "HEART STONE"
+	li "METAL COAT"
 	assert_list_length NUM_ITEMS
 	li "B2F"
 	li "B1F"

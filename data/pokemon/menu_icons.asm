@@ -160,4 +160,32 @@ MonPartyData:
 	nybble ICON_WATER     ; Kurusu
 	nybble ICON_WATER     ; Akua
 	nybble ICON_WATER     ; Akueria
+	nybble ICON_BIRD      ; Hoho
+	nybble ICON_BIRD      ; Bobo
+	nybble ICON_MON       ; Pachime
+	nybble ICON_MON       ; Mokoko
+	nybble ICON_MON       ; Denryu
+	nybble ICON_MON       ; Mikon
+	nybble ICON_GRASS     ; Monja
+	nybble ICON_GRASS     ; Jaranra
+	nybble ICON_WATER     ; Hanei
+	nybble ICON_WATER     ; Puku
+	nybble ICON_WATER     ; Shibirefugu
+	nybble ICON_FAIRY     ; Pichu
+	nybble ICON_FAIRY     ; Py
+	nybble ICON_FAIRY     ; Pupurin
+	nybble ICON_MON       ; Mizuo
+	nybble ICON_BIRD      ; Neiti
+	nybble ICON_BIRD      ; Neitio
+	nybble ICON_WATER     ; Gyopin
+	nybble ICON_WATER     ; Mariru
+	nybble ICON_WATER     ; Manbo
+	nybble ICON_WATER     ; Ikari
+	nybble ICON_WATER     ; Gurotesu
+	nybble ICON_BIRD      ; Ekushingu
+	nybble ICON_BUG       ; Para
+	nybble ICON_BUG       ; Kokumo
+	nybble ICON_BUG       ; Tsuheddo
+	nybble ICON_BIRD      ; Yoroidori
+	nybble ICON_MON       ; Animon
 	end_nybble_array NUM_POKEMON

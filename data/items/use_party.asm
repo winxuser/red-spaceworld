@@ -47,4 +47,6 @@ UsableItems_PartyMenu:
 	db MINT_BERRY
 	db PRZCUREBERRY
 	db MIRACLEBERRY
+	db HEART_STONE
+	db METAL_COAT
 	db -1 ; end
