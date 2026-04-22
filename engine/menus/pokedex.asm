@@ -2,6 +2,12 @@ ShowPokedexMenu:
 	call GBPalWhiteOut
 	call ClearScreen
 	call UpdateSprites
+
+	ldh a, [hTileAnimations]
+	push af          ; Save current animation state (On or Off)
+	xor a
+	ldh [hTileAnimations], a ; Force animations OFF
+
 	ld a, [wListScrollOffset]
 	push af
 	xor a
@@ -12,14 +18,16 @@ ShowPokedexMenu:
 	ld [wPokedexNum], a
 	ldh [hJoy7], a
 .setUpGraphics
-	ld b, SET_PAL_GENERIC
+	ld b, SET_PAL_POKEDEX
+;	ld b, SET_PAL_GENERIC
 	call RunPaletteCommand
 	callfar LoadPokedexTilePatterns
+	call GBPalNormal
 .doPokemonListMenu
 	ld hl, wTopMenuItemY
-	ld a, 3
+	ld a, 2
 	ld [hli], a ; top menu item Y
-	xor a
+	ld a, 8
 	ld [hli], a ; top menu item X
 	inc a
 	ld [wMenuWatchMovingOutOfBounds], a
@@ -27,10 +35,15 @@ ShowPokedexMenu:
 	inc hl
 	ld a, 6
 	ld [hli], a ; max menu item ID
-	ld [hl], PAD_LEFT | PAD_RIGHT | PAD_B | PAD_A
+	ld [hl], PAD_UP | PAD_DOWN | PAD_LEFT | PAD_RIGHT | PAD_B | PAD_A
 	call HandlePokedexListMenu
 	jr c, .goToSideMenu ; if the player chose a pokemon from the list
 .exitPokedex
+	pop af
+	ld [wListScrollOffset], a ; Restore scroll offset
+	pop af
+	ldh [hTileAnimations], a  ; Restore Animations
+
 	xor a
 	ld [wMenuWatchMovingOutOfBounds], a
 	ld [wCurrentMenuItem], a
@@ -38,11 +51,10 @@ ShowPokedexMenu:
 	ldh [hJoy7], a
 	ld [wUnusedOverrideSimulatedJoypadStatesIndex], a
 	ld [wOverrideSimulatedJoypadStatesMask], a
-	pop af
-	ld [wListScrollOffset], a
+
 	call GBPalWhiteOutWithDelay3
 	call RunDefaultPaletteCommand
-	jp ReloadMapData
+	jp ReloadMapData ; THIS restores the overworld graphics
 .goToSideMenu
 	call HandlePokedexSideMenu
 	dec b
@@ -161,47 +173,55 @@ HandlePokedexSideMenu:
 HandlePokedexListMenu:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-; draw the horizontal line separating the seen and owned amounts from the menu
-	hlcoord 15, 8
-	ld a, '─'
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	hlcoord 14, 0
-	ld [hl], $71 ; vertical line tile
-	hlcoord 14, 1
+	call ClearScreen ; Start with a fresh canvas
+
+; --- DRAW THE LAYOUT BORDERS ---
+
+; 1. Draw the Main Vertical Divider (Separates List from Left Side)
+	hlcoord 7, 10
+	ld c, 9
 	call DrawPokedexVerticalLine
-	hlcoord 14, 9
-	call DrawPokedexVerticalLine
+
+; 2. Draw the Horizontal Divider (Separates Sprite Box from Info Box)
+;	hlcoord 0, 9
+;	ld b, $64 ; Horizontal line tile
+;	ld c, 7   ; Width
+;	ld de, 1  ; Horizontal direction
+;	call DrawTileLine
+
+; 3. Clean up the Junction
+	ld a, $66 ; Try tile $6A or $65 for a cleaner "-|" junction
+	ldcoord_a 7, 9
+
+	; REMOVED: ldcoord_a 0, 0 (This removes the stray line in the top left)
+
+; --- DRAW OWNED/SEEN BOX (Bottom Left) ---
+	hlcoord 1, 12
+	ld de, PokedexSeenText
+	call PlaceString
+	hlcoord 1, 15
+	ld de, PokedexOwnText
+	call PlaceString
+
+; --- PREPARE DATA ---
+; (The rest of the logic to count bits stays the same for now)
 	ld hl, wPokedexSeen
 	ld b, wPokedexSeenEnd - wPokedexSeen
 	call CountSetBits
 	ld de, wNumSetBits
-	hlcoord 16, 3
+	hlcoord 3, 13 ; Moved coordinates to fit the new small box
 	lb bc, 1, 3
-	call PrintNumber ; print number of seen pokemon
+	call PrintNumber
+
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld de, wNumSetBits
-	hlcoord 16, 6
+	hlcoord 3, 16 ; Moved coordinates to fit the new small box
 	lb bc, 1, 3
-	call PrintNumber ; print number of owned pokemon
-	hlcoord 16, 2
-	ld de, PokedexSeenText
-	call PlaceString
-	hlcoord 16, 5
-	ld de, PokedexOwnText
-	call PlaceString
-	hlcoord 1, 1
-	ld de, PokedexContentsText
-	call PlaceString
-	hlcoord 16, 10
-	ld de, PokedexMenuItemsText
-	call PlaceString
-; find the highest pokedex number among the pokemon the player has seen
+	call PrintNumber
+
+; find the highest pokedex number...
 	ld hl, wPokedexSeenEnd - 1
 	ld b, (wPokedexSeenEnd - wPokedexSeen) * 8 + 1
 .maxSeenPokemonLoop
@@ -221,10 +241,61 @@ HandlePokedexListMenu:
 .loop
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	hlcoord 4, 2
-	lb bc, 14, 10
+
+	call PokedexDrawLiveSprite
+	call Pokedex_ApplyAttributes
+	ld a, 1
+	ldh [hAutoBGTransferEnabled], a
+	call DelayFrame
+
+; 1. Redraw the UI Skeleton (Ensures borders don't vanish)
+	hlcoord 7, 10
+	ld c, 9
+	call DrawPokedexVerticalLine
+
+	hlcoord 0, 9
+	ld b, $64 ; Horizontal line tile
+	ld c, 7   ; Width
+	ld de, 1  ; Horizontal
+	call DrawTileLine ; Horizontal Divider
+
+
+;	ld a, $68 ; T-junction tile
+;	ldcoord_a 7, 9
+;	ld a, $64 ; Top-left corner fix
+;	ldcoord_a 0, 0
+
+; 2. Redraw "Seen/Owned" Labels & Numbers
+	hlcoord 1, 12
+	ld de, PokedexSeenText
+	call PlaceString
+	hlcoord 1, 15
+	ld de, PokedexOwnText
+	call PlaceString
+
+	; Redraw the actual numbers
+	ld hl, wPokedexSeen
+	ld b, wPokedexSeenEnd - wPokedexSeen
+	call CountSetBits
+	ld de, wNumSetBits
+	hlcoord 3, 13
+	lb bc, 1, 3
+	call PrintNumber
+
+	ld hl, wPokedexOwned
+	ld b, wPokedexOwnedEnd - wPokedexOwned
+	call CountSetBits
+	ld de, wNumSetBits
+	hlcoord 3, 16
+	lb bc, 1, 3
+	call PrintNumber
+
+; 4. Clear and Print the Pokémon List (Right Side)
+	hlcoord 8, 0
+	lb bc, 18, 12
 	call ClearScreenArea
-	hlcoord 1, 3
+
+	hlcoord 9, 2 ; List start (Column 10 gives space for cursor + pokeball)
 	ld a, [wListScrollOffset]
 	ld [wPokedexNum], a
 	ld d, 7
@@ -234,8 +305,7 @@ HandlePokedexListMenu:
 	ld d, a
 	dec a
 	ld [wMaxMenuItem], a
-; loop to print pokemon pokedex numbers and names
-; if the player has owned the pokemon, it puts a pokeball beside the name
+
 .printPokemonLoop
 	ld a, [wPokedexNum]
 	inc a
@@ -243,14 +313,6 @@ HandlePokedexListMenu:
 	push af
 	push de
 	push hl
-	ld de, -SCREEN_WIDTH
-	add hl, de
-	ld de, wPokedexNum
-	lb bc, LEADING_ZEROES | 1, 3
-	call PrintNumber
-	ld de, SCREEN_WIDTH
-	add hl, de
-	dec hl
 	push hl
 	ld hl, wPokedexOwned
 	call IsPokemonBitSet
@@ -259,14 +321,14 @@ HandlePokedexListMenu:
 	jr z, .writeTile
 	ld a, $72 ; pokeball tile
 .writeTile
-	ld [hl], a ; put a pokeball next to pokemon that the player has owned
+	ld [hl], a
 	push hl
 	ld hl, wPokedexSeen
 	call IsPokemonBitSet
-	jr nz, .getPokemonName ; if the player has seen the pokemon
-	ld de, .dashedLine ; print a dashed line in place of the name if the player hasn't seen the pokemon
+	jr nz, .getPokemonName
+	ld de, .dashedLine
 	jr .skipGettingName
-.dashedLine ; for unseen pokemon in the list
+.dashedLine
 	db "----------@"
 .getPokemonName
 	call PokedexToIndex
@@ -283,37 +345,60 @@ HandlePokedexListMenu:
 	ld [wPokedexNum], a
 	dec d
 	jr nz, .printPokemonLoop
-	ld a, 01
+
+.waitForInput
+	ld a, $01
 	ldh [hAutoBGTransferEnabled], a
 	call Delay3
-	call GBPalNormal
 	call HandleMenuInput
+
 	bit B_PAD_B, a
 	jp nz, .buttonBPressed
-; check if Up pressed
+	bit B_PAD_A, a
+	jp nz, .buttonAPressed
+
+	; Check if we need to scroll or just update the sprite
 	bit B_PAD_UP, a
-	jr z, .checkIfDownPressed
-.upPressed ; scroll up one row
+	jr nz, .upPressed
+	bit B_PAD_DOWN, a
+	jr nz, .downPressed
+	bit B_PAD_RIGHT, a
+	jp nz, .checkIfRightPressed
+	bit B_PAD_LEFT, a
+	jp nz, .checkIfLeftPressed
+
+	; If no relevant button was pressed, just wait for input again
+	jr .waitForInput
+
+.upPressed
+	ld a, [wCurrentMenuItem]
+	and a
+	jp nz, .loop ; Not at top? Just loop to update sprite
 	ld a, [wListScrollOffset]
 	and a
-	jp z, .loop
+	jp z, .loop ; At very top of dex? Do nothing
 	dec a
 	ld [wListScrollOffset], a
+	call ClearSprites
 	jp .loop
-.checkIfDownPressed
-	bit B_PAD_DOWN, a
-	jr z, .checkIfRightPressed
-; Down pressed, scroll down one row
+
+.downPressed
+	ld a, [wCurrentMenuItem]
+	ld b, a
+	ld a, [wMaxMenuItem]
+	cp b
+	jp nz, .loop ; Not at bottom? Just loop to update sprite
 	ld a, [wDexMaxSeenMon]
 	cp 7
-	jp c, .loop ; can't if the list is shorter than 7
+	jp c, .loop ; Dex too short to scroll?
 	sub 7
 	ld b, a
 	ld a, [wListScrollOffset]
 	cp b
-	jp z, .loop
+	jp z, .loop ; At very end of dex?
 	inc a
 	ld [wListScrollOffset], a
+	call ClearSprites
 	jp .loop
 .checkIfRightPressed
 	bit B_PAD_RIGHT, a
@@ -345,22 +430,120 @@ HandlePokedexListMenu:
 	ld [wListScrollOffset], a
 	jp .loop
 .buttonAPressed
-	scf
-	ret
+	; 1. Calculate which Dex number is actually highlighted
+	ld a, [wListScrollOffset]
+	ld b, a
+	ld a, [wCurrentMenuItem]
+	add b
+	inc a                 ; Now A = the correct Pokédex Number
+	ld [wPokedexNum], a   ; Store it so the Data screen knows who to load
+
+	; 2. Check if seen
+	ld hl, wPokedexSeen
+	call IsPokemonBitSet
+	jp z, .waitForInput
+
+	; 3. Transition to Data Screen
+	call PokedexToIndex
+    call ShowPokedexDataInternal
+
+    ; --- THE FIX STARTS HERE ---
+    callfar LoadPokedexTilePatterns ; Restore the tiles
+
+    ; We need to force a redraw of the UI so it's not a white screen
+    ld b, SET_PAL_POKEDEX
+    call RunPaletteCommand
+    call GBPalNormal
+
+    ; Jump back to .loop instead of .waitForInput
+    ; .loop contains the code that draws the sprite, borders, and names
+    jp .loop
 .buttonBPressed
 	and a
 	ret
 
+; Reusable routine to draw a vertical line
+; hl = starting coordinate
+; c = height
 DrawPokedexVerticalLine:
-	ld c, 9 ; height of line
 	ld de, SCREEN_WIDTH
-	ld a, $71 ; vertical line tile
+	ld a, $66 ; Standard vertical border tile
 .loop
 	ld [hl], a
 	add hl, de
-	xor 1 ; toggle between vertical line tile and box tile
 	dec c
-	jr nz, .loop
+	jp nz, .loop
+	ret
+
+PokedexDrawLiveSprite:
+
+    ; compute mon index
+    ld a, [wListScrollOffset]
+    ld b, a
+    ld a, [wCurrentMenuItem]
+    add b
+    inc a
+    ld [wPokedexNum], a
+
+    ; check seen
+    ld hl, wPokedexSeen
+    call IsPokemonBitSet
+    jr z, .unseen
+
+    call PokedexToIndex
+
+    ; set species FIRST
+    ld a, [wPokedexNum]
+    ld [wCurPartySpecies], a
+    ld [wCurSpecies], a
+
+    call GetMonHeader
+
+    ; 🔥 1. CLEAR OLD SPRITE FIRST
+    hlcoord 0, 1
+    lb bc, 7, 7
+    ld a, $7F
+    call FillPokedexRect
+
+    ; 🔥 2. DRAW SPRITE FIRST (no palette yet)
+    hlcoord 0, 1
+    call LoadFlippedFrontSpriteByMonIndex
+
+    ; 🔥 3. NOW apply palette AFTER sprite exists
+    ld b, SET_PAL_POKEDEX
+    call RunPaletteCommand
+
+    ; force update
+    ld a, 2
+    ldh [rWBK], a
+    ld a, 1
+    ld [W2_ForceBGPUpdate], a
+    xor a
+    ldh [rWBK], a
+
+    ret
+
+.unseen
+    hlcoord 0, 1
+    lb bc, 7, 7
+    ld a, $7F
+    jp FillPokedexRect
+
+; Add this helper below or at the end of the file
+FillPokedexRect:
+.rowLoop
+	push bc
+	push hl
+.colLoop
+	ld [hli], a
+	dec b
+	jr nz, .colLoop
+	pop hl
+	ld de, SCREEN_WIDTH
+	add hl, de
+	pop bc
+	dec c
+	jr nz, .rowLoop
 	ret
 
 PokedexSeenText:
@@ -412,10 +595,19 @@ ShowPokedexDataInternal:
 	push af
 	ld b, SET_PAL_POKEDEX
 	call RunPaletteCommand
+
+	ld a, 2
+	ldh [rWBK], a
+	ld a, 1
+	ld [W2_ForceBGPUpdate], a ; Force the colors to change
+	xor a
+	ldh [rWBK], a
+
 	pop af
 	ld [wPokedexNum], a
 	ldh a, [hTileAnimations]
 	push af
+.redrawAfterMap
 	xor a
 	ldh [hTileAnimations], a
 
@@ -581,22 +773,60 @@ ShowPokedexDataInternal:
 	xor a
 	ldh [hClearLetterPrintingDelayFlags], a
 .waitForButtonPress
-	call JoypadLowSensitivity
-	ldh a, [hJoy5]
-	and PAD_A | PAD_B
-	jr z, .waitForButtonPress
-	pop af
-	ldh [hTileAnimations], a
-	call GBPalWhiteOut
-	call ClearScreen
-	call RunDefaultPaletteCommand
-	call LoadTextBoxTilePatterns
+    call JoypadLowSensitivity
+    ldh a, [hJoy5]
+    ld b, a
+
+    ; 1. Check START (Bit 3) for Cry
+    bit B_PAD_START, b
+    jr nz, .playCry
+
+    ; 2. Check SELECT (Bit 2) for Map
+    bit B_PAD_SELECT, b
+    jr nz, .showMap
+
+    ; 3. Check A (Bit 0) or B (Bit 1) for Exit
+    ld a, b
+    and PAD_A | PAD_B     ; This uses the (1 << bit) masks from your file
+    jr nz, .exitData
+
+    call DelayFrame
+    jr .waitForButtonPress
+
+.playCry
+    ; We use wCurPartySpecies because it was set at the start of the routine
+    ld a, [wCurPartySpecies]
+    call PlayCry
+    ; After the cry, go back to waiting for more buttons
+    jr .waitForButtonPress
+
+.showMap
+	predef LoadTownMap_Nest
+
+	; 1. Reload the tiles the map just wiped out
+	callfar LoadPokedexTilePatterns
+
+	; 2. Restore the colors
+	ld b, SET_PAL_POKEDEX
+	call RunPaletteCommand
 	call GBPalNormal
-	ld hl, wStatusFlags2
-	res BIT_NO_AUDIO_FADE_OUT, [hl]
-	ld a, $77 ; max volume
-	ldh [rAUDVOL], a
-	ret
+
+	ld a, [wCurPartySpecies]
+	ld [wPokedexNum], a
+
+	; 3. Jump to the REDRAW section, NOT the start
+	; If we jump to "ShowPokedexDataInternal", we crash the stack (push af).
+	; We need to jump to the code right AFTER the push commands.
+	jp .redrawAfterMap
+
+.exitData
+    pop af
+    ldh [hTileAnimations], a
+    call GBPalWhiteOut
+    call ClearScreen
+    call RunDefaultPaletteCommand
+    ; Return to the list menu
+    ret
 
 HeightWeightText:
 	db   "HT  ?′??″"
@@ -670,3 +900,104 @@ IndexToPokedex:
 	ret
 
 INCLUDE "data/pokemon/dex_order.asm"
+
+Pokedex_SetAttributes:
+	; 1. Set the 7x7 Sprite Area to Palette 0
+	hlcoord 1, 1
+	ld b, 7 ; height
+	ld c, 7 ; width
+	ld a, 0 ; Palette ID 0
+	call .fillArea
+
+; 1. Set the Pokéball Column (Column 9) to Palette 0 (RED)
+	hlcoord 9, 0
+	ld b, 18 ; height
+	ld c, 1  ; width
+	ld a, 0    ; Palette ID 0 (Red)
+	call .fillArea
+
+	; 2. Set the rest of the List Area (Column 10 to 19) to Palette 1 (BLUE)
+	hlcoord 10, 0
+	ld b, 18 ; height
+	ld c, 10 ; width
+	ld a, 1  ; Palette ID 1 (Standard Blue/Text)
+	call .fillArea
+
+    ; 3. Overlay Pokéball column (X = 9) with Palette 0 (RED)
+    ld hl, W2_TilesetPaletteMap + 9 ; X=9, Y=0
+    ld de, 20 - 1
+    ld b, 18        ; full height
+.pokeballLoop
+    ld c, 1
+.pokeballInner
+    xor a           ; Palette 0 (red)
+    ld [hli], a
+    dec c
+    jr nz, .pokeballInner
+    add hl, de
+    dec b
+    jr nz, .pokeballLoop
+
+.fillArea
+	push hl
+	push bc
+.colLoop
+	; This writes to VRAM Bank 1 where attributes live
+	ld d, a
+	ld a, 1
+	ldh [rVBK], a ; Switch to VRAM Bank 1
+	ld a, d
+	ld [hli], a   ; Set the palette for this tile
+	xor a
+	ldh [rVBK], a ; Switch back to VRAM Bank 0
+	dec c
+	jr nz, .colLoop
+	pop bc
+	pop hl
+	ld de, SCREEN_WIDTH
+	add hl, de
+	dec b
+	jr nz, .fillArea
+	ret
+
+Pokedex_ApplyAttributes:
+	ld a, 2
+	ldh [rWBK], a ; Switch to RAM Bank 2
+
+	; 1. Set the ENTIRE screen to Palette 1 (UI Colors)
+	ld hl, W2_TilesetPaletteMap
+	ld bc, 20 * 18
+	ld d, 1      ; Palette 1
+
+.fillLoop
+	ld [hl], d
+	inc hl
+	dec bc
+	ld a, b
+	or c
+	jr nz, .fillLoop
+
+	; 2. Overlay the Sprite Area with Palette 0 (Pokemon Colors)
+	ld hl, W2_TilesetPaletteMap + 20 ; Starts at X=0, Y=1
+	ld de, 20 - 7
+	ld b, 7
+.pokeLoop
+	ld c, 7
+.pokeInnerLoop
+	xor a        ; Palette 0
+	ld [hli], a
+	dec c
+	jr nz, .pokeInnerLoop
+	add hl, de
+	dec b
+	jr nz, .pokeLoop
+
+	; 3. Trigger the update
+	ld a, 3
+	ld [W2_StaticPaletteMapChanged], a
+	ld a, 1
+	ld [W2_ForceBGPUpdate], a ; Tell the hardware to refresh NOW
+
+	xor a
+	ldh [rWBK], a ; Back to Bank 0
+	ret
