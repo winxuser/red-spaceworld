@@ -175,8 +175,9 @@ DEF NUM_ATTACKS EQU const_value - 1
 
 DEF CANNOT_MOVE EQU $ff
 
-	; Moves do double duty as animation identifiers.
-
+	; Separate other battle animations
+	const_def
+	const NO_ANIM
 	const SHOWPIC_ANIM
 	const STATUS_AFFECTED_ANIM
 	const ANIM_A8
@@ -215,4 +216,4 @@ DEF CANNOT_MOVE EQU $ff
 	const ROCK_ANIM ; throw rock
 	const BAIT_ANIM ; throw bait
 
-DEF NUM_ATTACK_ANIMS EQU const_value - 1
+DEF NUM_ALTERNATIVE_ANIMS EQU const_value - 1

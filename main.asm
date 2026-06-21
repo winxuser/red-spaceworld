@@ -388,7 +388,7 @@ INCLUDE "data/battle_anims/subanimations.asm"
 INCLUDE "data/battle_anims/frame_blocks.asm"
 INCLUDE "engine/movie/evolution.asm"
 INCLUDE "engine/overworld/elevator.asm"
-INCLUDE "engine/items/tm_prices.asm"
+
 
 INCLUDE "color/animations.asm"
 
@@ -397,4 +397,4 @@ SECTION "Overflow", ROMX
 
 INCLUDE "engine/overworld/map_sprites.asm"
 INCLUDE "engine/overworld/emotion_bubbles.asm"
-
+INCLUDE "engine/items/tm_prices.asm"
