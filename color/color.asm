@@ -336,8 +336,8 @@ ENDC
 
 IF GEN_2_GRAPHICS
 	; Player exp bar
-	ld hl, W2_TilesetPaletteMap + 11 + 5 * SCREEN_WIDTH
-	ld b, 8
+	ld hl, W2_TilesetPaletteMap + 9 + 16 * SCREEN_WIDTH
+	ld b, 10
 	ld a, 4
 .expLoop
 	ld [hli], a

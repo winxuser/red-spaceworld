@@ -4,7 +4,7 @@ StatusScreenHook:
 	; b = SET_PAL_STATUS_SCREEN
 	call RunPaletteCommand
 IF GEN_2_GRAPHICS
-	decoord 18, 5
+	decoord 18, 16
 	ld a, [wBattleMonLevel]
 	push af
 	ld a, [wLoadedMonLevel]
