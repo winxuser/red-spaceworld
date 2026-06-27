@@ -1,5 +1,5 @@
 OaksLab_Script:
-	CheckEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS_2
+	CheckEvent EVENT_SILENT_AFTER_GETTING_POKEBALLS_2
 	call nz, OaksLabLoadTextPointers2Script
 	ld a, 1 << BIT_NO_AUTO_TEXT_BOX
 	ld [wAutoTextBoxDrawingControl], a
@@ -32,7 +32,7 @@ OaksLab_ScriptPointers:
 	dw_const OaksLabNoopScript,                      SCRIPT_OAKSLAB_NOOP
 
 OaksLabDefaultScript:
-	CheckEvent EVENT_OAK_APPEARED_IN_PALLET
+	CheckEvent EVENT_OAK_APPEARED_IN_SILENT
 	ret z
 	ld a, [wNPCMovementScriptFunctionNum]
 	and a
@@ -58,6 +58,7 @@ OaksLabOakEntersLabScript:
 	ret
 
 OakEntryMovement:
+	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
@@ -102,7 +103,9 @@ OaksLabPlayerEntersLabScript:
 	ret
 
 PlayerEntryMovementRLE:
-	db PAD_UP, 8
+	db PAD_UP, 1
+	db PAD_RIGHT, 2
+	db PAD_UP, 11
 	db -1 ; end
 
 OaksLabFollowedOakScript:
@@ -194,11 +197,11 @@ OaksLabPlayerForcedToWalkBackScript:
 OaksLabChoseStarterScript:
 	ld a, [wPlayerStarter]
 	cp STARTER1
-	jr z, .Charmander
+	jr z, .Honoguma
 	cp STARTER2
-	jr z, .Squirtle
-	jr .Bulbasaur
-.Charmander
+	jr z, .Kurusu
+	jr .Happa
+.Honoguma
 	ld de, .MiddleBallMovement1
 	ld a, [wYCoord]
 	cp 4 ; is the player standing below the table?
@@ -208,21 +211,19 @@ OaksLabChoseStarterScript:
 
 .MiddleBallMovement1
 	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_LEFT
 	db NPC_MOVEMENT_UP
 	db -1 ; end
 
 .MiddleBallMovement2
 	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_UP
 	db -1 ; end
 
-.Squirtle
+.Kurusu
 	ld de, .RightBallMovement1
 	ld a, [wYCoord]
 	cp 4 ; is the player standing below the table?
@@ -232,23 +233,17 @@ OaksLabChoseStarterScript:
 
 .RightBallMovement1
 	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_LEFT
 	db NPC_MOVEMENT_UP
 	db -1 ; end
 
 .RightBallMovement2
 	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_UP
 	db -1 ; end
 
-.Bulbasaur
+.Happa
 	ld de, .LeftBallMovement1
 	ld a, [wXCoord]
 	cp 9 ; is the player standing to the right of the table?
@@ -275,9 +270,18 @@ OaksLabChoseStarterScript:
 
 .LeftBallMovement1
 	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_UP
+	db -1 ; end
+
 .LeftBallMovement2
-	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_UP
 	db -1 ; end
 
 .moveBlue
@@ -304,16 +308,16 @@ OaksLabRivalChoosesStarterScript:
 	ldh [hTextID], a
 	call DisplayTextID
 	ld a, [wRivalStarterBallSpriteIndex]
-	cp OAKSLAB_CHARMANDER_POKE_BALL
-	jr nz, .not_charmander
+	cp OAKSLAB_HONOGUMA_POKE_BALL
+	jr nz, .not_honoguma
 	ld a, TOGGLE_STARTER_BALL_1
 	jr .hideBallAndContinue
-.not_charmander
-	cp OAKSLAB_SQUIRTLE_POKE_BALL
-	jr nz, .not_squirtle
+.not_honoguma
+	cp OAKSLAB_KURUSU_POKE_BALL
+	jr nz, .not_kurusu
 	ld a, TOGGLE_STARTER_BALL_2
 	jr .hideBallAndContinue
-.not_squirtle
+.not_kurusu
 	ld a, TOGGLE_STARTER_BALL_3
 .hideBallAndContinue
 	ld [wToggleableObjectIndex], a
@@ -388,15 +392,15 @@ OaksLabRivalStartBattleScript:
 	ld [wCurOpponent], a
 	ld a, [wRivalStarter]
 	cp STARTER2
-	jr nz, .not_squirtle
+	jr nz, .not_kurusu
 	ld a, $1
 	jr .done
-.not_squirtle
+.not_kurusu
 	cp STARTER3
-	jr nz, .not_bulbasaur
+	jr nz, .not_happa
 	ld a, $2
 	jr .done
-.not_bulbasaur
+.not_happa
 	ld a, $3
 .done
 	ld [wTrainerNo], a
@@ -447,20 +451,33 @@ OaksLabRivalStartsExitScript:
 	ldh [hTextID], a
 	call DisplayTextID
 	farcall Music_RivalAlternateStart
-	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
-	ld de, .RivalExitMovement
-	call MoveSprite
+
+	; Let's build the dynamic movement first in wNPCMovementDirections2
 	ld a, [wXCoord]
 	cp 4
-	; move left or right depending on where the player is standing
 	jr nz, .moveLeft
 	ld a, NPC_MOVEMENT_RIGHT
 	jr .next
 .moveLeft
 	ld a, NPC_MOVEMENT_LEFT
 .next
-	ld [wNPCMovementDirections], a
+	ld [wNPCMovementDirections2], a ; Step out of the player's way first
+
+	; Now append the downward exit steps to the array
+	ld hl, wNPCMovementDirections2 + 1
+	ld a, NPC_MOVEMENT_DOWN
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], $ff ; Terminator ($ff / -1)
+
+	; Now execute the movement safely using the array we just built
+	ld a, OAKSLAB_RIVAL
+	ldh [hSpriteIndex], a
+	ld de, wNPCMovementDirections2
+	call MoveSprite
 
 	ld a, SCRIPT_OAKSLAB_PLAYER_WATCH_RIVAL_EXIT
 	ld [wOaksLabCurScript], a
@@ -479,11 +496,19 @@ OaksLabPlayerWatchRivalExitScript:
 	ld a, [wStatusFlags5]
 	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	jr nz, .checkRivalPosition
+
+	; The rival has officially finished his movement steps and left!
 	ld a, TOGGLE_OAKS_LAB_RIVAL
 	ld [wToggleableObjectIndex], a
 	predef HideObject
+
+	; FORCE UNLOCK BUTTONS HERE
 	xor a
 	ld [wJoyIgnore], a
+	ld [wSimulatedJoypadStatesIndex], a
+	ld hl, wStatusFlags5
+	res BIT_SCRIPTED_NPC_MOVEMENT, [hl] ; Force clear any hanging movement flags
+
 	call PlayDefaultMusic ; reset to map music
 	ld a, SCRIPT_OAKSLAB_NOOP
 	ld [wOaksLabCurScript], a
@@ -643,8 +668,8 @@ OaksLabRivalLeavesWithPokedexScript:
 	ld a, TOGGLE_ROUTE_22_RIVAL_1
 	ld [wToggleableObjectIndex], a
 	predef ShowObject
-	ld a, SCRIPT_PALLETTOWN_DAISY
-	ld [wPalletTownCurScript], a
+	ld a, SCRIPT_SILENTHILL_DAISY
+	ld [wSilentHillCurScript], a
 	xor a
 	ld [wJoyIgnore], a
 
@@ -727,9 +752,9 @@ OaksLabLoadTextPointers2Script:
 OaksLab_TextPointers:
 	def_text_pointers
 	dw_const OaksLabRivalText,                    TEXT_OAKSLAB_RIVAL
-	dw_const OaksLabCharmanderPokeBallText,       TEXT_OAKSLAB_CHARMANDER_POKE_BALL
-	dw_const OaksLabSquirtlePokeBallText,         TEXT_OAKSLAB_SQUIRTLE_POKE_BALL
-	dw_const OaksLabBulbasaurPokeBallText,        TEXT_OAKSLAB_BULBASAUR_POKE_BALL
+	dw_const OaksLabHonogumaPokeBallText,         TEXT_OAKSLAB_HONOGUMA_POKE_BALL
+	dw_const OaksLabKurusuPokeBallText,           TEXT_OAKSLAB_KURUSU_POKE_BALL
+	dw_const OaksLabHappaPokeBallText,            TEXT_OAKSLAB_HAPPA_POKE_BALL
 	dw_const OaksLabOak1Text,                     TEXT_OAKSLAB_OAK1
 	dw_const OaksLabPokedexText,                  TEXT_OAKSLAB_POKEDEX1
 	dw_const OaksLabPokedexText,                  TEXT_OAKSLAB_POKEDEX2
@@ -756,9 +781,9 @@ OaksLab_TextPointers:
 
 OaksLab_TextPointers2:
 	dw OaksLabRivalText
-	dw OaksLabCharmanderPokeBallText
-	dw OaksLabSquirtlePokeBallText
-	dw OaksLabBulbasaurPokeBallText
+	dw OaksLabHonogumaPokeBallText
+	dw OaksLabKurusuPokeBallText
+	dw OaksLabHappaPokeBallText
 	dw OaksLabOak1Text
 	dw OaksLabPokedexText
 	dw OaksLabPokedexText
@@ -798,34 +823,34 @@ OaksLabRivalText:
 	text_far _OaksLabRivalMyPokemonLooksStrongerText
 	text_end
 
-OaksLabCharmanderPokeBallText:
+OaksLabHonogumaPokeBallText:
 	text_asm
 	ld a, STARTER2
 	ld [wRivalStarterTemp], a
-	ld a, OAKSLAB_SQUIRTLE_POKE_BALL
+	ld a, OAKSLAB_KURUSU_POKE_BALL
 	ld [wRivalStarterBallSpriteIndex], a
 	ld a, STARTER1
-	ld b, OAKSLAB_CHARMANDER_POKE_BALL
+	ld b, OAKSLAB_HONOGUMA_POKE_BALL
 	jr OaksLabSelectedPokeBallScript
 
-OaksLabSquirtlePokeBallText:
+OaksLabKurusuPokeBallText:
 	text_asm
 	ld a, STARTER3
 	ld [wRivalStarterTemp], a
-	ld a, OAKSLAB_BULBASAUR_POKE_BALL
+	ld a, OAKSLAB_HAPPA_POKE_BALL
 	ld [wRivalStarterBallSpriteIndex], a
 	ld a, STARTER2
-	ld b, OAKSLAB_SQUIRTLE_POKE_BALL
+	ld b, OAKSLAB_KURUSU_POKE_BALL
 	jr OaksLabSelectedPokeBallScript
 
-OaksLabBulbasaurPokeBallText:
+OaksLabHappaPokeBallText:
 	text_asm
 	ld a, STARTER1
 	ld [wRivalStarterTemp], a
-	ld a, OAKSLAB_CHARMANDER_POKE_BALL
+	ld a, OAKSLAB_HONOGUMA_POKE_BALL
 	ld [wRivalStarterBallSpriteIndex], a
 	ld a, STARTER3
-	ld b, OAKSLAB_BULBASAUR_POKE_BALL
+	ld b, OAKSLAB_HAPPA_POKE_BALL
 
 OaksLabSelectedPokeBallScript:
 	ld [wCurPartySpecies], a
@@ -866,31 +891,31 @@ OaksLabShowPokeBallPokemonScript:
 	ld c, 10
 	call DelayFrames
 	ld a, [wSpriteIndex]
-	cp OAKSLAB_CHARMANDER_POKE_BALL
-	jr z, OaksLabYouWantCharmanderText
-	cp OAKSLAB_SQUIRTLE_POKE_BALL
-	jr z, OaksLabYouWantSquirtleText
-	jr OaksLabYouWantBulbasaurText
+	cp OAKSLAB_HONOGUMA_POKE_BALL
+	jr z, OaksLabYouWantHonogumaText
+	cp OAKSLAB_KURUSU_POKE_BALL
+	jr z, OaksLabYouWantKurusuText
+	jr OaksLabYouWantHappaText
 
-OaksLabYouWantCharmanderText:
+OaksLabYouWantHonogumaText:
 	ld hl, .Text
 	jr OaksLabMonChoiceMenu
 .Text:
-	text_far _OaksLabYouWantCharmanderText
+	text_far _OaksLabYouWantHonogumaText
 	text_end
 
-OaksLabYouWantSquirtleText:
+OaksLabYouWantKurusuText:
 	ld hl, .Text
 	jr OaksLabMonChoiceMenu
 .Text:
-	text_far _OaksLabYouWantSquirtleText
+	text_far _OaksLabYouWantKurusuText
 	text_end
 
-OaksLabYouWantBulbasaurText:
+OaksLabYouWantHappaText:
 	ld hl, .Text
 	jr OaksLabMonChoiceMenu
 .Text:
-	text_far _OaksLabYouWantBulbasaurText
+	text_far _OaksLabYouWantHappaText
 	text_end
 
 OaksLabMonChoiceMenu:
@@ -906,16 +931,16 @@ OaksLabMonChoiceMenu:
 	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld a, [wSpriteIndex]
-	cp OAKSLAB_CHARMANDER_POKE_BALL
-	jr nz, .not_charmander
+	cp OAKSLAB_HONOGUMA_POKE_BALL
+	jr nz, .not_honoguma
 	ld a, TOGGLE_STARTER_BALL_1
 	jr .continue
-.not_charmander
-	cp OAKSLAB_SQUIRTLE_POKE_BALL
-	jr nz, .not_squirtle
+.not_honoguma
+	cp OAKSLAB_KURUSU_POKE_BALL
+	jr nz, .not_kurusu
 	ld a, TOGGLE_STARTER_BALL_2
 	jr .continue
-.not_squirtle
+.not_kurusu
 	ld a, TOGGLE_STARTER_BALL_3
 .continue
 	ld [wToggleableObjectIndex], a
@@ -968,7 +993,7 @@ OaksLabLastMonText:
 
 OaksLabOak1Text:
 	text_asm
-	CheckEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS
+	CheckEvent EVENT_SILENT_AFTER_GETTING_POKEBALLS
 	jr nz, .already_got_poke_balls
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned

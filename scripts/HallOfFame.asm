@@ -45,7 +45,7 @@ HallOfFameResetEventsAndSaveScript:
 	ResetEventRange INDIGO_PLATEAU_EVENTS_START, INDIGO_PLATEAU_EVENTS_END, 1
 	xor a
 	ld [wHallOfFameCurScript], a
-	ld a, PALLET_TOWN
+	ld a, SILENT_HILL
 	ld [wLastBlackoutMap], a
 	farcall SaveGameData
 	ld b, 5

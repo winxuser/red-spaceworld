@@ -25,22 +25,22 @@ _OaksLabThoseArePokeBallsText::
 	cont "contain #MON!"
 	done
 
-_OaksLabYouWantCharmanderText::
+_OaksLabYouWantHonogumaText::
 	text "So! You want the"
 	line "fire #MON,"
-	cont "CHARMANDER?"
+	cont "HONOGUMA?"
 	done
 
-_OaksLabYouWantSquirtleText::
+_OaksLabYouWantKurusuText::
 	text "So! You want the"
 	line "water #MON,"
-	cont "SQUIRTLE?"
+	cont "KURUSU?"
 	done
 
-_OaksLabYouWantBulbasaurText::
+_OaksLabYouWantHappaText::
 	text "So! You want the"
 	line "plant #MON,"
-	cont "BULBASAUR?"
+	cont "HAPPA?"
 	done
 
 _OaksLabMonEnergeticText::

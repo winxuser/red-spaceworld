@@ -134,21 +134,21 @@ DEF ANY_FACING EQU $d0
 	db -1 ; end
 
 	hidden_events_for REDS_HOUSE_2F
-	hidden_event  0,  1, OpenRedsPC, SPRITE_FACING_UP
-	hidden_event  3,  5, PrintRedSNESText, ANY_FACING
+	hidden_event  3,  1, OpenRedsPC, SPRITE_FACING_UP
+	hidden_event  7,  2, PrintRedSNESText, ANY_FACING
+	hidden_event  2,  1, PrintRedRadioText, SPRITE_FACING_UP
 	db -1 ; end
 
 	hidden_events_for BLUES_HOUSE
-	hidden_event  0,  1, PrintBookcaseText, SPRITE_FACING_UP
-	hidden_event  1,  1, PrintBookcaseText, SPRITE_FACING_UP
-	hidden_event  7,  1, PrintBookcaseText, SPRITE_FACING_UP
+;	hidden_event  0,  1, PrintBookcaseText, SPRITE_FACING_UP
+;	hidden_event  1,  1, PrintBookcaseText, SPRITE_FACING_UP
+;	hidden_event  7,  1, PrintBookcaseText, SPRITE_FACING_UP
 	db -1 ; end
 
 	hidden_events_for OAKS_LAB
 	hidden_event  4,  0, DisplayOakLabLeftPoster, SPRITE_FACING_UP
 	hidden_event  5,  0, DisplayOakLabRightPoster, SPRITE_FACING_UP
-	hidden_event  0,  1, DisplayOakLabEmailText, SPRITE_FACING_UP
-	hidden_event  1,  1, DisplayOakLabEmailText, SPRITE_FACING_UP
+	hidden_event  6,  1, DisplayOakLabEmailText, SPRITE_FACING_UP
 	db -1 ; end
 
 	hidden_events_for VIRIDIAN_POKECENTER

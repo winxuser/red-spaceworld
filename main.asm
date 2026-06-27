@@ -398,3 +398,4 @@ SECTION "Overflow", ROMX
 INCLUDE "engine/overworld/map_sprites.asm"
 INCLUDE "engine/overworld/emotion_bubbles.asm"
 INCLUDE "engine/items/tm_prices.asm"
+INCLUDE "data/text/text_8.asm"

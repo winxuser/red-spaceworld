@@ -12,3 +12,11 @@ OpenRedsPC:
 
 RedBedroomPCText::
 	script_players_pc
+
+PrintRedRadioText:
+	call EnableAutoTextBoxDrawing
+	tx_pre_jump RedBedroomRadioText
+
+RedBedroomRadioText::
+	text_far _RedBedroomRadioText
+	text_end

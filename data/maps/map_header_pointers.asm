@@ -1,7 +1,7 @@
 ; see also MapHeaderBanks
 MapHeaderPointers::
 	table_width 2
-	dw PalletTown_h
+	dw SilentHill_h
 	dw ViridianCity_h
 	dw PewterCity_h
 	dw CeruleanCity_h
@@ -42,6 +42,7 @@ MapHeaderPointers::
 	dw RedsHouse2F_h
 	dw BluesHouse_h
 	dw OaksLab_h
+	dw SilentHillPokecenter_h ; UNUSED_MAP_69
 	dw ViridianPokecenter_h
 	dw ViridianMart_h
 	dw ViridianSchoolHouse_h
@@ -106,7 +107,7 @@ MapHeaderPointers::
 	dw SSAnne1FRooms_h
 	dw SSAnne2FRooms_h
 	dw SSAnneB1FRooms_h
-	dw LancesRoom_h ; UNUSED_MAP_69
+;	dw LancesRoom_h ; UNUSED_MAP_69
 	dw LancesRoom_h ; UNUSED_MAP_6A
 	dw LancesRoom_h ; UNUSED_MAP_6B
 	dw VictoryRoad1F_h

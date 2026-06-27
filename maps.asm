@@ -4,9 +4,10 @@ INCLUDE "data/maps/headers/CeladonCity.asm"
 INCLUDE "data/maps/objects/CeladonCity.asm"
 CeladonCity_Blocks: INCBIN "maps/CeladonCity.blk"
 
-INCLUDE "data/maps/headers/PalletTown.asm"
-INCLUDE "data/maps/objects/PalletTown.asm"
-PalletTown_Blocks: INCBIN "maps/PalletTown.blk"
+INCLUDE "data/maps/headers/SilentHill.asm"
+INCLUDE "scripts/SilentHill.asm"
+INCLUDE "data/maps/objects/SilentHill.asm"
+SilentHill_Blocks: INCBIN "maps/SilentHill.blk"
 
 INCLUDE "data/maps/headers/ViridianCity.asm"
 INCLUDE "data/maps/objects/ViridianCity.asm"
@@ -32,7 +33,6 @@ FuchsiaCity_Blocks: INCBIN "maps/FuchsiaCity.blk"
 
 SECTION "Maps 2", ROMX
 
-INCLUDE "scripts/PalletTown.asm"
 INCLUDE "scripts/ViridianCity.asm"
 INCLUDE "scripts/PewterCity.asm"
 INCLUDE "scripts/CeruleanCity.asm"
@@ -1219,3 +1219,8 @@ INCLUDE "data/maps/headers/AgathasRoom.asm"
 INCLUDE "scripts/AgathasRoom.asm"
 INCLUDE "data/maps/objects/AgathasRoom.asm"
 AgathasRoom_Blocks: INCBIN "maps/AgathasRoom.blk"
+
+INCLUDE "data/maps/headers/SilentHillPokecenter.asm"
+INCLUDE "scripts/SilentHillPokecenter.asm"
+INCLUDE "data/maps/objects/SilentHillPokecenter.asm"
+SilentHillPokecenter_Blocks: INCBIN "maps/SilentHillPokecenter.blk"

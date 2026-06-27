@@ -23,7 +23,7 @@ ENDM
 ; Each map also has associated data in maps.asm.
 ; Order: towns/cities, then routes, then indoor/dungeon maps
 	const_def
-	map_const PALLET_TOWN,                   10,  9 ; $00
+	map_const SILENT_HILL,                   10,  9 ; $00
 	map_const VIRIDIAN_CITY,                 20, 18 ; $01
 	map_const PEWTER_CITY,                   20, 18 ; $02
 	map_const CERULEAN_CITY,                 20, 18 ; $03
@@ -66,11 +66,12 @@ DEF FIRST_ROUTE_MAP EQU const_value
 	map_const ROUTE_25,                      30,  9 ; $24
 
 DEF FIRST_INDOOR_MAP EQU const_value
-	map_const REDS_HOUSE_1F,                  4,  4 ; $25
-	map_const REDS_HOUSE_2F,                  4,  4 ; $26
+	map_const REDS_HOUSE_1F,                  5,  4 ; $25
+	map_const REDS_HOUSE_2F,                  5,  4 ; $26
 	map_const BLUES_HOUSE,                    5,  4 ; $27
-	map_const OAKS_LAB,                       5,  6 ; $28
-	end_indoor_group PALLET_TOWN
+	map_const OAKS_LAB,                       4,  8 ; $28
+	map_const SILENT_HILL_POKECENTER,         8,  4 ; $69
+	end_indoor_group SILENT_HILL
 
 	map_const VIRIDIAN_POKECENTER,            7,  4 ; $29
 	map_const VIRIDIAN_MART,                  4,  4 ; $2A
@@ -174,7 +175,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const SS_ANNE_B1F_ROOMS,             12,  8 ; $68
 	end_indoor_group SS_ANNE
 
-	map_const UNUSED_MAP_69,                  0,  0 ; $69
+;	map_const UNUSED_MAP_69,                  0,  0 ; $69
 	map_const UNUSED_MAP_6A,                  0,  0 ; $6A
 	map_const UNUSED_MAP_6B,                  0,  0 ; $6B
 	map_const VICTORY_ROAD_1F,               10,  9 ; $6C

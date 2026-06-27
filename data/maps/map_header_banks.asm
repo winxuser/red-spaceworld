@@ -1,7 +1,7 @@
 ; see also MapHeaderPointers
 MapHeaderBanks::
 	table_width 1
-	db BANK(PalletTown_h)
+	db BANK(SilentHill_h)
 	db BANK(ViridianCity_h)
 	db BANK(PewterCity_h)
 	db BANK(CeruleanCity_h)
@@ -42,6 +42,7 @@ MapHeaderBanks::
 	db BANK(RedsHouse2F_h)
 	db BANK(BluesHouse_h)
 	db BANK(OaksLab_h)
+	db BANK(SilentHillPokecenter_h) ; UNUSED_MAP_69
 	db BANK(ViridianPokecenter_h)
 	db BANK(ViridianMart_h)
 	db BANK(ViridianSchoolHouse_h)
@@ -106,7 +107,7 @@ MapHeaderBanks::
 	db BANK(SSAnne1FRooms_h)
 	db BANK(SSAnne2FRooms_h)
 	db BANK(SSAnneB1FRooms_h)
-	db $1D ; UNUSED_MAP_69
+;	db $1D ; UNUSED_MAP_69
 	db $1D ; UNUSED_MAP_6A
 	db $1D ; UNUSED_MAP_6B
 	db BANK(VictoryRoad1F_h)
