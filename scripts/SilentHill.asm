@@ -1,4 +1,10 @@
 SilentHill_Script:
+	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB
+	jr z, .continueScript
+	ld a, SCRIPT_SILENTHILL_NOOP
+	ld [wSilentHillCurScript], a
+
+.continueScript
 	CheckEvent EVENT_GOT_POKEBALLS_FROM_OAK
 	jr z, .next
 	SetEvent EVENT_SILENT_AFTER_GETTING_POKEBALLS

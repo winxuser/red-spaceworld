@@ -165,6 +165,7 @@ PalletMovementScript_Done:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
+	ld a, TOGGLE_SILENT_HILL_OAK
 	ld [wToggleableObjectIndex], a
 	predef HideObject
 	ld hl, wStatusFlags5
