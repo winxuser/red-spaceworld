@@ -1962,7 +1962,7 @@ wToggleableObjectList:: ds 16 * 2 + 1
 
 wGameProgressFlags::
 wOaksLabCurScript:: db
-wPalletTownCurScript:: db
+wSilentHillCurScript:: db
 	ds 1
 wBluesHouseCurScript:: db
 wViridianCityCurScript:: db

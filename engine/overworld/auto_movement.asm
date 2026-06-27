@@ -45,40 +45,47 @@ _EndNPCMovementScript::
 	ret
 
 PalletMovementScriptPointerTable::
-	dw PalletMovementScript_OakMoveLeft
-	dw PalletMovementScript_PlayerMoveLeft
-	dw PalletMovementScript_WaitAndWalkToLab
-	dw PalletMovementScript_WalkToLab
-	dw PalletMovementScript_Done
+	dw PalletMovementScript_OakMoveLeft     ; Index 0
+	dw PalletMovementScript_PlayerMoveLeft   ; Index 1
+	dw PalletMovementScript_WalkToLab        ; Index 2
+	dw PalletMovementScript_Done             ; Index 3
 
-PalletMovementScript_OakMoveLeft:
-	ld a, [wXCoord]
-	sub $a
-	ld [wNumStepsToTake], a
-	jr z, .playerOnLeftTile
-; The player is on the right tile of the northern path out of Pallet Town and
-; Prof. Oak is below.
-; Make Prof. Oak step to the left.
-	ld b, 0
-	ld c, a
-	ld hl, wNPCMovementDirections2
+PalletMovementScript_OakMoveLeft::
+	; Force the sprite engine to process Oak horizontally/manually
+	ld hl, wSpritePlayerStateData1 + 2
 	ld a, NPC_MOVEMENT_LEFT
-	call FillMemory
-	ld [hl], $ff
+	ld [hl], a
+
+	ld hl, wNPCMovementDirections2
+
+	ld a, [wYCoord]
+	cp 9
+	jr nz, .buildLeftSteps
+
+	ld a, NPC_MOVEMENT_DOWN
+	ld [hli], a
+
+.buildLeftSteps
+	ld b, 4
+.walkLeftLoop
+	ld a, NPC_MOVEMENT_LEFT
+	ld [hli], a
+	dec b
+	jr nz, .walkLeftLoop
+
+	ld [hl], $ff            ; Terminator byte
+
 	ld a, [wSpriteIndex]
 	ldh [hSpriteIndex], a
 	ld de, wNPCMovementDirections2
 	call MoveSprite
-	ld a, $1
+
+	xor a
+	ld [wNumStepsToTake], a
+
+	ld a, $1                ; Move to index 1 (PlayerMoveLeft)
 	ld [wNPCMovementScriptFunctionNum], a
-	jr .done
-; The player is on the left tile of the northern path out of Pallet Town and
-; Prof. Oak is below.
-; Prof. Oak is already where he needs to be.
-.playerOnLeftTile
-	ld a, $3
-	ld [wNPCMovementScriptFunctionNum], a
-.done
+
 	ld hl, wStatusFlags7
 	set BIT_NO_MAP_MUSIC, [hl]
 	ld a, PAD_SELECT | PAD_START | PAD_CTRL_PAD
@@ -88,67 +95,76 @@ PalletMovementScript_OakMoveLeft:
 PalletMovementScript_PlayerMoveLeft:
 	ld a, [wStatusFlags5]
 	bit BIT_SCRIPTED_NPC_MOVEMENT, a
-	ret nz ; return if Oak is still moving
-	ld a, [wNumStepsToTake]
-	ld [wSimulatedJoypadStatesIndex], a
-	ldh [hNPCMovementDirections2Index], a
-	predef ConvertNPCMovementDirectionsToJoypadMasks
-	call StartSimulatingJoypadStates
-	ld a, $2
-	ld [wNPCMovementScriptFunctionNum], a
-	ret
-
-PalletMovementScript_WaitAndWalkToLab:
-	ld a, [wSimulatedJoypadStatesIndex]
-	and a ; is the player done moving left yet?
-	ret nz
-
-PalletMovementScript_WalkToLab:
+	ret nz ; Wait here until Oak finishes his footsteps
+	; Force Oak to look left
+	ld a, [wSpriteIndex]
+	swap a
+	ld l, a
+	ld h, HIGH(wSpriteStateData1)
+	inc l
+	inc l
+	ld [hl], SPRITE_FACING_LEFT
 	xor a
+	ld [wSimulatedJoypadStatesIndex], a
+	ld [wSimulatedJoypadStatesEnd], a
 	ld [wOverrideSimulatedJoypadStatesMask], a
+
 	ld a, [wSpriteIndex]
 	swap a
 	ld [wNPCMovementScriptSpriteOffset], a
 	xor a
 	ld [wSpritePlayerStateData2MovementByte1], a
+
+	; Check which row the sequence started on
+	ld a, [wYCoord]
+	cp 9
+	jr z, .adjustForRow9
+
+	ld a, 4
+	ld [RLEList_ProfOakWalkToLab + 3], a
+	ld a, 4
+	ld [RLEList_PlayerWalkToLab + 3], a
+	jr .decodePaths
+
+.adjustForRow9
+	ld a, 3
+	ld [RLEList_ProfOakWalkToLab + 3], a
+	ld a, 3
+	ld [RLEList_PlayerWalkToLab + 3], a
+
+.decodePaths
 	ld hl, wSimulatedJoypadStatesEnd
 	ld de, RLEList_PlayerWalkToLab
 	call DecodeRLEList
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
+
 	ld hl, wNPCMovementDirections2
 	ld de, RLEList_ProfOakWalkToLab
 	call DecodeRLEList
+
 	ld hl, wStatusFlags4
 	res BIT_INIT_SCRIPTED_MOVEMENT, [hl]
 	ld hl, wStatusFlags5
 	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
-	ld a, $4
+
+	ld a, $2
 	ld [wNPCMovementScriptFunctionNum], a
 	ret
 
-RLEList_ProfOakWalkToLab:
-	db NPC_MOVEMENT_DOWN, 5
-	db NPC_MOVEMENT_LEFT, 1
-	db NPC_MOVEMENT_DOWN, 5
-	db NPC_MOVEMENT_RIGHT, 3
-	db NPC_MOVEMENT_UP, 1
-	db NPC_CHANGE_FACING, 1
-	db -1 ; end
+PalletMovementScript_WalkToLab:
+	ld a, [wSimulatedJoypadStatesIndex]
+	and a
+	ret nz
 
-RLEList_PlayerWalkToLab:
-	db PAD_UP, 2
-	db PAD_RIGHT, 3
-	db PAD_DOWN, 5
-	db PAD_LEFT, 1
-	db PAD_DOWN, 6
-	db -1 ; end
+	ld a, $3
+	ld [wNPCMovementScriptFunctionNum], a
+	ret
 
 PalletMovementScript_Done:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
-	ld a, TOGGLE_PALLET_TOWN_OAK
 	ld [wToggleableObjectIndex], a
 	predef HideObject
 	ld hl, wStatusFlags5
@@ -156,6 +172,20 @@ PalletMovementScript_Done:
 	ld hl, wStatusFlags4
 	res BIT_INIT_SCRIPTED_MOVEMENT, [hl]
 	jp EndNPCMovementScript
+
+RLEList_ProfOakWalkToLab:
+	db NPC_MOVEMENT_RIGHT, 5
+	db NPC_MOVEMENT_DOWN, 4
+	db NPC_MOVEMENT_RIGHT, 5
+	db NPC_MOVEMENT_UP, 1
+	db -1 ; end
+
+RLEList_PlayerWalkToLab:
+	db PAD_UP, 3
+	db PAD_RIGHT, 5
+	db PAD_DOWN, 4
+	db PAD_RIGHT, 6
+	db -1 ; end
 
 PewterMuseumGuyMovementScriptPointerTable::
 	dw PewterMovementScript_WalkToMuseum

@@ -1,0 +1,16 @@
+SilentHillPokecenter_Script:
+	call Serial_TryEstablishingExternallyClockedConnection
+	jp EnableAutoTextBoxDrawing
+
+SilentHillPokecenter_TextPointers:
+	def_text_pointers
+	dw_const SilentHillPokecenterNurseText,            TEXT_SILENTHILLPOKECENTER_NURSE
+	dw_const SilentHillPokecenterLinkReceptionistText, TEXT_SILENTHILLPOKECENTER_LINK_RECEPTIONIST
+
+SilentHillPokecenterNurseText:
+	script_pokecenter_nurse
+
+
+
+SilentHillPokecenterLinkReceptionistText:
+	script_cable_club_receptionist

@@ -42,8 +42,8 @@ ToggleableObjectStates:
 ; entries correspond to TOGGLE_* constants (see constants/toggle_constants.asm)
 	table_width 3
 
-	toggleable_objects_for PALLET_TOWN
-	toggle_object_state PALLETTOWN_OAK, OFF
+	toggleable_objects_for SILENT_HILL
+	toggle_object_state SILENTHILL_OAK, OFF
 
 	toggleable_objects_for VIRIDIAN_CITY
 	toggle_object_state VIRIDIANCITY_OLD_MAN_SLEEPY, ON
@@ -116,9 +116,9 @@ ToggleableObjectStates:
 
 	toggleable_objects_for OAKS_LAB
 	toggle_object_state OAKSLAB_RIVAL,                ON
-	toggle_object_state OAKSLAB_CHARMANDER_POKE_BALL, ON
-	toggle_object_state OAKSLAB_SQUIRTLE_POKE_BALL,   ON
-	toggle_object_state OAKSLAB_BULBASAUR_POKE_BALL,  ON
+	toggle_object_state OAKSLAB_HONOGUMA_POKE_BALL, ON
+	toggle_object_state OAKSLAB_KURUSU_POKE_BALL,   ON
+	toggle_object_state OAKSLAB_HAPPA_POKE_BALL,  ON
 	toggle_object_state OAKSLAB_OAK1,                 OFF
 	toggle_object_state OAKSLAB_POKEDEX1,             ON
 	toggle_object_state OAKSLAB_POKEDEX2,             ON

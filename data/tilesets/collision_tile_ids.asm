@@ -17,7 +17,7 @@ RedsHouse2_Coll::
 
 Mart_Coll::
 Pokecenter_Coll::
-	coll_tiles $11, $1a, $1c, $3c, $5e
+	coll_tiles $11, $12, $3b
 
 Dojo_Coll::
 Gym_Coll::
@@ -27,7 +27,7 @@ Forest_Coll::
 	coll_tiles $1e, $20, $2e, $30, $34, $37, $39, $3a, $40, $51, $52, $5a, $5c, $5e, $5f
 
 House_Coll::
-	coll_tiles $01, $04, $12, $14
+	coll_tiles $01, $04, $05, $12, $14, $5c, $5e,
 
 ForestGate_Coll::
 Museum_Coll::
@@ -58,7 +58,7 @@ Mansion_Coll::
 	coll_tiles $01, $05, $11, $12, $14, $1a, $1c, $2c, $53
 
 Lab_Coll::
-	coll_tiles $0c, $26, $16, $1e, $34, $37
+	coll_tiles $01, $02, $12, $1e
 
 Club_Coll::
 	coll_tiles $0f, $1a, $1f, $26, $28, $29, $2c, $2d, $2e, $2f, $41

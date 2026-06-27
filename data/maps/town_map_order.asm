@@ -1,5 +1,5 @@
 TownMapOrder:
-	db PALLET_TOWN
+	db SILENT_HILL
 	db ROUTE_1
 	db VIRIDIAN_CITY
 	db ROUTE_2

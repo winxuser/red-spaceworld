@@ -7,7 +7,7 @@ ENDM
 ExternalMapEntries:
 	table_width 3
 	; x, y, name
-	outdoor_map  2, 11, PalletTownName
+	outdoor_map  2, 11, SilentHillName
 	outdoor_map  2,  8, ViridianCityName
 	outdoor_map  2,  3, PewterCityName
 	outdoor_map 10,  2, CeruleanCityName
@@ -18,7 +18,7 @@ ExternalMapEntries:
 	outdoor_map  2, 15, CinnabarIslandName
 	outdoor_map  0,  2, IndigoPlateauName
 	outdoor_map 10,  5, SaffronCityName
-	outdoor_map  0,  0, PalletTownName ; unused
+	outdoor_map  0,  0, SilentHillName ; unused
 	outdoor_map  2, 10, Route1Name
 	outdoor_map  2,  6, Route2Name
 	outdoor_map  4,  3, Route3Name
@@ -57,7 +57,7 @@ ENDM
 InternalMapEntries:
 	table_width 4
 	; indoor map group, x, y, name
-	indoor_map PALLET_TOWN,         2, 11, PalletTownName
+	indoor_map SILENT_HILL,         2, 11, SilentHillName
 	indoor_map VIRIDIAN_CITY,       2,  8, ViridianCityName
 	indoor_map ROUTE_2,             2,  6, Route2Name
 	indoor_map VIRIDIAN_FOREST,     2,  4, ViridianForestName
