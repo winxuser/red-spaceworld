@@ -9,4 +9,5 @@ WaterTilesets:
 	db CAVERN
 	db FACILITY
 	db PLATEAU
+	db OLD_CITY
 	db -1 ; end

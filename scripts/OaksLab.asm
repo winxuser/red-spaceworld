@@ -628,11 +628,11 @@ OaksLabOakGivesPokedexScript:
 	call DisplayTextID
 	SetEvent EVENT_GOT_POKEDEX
 	SetEvent EVENT_OAK_GOT_PARCEL
-	ld a, TOGGLE_LYING_OLD_MAN
-	ld [wToggleableObjectIndex], a
-	predef HideObject
-	ld a, TOGGLE_OLD_MAN
-	ld [wToggleableObjectIndex], a
+;	ld a, TOGGLE_LYING_OLD_MAN
+;	ld [wToggleableObjectIndex], a
+;	predef HideObject
+;	ld a, TOGGLE_OLD_MAN
+;	ld [wToggleableObjectIndex], a
 	predef ShowObject
 	ld a, [wSavedNPCMovementDirections2Index]
 	ld b, 0

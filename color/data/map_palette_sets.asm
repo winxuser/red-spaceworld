@@ -26,8 +26,10 @@ MapPaletteSets:
 	dw FacilityPalSet    ; FACILITY
 	dw PlateauPalSet     ; PLATEAU
 	dw TrashedHousePalSet ; TRASHEDHOUSE
+	dw OldCityPalSet     ; OLD_CITY
 	assert_table_length NUM_TILESETS
 
+OldCityPalSet:
 OverworldPalSet:
 PlateauPalSet:
 	db OUTDOOR_GRAY
@@ -38,6 +40,7 @@ PlateauPalSet:
 	db OUTDOOR_BROWN
 	db OUTDOOR_ROOF
 	db CRYS_TEXTBOX
+	db PAL_BG_CUSTOM1
 
 TrashedHousePalSet:
 RedsHouse1PalSet:

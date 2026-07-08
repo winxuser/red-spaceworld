@@ -34,4 +34,5 @@ Tilesets:
 	tileset Facility,     $12, -1, -1,  -1, TILEANIM_WATER
 	tileset Plateau,       -1, -1, -1, $45, TILEANIM_WATER
 	tileset TrashedHouse,  -1, -1, -1,  -1, TILEANIM_NONE
+	tileset OldCity,       -1, -1, -1, $04, TILEANIM_WATER_FLOWER
 	assert_table_length NUM_TILESETS

@@ -76,6 +76,7 @@
 	const PAL_BG_BROWN     ; 05
 	const PAL_BG_ROOF      ; 06
 	const PAL_BG_TEXT      ; 07
+	const PAL_BG_CUSTOM1
 
 ; Used when you want a tile to display above the Player and NPCs
 	const_def $80

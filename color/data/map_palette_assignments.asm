@@ -31,6 +31,7 @@ MapPaletteAssignments:
 	dw FacilityPalMap     ; FACILITY
 	dw PlateauPalMap      ; PLATEAU
 	dw TrashedHousePalMap ; TRASHEDHOUSE
+	dw OldCityPalMap      ; OLD_CITY
 	assert_table_length NUM_TILESETS
 
 OverworldPalMap:
@@ -97,3 +98,6 @@ PlateauPalMap:
 
 TrashedHousePalMap:
 	INCLUDE "color/tilesets/trashedhouse.asm"
+
+OldCityPalMap:
+	INCLUDE "color/tilesets/old_city.asm"

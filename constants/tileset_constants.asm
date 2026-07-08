@@ -28,4 +28,5 @@ DEF MAP_TILESET_SIZE EQU $60 ; tiles
 	const FACILITY     ; 22
 	const PLATEAU      ; 23
 	const TRASHEDHOUSE
+	const OLD_CITY_TS
 DEF NUM_TILESETS EQU const_value

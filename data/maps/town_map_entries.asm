@@ -8,7 +8,7 @@ ExternalMapEntries:
 	table_width 3
 	; x, y, name
 	outdoor_map  2, 11, SilentHillName
-	outdoor_map  2,  8, ViridianCityName
+	outdoor_map  2,  8, OldCityName
 	outdoor_map  2,  3, PewterCityName
 	outdoor_map 10,  2, CeruleanCityName
 	outdoor_map 14,  5, LavenderTownName
@@ -20,6 +20,7 @@ ExternalMapEntries:
 	outdoor_map 10,  5, SaffronCityName
 	outdoor_map  0,  0, SilentHillName ; unused
 	outdoor_map  2, 10, Route1Name
+	outdoor_map  2, 11, Route1P2Name
 	outdoor_map  2,  6, Route2Name
 	outdoor_map  4,  3, Route3Name
 	outdoor_map  8,  2, Route4Name
@@ -58,7 +59,7 @@ InternalMapEntries:
 	table_width 4
 	; indoor map group, x, y, name
 	indoor_map SILENT_HILL,         2, 11, SilentHillName
-	indoor_map VIRIDIAN_CITY,       2,  8, ViridianCityName
+	indoor_map OLD_CITY,            2,  8, OldCityName
 	indoor_map ROUTE_2,             2,  6, Route2Name
 	indoor_map VIRIDIAN_FOREST,     2,  4, ViridianForestName
 	indoor_map PEWTER_CITY,         2,  3, PewterCityName

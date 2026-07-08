@@ -18,9 +18,9 @@ ENDM
 	toggle_consts_for SILENT_HILL
 	const TOGGLE_SILENT_HILL_OAK               ; 00
 
-	toggle_consts_for VIRIDIAN_CITY
-	const TOGGLE_LYING_OLD_MAN                 ; 01
-	const TOGGLE_OLD_MAN                       ; 02
+	toggle_consts_for OLD_CITY
+;	const TOGGLE_LYING_OLD_MAN                 ; 01
+;	const TOGGLE_OLD_MAN                       ; 02
 
 	toggle_consts_for PEWTER_CITY
 	const TOGGLE_MUSEUM_GUY                    ; 03

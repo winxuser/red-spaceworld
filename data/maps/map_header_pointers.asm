@@ -2,7 +2,7 @@
 MapHeaderPointers::
 	table_width 2
 	dw SilentHill_h
-	dw ViridianCity_h
+	dw OldCity_h
 	dw PewterCity_h
 	dw CeruleanCity_h
 	dw LavenderTown_h
@@ -12,8 +12,9 @@ MapHeaderPointers::
 	dw CinnabarIsland_h
 	dw IndigoPlateau_h
 	dw SaffronCity_h
-	dw SaffronCity_h ; UNUSED_MAP_0B
+	dw SaffronCity_h 		; UNUSED_MAP_0B
 	dw Route1_h
+	dw Route1P2_h 			; UNUSED_MAP_6A
 	dw Route2_h
 	dw Route3_h
 	dw Route4_h
@@ -43,7 +44,7 @@ MapHeaderPointers::
 	dw BluesHouse_h
 	dw OaksLab_h
 	dw SilentHillPokecenter_h ; UNUSED_MAP_69
-	dw ViridianPokecenter_h
+	dw OldCityPokecenter1F_h
 	dw ViridianMart_h
 	dw ViridianSchoolHouse_h
 	dw ViridianNicknameHouse_h
@@ -107,8 +108,6 @@ MapHeaderPointers::
 	dw SSAnne1FRooms_h
 	dw SSAnne2FRooms_h
 	dw SSAnneB1FRooms_h
-;	dw LancesRoom_h ; UNUSED_MAP_69
-	dw LancesRoom_h ; UNUSED_MAP_6A
 	dw LancesRoom_h ; UNUSED_MAP_6B
 	dw VictoryRoad1F_h
 	dw LancesRoom_h ; UNUSED_MAP_6D

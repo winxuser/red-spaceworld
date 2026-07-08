@@ -2,7 +2,7 @@
 SuperRodData:
 	; map, fishing group
 	dbw SILENT_HILL,         .Group1
-	dbw VIRIDIAN_CITY,       .Group1
+	dbw OLD_CITY,            .Group1
 	dbw CERULEAN_CITY,       .Group3
 	dbw VERMILION_CITY,      .Group4
 	dbw CELADON_CITY,        .Group5

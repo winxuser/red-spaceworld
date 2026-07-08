@@ -1,0 +1,14 @@
+OldCityPokecenter1F_Script:
+	call Serial_TryEstablishingExternallyClockedConnection
+	jp EnableAutoTextBoxDrawing
+
+OldCityPokecenter1F_TextPointers:
+	def_text_pointers
+	dw_const OldCityPokecenter1FNurseText,            TEXT_OLDCITYPOKECENTER1F_NURSE
+	dw_const OldCityPokecenter1FLinkReceptionistText, TEXT_OLDCITYPOKECENTER1F_LINK_RECEPTIONIST
+
+OldCityPokecenter1FNurseText:
+	script_pokecenter_nurse
+
+OldCityPokecenter1FLinkReceptionistText:
+	script_cable_club_receptionist

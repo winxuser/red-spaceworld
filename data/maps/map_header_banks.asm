@@ -2,7 +2,7 @@
 MapHeaderBanks::
 	table_width 1
 	db BANK(SilentHill_h)
-	db BANK(ViridianCity_h)
+	db BANK(OldCity_h)
 	db BANK(PewterCity_h)
 	db BANK(CeruleanCity_h)
 	db BANK(LavenderTown_h)
@@ -14,6 +14,7 @@ MapHeaderBanks::
 	db BANK(SaffronCity_h)
 	db $01 ; UNUSED_MAP_0B
 	db BANK(Route1_h)
+	db BANK(Route1P2_h) ; UNUSED_MAP_6A
 	db BANK(Route2_h)
 	db BANK(Route3_h)
 	db BANK(Route4_h)
@@ -43,7 +44,7 @@ MapHeaderBanks::
 	db BANK(BluesHouse_h)
 	db BANK(OaksLab_h)
 	db BANK(SilentHillPokecenter_h) ; UNUSED_MAP_69
-	db BANK(ViridianPokecenter_h)
+	db BANK(OldCityPokecenter1F_h)
 	db BANK(ViridianMart_h)
 	db BANK(ViridianSchoolHouse_h)
 	db BANK(ViridianNicknameHouse_h)
@@ -107,8 +108,6 @@ MapHeaderBanks::
 	db BANK(SSAnne1FRooms_h)
 	db BANK(SSAnne2FRooms_h)
 	db BANK(SSAnneB1FRooms_h)
-;	db $1D ; UNUSED_MAP_69
-	db $1D ; UNUSED_MAP_6A
 	db $1D ; UNUSED_MAP_6B
 	db BANK(VictoryRoad1F_h)
 	db $1D ; UNUSED_MAP_6D

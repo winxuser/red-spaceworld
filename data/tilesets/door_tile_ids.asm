@@ -12,6 +12,8 @@ DoorTileIDPointers:
 	dbw LAB,         .LabDoorTileIDs
 	dbw FACILITY,    .FacilityDoorTileIDs
 	dbw PLATEAU,     .PlateauDoorTileIDs
+	dbw TRASHEDHOUSE,.TrashedHouseDoorTileIDs
+	dbw OLD_CITY,    .OldCityDoorTileIDs
 	db -1 ; end
 
 MACRO door_tiles
@@ -53,3 +55,9 @@ ENDM
 
 .PlateauDoorTileIDs:
 	door_tiles $3b, $1b
+
+.TrashedHouseDoorTileIDs:
+	door_tiles
+
+.OldCityDoorTileIDs:
+	door_tiles $29

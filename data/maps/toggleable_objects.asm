@@ -45,9 +45,9 @@ ToggleableObjectStates:
 	toggleable_objects_for SILENT_HILL
 	toggle_object_state SILENTHILL_OAK, OFF
 
-	toggleable_objects_for VIRIDIAN_CITY
-	toggle_object_state VIRIDIANCITY_OLD_MAN_SLEEPY, ON
-	toggle_object_state VIRIDIANCITY_OLD_MAN,        OFF
+	toggleable_objects_for OLD_CITY
+;	toggle_object_state VIRIDIANCITY_OLD_MAN_SLEEPY, ON
+;	toggle_object_state VIRIDIANCITY_OLD_MAN,        OFF
 
 	toggleable_objects_for PEWTER_CITY
 	toggle_object_state PEWTERCITY_SUPER_NERD1, ON

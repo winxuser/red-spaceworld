@@ -71,3 +71,6 @@ Plateau_Coll::
 
 TrashedHouse_Coll::
 	coll_tiles $01, $12, $14, $28, $32, $37, $44, $54, $5c
+
+OldCity_Coll::
+	coll_tiles $00, $03, $04, $05, $06, $07, $29, $38, $53, $54

@@ -8,7 +8,7 @@ SilentHill_Object:
 
 	def_warp_events
 	warp_event  5,  4, REDS_HOUSE_1F, 1
-	warp_event  3, 12, BLUES_HOUSE, 1
+	warp_event  3, 12, OLD_CITY, 1
 	warp_event 14, 11, OAKS_LAB, 1
 	warp_event 15, 11, OAKS_LAB, 2
 	warp_event 13,  4, SILENT_HILL_POKECENTER, 1
@@ -21,7 +21,7 @@ SilentHill_Object:
 
 	def_object_events
 	object_event  8,  8, SPRITE_OAK, STAY, NONE, TEXT_SILENTHILL_OAK
-	object_event  5,  6, SPRITE_GIRL, WALK, ANY_DIR, TEXT_SILENTHILL_GIRL
-	object_event 11, 10, SPRITE_FISHER, WALK, ANY_DIR, TEXT_SILENTHILL_FISHER
+	object_event  6,  7, SPRITE_GIRL, STAY, ANY_DIR, TEXT_SILENTHILL_GIRL
+	object_event 15,  7, SPRITE_FISHER, STAY, ANY_DIR, TEXT_SILENTHILL_FISHER
 
 	def_warps_to SILENT_HILL

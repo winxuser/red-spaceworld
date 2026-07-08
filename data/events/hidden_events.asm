@@ -10,7 +10,7 @@ HiddenEventMaps:
 	hidden_event_map REDS_HOUSE_2F
 	hidden_event_map BLUES_HOUSE
 	hidden_event_map OAKS_LAB
-	hidden_event_map VIRIDIAN_POKECENTER
+	hidden_event_map OLD_CITY_POKECENTER_1F
 	hidden_event_map VIRIDIAN_MART
 	hidden_event_map VIRIDIAN_SCHOOL_HOUSE
 	hidden_event_map VIRIDIAN_GYM
@@ -67,7 +67,7 @@ HiddenEventMaps:
 	hidden_event_map VICTORY_ROAD_2F
 	hidden_event_map UNUSED_MAP_6F
 	hidden_event_map BILLS_HOUSE
-	hidden_event_map VIRIDIAN_CITY
+	hidden_event_map OLD_CITY
 	hidden_event_map SAFARI_ZONE_WEST_REST_HOUSE
 	hidden_event_map SAFARI_ZONE_EAST_REST_HOUSE
 	hidden_event_map SAFARI_ZONE_NORTH_REST_HOUSE
@@ -151,7 +151,7 @@ DEF ANY_FACING EQU $d0
 	hidden_event  6,  1, DisplayOakLabEmailText, SPRITE_FACING_UP
 	db -1 ; end
 
-	hidden_events_for VIRIDIAN_POKECENTER
+	hidden_events_for OLD_CITY_POKECENTER_1F
 	hidden_event  0,  4, PrintBenchGuyText, SPRITE_FACING_LEFT
 	hidden_event 13,  3, OpenPokemonCenterPC, SPRITE_FACING_UP
 	db -1 ; end
@@ -488,7 +488,7 @@ DEF ANY_FACING EQU $d0
 	hidden_event  1,  4, BillsHousePC, SPRITE_FACING_UP
 	db -1 ; end
 
-	hidden_events_for VIRIDIAN_CITY
+	hidden_events_for OLD_CITY
 	hidden_event 14,  4, HiddenItems, POTION
 	db -1 ; end
 

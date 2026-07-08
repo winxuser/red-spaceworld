@@ -24,7 +24,7 @@ ENDM
 ; Order: towns/cities, then routes, then indoor/dungeon maps
 	const_def
 	map_const SILENT_HILL,                   10,  9 ; $00
-	map_const VIRIDIAN_CITY,                 20, 18 ; $01
+	map_const OLD_CITY,                      20, 18 ; $01
 	map_const PEWTER_CITY,                   20, 18 ; $02
 	map_const CERULEAN_CITY,                 20, 18 ; $03
 	map_const LAVENDER_TOWN,                 10,  9 ; $04
@@ -39,7 +39,8 @@ DEF NUM_CITY_MAPS EQU const_value
 	map_const UNUSED_MAP_0B,                  0,  0 ; $0B
 
 DEF FIRST_ROUTE_MAP EQU const_value
-	map_const ROUTE_1,                       10, 18 ; $0C
+	map_const ROUTE_1,                       15,  9 ; $0C
+	map_const ROUTE_1_P2,                    10, 18 ; UNUSED_MAP_6A
 	map_const ROUTE_2,                       10, 36 ; $0D
 	map_const ROUTE_3,                       35,  9 ; $0E
 	map_const ROUTE_4,                       45,  9 ; $0F
@@ -73,12 +74,12 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const SILENT_HILL_POKECENTER,         8,  4 ; $69
 	end_indoor_group SILENT_HILL
 
-	map_const VIRIDIAN_POKECENTER,            7,  4 ; $29
+	map_const OLD_CITY_POKECENTER_1F,         8,  4 ; $29
 	map_const VIRIDIAN_MART,                  4,  4 ; $2A
 	map_const VIRIDIAN_SCHOOL_HOUSE,          4,  4 ; $2B
 	map_const VIRIDIAN_NICKNAME_HOUSE,        4,  4 ; $2C
 	map_const VIRIDIAN_GYM,                  10,  9 ; $2D
-	end_indoor_group VIRIDIAN_CITY
+	end_indoor_group OLD_CITY
 
 	map_const DIGLETTS_CAVE_ROUTE_2,          4,  4 ; $2E
 	map_const VIRIDIAN_FOREST_NORTH_GATE,     5,  4 ; $2F
@@ -176,7 +177,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	end_indoor_group SS_ANNE
 
 ;	map_const UNUSED_MAP_69,                  0,  0 ; $69
-	map_const UNUSED_MAP_6A,                  0,  0 ; $6A
+;	map_const UNUSED_MAP_6A,                  0,  0 ; $6A
 	map_const UNUSED_MAP_6B,                  0,  0 ; $6B
 	map_const VICTORY_ROAD_1F,               10,  9 ; $6C
 	end_indoor_group VICTORY_ROAD
