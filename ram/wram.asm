@@ -1971,7 +1971,7 @@ wPewterCityCurScript:: db
 wRoute3CurScript:: db
 wRoute4CurScript:: db
 	ds 1
-wViridianGymCurScript:: db
+wOldCityGymCurScript:: db
 wPewterGymCurScript:: db
 wCeruleanGymCurScript:: db
 wVermilionGymCurScript:: db
@@ -1989,12 +1989,12 @@ wSSAnne2FRoomsCurScript:: db
 wRoute22CurScript:: db
 	ds 1
 wRedsHouse2FCurScript:: db
-wViridianMartCurScript:: db
+wOldCityMartCurScript:: db
 wRoute22GateCurScript:: db
 wCeruleanCityCurScript:: db
 	ds 7
 wSSAnneBowCurScript:: db
-wViridianForestCurScript:: db
+wSilentHillsCurScript:: db
 wMuseum1FCurScript:: db
 wRoute13CurScript:: db
 wRoute14CurScript:: db

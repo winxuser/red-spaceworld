@@ -11,9 +11,9 @@ HiddenEventMaps:
 	hidden_event_map BLUES_HOUSE
 	hidden_event_map OAKS_LAB
 	hidden_event_map OLD_CITY_POKECENTER_1F
-	hidden_event_map VIRIDIAN_MART
+	hidden_event_map OLD_CITY_MART
 	hidden_event_map VIRIDIAN_SCHOOL_HOUSE
-	hidden_event_map VIRIDIAN_GYM
+	hidden_event_map OLD_CITY_GYM
 	hidden_event_map MUSEUM_1F
 	hidden_event_map PEWTER_GYM
 	hidden_event_map PEWTER_MART
@@ -38,7 +38,7 @@ HiddenEventMaps:
 	hidden_event_map ROCK_TUNNEL_POKECENTER
 	hidden_event_map TRADE_CENTER
 	hidden_event_map COLOSSEUM
-	hidden_event_map VIRIDIAN_FOREST
+	hidden_event_map SILENT_HILLS
 	hidden_event_map MT_MOON_B2F
 	hidden_event_map INDIGO_PLATEAU
 	hidden_event_map ROUTE_25
@@ -140,9 +140,6 @@ DEF ANY_FACING EQU $d0
 	db -1 ; end
 
 	hidden_events_for BLUES_HOUSE
-;	hidden_event  0,  1, PrintBookcaseText, SPRITE_FACING_UP
-;	hidden_event  1,  1, PrintBookcaseText, SPRITE_FACING_UP
-;	hidden_event  7,  1, PrintBookcaseText, SPRITE_FACING_UP
 	db -1 ; end
 
 	hidden_events_for OAKS_LAB
@@ -156,7 +153,7 @@ DEF ANY_FACING EQU $d0
 	hidden_event 13,  3, OpenPokemonCenterPC, SPRITE_FACING_UP
 	db -1 ; end
 
-	hidden_events_for VIRIDIAN_MART
+	hidden_events_for OLD_CITY_MART
 	db -1 ; end
 
 	hidden_events_for VIRIDIAN_SCHOOL_HOUSE
@@ -164,9 +161,9 @@ DEF ANY_FACING EQU $d0
 	hidden_text_predef  3,  0, PrintBlackboardLinkCableText, ViridianSchoolBlackboard
 	db -1 ; end
 
-	hidden_events_for VIRIDIAN_GYM
-	hidden_event 15, 15, GymStatues, SPRITE_FACING_UP
-	hidden_event 18, 15, GymStatues, SPRITE_FACING_UP
+	hidden_events_for OLD_CITY_GYM
+	hidden_event  3, 15, GymStatues, SPRITE_FACING_UP
+	hidden_event  6, 15, GymStatues, SPRITE_FACING_UP
 	db -1 ; end
 
 	hidden_events_for MUSEUM_1F
@@ -343,9 +340,9 @@ DEF ANY_FACING EQU $d0
 	hidden_event 13,  3, OpenPokemonCenterPC, SPRITE_FACING_UP
 	db -1 ; end
 
-	hidden_events_for VIRIDIAN_FOREST
-	hidden_event  1, 18, HiddenItems, POTION
-	hidden_event 16, 42, HiddenItems, ANTIDOTE
+	hidden_events_for SILENT_HILLS
+;	hidden_event  1, 18, HiddenItems, POTION
+;	hidden_event 16, 42, HiddenItems, ANTIDOTE
 	db -1 ; end
 
 	hidden_events_for MT_MOON_B2F

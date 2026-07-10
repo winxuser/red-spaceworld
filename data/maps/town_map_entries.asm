@@ -61,7 +61,7 @@ InternalMapEntries:
 	indoor_map SILENT_HILL,         2, 11, SilentHillName
 	indoor_map OLD_CITY,            2,  8, OldCityName
 	indoor_map ROUTE_2,             2,  6, Route2Name
-	indoor_map VIRIDIAN_FOREST,     2,  4, ViridianForestName
+	indoor_map SILENT_HILLS,        2,  4, SilentHillsName
 	indoor_map PEWTER_CITY,         2,  3, PewterCityName
 	indoor_map MT_MOON,             6,  2, MountMoonName
 	indoor_map CERULEAN_CITY,      10,  2, CeruleanCityName

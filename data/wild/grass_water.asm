@@ -43,7 +43,8 @@ WildDataPointers:
 	dw NothingWildMons          ; BLUES_HOUSE
 	dw NothingWildMons          ; OAKS_LAB
 	dw NothingWildMons          ; SILENT_HILL_POKECENTER unused map 69
-	dw NothingWildMons          ; OLD_CITY_POKECENTER_1F
+	dw NothingWildMons          ; ROUTE_1_GATE_1F  UNUSED_MAP_6C
+	dw NothingWildMons          ; OLD_CITY_POKECENTER_1F UNUSED_MAP_6B
 	dw NothingWildMons          ; VIRIDIAN_MART
 	dw NothingWildMons          ; VIRIDIAN_SCHOOL_HOUSE
 	dw NothingWildMons          ; VIRIDIAN_NICKNAME_HOUSE
@@ -53,7 +54,7 @@ WildDataPointers:
 	dw NothingWildMons          ; ROUTE_2_TRADE_HOUSE
 	dw NothingWildMons          ; ROUTE_2_GATE
 	dw NothingWildMons          ; VIRIDIAN_FOREST_SOUTH_GATE
-	dw ViridianForestWildMons   ; VIRIDIAN_FOREST
+	dw SilentHillsWildMons      ; SILENT_HILLS UNUSED_MAP_6D
 	dw NothingWildMons          ; MUSEUM_1F
 	dw NothingWildMons          ; MUSEUM_2F
 	dw NothingWildMons          ; PEWTER_GYM
@@ -107,9 +108,7 @@ WildDataPointers:
 	dw NothingWildMons          ; SS_ANNE_1F_ROOMS
 	dw NothingWildMons          ; SS_ANNE_2F_ROOMS
 	dw NothingWildMons          ; SS_ANNE_B1F_ROOMS
-	dw NothingWildMons          ; UNUSED_MAP_6B
 	dw VictoryRoad1FWildMons    ; VICTORY_ROAD_1F
-	dw NothingWildMons          ; UNUSED_MAP_6D
 	dw NothingWildMons          ; UNUSED_MAP_6E
 	dw NothingWildMons          ; UNUSED_MAP_6F
 	dw NothingWildMons          ; UNUSED_MAP_70
@@ -266,7 +265,6 @@ INCLUDE "data/wild/maps/nothing.asm"
 INCLUDE "data/wild/maps/Route1.asm"
 INCLUDE "data/wild/maps/Route2.asm"
 INCLUDE "data/wild/maps/Route22.asm"
-INCLUDE "data/wild/maps/ViridianForest.asm"
 INCLUDE "data/wild/maps/Route3.asm"
 INCLUDE "data/wild/maps/MtMoon1F.asm"
 INCLUDE "data/wild/maps/MtMoonB1F.asm"
@@ -322,3 +320,4 @@ INCLUDE "data/wild/maps/VictoryRoad3F.asm"
 INCLUDE "data/wild/maps/VictoryRoad1F.asm"
 INCLUDE "data/wild/maps/DiglettsCave.asm"
 INCLUDE "data/wild/maps/Route1P2.asm"
+INCLUDE "data/wild/maps/SilentHills.asm"

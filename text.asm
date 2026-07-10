@@ -25,6 +25,8 @@ INCLUDE "text/SilphCo2F.asm"
 INCLUDE "text/SilphCo3F.asm"
 INCLUDE "text/SilphCo4F.asm"
 INCLUDE "text/SilphCo5F.asm"
+INCLUDE "text/OldCityMart.asm"
+INCLUDE "text/SilentHills.asm"
 
 
 SECTION "Text 2", ROMX
@@ -151,8 +153,8 @@ INCLUDE "text/ViridianNicknameHouse.asm"
 INCLUDE "text/ViridianGym.asm"
 INCLUDE "text/Museum1F.asm"
 INCLUDE "text/Museum2F.asm"
+INCLUDE "text/OldCityGym.asm"
 INCLUDE "text/PewterGym.asm"
-
 
 SECTION "Text 7", ROMX
 

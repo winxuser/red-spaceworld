@@ -13,7 +13,7 @@ DoorTileIDPointers:
 	dbw FACILITY,    .FacilityDoorTileIDs
 	dbw PLATEAU,     .PlateauDoorTileIDs
 	dbw TRASHEDHOUSE,.TrashedHouseDoorTileIDs
-	dbw OLD_CITY,    .OldCityDoorTileIDs
+	dbw OLD_CITY_TS,    .OldCityDoorTileIDs
 	db -1 ; end
 
 MACRO door_tiles

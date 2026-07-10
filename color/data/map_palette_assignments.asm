@@ -41,7 +41,6 @@ RedsHouse1PalMap:
 RedsHouse2PalMap:
 	INCLUDE "color/tilesets/reds_house.asm"
 
-MartPalMap:
 PokecenterPalMap:
 	INCLUDE "color/tilesets/pokecenter.asm"
 
@@ -101,3 +100,6 @@ TrashedHousePalMap:
 
 OldCityPalMap:
 	INCLUDE "color/tilesets/old_city.asm"
+
+MartPalMap:
+	INCLUDE "color/tilesets/mart.asm"

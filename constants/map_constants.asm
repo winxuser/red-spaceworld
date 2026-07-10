@@ -71,14 +71,15 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const REDS_HOUSE_2F,                  5,  4 ; $26
 	map_const BLUES_HOUSE,                    5,  4 ; $27
 	map_const OAKS_LAB,                       4,  8 ; $28
-	map_const SILENT_HILL_POKECENTER,         8,  4 ; $69
+	map_const SILENT_HILL_POKECENTER,         8,  4 ; UNUSED MAP $69
+	map_const ROUTE_1_GATE_1F,                5,  4 ; UNUSED MAP $6B
 	end_indoor_group SILENT_HILL
 
 	map_const OLD_CITY_POKECENTER_1F,         8,  4 ; $29
-	map_const VIRIDIAN_MART,                  4,  4 ; $2A
+	map_const OLD_CITY_MART,                  8,  4 ; $2A
 	map_const VIRIDIAN_SCHOOL_HOUSE,          4,  4 ; $2B
 	map_const VIRIDIAN_NICKNAME_HOUSE,        4,  4 ; $2C
-	map_const VIRIDIAN_GYM,                  10,  9 ; $2D
+	map_const OLD_CITY_GYM,                   5,  9 ; $2D
 	end_indoor_group OLD_CITY
 
 	map_const DIGLETTS_CAVE_ROUTE_2,          4,  4 ; $2E
@@ -88,8 +89,8 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const VIRIDIAN_FOREST_SOUTH_GATE,     5,  4 ; $32
 	end_indoor_group ROUTE_2
 
-	map_const VIRIDIAN_FOREST,               17, 24 ; $33
-	end_indoor_group VIRIDIAN_FOREST
+	map_const SILENT_HILLS ,                 25, 18 ; UNUSED_MAP $6D
+	end_indoor_group SILENT_HILLS
 
 	map_const MUSEUM_1F,                     10,  4 ; $34
 	map_const MUSEUM_2F,                      7,  4 ; $35
@@ -176,13 +177,9 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const SS_ANNE_B1F_ROOMS,             12,  8 ; $68
 	end_indoor_group SS_ANNE
 
-;	map_const UNUSED_MAP_69,                  0,  0 ; $69
-;	map_const UNUSED_MAP_6A,                  0,  0 ; $6A
-	map_const UNUSED_MAP_6B,                  0,  0 ; $6B
 	map_const VICTORY_ROAD_1F,               10,  9 ; $6C
 	end_indoor_group VICTORY_ROAD
 
-	map_const UNUSED_MAP_6D,                  0,  0 ; $6D
 	map_const UNUSED_MAP_6E,                  0,  0 ; $6E
 	map_const UNUSED_MAP_6F,                  0,  0 ; $6F
 	map_const UNUSED_MAP_70,                  0,  0 ; $70

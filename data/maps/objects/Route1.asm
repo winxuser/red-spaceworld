@@ -6,6 +6,9 @@ Route1_Object:
 	db $00 ; border block
 
 	def_warp_events
+	warp_event  8, 8, SILENT_HILLS, 8
+	warp_event  8, 9, SILENT_HILLS, 9
+
 
 	def_bg_events
 	bg_event 20,  8, TEXT_ROUTE1_SIGN
@@ -15,6 +18,3 @@ Route1_Object:
 	object_event 17, 11, SPRITE_YOUNGSTER, WALK, LEFT_RIGHT, TEXT_ROUTE1_YOUNGSTER2
 
 	def_warps_to ROUTE_1
-
-	; unused
-	warp_to  2, 10, 4

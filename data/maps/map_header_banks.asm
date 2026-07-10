@@ -43,18 +43,19 @@ MapHeaderBanks::
 	db BANK(RedsHouse2F_h)
 	db BANK(BluesHouse_h)
 	db BANK(OaksLab_h)
-	db BANK(SilentHillPokecenter_h) ; UNUSED_MAP_69
+	db BANK(SilentHillPokecenter_h)    ; UNUSED_MAP_69
+	db BANK(Route1Gate1F_h)            ; UNUSED_MAP_6B
 	db BANK(OldCityPokecenter1F_h)
-	db BANK(ViridianMart_h)
+	db BANK(OldCityMart_h)
 	db BANK(ViridianSchoolHouse_h)
 	db BANK(ViridianNicknameHouse_h)
-	db BANK(ViridianGym_h)
+	db BANK(OldCityGym_h)
 	db BANK(DiglettsCaveRoute2_h)
 	db BANK(ViridianForestNorthGate_h)
 	db BANK(Route2TradeHouse_h)
 	db BANK(Route2Gate_h)
 	db BANK(ViridianForestSouthGate_h)
-	db BANK(ViridianForest_h)
+	db BANK(SilentHills_h)             ; UNUSED_MAP_6D
 	db BANK(Museum1F_h)
 	db BANK(Museum2F_h)
 	db BANK(PewterGym_h)
@@ -108,9 +109,7 @@ MapHeaderBanks::
 	db BANK(SSAnne1FRooms_h)
 	db BANK(SSAnne2FRooms_h)
 	db BANK(SSAnneB1FRooms_h)
-	db $1D ; UNUSED_MAP_6B
 	db BANK(VictoryRoad1F_h)
-	db $1D ; UNUSED_MAP_6D
 	db $1D ; UNUSED_MAP_6E
 	db $1D ; UNUSED_MAP_6F
 	db $1D ; UNUSED_MAP_70

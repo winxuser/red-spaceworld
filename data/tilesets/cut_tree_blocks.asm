@@ -13,4 +13,5 @@ CutTreeBlockSwaps:
 	db $3F, $35
 	db $3D, $36
 	db $4C, $4D
+	db $6C, $69
 	db -1 ; end

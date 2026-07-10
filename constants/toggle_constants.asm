@@ -97,9 +97,7 @@ ENDM
 	const TOGGLE_POKEDEX_2                     ; 30
 	const TOGGLE_OAKS_LAB_OAK_2                ; 31
 
-	toggle_consts_for VIRIDIAN_GYM
-	const TOGGLE_VIRIDIAN_GYM_GIOVANNI         ; 32
-	const TOGGLE_VIRIDIAN_GYM_ITEM             ; 33 X
+	toggle_consts_for OLD_CITY_GYM
 
 	toggle_consts_for MUSEUM_1F
 	const TOGGLE_OLD_AMBER                     ; 34
@@ -185,10 +183,10 @@ ENDM
 	const TOGGLE_BILL_1                        ; 62
 	const TOGGLE_BILL_2                        ; 63
 
-	toggle_consts_for VIRIDIAN_FOREST
-	const TOGGLE_VIRIDIAN_FOREST_ITEM_1        ; 64 X
-	const TOGGLE_VIRIDIAN_FOREST_ITEM_2        ; 65 X
-	const TOGGLE_VIRIDIAN_FOREST_ITEM_3        ; 66 X
+	toggle_consts_for SILENT_HILLS
+;	const TOGGLE_VIRIDIAN_FOREST_ITEM_1        ; 64 X
+;	const TOGGLE_VIRIDIAN_FOREST_ITEM_2        ; 65 X
+;	const TOGGLE_VIRIDIAN_FOREST_ITEM_3        ; 66 X
 
 	toggle_consts_for MT_MOON_1F
 	const TOGGLE_MT_MOON_1F_ITEM_1             ; 67 X

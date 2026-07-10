@@ -29,9 +29,7 @@ Gym_GFX::           INCBIN "gfx/tilesets/gym.2bpp"
 Dojo_Block::
 Gym_Block::         INCBIN "gfx/blocksets/gym.bst"
 
-Mart_GFX::
 Pokecenter_GFX::    INCBIN "gfx/tilesets/pokecenter.2bpp"
-Mart_Block::
 Pokecenter_Block::  INCBIN "gfx/blocksets/pokecenter.bst"
 
 ForestGate_GFX::
@@ -72,3 +70,5 @@ TrashedHouse_GFX::   INCBIN "gfx/tilesets/trashedhouse.2bpp"
 TrashedHouse_Block:: INCBIN "gfx/blocksets/trashedhouse.bst"
 OldCity_GFX::        INCBIN "gfx/tilesets/old_city.2bpp"
 OldCity_Block::      INCBIN "gfx/blocksets/old_city.bst"
+Mart_GFX::          INCBIN "gfx/tilesets/mart.2bpp"
+Mart_Block::        INCBIN "gfx/blocksets/mart.bst"

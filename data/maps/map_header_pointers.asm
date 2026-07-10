@@ -43,18 +43,19 @@ MapHeaderPointers::
 	dw RedsHouse2F_h
 	dw BluesHouse_h
 	dw OaksLab_h
-	dw SilentHillPokecenter_h ; UNUSED_MAP_69
+	dw SilentHillPokecenter_h      ; UNUSED_MAP_69
+	dw Route1Gate1F_h              ; UNUSED_MAP_6B
 	dw OldCityPokecenter1F_h
-	dw ViridianMart_h
+	dw OldCityMart_h
 	dw ViridianSchoolHouse_h
 	dw ViridianNicknameHouse_h
-	dw ViridianGym_h
+	dw OldCityGym_h
 	dw DiglettsCaveRoute2_h
 	dw ViridianForestNorthGate_h
 	dw Route2TradeHouse_h
 	dw Route2Gate_h
 	dw ViridianForestSouthGate_h
-	dw ViridianForest_h
+	dw SilentHills_h               ; UNUSED_MAP_6D
 	dw Museum1F_h
 	dw Museum2F_h
 	dw PewterGym_h
@@ -108,9 +109,7 @@ MapHeaderPointers::
 	dw SSAnne1FRooms_h
 	dw SSAnne2FRooms_h
 	dw SSAnneB1FRooms_h
-	dw LancesRoom_h ; UNUSED_MAP_6B
 	dw VictoryRoad1F_h
-	dw LancesRoom_h ; UNUSED_MAP_6D
 	dw LancesRoom_h ; UNUSED_MAP_6E
 	dw LancesRoom_h ; UNUSED_MAP_6F
 	dw LancesRoom_h ; UNUSED_MAP_70

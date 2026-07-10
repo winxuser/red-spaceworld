@@ -76,8 +76,8 @@ FlyWarpDataPtr:
 	fly_warp_spec ROUTE_4,         .Route4
 	fly_warp_spec ROUTE_10,        .Route10
 
-.SilentHill:     fly_warp SILENT_HILL,      5,  6
-.OldCity:        fly_warp OLD_CITY,        23, 26
+.SilentHill:     fly_warp SILENT_HILL,      5,  5
+.OldCity:        fly_warp OLD_CITY,        27, 29
 .PewterCity:     fly_warp PEWTER_CITY,     13, 26
 .CeruleanCity:   fly_warp CERULEAN_CITY,   19, 18
 .LavenderTown:   fly_warp LAVENDER_TOWN,    3,  6

@@ -9,10 +9,35 @@ INCLUDE "scripts/SilentHill.asm"
 INCLUDE "data/maps/objects/SilentHill.asm"
 SilentHill_Blocks: INCBIN "maps/SilentHill.blk"
 
+INCLUDE "data/maps/headers/SilentHillPokecenter.asm"
+INCLUDE "scripts/SilentHillPokecenter.asm"
+INCLUDE "data/maps/objects/SilentHillPokecenter.asm"
+SilentHillPokecenter_Blocks: INCBIN "maps/SilentHillPokecenter.blk"
+
 INCLUDE "data/maps/headers/OldCity.asm"
 INCLUDE "scripts/OldCity.asm"
 INCLUDE "data/maps/objects/OldCity.asm"
 OldCity_Blocks: INCBIN "maps/OldCity.blk"
+
+INCLUDE "data/maps/headers/OldCityPokecenter1F.asm"
+INCLUDE "scripts/OldCityPokecenter1F.asm"
+INCLUDE "data/maps/objects/OldCityPokecenter1F.asm"
+OldCityPokecenter1F_Blocks: INCBIN "maps/OldCityPokecenter1F.blk"
+
+INCLUDE "data/maps/headers/OldCityMart.asm"
+INCLUDE "scripts/OldCityMart.asm"
+INCLUDE "data/maps/objects/OldCityMart.asm"
+OldCityMart_Blocks: INCBIN "maps/OldCityMart.blk"
+
+INCLUDE "data/maps/headers/OldCityGym.asm"
+INCLUDE "scripts/OldCityGym.asm"
+INCLUDE "data/maps/objects/OldCityGym.asm"
+OldCityGym_Blocks: INCBIN "maps/OldCityGym.blk"
+
+INCLUDE "data/maps/headers/Route1Gate1F.asm"
+INCLUDE "scripts/Route1Gate1F.asm"
+INCLUDE "data/maps/objects/Route1Gate1F.asm"
+Route1Gate1F_Blocks: INCBIN "maps/Route1Gate1F.blk"
 
 INCLUDE "data/maps/headers/PewterCity.asm"
 	ds 1
@@ -31,10 +56,10 @@ INCLUDE "data/maps/headers/FuchsiaCity.asm"
 INCLUDE "data/maps/objects/FuchsiaCity.asm"
 FuchsiaCity_Blocks: INCBIN "maps/FuchsiaCity.blk"
 
-INCLUDE "data/maps/headers/OldCityPokecenter1F.asm"
-INCLUDE "scripts/OldCityPokecenter1F.asm"
-INCLUDE "data/maps/objects/OldCityPokecenter1F.asm"
-OldCityPokecenter1F_Blocks: INCBIN "maps/OldCityPokecenter1F.blk"
+INCLUDE "data/maps/headers/SilentHills.asm"
+INCLUDE "scripts/SilentHills.asm"
+INCLUDE "data/maps/objects/SilentHills.asm"
+SilentHills_Blocks: INCBIN "maps/SilentHills.blk"
 
 
 SECTION "Maps 2", ROMX
@@ -122,10 +147,6 @@ INCLUDE "data/maps/headers/OaksLab.asm"
 INCLUDE "scripts/OaksLab.asm"
 INCLUDE "data/maps/objects/OaksLab.asm"
 
-INCLUDE "data/maps/headers/ViridianMart.asm"
-INCLUDE "scripts/ViridianMart.asm"
-INCLUDE "data/maps/objects/ViridianMart.asm"
-ViridianMart_Blocks: INCBIN "maps/ViridianMart.blk"
 
 INCLUDE "data/maps/headers/ViridianSchoolHouse.asm"
 INCLUDE "scripts/ViridianSchoolHouse.asm"
@@ -257,8 +278,6 @@ INCLUDE "data/maps/headers/LavenderTown.asm"
 INCLUDE "data/maps/objects/LavenderTown.asm"
 LavenderTown_Blocks: INCBIN "maps/LavenderTown.blk"
 
-;ViridianPokecenter_Blocks: INCBIN "maps/ViridianPokecenter.blk"
-
 SafariZoneCenterRestHouse_Blocks:
 SafariZoneWestRestHouse_Blocks:
 SafariZoneEastRestHouse_Blocks:
@@ -268,10 +287,6 @@ INCLUDE "scripts/LavenderTown.asm"
 
 
 SECTION "Maps 6", ROMX
-
-;INCLUDE "data/maps/headers/ViridianPokecenter.asm"
-;INCLUDE "scripts/ViridianPokecenter.asm"
-;INCLUDE "data/maps/objects/ViridianPokecenter.asm"
 
 INCLUDE "data/maps/headers/PokemonMansion1F.asm"
 INCLUDE "scripts/PokemonMansion1F.asm"
@@ -980,7 +995,6 @@ VictoryRoad1F_Blocks: INCBIN "maps/VictoryRoad1F.blk"
 
 SECTION "Maps 17", ROMX
 
-ViridianForest_Blocks: INCBIN "maps/ViridianForest.blk"
 UndergroundPathNorthSouth_Blocks: INCBIN "maps/UndergroundPathNorthSouth.blk"
 UndergroundPathWestEast_Blocks: INCBIN "maps/UndergroundPathWestEast.blk"
 
@@ -1034,9 +1048,9 @@ CeladonMart1F_Blocks: INCBIN "maps/CeladonMart1F.blk"
 
 SECTION "Maps 18", ROMX
 
-INCLUDE "data/maps/headers/ViridianForest.asm"
-INCLUDE "scripts/ViridianForest.asm"
-INCLUDE "data/maps/objects/ViridianForest.asm"
+;INCLUDE "data/maps/headers/ViridianForest.asm"
+;INCLUDE "scripts/ViridianForest.asm"
+;INCLUDE "data/maps/objects/ViridianForest.asm"
 
 INCLUDE "data/maps/headers/SSAnne1F.asm"
 INCLUDE "scripts/SSAnne1F.asm"
@@ -1118,11 +1132,6 @@ CeruleanBadgeHouse_Blocks: INCBIN "maps/CeruleanBadgeHouse.blk"
 SECTION "Maps 20", ROMX
 
 INCLUDE "scripts/CeruleanCity_2.asm"
-
-INCLUDE "data/maps/headers/ViridianGym.asm"
-INCLUDE "scripts/ViridianGym.asm"
-INCLUDE "data/maps/objects/ViridianGym.asm"
-ViridianGym_Blocks: INCBIN "maps/ViridianGym.blk"
 
 INCLUDE "data/maps/headers/PewterMart.asm"
 INCLUDE "scripts/PewterMart.asm"
@@ -1224,11 +1233,6 @@ INCLUDE "data/maps/headers/AgathasRoom.asm"
 INCLUDE "scripts/AgathasRoom.asm"
 INCLUDE "data/maps/objects/AgathasRoom.asm"
 AgathasRoom_Blocks: INCBIN "maps/AgathasRoom.blk"
-
-INCLUDE "data/maps/headers/SilentHillPokecenter.asm"
-INCLUDE "scripts/SilentHillPokecenter.asm"
-INCLUDE "data/maps/objects/SilentHillPokecenter.asm"
-SilentHillPokecenter_Blocks: INCBIN "maps/SilentHillPokecenter.blk"
 
 
 INCLUDE "data/maps/headers/Route1P2.asm"

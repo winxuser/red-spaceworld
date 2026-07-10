@@ -15,16 +15,15 @@ RedsHouse1_Coll::
 RedsHouse2_Coll::
 	coll_tiles $01, $02, $03, $11, $12, $13, $14, $1c, $1a
 
-Mart_Coll::
 Pokecenter_Coll::
 	coll_tiles $11, $12, $3b
 
 Dojo_Coll::
 Gym_Coll::
-	coll_tiles $11, $16, $19, $2b, $3c, $3d, $3f, $4a, $4c, $4d, $03
+	coll_tiles $09, $20, $23, $3b, $41, $42
 
 Forest_Coll::
-	coll_tiles $1e, $20, $2e, $30, $34, $37, $39, $3a, $40, $51, $52, $5a, $5c, $5e, $5f
+	coll_tiles $00, $04, $05, $06, $24, $29, $54, $5a
 
 House_Coll::
 	coll_tiles $01, $04, $05, $12, $14, $5c, $5e,
@@ -73,4 +72,7 @@ TrashedHouse_Coll::
 	coll_tiles $01, $12, $14, $28, $32, $37, $44, $54, $5c
 
 OldCity_Coll::
-	coll_tiles $00, $03, $04, $05, $06, $07, $29, $38, $53, $54
+	coll_tiles $00, $03, $04, $05, $06, $07, $29, $53, $54
+
+Mart_Coll::
+	coll_tiles $01, $02, $11, $12, $1a, $1b, $2a, $2b, $3a, $3b

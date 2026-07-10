@@ -124,9 +124,7 @@ ToggleableObjectStates:
 	toggle_object_state OAKSLAB_POKEDEX2,             ON
 	toggle_object_state OAKSLAB_OAK2,                 OFF
 
-	toggleable_objects_for VIRIDIAN_GYM
-	toggle_object_state VIRIDIANGYM_GIOVANNI, ON
-	toggle_object_state VIRIDIANGYM_REVIVE,   ON
+	toggleable_objects_for OLD_CITY_GYM
 
 	toggleable_objects_for MUSEUM_1F
 	toggle_object_state MUSEUM1F_OLD_AMBER, ON
@@ -212,10 +210,10 @@ ToggleableObjectStates:
 	toggle_object_state BILLSHOUSE_BILL1,        OFF
 	toggle_object_state BILLSHOUSE_BILL2,        OFF
 
-	toggleable_objects_for VIRIDIAN_FOREST
-	toggle_object_state VIRIDIANFOREST_ANTIDOTE,  ON
-	toggle_object_state VIRIDIANFOREST_POTION,    ON
-	toggle_object_state VIRIDIANFOREST_POKE_BALL, ON
+	toggleable_objects_for SILENT_HILLS
+;	toggle_object_state VIRIDIANFOREST_ANTIDOTE,  ON
+;	toggle_object_state VIRIDIANFOREST_POTION,    ON
+;	toggle_object_state VIRIDIANFOREST_POKE_BALL, ON
 
 	toggleable_objects_for MT_MOON_1F
 	toggle_object_state MTMOON1F_POTION1,      ON

@@ -5,8 +5,8 @@ ENDM
 HiddenItemCoords:
 	table_width 3
 	; map id, x, y
-	hidden_item VIRIDIAN_FOREST,                1,  18
-	hidden_item VIRIDIAN_FOREST,               16,  42
+;	hidden_item VIRIDIAN_FOREST,                1,  18
+;	hidden_item VIRIDIAN_FOREST,               16,  42
 	hidden_item MT_MOON_B2F,                   18,  12
 	hidden_item ROUTE_25,                      38,   3
 	hidden_item ROUTE_9,                       14,   7
