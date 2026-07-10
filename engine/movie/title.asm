@@ -275,7 +275,8 @@ TitleScreenPickNewMon:
 .loop
 ; Keep looping until a mon different from the current one is picked.
 	call Random
-	and $f
+	cp (TitleMonsEnd - TitleMons) ; Check against the total number of mons in the list
+	jr nc, .loop                 ; If random number is too high, try again
 	ld c, a
 	ld b, 0
 	ld hl, TitleMons
