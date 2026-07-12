@@ -88,6 +88,7 @@ VBlank::
 ;.afterMusic
 
 	farcall TrackPlayTime ; keep track of time played
+	call UpdateSoftwareRTC
 
 	ldh a, [hDisableJoypadPolling]
 	and a

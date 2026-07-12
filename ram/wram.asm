@@ -2257,6 +2257,12 @@ wDayCareMonOT::   ds NAME_LENGTH
 
 wDayCareMon:: box_struct wDayCareMon
 
+wRTCSeconds:: db
+wRTCMinutes:: db
+wRTCHours::   db
+wRTCDays::    db
+wRTCFrames::  db ; Counts up to 60 to track 1 second
+
 wMainDataEnd::
 
 

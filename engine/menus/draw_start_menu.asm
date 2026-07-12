@@ -17,6 +17,13 @@ DrawStartMenu::
 	ld c, $08
 .drawTextBoxBorder
 	call TextBoxBorder
+	; For clock
+	hlcoord 0, 0   ; Top-left corner anchor
+	ld b, 2        ; Inner height
+	ld c, 5        ; Inner width (fits "00:00")
+	call TextBoxBorder
+	call PrintStartMenuClock
+
 	ld a, PAD_DOWN | PAD_UP | PAD_START | PAD_B | PAD_A
 	ld [wMenuWatchedKeys], a
 	ld a, $02
@@ -71,6 +78,24 @@ DrawStartMenu::
 	call PlaceString
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
+	ret
+
+PrintStartMenuClock::
+	hlcoord 1, 1
+
+	; Print Hours
+	ld de, wRTCHours
+	lb bc, LEADING_ZEROES | 1, 2
+	call PrintNumber
+
+	; Print the ":" divider character
+	ld a, ':'
+	ld [hli], a
+
+	; Print Minutes
+	ld de, wRTCMinutes
+	lb bc, LEADING_ZEROES | 1, 2
+	call PrintNumber
 	ret
 
 StartMenuPokedexText:

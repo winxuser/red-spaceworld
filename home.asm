@@ -127,6 +127,7 @@ INCLUDE "home/random.asm"
 INCLUDE "home/predef.asm"
 INCLUDE "home/hidden_events.asm"
 INCLUDE "home/predef_text.asm"
+INCLUDE "home/rtc_clock.asm"
 
 
 ; Note: this saves rWBK before calling an interrupt. It would also make sense to save

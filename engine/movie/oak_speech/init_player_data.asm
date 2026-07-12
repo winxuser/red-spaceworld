@@ -45,6 +45,17 @@ DEF START_MONEY EQU $3000
 	ld bc, wGameProgressFlagsEnd - wGameProgressFlags
 	call FillMemory ; clear all game progress flags
 
+	xor a
+	ld [wRTCSeconds], a
+	ld [wRTCFrames], a
+	ld [wRTCMinutes], a ; Starts at 0 minutes
+
+	ld a, 7
+	ld [wRTCHours], a   ; Starts at 7 AM
+
+	ld a, 1
+	ld [wRTCDays], a    ; Starts on Day 1
+
 	jp InitializeToggleableObjectsFlags
 
 InitializeEmptyList:
