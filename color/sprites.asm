@@ -23,31 +23,46 @@ DEF SPR_PAL_ROCK    EQU 7
 DEF SPR_PAL_RANDOM  EQU 8
 
 LoadOverworldSpritePalettes:
-	ldh a, [rWBK]
-	ld b, a
-	xor a
-	ldh [rWBK], a
-	push bc
-	; Does the map we're on use dark/night palettes?
-	; Load the matching Object Pals if so
-	ld a, [wCurMapTileset]
-	ld hl, SpritePalettesNite
-	cp CAVERN
-	jr z, .gotPaletteList
-	; If it is the Pokemon Center, load different pals for the Heal Machine to flash
-	ld hl, SpritePalettesPokecenter
-	cp POKECENTER
-	jr z, .gotPaletteList
-	ld a, [wCurMap]
-	cp INDIGO_PLATEAU_LOBBY
-	jr z, .gotPaletteList
-	; If not, load the normal Object Pals
-	ld hl, SpritePalettes
+    ldh a, [rWBK]
+    ld b, a
+    xor a
+    ldh [rWBK], a
+    push bc
+
+    ld a, [wCurMapTileset]
+    cp CAVERN
+    ld hl, SpritePalettesNight
+    jr z, .gotPaletteList
+
+    cp POKECENTER
+    ld hl, SpritePalettesPokecenter
+    jr z, .gotPaletteList
+    ld a, [wCurMap]
+    cp INDIGO_PLATEAU_LOBBY
+    jr z, .gotPaletteList
+
+    ld a, [wCurMapTileset]
+    cp OVERWORLD
+    jr z, .checkNight
+    cp OLD_CITY_TS
+    jr z, .checkNight
+    ; If it doesn't match any outdoor tilesets, it's an indoor map.
+    jr .useDayPalette
+
+.checkNight
+    call GetTimeOfDayStage
+    cp 2 ; Does GetTimeOfDayStage return 2 (Night)?
+    ld hl, SpritePalettesNight
+    jr z, .gotPaletteList
+
+.useDayPalette
+    ld hl, SpritePalettes
+
 .gotPaletteList
-	pop bc
-	ld a, b
-	ldh [rWBK], a
-	jr LoadSpritePaletteData
+    pop bc
+    ld a, b
+    ldh [rWBK], a
+    jr LoadSpritePaletteData
 
 LoadAttackSpritePalettes:
 	ld hl, AttackSpritePalettes

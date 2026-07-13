@@ -1,7 +1,11 @@
 INCLUDE "color/data/map_palettes.asm"
+INCLUDE "color/data/map_palettes_morning.asm"
+INCLUDE "color/data/map_palettes_night.asm"
 INCLUDE "color/data/map_palette_sets.asm"
 INCLUDE "color/data/map_palette_assignments.asm"
 INCLUDE "color/data/roofpalettes.asm"
+INCLUDE "color/data/roofpalettes_morning.asm"
+INCLUDE "color/data/roofpalettes_night.asm"
 
 DEF TILESET_SIZE EQU $60
 
@@ -50,7 +54,47 @@ LoadTilesetPalette:
 	sla e
 	rl d
 	push hl
+
+; Only swap tables for specific tilesets
+	xor a
+	ldh [rWBK], a
+	ld a, [wCurMapTileset]
+	ld h, a
+	ld a, 2
+	ldh [rWBK], a
+	ld a, h
+
+	and a             ; Is it tileset 0 (OVERWORLD)?
+	jr z, .checkTime
+	cp PLATEAU
+	jr z, .checkTime
+	cp OLD_CITY_TS
+	jr z, .checkTime
+	cp SILENT_HILLS
+	jr z, .checkTime
+
+	; If it isn't any of the above, skip to day palettes
+	jr .dayPalettes
+
+.checkTime
+	call GetTimeOfDayStage
+	and a
+	jr z, .dayPalettes
+	dec a
+	jr nz, .nightPalettes
+
+	; Morning
+	ld hl, MapPalettesMorning
+	jr .applyOffset
+
+.nightPalettes
+	ld hl, MapPalettesNight
+	jr .applyOffset
+
+.dayPalettes
 	ld hl, MapPalettes
+
+.applyOffset
 	add hl, de
 	ld d, h
 	ld e, l ; de now points to map's palette data
@@ -93,10 +137,6 @@ LoadTilesetPalette:
 	dec b
 	jr nz, .fillLoop
 
-	; There used to be special-case code for tile $78 here (pokeball in pc), but now
-	; it uses palette 7 as well. Those areas still need to load the variant of the
-	; textbox palette (PC_POKEBALL_PAL).
-
 	; Switch to wram bank 1 just to read wCurMap
 	xor a
 	ldh [rWBK], a
@@ -130,7 +170,7 @@ LoadTilesetPalette:
 	ld [hli], a
 .notCeladon1st
 
-	; Retrieve former wram bank
+; Retrieve former wram bank
 	pop af
 	ld b, a
 
@@ -146,6 +186,12 @@ LoadTilesetPalette:
 	and a ; Check whether tileset 0 is loaded
 	call z, LoadTownPalette
 	cp PLATEAU ; tileset 0 isn't the only outside tileset
+	call z, LoadTownPalette
+
+	; Add your new outdoor tilesets here!
+	cp OLD_CITY_TS
+	call z, LoadTownPalette
+	cp SILENT_HILLS
 	call z, LoadTownPalette
 
 	pop hl
@@ -180,7 +226,24 @@ LoadTownPalette:
 
 	push de
 	push hl
+
+	call GetTimeOfDayStage
+	and a
+	jr z, .dayRoofs
+	dec a
+	jr nz, .nightRoofs
+
+	ld hl, RoofPalettesMorning
+	jr .applyRoofOffset
+
+.nightRoofs
+	ld hl, RoofPalettesNight
+	jr .applyRoofOffset
+
+.dayRoofs
 	ld hl, RoofPalettes
+
+.applyRoofOffset
 	ld b, 0
 	add hl, bc
 	ld e, [hl]
@@ -203,3 +266,37 @@ LoadTownPalette:
 	pop af
 	ldh [rWBK], a ; Restore wram bank
 	ret
+
+GetTimeOfDayStage::
+    push af
+    jr .night        ; <-- ADD THIS LINE FOR DEBUGGING
+
+    ld a, [wRTCHours]
+
+    ; NEW GAME FAIL-SAFE:
+    ; If the hour is 0, we treat it as 7 (Morning)
+    ; because 0 is likely just uninitialized memory.
+    and a            ; Is it 0?
+    jr nz, .check_time
+    ld a, 7          ; Default to 7 if 0
+
+.check_time
+    cp 4
+    jr c, .night    ; 0-3 = Night
+    cp 10
+    jr c, .morning  ; 4-9 = Morning
+    cp 18
+    jr c, .day      ; 10-17 = Day
+
+.night
+    pop af
+    ld a, 2
+    ret
+.morning
+    pop af
+    ld a, 1
+    ret
+.day
+    pop af
+    xor a
+    ret

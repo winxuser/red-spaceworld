@@ -1,14 +1,14 @@
 UpdateSoftwareRTC::
-    push af             ; Save register A and flags
+    push af               ; Save register A and flags
 
     ld a, [wRTCFrames]
     inc a
-    cp 60               ; 60 frames = 1 second
+    cp 10                 ; Changed from 60 to 10 (60 / 6 = 10)
     ld [wRTCFrames], a
-    jr nz, .done        ; If not 60 yet, we are done
+    jr nz, .done          ; If not 10 yet, we are done
 
     xor a
-    ld [wRTCFrames], a  ; Reset frames
+    ld [wRTCFrames], a    ; Reset frames
 
     ; Increment Seconds
     ld a, [wRTCSeconds]
@@ -46,5 +46,5 @@ UpdateSoftwareRTC::
     ld [wRTCDays], a
 
 .done
-    pop af              ; Restore register A and flags
+    pop af                ; Restore register A and flags
     ret
