@@ -2870,9 +2870,8 @@ SwapMovesInMenu:
 PrintMenuItem:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	hlcoord 0, 8
-	ld b, 3
-	ld c, 9
+	hlcoord 0, 7
+	lb bc, 4, 9
 	call TextBoxBorder
 	ld a, [wPlayerDisabledMove]
 	and a
@@ -2886,7 +2885,7 @@ PrintMenuItem:
 	hlcoord 1, 10
 	ld de, DisabledText
 	call PlaceString
-	jr .moveDisabled
+	jp .finished
 .notDisabled
 	ld hl, wCurrentMenuItem
 	dec [hl]
@@ -2914,32 +2913,108 @@ PrintMenuItem:
 	ld a, [hl]
 	and PP_MASK
 	ld [wBattleMenuCurrentPP], a
-; print TYPE/<type> and <curPP>/<maxPP>
-	hlcoord 1, 9
-	ld de, TypeText
+; print move info
+	hlcoord 6, 11
+	ld [hl], '/'
+.printPP
+	hlcoord 1, 11
+	ld de, PPText
 	call PlaceString
-	hlcoord 7, 11
-	ld [hl], '/'
-	hlcoord 5, 9
-	ld [hl], '/'
-	hlcoord 5, 11
+	; current PP
+	hlcoord 4, 11
 	ld de, wBattleMenuCurrentPP
 	lb bc, 1, 2
 	call PrintNumber
-	hlcoord 8, 11
+	; max PP
+	hlcoord 7, 11
 	ld de, wMaxPP
 	lb bc, 1, 2
 	call PrintNumber
+.printType
 	call GetCurrentMove
-	hlcoord 2, 10
+	hlcoord  1, 8
 	predef PrintMoveType
-.moveDisabled
+.printPower
+	hlcoord 1, 9
+	ld de, PowerText
+	call PlaceString
+	hlcoord 5, 9
+	ld de, wPlayerMovePower
+	ld a, [wPlayerMoveEffect]
+	cp SPLASH_EFFECT
+	jr z, .hasMovePower
+	ld a, [wPlayerMovePower]
+	cp 1
+	jr z, .noMovePower
+	and a
+	jr z, .noMovePower
+.hasMovePower
+	lb bc, 1, 3
+	call PrintNumber
+	jr .printAccuracy
+.noMovePower
+	ld de, NoMovePowerText
+	call PlaceString
+	; ACC
+.printAccuracy
+	hlcoord 1, 10
+	ld de, AccuracyText
+	call PlaceString
+	ld a, [wPlayerMoveEffect]
+	cp SWIFT_EFFECT
+	jr z, .infAccuracy
+	; convert accuracy
+	ld a, [wPlayerMoveAccuracy]
+	farcall ConvertPercentagesBattle
+	ld de, wBuffer
+	hlcoord 5, 10
+	lb bc, 1, 3
+	call PrintNumber
+	hlcoord 8, 10
+	ld [hl], '%'
+	jr .printHighCrit
+.infAccuracy
+	hlcoord 5, 10
+.printHighCrit
+	ld a, [wPlayerSelectedMove]
+	ld b, a
+	ld hl, HighCriticalMoves
+.hcLoop
+	ld a, [hli] ; read move from table
+	cp b
+	jr z, .highCritMove
+	inc a
+	jr nz, .hcLoop
+	jr .statusEffect
+.statusEffect
+	ld a, [wPlayerMoveEffect]
+.noAdditionalEffect
+	cp NO_ADDITIONAL_EFFECT
+	jp z, .finished
+	cp SPLASH_EFFECT
+	jp z, .finished
+.highCritMove
+	hlcoord 9, 8
+	jp .finished
+.finished
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	jp Delay3
 
+PowerText:
+	db "PWR@"
+
+NoMovePowerText:
+	db "---@s"
+
 DisabledText:
-	db "disabled!@"
+	db "Disabled!@"
+
+AccuracyText:
+	db "ACC@"
+
+PPText:
+	db "PP@"
 
 TypeText:
 	db "TYPE@"
