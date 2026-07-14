@@ -57,6 +57,7 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	;call Delay3
 	nop
 	nop
+	nop
 	ld a, 1 ; HAX: don't disable bg transfer. Makes the battle transition smoother.
 	ldh [hAutoBGTransferEnabled], a
 	ld b, $70
@@ -1849,6 +1850,9 @@ DrawPlayerHUDAndHPBar:
 	hlcoord 10, 7
 IF GEN_2_GRAPHICS
 	call PlaceString ; Note: "CenterMonName" not called to be consistent with gen 2
+	ld a, [wBattleMonSpecies]
+	ld [wGenderTemp], a
+	call PrintPlayerMonGender
 	call PrintEXPBarAt1711
 ELSE
 	call CenterMonName
@@ -1913,6 +1917,9 @@ DrawEnemyHUDAndHPBar:
 	hlcoord 1, 0
 	call CenterMonName
 	call PlaceString
+	ld a, [wEnemyMonSpecies]
+	ld [wGenderTemp], a
+	call PrintEnemyMonGender
 IF GEN_2_GRAPHICS
 	hlcoord 6, 1
 ELSE
@@ -2004,6 +2011,50 @@ GetBattleHealthBarColor:
 	ret z
 	ld b, SET_PAL_BATTLE
 	jp RunPaletteCommand
+
+PrintEnemyMonGender: ; called during battle
+	; get gender
+	ld de, wEnemyMonDVs
+	callfar GetMonGender
+	ld a, [wGenderTemp]
+	and a
+	jr z, .noGender
+	dec a
+	jr z, .male
+	; else female
+	ld a, '♀'
+	jr .printSymbol
+.male
+	ld a, '♂'
+	jr .printSymbol
+.noGender
+	ld a, ' '
+.printSymbol
+	hlcoord 9, 1
+	ld [hl], a
+	ret
+
+PrintPlayerMonGender: ; called during battle
+	; get gender
+	ld de, wBattleMonDVs
+	callfar GetMonGender
+	ld a, [wGenderTemp]
+	and a
+	jr z, .noGender
+	dec a
+	jr z, .male
+	; else female
+	ld a, '♀'
+	jr .printSymbol
+.male
+	ld a, '♂'
+	jr .printSymbol
+.noGender
+	ld a, ' '
+.printSymbol
+	hlcoord 17, 8
+	ld [hl], a
+	ret
 
 ; center's mon's name on the battle screen
 ; if the name is 1 or 2 letters long, it is printed 2 spaces more to the right than usual

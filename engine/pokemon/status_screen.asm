@@ -135,6 +135,10 @@ StatusScreen:
 	hlcoord 9, 2
 	call PlaceString ; Pokémon name
 
+	ld a, [wLoadedMonSpecies]
+	ld [wGenderTemp], a
+	call PrintGenderStatusScreen
+
 	hlcoord 14, 0
 	call PrintLevel
 
@@ -572,4 +576,26 @@ DrawVerticalDivider:
 	add hl, de
 	dec b
 	jr nz, .loop
+	ret
+
+PrintGenderStatusScreen: ; called on status screen
+	; get gender
+	ld de, wLoadedMonDVs
+	callfar GetMonGender
+	ld a, [wGenderTemp]
+	and a
+	jr z, .noGender
+	dec a
+	jr z, .male
+	; else female
+	ld a, '♀'
+	jr .printSymbol
+.male
+	ld a, '♂'
+	jr .printSymbol
+.noGender
+	ld a, ' '
+.printSymbol
+	hlcoord 18, 0
+	ld [hl], a
 	ret

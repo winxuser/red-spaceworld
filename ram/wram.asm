@@ -2263,6 +2263,8 @@ wRTCHours::   db
 wRTCDays::    db
 wRTCFrames::  db ; Counts up to 60 to track 1 second
 
+wGenderTemp:: db
+
 wMainDataEnd::
 
 
