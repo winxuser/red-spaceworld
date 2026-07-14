@@ -70,7 +70,7 @@ LoadTilesetPalette:
 	jr z, .checkTime
 	cp OLD_CITY_TS
 	jr z, .checkTime
-	cp SILENT_HILLS
+	cp FOREST
 	jr z, .checkTime
 
 	; If it isn't any of the above, skip to day palettes
@@ -191,7 +191,7 @@ LoadTilesetPalette:
 	; Add your new outdoor tilesets here!
 	cp OLD_CITY_TS
 	call z, LoadTownPalette
-	cp SILENT_HILLS
+	cp FOREST
 	call z, LoadTownPalette
 
 	pop hl
