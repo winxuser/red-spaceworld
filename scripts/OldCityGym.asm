@@ -66,9 +66,9 @@ OldCityGymScriptReceiveTM34:
 	ld hl, wBeatGymFlags
 	set BIT_BOULDERBADGE, [hl]
 
-	ld a, TOGGLE_GYM_GUY
-	ld [wToggleableObjectIndex], a
-	predef HideObject
+;	ld a, TOGGLE_GYM_GUY
+;	ld [wToggleableObjectIndex], a
+;	predef HideObject
 	ld a, TOGGLE_ROUTE_22_RIVAL_1
 	ld [wToggleableObjectIndex], a
 	predef HideObject

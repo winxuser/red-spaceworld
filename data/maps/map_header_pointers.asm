@@ -3,7 +3,7 @@ MapHeaderPointers::
 	table_width 2
 	dw SilentHill_h
 	dw OldCity_h
-	dw PewterCity_h
+	dw WestCity_h
 	dw CeruleanCity_h
 	dw LavenderTown_h
 	dw VermilionCity_h

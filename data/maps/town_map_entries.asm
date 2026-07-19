@@ -9,7 +9,7 @@ ExternalMapEntries:
 	; x, y, name
 	outdoor_map  2, 11, SilentHillName
 	outdoor_map  2,  8, OldCityName
-	outdoor_map  2,  3, PewterCityName
+	outdoor_map  2,  3, WestCityName
 	outdoor_map 10,  2, CeruleanCityName
 	outdoor_map 14,  5, LavenderTownName
 	outdoor_map 10,  9, VermilionCityName
@@ -62,7 +62,7 @@ InternalMapEntries:
 	indoor_map OLD_CITY,            2,  8, OldCityName
 	indoor_map ROUTE_2,             2,  6, Route2Name
 	indoor_map SILENT_HILLS,        2,  4, SilentHillsName
-	indoor_map PEWTER_CITY,         2,  3, PewterCityName
+	indoor_map WEST_CITY,           2,  3, WestCityName
 	indoor_map MT_MOON,             6,  2, MountMoonName
 	indoor_map CERULEAN_CITY,      10,  2, CeruleanCityName
 	indoor_map ROUTE_4,             5,  2, Route4Name

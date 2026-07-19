@@ -22,9 +22,9 @@ ENDM
 ;	const TOGGLE_LYING_OLD_MAN                 ; 01
 ;	const TOGGLE_OLD_MAN                       ; 02
 
-	toggle_consts_for PEWTER_CITY
-	const TOGGLE_MUSEUM_GUY                    ; 03
-	const TOGGLE_GYM_GUY                       ; 04
+	toggle_consts_for WEST_CITY
+;	const TOGGLE_MUSEUM_GUY                    ; 03
+;	const TOGGLE_GYM_GUY                       ; 04
 
 	toggle_consts_for CERULEAN_CITY
 	const TOGGLE_CERULEAN_RIVAL                ; 05
@@ -51,8 +51,6 @@ ENDM
 	const TOGGLE_SAFFRON_CITY_F                ; 18
 
 	toggle_consts_for ROUTE_2
-	const TOGGLE_ROUTE_2_ITEM_1                ; 19 X
-	const TOGGLE_ROUTE_2_ITEM_2                ; 1A X
 
 	toggle_consts_for ROUTE_4
 	const TOGGLE_ROUTE_4_ITEM                  ; 1B X

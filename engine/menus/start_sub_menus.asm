@@ -145,6 +145,8 @@ StartMenu_Pokemon::
 	jr z, .canFly
 	cp OLD_CITY
 	jr z, .canFly
+	cp WEST_CITY
+	jr z, .canFly
 ; end of new block to make "open-air" maps flyable
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
@@ -429,6 +431,7 @@ StartMenu_Item::
 	jp z, .partyMenuNotDisplayed
 	call GBPalWhiteOutWithDelay3
 	call RestoreScreenTilesAndReloadTilePatterns
+	call ReloadMapData
 	pop af
 	ld [wUpdateSpritesEnabled], a
 	jp StartMenu_Item

@@ -39,10 +39,10 @@ INCLUDE "scripts/Route1Gate1F.asm"
 INCLUDE "data/maps/objects/Route1Gate1F.asm"
 Route1Gate1F_Blocks: INCBIN "maps/Route1Gate1F.blk"
 
-INCLUDE "data/maps/headers/PewterCity.asm"
-	ds 1
-INCLUDE "data/maps/objects/PewterCity.asm"
-PewterCity_Blocks: INCBIN "maps/PewterCity.blk"
+INCLUDE "data/maps/headers/WestCity.asm"
+INCLUDE "scripts/WestCity.asm"
+INCLUDE "data/maps/objects/WestCity.asm"
+WestCity_Blocks: INCBIN "maps/WestCity.blk"
 
 INCLUDE "data/maps/headers/CeruleanCity.asm"
 INCLUDE "data/maps/objects/CeruleanCity.asm"
@@ -61,10 +61,14 @@ INCLUDE "scripts/SilentHills.asm"
 INCLUDE "data/maps/objects/SilentHills.asm"
 SilentHills_Blocks: INCBIN "maps/SilentHills.blk"
 
+INCLUDE "data/maps/headers/Route2Gate.asm"
+INCLUDE "scripts/Route2Gate.asm"
+INCLUDE "data/maps/objects/Route2Gate.asm"
+Route2Gate_Blocks: INCBIN "maps/Route2Gate.blk"
+
 
 SECTION "Maps 2", ROMX
 
-INCLUDE "scripts/PewterCity.asm"
 INCLUDE "scripts/CeruleanCity.asm"
 INCLUDE "scripts/VermilionCity.asm"
 INCLUDE "scripts/CeladonCity.asm"
@@ -864,7 +868,6 @@ UndergroundPathRoute7Copy_Blocks:
 UndergroundPathRoute6_Blocks:
 UndergroundPathRoute5_Blocks: INCBIN "maps/UndergroundPathRoute5.blk"
 
-Route2Gate_Blocks:
 ViridianForestSouthGate_Blocks:
 ViridianForestNorthGate_Blocks: INCBIN "maps/ViridianForestNorthGate.blk"
 
@@ -957,10 +960,6 @@ INCLUDE "data/maps/objects/SaffronPokecenter.asm"
 INCLUDE "data/maps/headers/ViridianForestNorthGate.asm"
 INCLUDE "scripts/ViridianForestNorthGate.asm"
 INCLUDE "data/maps/objects/ViridianForestNorthGate.asm"
-
-INCLUDE "data/maps/headers/Route2Gate.asm"
-INCLUDE "scripts/Route2Gate.asm"
-INCLUDE "data/maps/objects/Route2Gate.asm"
 
 INCLUDE "data/maps/headers/ViridianForestSouthGate.asm"
 INCLUDE "scripts/ViridianForestSouthGate.asm"

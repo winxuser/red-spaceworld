@@ -13,7 +13,8 @@ DoorTileIDPointers:
 	dbw FACILITY,    .FacilityDoorTileIDs
 	dbw PLATEAU,     .PlateauDoorTileIDs
 	dbw TRASHEDHOUSE,.TrashedHouseDoorTileIDs
-	dbw OLD_CITY_TS,    .OldCityDoorTileIDs
+	dbw OLD_CITY_TS, .OldCityDoorTileIDs
+	dbw WEST_CITY_TS,.WestCityDoorTileIDs
 	db -1 ; end
 
 MACRO door_tiles
@@ -60,4 +61,5 @@ ENDM
 	door_tiles
 
 .OldCityDoorTileIDs:
+.WestCityDoorTileIDs:
 	door_tiles $29

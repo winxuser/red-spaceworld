@@ -72,6 +72,8 @@ LoadTilesetPalette:
 	jr z, .checkTime
 	cp FOREST
 	jr z, .checkTime
+	cp WEST_CITY_TS
+	jr z, .checkTime
 
 	; If it isn't any of the above, skip to day palettes
 	jr .dayPalettes

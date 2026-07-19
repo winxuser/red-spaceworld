@@ -1,6 +1,6 @@
 SilentHillName:      db "SILENT HILL@"
 OldCityName:         db "OLD CITY@"
-PewterCityName:      db "PEWTER CITY@"
+WestCityName:        db "WEST CITY@"
 CeruleanCityName:    db "CERULEAN CITY@"
 LavenderTownName:    db "LAVENDER TOWN@"
 VermilionCityName:   db "VERMILION CITY@"

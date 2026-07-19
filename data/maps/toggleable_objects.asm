@@ -49,9 +49,9 @@ ToggleableObjectStates:
 ;	toggle_object_state VIRIDIANCITY_OLD_MAN_SLEEPY, ON
 ;	toggle_object_state VIRIDIANCITY_OLD_MAN,        OFF
 
-	toggleable_objects_for PEWTER_CITY
-	toggle_object_state PEWTERCITY_SUPER_NERD1, ON
-	toggle_object_state PEWTERCITY_YOUNGSTER,   ON
+	toggleable_objects_for WEST_CITY
+;	toggle_object_state PEWTERCITY_SUPER_NERD1, ON
+;	toggle_object_state WESTCITY_YOUNGSTER,   ON
 
 	toggleable_objects_for CERULEAN_CITY
 	toggle_object_state CERULEANCITY_RIVAL,       OFF
@@ -78,8 +78,6 @@ ToggleableObjectStates:
 	toggle_object_state SAFFRONCITY_ROCKET9,        OFF
 
 	toggleable_objects_for ROUTE_2
-	toggle_object_state ROUTE2_MOON_STONE, ON
-	toggle_object_state ROUTE2_HP_UP,      ON
 
 	toggleable_objects_for ROUTE_4
 	toggle_object_state ROUTE4_TM_WHIRLWIND, ON
@@ -125,6 +123,7 @@ ToggleableObjectStates:
 	toggle_object_state OAKSLAB_OAK2,                 OFF
 
 	toggleable_objects_for OLD_CITY_GYM
+;	toggle_object_state OLDCITY_YOUNGSTER,   ON
 
 	toggleable_objects_for MUSEUM_1F
 	toggle_object_state MUSEUM1F_OLD_AMBER, ON

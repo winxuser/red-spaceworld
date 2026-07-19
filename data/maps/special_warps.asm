@@ -64,7 +64,7 @@ ENDM
 FlyWarpDataPtr:
 	fly_warp_spec SILENT_HILL,     .SilentHill
 	fly_warp_spec OLD_CITY,        .OldCity
-	fly_warp_spec PEWTER_CITY,     .PewterCity
+	fly_warp_spec WEST_CITY,       .WestCity
 	fly_warp_spec CERULEAN_CITY,   .CeruleanCity
 	fly_warp_spec LAVENDER_TOWN,   .LavenderTown
 	fly_warp_spec VERMILION_CITY,  .VermilionCity
@@ -78,7 +78,7 @@ FlyWarpDataPtr:
 
 .SilentHill:     fly_warp SILENT_HILL,      5,  5
 .OldCity:        fly_warp OLD_CITY,        27, 29
-.PewterCity:     fly_warp PEWTER_CITY,     13, 26
+.WestCity:       fly_warp WEST_CITY,       24, 15
 .CeruleanCity:   fly_warp CERULEAN_CITY,   19, 18
 .LavenderTown:   fly_warp LAVENDER_TOWN,    3,  6
 .VermilionCity:  fly_warp VERMILION_CITY,  11,  4

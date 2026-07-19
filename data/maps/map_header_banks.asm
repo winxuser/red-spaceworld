@@ -3,7 +3,7 @@ MapHeaderBanks::
 	table_width 1
 	db BANK(SilentHill_h)
 	db BANK(OldCity_h)
-	db BANK(PewterCity_h)
+	db BANK(WestCity_h)
 	db BANK(CeruleanCity_h)
 	db BANK(LavenderTown_h)
 	db BANK(VermilionCity_h)

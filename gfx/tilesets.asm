@@ -66,9 +66,14 @@ Club_GFX::          INCBIN "gfx/tilesets/club.2bpp"
 Club_Block::        INCBIN "gfx/blocksets/club.bst"
 Underground_GFX::   INCBIN "gfx/tilesets/underground.2bpp"
 Underground_Block:: INCBIN "gfx/blocksets/underground.bst"
-TrashedHouse_GFX::   INCBIN "gfx/tilesets/trashedhouse.2bpp"
-TrashedHouse_Block:: INCBIN "gfx/blocksets/trashedhouse.bst"
-OldCity_GFX::        INCBIN "gfx/tilesets/old_city.2bpp"
-OldCity_Block::      INCBIN "gfx/blocksets/old_city.bst"
+TrashedHouse_GFX::  INCBIN "gfx/tilesets/trashedhouse.2bpp"
+TrashedHouse_Block::INCBIN "gfx/blocksets/trashedhouse.bst"
+OldCityTS_GFX::     INCBIN "gfx/tilesets/old_city.2bpp"
+OldCityTS_Block::   INCBIN "gfx/blocksets/old_city.bst"
 Mart_GFX::          INCBIN "gfx/tilesets/mart.2bpp"
 Mart_Block::        INCBIN "gfx/blocksets/mart.bst"
+
+SECTION "Tilesets 5", ROMX
+
+WestCityTS_GFX::	INCBIN "gfx/tilesets/west_city_ts.2bpp"
+WestCityTS_Block::	INCBIN "gfx/blocksets/west_city_ts.bst"

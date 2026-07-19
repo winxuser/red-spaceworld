@@ -2,7 +2,7 @@ WildDataPointers:
 	table_width 2
 	dw NothingWildMons          ; SILENT_HILL
 	dw NothingWildMons          ; OLD_CITY
-	dw NothingWildMons          ; PEWTER_CITY
+	dw NothingWildMons          ; WEST_CITY
 	dw NothingWildMons          ; CERULEAN_CITY
 	dw NothingWildMons          ; LAVENDER_TOWN
 	dw NothingWildMons          ; VERMILION_CITY

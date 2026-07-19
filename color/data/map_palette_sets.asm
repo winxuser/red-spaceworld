@@ -25,10 +25,12 @@ MapPaletteSets:
 	dw ClubPalSet        ; CLUB
 	dw FacilityPalSet    ; FACILITY
 	dw PlateauPalSet     ; PLATEAU
-	dw TrashedHousePalSet ; TRASHEDHOUSE
+	dw TrashedHousePalSet; TRASHEDHOUSE
 	dw OldCityPalSet     ; OLD_CITY
+	dw WestCityPalSet    ; WEST_CITY
 	assert_table_length NUM_TILESETS
 
+WestCityPalSet:
 OldCityPalSet:
 OverworldPalSet:
 PlateauPalSet:

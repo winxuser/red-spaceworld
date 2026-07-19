@@ -25,7 +25,7 @@ ENDM
 	const_def
 	map_const SILENT_HILL,                   10,  9 ; $00
 	map_const OLD_CITY,                      20, 18 ; $01
-	map_const PEWTER_CITY,                   20, 18 ; $02
+	map_const WEST_CITY,                     20, 18 ; $02
 	map_const CERULEAN_CITY,                 20, 18 ; $03
 	map_const LAVENDER_TOWN,                 10,  9 ; $04
 	map_const VERMILION_CITY,                20, 18 ; $05
@@ -41,7 +41,7 @@ DEF NUM_CITY_MAPS EQU const_value
 DEF FIRST_ROUTE_MAP EQU const_value
 	map_const ROUTE_1,                       15,  9 ; $0C
 	map_const ROUTE_1_P2,                    10, 18 ; UNUSED_MAP_6A
-	map_const ROUTE_2,                       10, 36 ; $0D
+	map_const ROUTE_2,                       15,  9 ; $0D
 	map_const ROUTE_3,                       35,  9 ; $0E
 	map_const ROUTE_4,                       45,  9 ; $0F
 	map_const ROUTE_5,                       10, 18 ; $10
@@ -99,7 +99,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const PEWTER_MART,                    4,  4 ; $38
 	map_const PEWTER_SPEECH_HOUSE,            4,  4 ; $39
 	map_const PEWTER_POKECENTER,              7,  4 ; $3A
-	end_indoor_group PEWTER_CITY
+	end_indoor_group WEST_CITY
 
 	map_const MT_MOON_1F,                    20, 18 ; $3B
 	map_const MT_MOON_B1F,                   14, 14 ; $3C

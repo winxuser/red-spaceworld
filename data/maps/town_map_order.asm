@@ -6,7 +6,7 @@ TownMapOrder:
 	db OLD_CITY
 	db ROUTE_2
 	db DIGLETTS_CAVE
-	db PEWTER_CITY
+	db WEST_CITY
 	db ROUTE_3
 	db MT_MOON_1F
 	db ROUTE_4
