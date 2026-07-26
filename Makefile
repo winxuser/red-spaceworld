@@ -119,26 +119,27 @@ rgbdscheck.o: rgbdscheck.asm
 	$(RGBASM) -o $@ $<
 
 # Build tools when building the rom.
-# This has to happen before the rules are processed, since that's when scan_includes is run.
 ifeq (,$(filter clean tidy tools,$(MAKECMDGOALS)))
 
-$(info $(shell $(MAKE) -C tools))
+$(shell $(MAKE) -s -C tools)
 
-# The dep rules have to be explicit or else missing files won't be reported.
-# As a side effect, they're evaluated immediately instead of when the rule is invoked.
-# It doesn't look like $(shell) can be deferred so there might not be a better way.
 preinclude_deps := includes.asm $(shell tools/scan_includes includes.asm)
 define DEP
 $1: $2 $$(shell tools/scan_includes $2) $(preinclude_deps) | rgbdscheck.o
 	$$(RGBASM) $$(RGBASMFLAGS) -o $$@ $$<
 endef
 
-# Dependencies for objects (drop _red and _blue from asm file basenames)
-$(foreach obj, $(pokered_obj), $(eval $(call DEP,$(obj),$(obj:_red.o=.asm))))
-$(foreach obj, $(pokeblue_obj), $(eval $(call DEP,$(obj),$(obj:_blue.o=.asm))))
-$(foreach obj, $(pokeblue_debug_obj), $(eval $(call DEP,$(obj),$(obj:_blue_debug.o=.asm))))
-$(foreach obj, $(pokered_vc_obj), $(eval $(call DEP,$(obj),$(obj:_red_vc.o=.asm))))
-$(foreach obj, $(pokeblue_vc_obj), $(eval $(call DEP,$(obj),$(obj:_blue_vc.o=.asm))))
+# Consolidated object loop to reduce evaluation overhead
+all_objs := $(pokered_obj) $(pokeblue_obj) $(pokeblue_debug_obj) $(pokered_vc_obj) $(pokeblue_vc_obj)
+
+$(foreach obj,$(all_objs), \
+	$(eval $(call DEP,$(obj), \
+		$(patsubst %.o,%.asm, \
+			$(subst _red_vc.o,.o, \
+				$(subst _blue_vc.o,.o, \
+					$(subst _blue_debug.o,.o, \
+						$(subst _blue.o,.o, \
+							$(subst _red.o,.o,$(obj))))))))))
 
 endif
 

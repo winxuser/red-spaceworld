@@ -52,13 +52,7 @@ DisplayTownMap:
 	ld hl, wShadowOAMSprite04
 	call WriteTownMapSpriteOAM ; town map cursor sprite
 	pop hl
-	ld de, wNameBuffer
-.copyMapName
-	ld a, [hli]
-	ld [de], a
-	inc de
-	cp '@'
-	jr nz, .copyMapName
+	call CopyMapNameBuffer
 	hlcoord 1, 0
 	ld de, wNameBuffer
 	call PlaceString
@@ -289,8 +283,7 @@ LoadTownMap:
 	call TextBoxBorder
 	call DisableLCD
 	ld hl, WorldMapTileGraphics
-    ld de, vChars2
-    ld bc, $300
+	ld de, vChars2
 	ld bc, WorldMapTileGraphicsEnd - WorldMapTileGraphics
 	ld a, BANK(WorldMapTileGraphics)
 	call FarCopyData2
@@ -315,8 +308,8 @@ LoadTownMap:
 	ret
 
 UncompressedMap: ; Uses the Gen 2 format
-    INCBIN "gfx/town_map/town_map.map"
-    db $ff ; Marks the end of the map data
+	INCBIN "gfx/town_map/town_map.map"
+	db $ff ; Marks the end of the map data
 UncompressedMapEnd:
 
 ExitTownMap:
@@ -346,13 +339,7 @@ DrawPlayerOrBirdSprite:
 	call TownMapCoordsToOAMCoords
 	call WritePlayerOrBirdSpriteOAM
 	pop hl
-	ld de, wNameBuffer
-.loop
-	ld a, [hli]
-	ld [de], a
-	inc de
-	cp '@'
-	jr nz, .loop
+	call CopyMapNameBuffer
 	ld hl, wShadowOAM
 	ld de, wShadowOAMBackup
 	ld bc, OAM_COUNT * 4
@@ -549,14 +536,14 @@ LoadTownMapEntry:
 ; out: lower nybble of [de] = x, upper nybble of [de] = y, hl = address of name
 	cp FIRST_INDOOR_MAP
 	jr c, .external
-	ld bc, 4
 	ld hl, InternalMapEntries
-.loop
+.internalLoop
 	cp [hl]
-	jr c, .foundEntry
+	jr c, .foundInternalEntry
+	ld bc, 4
 	add hl, bc
-	jr .loop
-.foundEntry
+	jr .internalLoop
+.foundInternalEntry
 	inc hl
 	jr .readEntry
 .external
@@ -572,6 +559,16 @@ LoadTownMapEntry:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+	ret
+
+CopyMapNameBuffer:
+	ld de, wNameBuffer
+.copyLoop
+	ld a, [hli]
+	ld [de], a
+	inc de
+	cp '@'
+	jr nz, .copyLoop
 	ret
 
 INCLUDE "data/maps/town_map_entries.asm"

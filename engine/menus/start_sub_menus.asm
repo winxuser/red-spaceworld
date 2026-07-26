@@ -485,6 +485,7 @@ StartMenu_TownMap::
 	call LoadGBPal
 	pop af
 	ldh [hTileAnimations], a
+	call DrawStartMenu ; Draw the revamped start menu frame back onto the screen
 	jp RedisplayStartMenu
 
 StartMenu_TrainerInfo::
