@@ -26,29 +26,29 @@ ENDM
 ;	const TOGGLE_MUSEUM_GUY                    ; 03
 ;	const TOGGLE_GYM_GUY                       ; 04
 
-	toggle_consts_for CERULEAN_CITY
-	const TOGGLE_CERULEAN_RIVAL                ; 05
-	const TOGGLE_CERULEAN_ROCKET               ; 06
-	const TOGGLE_CERULEAN_GUARD_1              ; 07
-	const TOGGLE_CERULEAN_CAVE_GUY             ; 08
-	const TOGGLE_CERULEAN_GUARD_2              ; 09
+	toggle_consts_for BIRDON
+;	const TOGGLE_CERULEAN_RIVAL                ; 05
+;	const TOGGLE_CERULEAN_ROCKET               ; 06
+;	const TOGGLE_CERULEAN_GUARD_1              ; 07
+;	const TOGGLE_CERULEAN_CAVE_GUY             ; 08
+;	const TOGGLE_CERULEAN_GUARD_2              ; 09
 
-	toggle_consts_for SAFFRON_CITY
-	const TOGGLE_SAFFRON_CITY_1                ; 0A
-	const TOGGLE_SAFFRON_CITY_2                ; 0B
-	const TOGGLE_SAFFRON_CITY_3                ; 0C
-	const TOGGLE_SAFFRON_CITY_4                ; 0D
-	const TOGGLE_SAFFRON_CITY_5                ; 0E
-	const TOGGLE_SAFFRON_CITY_6                ; 0F
-	const TOGGLE_SAFFRON_CITY_7                ; 10
-	const TOGGLE_SAFFRON_CITY_8                ; 11
-	const TOGGLE_SAFFRON_CITY_9                ; 12
-	const TOGGLE_SAFFRON_CITY_A                ; 13
-	const TOGGLE_SAFFRON_CITY_B                ; 14
-	const TOGGLE_SAFFRON_CITY_C                ; 15
-	const TOGGLE_SAFFRON_CITY_D                ; 16
-	const TOGGLE_SAFFRON_CITY_E                ; 17
-	const TOGGLE_SAFFRON_CITY_F                ; 18
+	toggle_consts_for STAND
+;	const TOGGLE_SAFFRON_CITY_1                ; 0A
+;	const TOGGLE_SAFFRON_CITY_2                ; 0B
+;	const TOGGLE_SAFFRON_CITY_3                ; 0C
+;	const TOGGLE_SAFFRON_CITY_4                ; 0D
+;	const TOGGLE_SAFFRON_CITY_5                ; 0E
+;	const TOGGLE_SAFFRON_CITY_6                ; 0F
+;	const TOGGLE_SAFFRON_CITY_7                ; 10
+;	const TOGGLE_SAFFRON_CITY_8                ; 11
+;	const TOGGLE_SAFFRON_CITY_9                ; 12
+;	const TOGGLE_SAFFRON_CITY_A                ; 13
+;	const TOGGLE_SAFFRON_CITY_B                ; 14
+;	const TOGGLE_SAFFRON_CITY_C                ; 15
+;	const TOGGLE_SAFFRON_CITY_D                ; 16
+;	const TOGGLE_SAFFRON_CITY_E                ; 17
+;	const TOGGLE_SAFFRON_CITY_F                ; 18
 
 	toggle_consts_for ROUTE_2
 

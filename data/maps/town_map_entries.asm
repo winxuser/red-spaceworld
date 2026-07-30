@@ -10,15 +10,16 @@ ExternalMapEntries:
 	outdoor_map  2, 11, SilentHillName
 	outdoor_map  2,  8, OldCityName
 	outdoor_map  2,  3, WestCityName
-	outdoor_map 10,  2, CeruleanCityName
-	outdoor_map 14,  5, LavenderTownName
-	outdoor_map 10,  9, VermilionCityName
-	outdoor_map  7,  5, CeladonCityName
-	outdoor_map  8, 13, FuchsiaCityName
-	outdoor_map  2, 15, CinnabarIslandName
-	outdoor_map  0,  2, IndigoPlateauName
-	outdoor_map 10,  5, SaffronCityName
-	outdoor_map  0,  0, SilentHillName ; unused
+	outdoor_map 10,  2, BirdonName
+	outdoor_map 14,  5, FontName
+	outdoor_map 10,  9, SouthCityName
+	outdoor_map  7,  5, HighTechName
+	outdoor_map  8, 13, NewTypeName
+	outdoor_map  2, 15, PrinceName
+	outdoor_map  0,  2, KantoName
+	outdoor_map 10,  5, StandName
+	outdoor_map  0,  0, BlueForestName ; unused
+	outdoor_map  0,  0, NorthCityName ; unused
 	outdoor_map  2, 10, Route1Name
 	outdoor_map  2, 11, Route1P2Name
 	outdoor_map  2,  6, Route2Name
@@ -64,9 +65,9 @@ InternalMapEntries:
 	indoor_map SILENT_HILLS,        2,  4, SilentHillsName
 	indoor_map WEST_CITY,           2,  3, WestCityName
 	indoor_map MT_MOON,             6,  2, MountMoonName
-	indoor_map CERULEAN_CITY,      10,  2, CeruleanCityName
+	indoor_map BIRDON,             10,  2, BirdonName
 	indoor_map ROUTE_4,             5,  2, Route4Name
-	indoor_map CERULEAN_CITY_2,    10,  2, CeruleanCityName
+	indoor_map BIRDON_2,           10,  2, BirdonName
 	indoor_map ROUTE_5,            10,  4, Route5Name
 	indoor_map ROUTE_6,            10,  6, Route6Name
 	indoor_map ROUTE_7,             9,  5, Route7Name
@@ -76,27 +77,27 @@ InternalMapEntries:
 	indoor_map ROUTE_11,           13,  9, Route11Name
 	indoor_map ROUTE_12,           14,  7, Route12Name
 	indoor_map SEA_COTTAGE,        12,  0, SeaCottageName
-	indoor_map VERMILION_CITY,     10,  9, VermilionCityName
+	indoor_map SOUTH_CITY,         10,  9, SouthCityName
 	indoor_map SS_ANNE,             9, 10, SSAnneName
 	indoor_map VICTORY_ROAD,        0,  4, VictoryRoadName
 	indoor_map POKEMON_LEAGUE,      0,  2, PokemonLeagueName
 	indoor_map UNDERGROUND_PATH,   10,  5, UndergroundPathName
 	indoor_map POKEMON_LEAGUE_2,    0,  2, PokemonLeagueName
 	indoor_map UNDERGROUND_PATH_2, 10,  5, UndergroundPathName
-	indoor_map CELADON_CITY,        7,  5, CeladonCityName
-	indoor_map LAVENDER_TOWN,      14,  5, LavenderTownName
+	indoor_map HIGH_TECH,           7,  5, HighTechName
+	indoor_map FONT,               14,  5, FontName
 	indoor_map POKEMON_TOWER,      15,  5, PokemonTowerName
-	indoor_map LAVENDER_TOWN_2,    14,  5, LavenderTownName
-	indoor_map FUCHSIA_CITY,        8, 13, FuchsiaCityName
+	indoor_map FONT_2,             14,  5, FontName
+	indoor_map NEW_TYPE,            8, 13, NewTypeName
 	indoor_map SAFARI_ZONE,         8, 12, SafariZoneName
-	indoor_map FUCHSIA_CITY_2,      8, 13, FuchsiaCityName
+	indoor_map NEW_TYPE_2,          8, 13, NewTypeName
 	indoor_map SEAFOAM_ISLANDS,     5, 15, SeafoamIslandsName
-	indoor_map VERMILION_CITY_2,   10,  9, VermilionCityName
-	indoor_map FUCHSIA_CITY_3,      8, 13, FuchsiaCityName
+	indoor_map SOUTH_CITY_2,       10,  9, SouthCityName
+	indoor_map NEW_TYPE_3,          8, 13, NewTypeName
 	indoor_map POKEMON_MANSION,     2, 15, PokemonMansionName
-	indoor_map CINNABAR_ISLAND,     2, 15, CinnabarIslandName
-	indoor_map INDIGO_PLATEAU,      0,  2, IndigoPlateauName
-	indoor_map SAFFRON_CITY,       10,  5, SaffronCityName
+	indoor_map PRINCE,              2, 15, PrinceName
+	indoor_map INDIGO_PLATEAU,      0,  2, KantoName
+	indoor_map STAND,              10,  5, StandName
 	indoor_map ROUTE_15,            9, 13, Route15Name
 	indoor_map ROUTE_16,            4,  5, Route16Name
 	indoor_map ROUTE_12_2,         14, 10, Route12Name
@@ -105,7 +106,7 @@ InternalMapEntries:
 	indoor_map ROUTE_22,            0,  7, Route22Name
 	indoor_map VICTORY_ROAD_2,      0,  4, VictoryRoadName
 	indoor_map ROUTE_12_3,         14,  7, Route12Name
-	indoor_map VERMILION_CITY_3,   10,  9, VermilionCityName
+	indoor_map SOUTH_CITY_3,       10,  9, SouthCityName
 	indoor_map DIGLETTS_CAVE,       3,  4, DiglettsCaveName
 	indoor_map VICTORY_ROAD_3,      0,  4, VictoryRoadName
 	indoor_map ROCKET_HQ,           7,  5, RocketHQName
@@ -113,8 +114,8 @@ InternalMapEntries:
 	indoor_map POKEMON_MANSION_2,   2, 15, PokemonMansionName
 	indoor_map SAFARI_ZONE_2,       8, 12, SafariZoneName
 	indoor_map CERULEAN_CAVE,       9,  1, CeruleanCaveName
-	indoor_map LAVENDER_TOWN_3,    14,  5, LavenderTownName
-	indoor_map CERULEAN_CITY_3,    10,  2, CeruleanCityName
+	indoor_map FONT_3,             14,  5, FontName
+	indoor_map BIRDON_3,           10,  2, BirdonName
 	indoor_map ROCK_TUNNEL_2,      14,  3, RockTunnelName
 	indoor_map SILPH_CO_2,         10,  5, SilphCoName
 	indoor_map POKEMON_LEAGUE_3,    0,  2, PokemonLeagueName

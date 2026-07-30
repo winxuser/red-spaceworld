@@ -3,7 +3,7 @@ WildDataPointers:
 	dw NothingWildMons          ; SILENT_HILL
 	dw NothingWildMons          ; OLD_CITY
 	dw NothingWildMons          ; WEST_CITY
-	dw NothingWildMons          ; CERULEAN_CITY
+	dw NothingWildMons          ; BIRDON
 	dw NothingWildMons          ; LAVENDER_TOWN
 	dw NothingWildMons          ; VERMILION_CITY
 	dw NothingWildMons          ; CELADON_CITY

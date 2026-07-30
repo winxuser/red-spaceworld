@@ -4,15 +4,16 @@ MapHeaderBanks::
 	db BANK(SilentHill_h)
 	db BANK(OldCity_h)
 	db BANK(WestCity_h)
-	db BANK(CeruleanCity_h)
-	db BANK(LavenderTown_h)
-	db BANK(VermilionCity_h)
-	db BANK(CeladonCity_h)
-	db BANK(FuchsiaCity_h)
-	db BANK(CinnabarIsland_h)
-	db BANK(IndigoPlateau_h)
-	db BANK(SaffronCity_h)
-	db $01 ; UNUSED_MAP_0B
+	db BANK(Birdon_h)
+	db BANK(Font_h)
+	db BANK(SouthCity_h)
+	db BANK(HighTech_h)
+	db BANK(NewType_h)
+	db BANK(Prince_h)
+	db BANK(Kanto_h)
+	db BANK(Stand_h)
+	db BANK(BlueForest_h) ; UNUSED_MAP_0B
+	db BANK(NorthCity_h) ; UNUSED_MAP_6E
 	db BANK(Route1_h)
 	db BANK(Route1P2_h) ; UNUSED_MAP_6A
 	db BANK(Route2_h)
@@ -110,7 +111,6 @@ MapHeaderBanks::
 	db BANK(SSAnne2FRooms_h)
 	db BANK(SSAnneB1FRooms_h)
 	db BANK(VictoryRoad1F_h)
-	db $1D ; UNUSED_MAP_6E
 	db $1D ; UNUSED_MAP_6F
 	db $1D ; UNUSED_MAP_70
 	db BANK(LancesRoom_h)

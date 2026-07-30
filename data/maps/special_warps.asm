@@ -65,27 +65,31 @@ FlyWarpDataPtr:
 	fly_warp_spec SILENT_HILL,     .SilentHill
 	fly_warp_spec OLD_CITY,        .OldCity
 	fly_warp_spec WEST_CITY,       .WestCity
-	fly_warp_spec CERULEAN_CITY,   .CeruleanCity
-	fly_warp_spec LAVENDER_TOWN,   .LavenderTown
-	fly_warp_spec VERMILION_CITY,  .VermilionCity
-	fly_warp_spec CELADON_CITY,    .CeladonCity
-	fly_warp_spec FUCHSIA_CITY,    .FuchsiaCity
-	fly_warp_spec CINNABAR_ISLAND, .CinnabarIsland
-	fly_warp_spec INDIGO_PLATEAU,  .IndigoPlateau
-	fly_warp_spec SAFFRON_CITY,    .SaffronCity
+	fly_warp_spec BIRDON,          .Birdon
+	fly_warp_spec FONT,            .Font
+	fly_warp_spec SOUTH_CITY,      .SouthCity
+	fly_warp_spec HIGH_TECH,       .HighTech
+	fly_warp_spec NEW_TYPE,        .NewType
+	fly_warp_spec PRINCE,          .Prince
+	fly_warp_spec KANTO,           .Kanto
+	fly_warp_spec STAND,           .Stand
+	fly_warp_spec BLUE_FOREST,     .BlueForest
+	fly_warp_spec NORTH_CITY,      .NorthCity
 	fly_warp_spec ROUTE_4,         .Route4
 	fly_warp_spec ROUTE_10,        .Route10
 
 .SilentHill:     fly_warp SILENT_HILL,      5,  5
 .OldCity:        fly_warp OLD_CITY,        27, 29
 .WestCity:       fly_warp WEST_CITY,       24, 15
-.CeruleanCity:   fly_warp CERULEAN_CITY,   19, 18
-.LavenderTown:   fly_warp LAVENDER_TOWN,    3,  6
-.VermilionCity:  fly_warp VERMILION_CITY,  11,  4
-.CeladonCity:    fly_warp CELADON_CITY,    41, 10
-.FuchsiaCity:    fly_warp FUCHSIA_CITY,    19, 28
-.CinnabarIsland: fly_warp CINNABAR_ISLAND, 11, 12
-.IndigoPlateau:  fly_warp INDIGO_PLATEAU,   9,  6
-.SaffronCity:    fly_warp SAFFRON_CITY,     9, 30
+.Birdon:         fly_warp BIRDON,          19, 18
+.Font:           fly_warp FONT,             3,  6
+.SouthCity:      fly_warp SOUTH_CITY,      11,  4
+.HighTech:       fly_warp HIGH_TECH,       41, 10
+.NewType:        fly_warp NEW_TYPE,        19, 28
+.Prince:         fly_warp PRINCE,          11, 12
+.Kanto:          fly_warp KANTO,            9,  6
+.Stand:          fly_warp STAND,            9, 30
+.BlueForest:     fly_warp BLUE_FOREST,      5,  5
+.NorthCity:      fly_warp NORTH_CITY,       5,  5
 .Route4:         fly_warp ROUTE_4,         11,  6
 .Route10:        fly_warp ROUTE_10,        11, 20

@@ -171,12 +171,12 @@ BillsHouseBillSSTicketText:
 	ld hl, .SSTicketReceivedText
 	call PrintText
 	SetEvent EVENT_GOT_SS_TICKET
-	ld a, TOGGLE_CERULEAN_GUARD_1
-	ld [wToggleableObjectIndex], a
-	predef ShowObject
-	ld a, TOGGLE_CERULEAN_GUARD_2
-	ld [wToggleableObjectIndex], a
-	predef HideObject
+;	ld a, TOGGLE_CERULEAN_GUARD_1
+;	ld [wToggleableObjectIndex], a
+;	predef ShowObject
+;	ld a, TOGGLE_CERULEAN_GUARD_2
+;	ld [wToggleableObjectIndex], a
+;	predef HideObject
 .got_ss_ticket
 	ld hl, .WhyDontYouGoInsteadOfMeText
 	call PrintText

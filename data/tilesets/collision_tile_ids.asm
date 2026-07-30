@@ -79,3 +79,6 @@ Mart_Coll::
 
 WestCityTS_Coll::
 	coll_tiles $00, $03, $04, $05, $06, $07, $29, $53, $54
+
+BirdonTS_Coll::
+	coll_tiles $00, $03, $04, $05, $06, $07, $29, $53, $54

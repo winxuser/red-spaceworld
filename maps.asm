@@ -1,9 +1,5 @@
 SECTION "Maps 1", ROMX
 
-INCLUDE "data/maps/headers/CeladonCity.asm"
-INCLUDE "data/maps/objects/CeladonCity.asm"
-CeladonCity_Blocks: INCBIN "maps/CeladonCity.blk"
-
 INCLUDE "data/maps/headers/SilentHill.asm"
 INCLUDE "scripts/SilentHill.asm"
 INCLUDE "data/maps/objects/SilentHill.asm"
@@ -44,18 +40,6 @@ INCLUDE "scripts/WestCity.asm"
 INCLUDE "data/maps/objects/WestCity.asm"
 WestCity_Blocks: INCBIN "maps/WestCity.blk"
 
-INCLUDE "data/maps/headers/CeruleanCity.asm"
-INCLUDE "data/maps/objects/CeruleanCity.asm"
-CeruleanCity_Blocks: INCBIN "maps/CeruleanCity.blk"
-
-INCLUDE "data/maps/headers/VermilionCity.asm"
-INCLUDE "data/maps/objects/VermilionCity.asm"
-VermilionCity_Blocks: INCBIN "maps/VermilionCity.blk"
-
-INCLUDE "data/maps/headers/FuchsiaCity.asm"
-INCLUDE "data/maps/objects/FuchsiaCity.asm"
-FuchsiaCity_Blocks: INCBIN "maps/FuchsiaCity.blk"
-
 INCLUDE "data/maps/headers/SilentHills.asm"
 INCLUDE "scripts/SilentHills.asm"
 INCLUDE "data/maps/objects/SilentHills.asm"
@@ -66,13 +50,67 @@ INCLUDE "scripts/Route2Gate.asm"
 INCLUDE "data/maps/objects/Route2Gate.asm"
 Route2Gate_Blocks: INCBIN "maps/Route2Gate.blk"
 
+INCLUDE "data/maps/headers/Birdon.asm"
+INCLUDE "scripts/Birdon.asm"
+INCLUDE "data/maps/objects/Birdon.asm"
+Birdon_Blocks: INCBIN "maps/Birdon.blk"
+
+INCLUDE "data/maps/headers/Route1P2.asm"
+INCLUDE "scripts/Route1P2.asm"
+INCLUDE "data/maps/objects/Route1P2.asm"
+Route1P2_Blocks: INCBIN "maps/Route1P2.blk"
+
+INCLUDE "data/maps/headers/Route1.asm"
+INCLUDE "scripts/Route1.asm"
+INCLUDE "data/maps/objects/Route1.asm"
+Route1_Blocks: INCBIN "maps/Route1.blk"
+
+INCLUDE "data/maps/headers/Font.asm"
+INCLUDE "scripts/Font.asm"
+INCLUDE "data/maps/objects/Font.asm"
+Font_Blocks: INCBIN "maps/Font.blk"
+
+INCLUDE "data/maps/headers/SouthCity.asm"
+INCLUDE "scripts/SouthCity.asm"
+INCLUDE "data/maps/objects/SouthCity.asm"
+SouthCity_Blocks: INCBIN "maps/SouthCity.blk"
+
+INCLUDE "data/maps/headers/HighTech.asm"
+INCLUDE "scripts/HighTech.asm"
+INCLUDE "data/maps/objects/HighTech.asm"
+HighTech_Blocks: INCBIN "maps/HighTech.blk"
+
+INCLUDE "data/maps/headers/NewType.asm"
+INCLUDE "scripts/NewType.asm"
+INCLUDE "data/maps/objects/NewType.asm"
+NewType_Blocks: INCBIN "maps/NewType.blk"
+
+INCLUDE "data/maps/headers/Prince.asm"
+INCLUDE "scripts/Prince.asm"
+INCLUDE "data/maps/objects/Prince.asm"
+Prince_Blocks: INCBIN "maps/Prince.blk"
+
+INCLUDE "data/maps/headers/Kanto.asm"
+INCLUDE "scripts/Kanto.asm"
+INCLUDE "data/maps/objects/Kanto.asm"
+Kanto_Blocks: INCBIN "maps/Kanto.blk"
+
+INCLUDE "data/maps/headers/Stand.asm"
+INCLUDE "scripts/Stand.asm"
+INCLUDE "data/maps/objects/Stand.asm"
+Stand_Blocks: INCBIN "maps/Stand.blk"
+
+INCLUDE "data/maps/headers/BlueForest.asm"
+INCLUDE "scripts/BlueForest.asm"
+INCLUDE "data/maps/objects/BlueForest.asm"
+BlueForest_Blocks: INCBIN "maps/BlueForest.blk"
+
+INCLUDE "data/maps/headers/NorthCity.asm"
+INCLUDE "scripts/NorthCity.asm"
+INCLUDE "data/maps/objects/NorthCity.asm"
+NorthCity_Blocks: INCBIN "maps/NorthCity.blk"
 
 SECTION "Maps 2", ROMX
-
-INCLUDE "scripts/CeruleanCity.asm"
-INCLUDE "scripts/VermilionCity.asm"
-INCLUDE "scripts/CeladonCity.asm"
-INCLUDE "scripts/FuchsiaCity.asm"
 
 INCLUDE "data/maps/headers/BluesHouse.asm"
 INCLUDE "scripts/BluesHouse.asm"
@@ -107,13 +145,9 @@ SilphCo6F_Blocks: INCBIN "maps/SilphCo6F.blk"
 
 SECTION "Maps 3", ROMX
 
-INCLUDE "data/maps/headers/CinnabarIsland.asm"
-INCLUDE "data/maps/objects/CinnabarIsland.asm"
-CinnabarIsland_Blocks: INCBIN "maps/CinnabarIsland.blk"
-
-INCLUDE "data/maps/headers/Route1.asm"
-INCLUDE "data/maps/objects/Route1.asm"
-Route1_Blocks: INCBIN "maps/Route1.blk"
+;INCLUDE "data/maps/headers/CinnabarIsland.asm"
+;INCLUDE "data/maps/objects/CinnabarIsland.asm"
+;CinnabarIsland_Blocks: INCBIN "maps/CinnabarIsland.blk"
 
 UndergroundPathRoute8_Blocks: INCBIN "maps/UndergroundPathRoute8.blk"
 
@@ -143,9 +177,8 @@ DiglettsCaveRoute2_Blocks: INCBIN "maps/DiglettsCaveRoute2.blk"
 
 SECTION "Maps 4", ROMX
 
-INCLUDE "scripts/CinnabarIsland.asm"
+;INCLUDE "scripts/CinnabarIsland.asm"
 
-INCLUDE "scripts/Route1.asm"
 
 INCLUDE "data/maps/headers/OaksLab.asm"
 INCLUDE "scripts/OaksLab.asm"
@@ -278,16 +311,15 @@ BillsHouse_Blocks: INCBIN "maps/BillsHouse.blk"
 
 SECTION "Maps 5", ROMX
 
-INCLUDE "data/maps/headers/LavenderTown.asm"
-INCLUDE "data/maps/objects/LavenderTown.asm"
-LavenderTown_Blocks: INCBIN "maps/LavenderTown.blk"
+;INCLUDE "data/maps/headers/LavenderTown.asm"
+;INCLUDE "scripts/LavenderTown.asm"
+;INCLUDE "data/maps/objects/LavenderTown.asm"
+;LavenderTown_Blocks: INCBIN "maps/LavenderTown.blk"
 
 SafariZoneCenterRestHouse_Blocks:
 SafariZoneWestRestHouse_Blocks:
 SafariZoneEastRestHouse_Blocks:
 SafariZoneNorthRestHouse_Blocks: INCBIN "maps/SafariZoneCenterRestHouse.blk"
-
-INCLUDE "scripts/LavenderTown.asm"
 
 
 SECTION "Maps 6", ROMX
@@ -629,15 +661,15 @@ INCLUDE "data/maps/headers/Route25.asm"
 INCLUDE "data/maps/objects/Route25.asm"
 Route25_Blocks: INCBIN "maps/Route25.blk"
 
-INCLUDE "data/maps/headers/IndigoPlateau.asm"
-INCLUDE "scripts/IndigoPlateau.asm"
-INCLUDE "data/maps/objects/IndigoPlateau.asm"
-IndigoPlateau_Blocks: INCBIN "maps/IndigoPlateau.blk"
+;INCLUDE "data/maps/headers/IndigoPlateau.asm"
+;INCLUDE "scripts/IndigoPlateau.asm"
+;INCLUDE "data/maps/objects/IndigoPlateau.asm"
+;IndigoPlateau_Blocks: INCBIN "maps/IndigoPlateau.blk"
 
-INCLUDE "data/maps/headers/SaffronCity.asm"
-INCLUDE "data/maps/objects/SaffronCity.asm"
-SaffronCity_Blocks: INCBIN "maps/SaffronCity.blk"
-INCLUDE "scripts/SaffronCity.asm"
+;INCLUDE "data/maps/headers/SaffronCity.asm"
+;INCLUDE "data/maps/objects/SaffronCity.asm"
+;SaffronCity_Blocks: INCBIN "maps/SaffronCity.blk"
+;INCLUDE "scripts/SaffronCity.asm"
 
 INCLUDE "scripts/Route20.asm"
 INCLUDE "scripts/Route22.asm"
@@ -1130,7 +1162,7 @@ CeruleanBadgeHouse_Blocks: INCBIN "maps/CeruleanBadgeHouse.blk"
 
 SECTION "Maps 20", ROMX
 
-INCLUDE "scripts/CeruleanCity_2.asm"
+;INCLUDE "scripts/CeruleanCity_2.asm"
 
 INCLUDE "data/maps/headers/PewterMart.asm"
 INCLUDE "scripts/PewterMart.asm"
@@ -1232,9 +1264,3 @@ INCLUDE "data/maps/headers/AgathasRoom.asm"
 INCLUDE "scripts/AgathasRoom.asm"
 INCLUDE "data/maps/objects/AgathasRoom.asm"
 AgathasRoom_Blocks: INCBIN "maps/AgathasRoom.blk"
-
-
-INCLUDE "data/maps/headers/Route1P2.asm"
-INCLUDE "scripts/Route1P2.asm"
-INCLUDE "data/maps/objects/Route1P2.asm"
-Route1P2_Blocks: INCBIN "maps/Route1P2.blk"

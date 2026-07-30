@@ -30,4 +30,5 @@ DEF MAP_TILESET_SIZE EQU $60 ; tiles
 	const TRASHEDHOUSE
 	const OLD_CITY_TS
 	const WEST_CITY_TS
+	const BIRDON_TS
 DEF NUM_TILESETS EQU const_value

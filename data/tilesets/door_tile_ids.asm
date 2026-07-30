@@ -15,6 +15,7 @@ DoorTileIDPointers:
 	dbw TRASHEDHOUSE,.TrashedHouseDoorTileIDs
 	dbw OLD_CITY_TS, .OldCityDoorTileIDs
 	dbw WEST_CITY_TS,.WestCityDoorTileIDs
+	dbw BIRDON_TS,   .BirdonDoorTileIDs
 	db -1 ; end
 
 MACRO door_tiles
@@ -62,4 +63,5 @@ ENDM
 
 .OldCityDoorTileIDs:
 .WestCityDoorTileIDs:
+.BirdonDoorTileIDs:
 	door_tiles $29

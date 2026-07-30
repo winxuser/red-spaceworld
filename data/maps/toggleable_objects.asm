@@ -53,29 +53,29 @@ ToggleableObjectStates:
 ;	toggle_object_state PEWTERCITY_SUPER_NERD1, ON
 ;	toggle_object_state WESTCITY_YOUNGSTER,   ON
 
-	toggleable_objects_for CERULEAN_CITY
-	toggle_object_state CERULEANCITY_RIVAL,       OFF
-	toggle_object_state CERULEANCITY_ROCKET,      ON
-	toggle_object_state CERULEANCITY_GUARD1,      OFF
-	toggle_object_state CERULEANCITY_SUPER_NERD3, ON
-	toggle_object_state CERULEANCITY_GUARD2,      ON
+	toggleable_objects_for BIRDON
+;	toggle_object_state CERULEANCITY_RIVAL,       OFF
+;	toggle_object_state CERULEANCITY_ROCKET,      ON
+;	toggle_object_state CERULEANCITY_GUARD1,      OFF
+;	toggle_object_state CERULEANCITY_SUPER_NERD3, ON
+;	toggle_object_state CERULEANCITY_GUARD2,      ON
 
-	toggleable_objects_for SAFFRON_CITY
-	toggle_object_state SAFFRONCITY_ROCKET1,        ON
-	toggle_object_state SAFFRONCITY_ROCKET2,        ON
-	toggle_object_state SAFFRONCITY_ROCKET3,        ON
-	toggle_object_state SAFFRONCITY_ROCKET4,        ON
-	toggle_object_state SAFFRONCITY_ROCKET5,        ON
-	toggle_object_state SAFFRONCITY_ROCKET6,        ON
-	toggle_object_state SAFFRONCITY_ROCKET7,        ON
-	toggle_object_state SAFFRONCITY_SCIENTIST,      OFF
-	toggle_object_state SAFFRONCITY_SILPH_WORKER_M, OFF
-	toggle_object_state SAFFRONCITY_SILPH_WORKER_F, OFF
-	toggle_object_state SAFFRONCITY_GENTLEMAN,      OFF
-	toggle_object_state SAFFRONCITY_PIDGEOT,        OFF
-	toggle_object_state SAFFRONCITY_ROCKER,         OFF
-	toggle_object_state SAFFRONCITY_ROCKET8,        ON
-	toggle_object_state SAFFRONCITY_ROCKET9,        OFF
+	toggleable_objects_for STAND
+;	toggle_object_state SAFFRONCITY_ROCKET1,        ON
+;	toggle_object_state SAFFRONCITY_ROCKET2,        ON
+;	toggle_object_state SAFFRONCITY_ROCKET3,        ON
+;	toggle_object_state SAFFRONCITY_ROCKET4,        ON
+;	toggle_object_state SAFFRONCITY_ROCKET5,        ON
+;	toggle_object_state SAFFRONCITY_ROCKET6,        ON
+;	toggle_object_state SAFFRONCITY_ROCKET7,        ON
+;	toggle_object_state SAFFRONCITY_SCIENTIST,      OFF
+;	toggle_object_state SAFFRONCITY_SILPH_WORKER_M, OFF
+;	toggle_object_state SAFFRONCITY_SILPH_WORKER_F, OFF
+;	toggle_object_state SAFFRONCITY_GENTLEMAN,      OFF
+;	toggle_object_state SAFFRONCITY_PIDGEOT,        OFF
+;	toggle_object_state SAFFRONCITY_ROCKER,         OFF
+;	toggle_object_state SAFFRONCITY_ROCKET8,        ON
+;	toggle_object_state SAFFRONCITY_ROCKET9,        OFF
 
 	toggleable_objects_for ROUTE_2
 

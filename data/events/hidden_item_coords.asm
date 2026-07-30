@@ -40,7 +40,7 @@ HiddenItemCoords:
 	hidden_item VICTORY_ROAD_2F,                5,   2
 	hidden_item VICTORY_ROAD_2F,               26,   7
 	hidden_item UNUSED_MAP_6F,                 14,  11
-	hidden_item OLD_CITY,                 14,   4
+	hidden_item OLD_CITY,                      14,   4
 	hidden_item ROUTE_11,                      48,   5
 	hidden_item ROUTE_12,                       2,  63
 	hidden_item ROUTE_17,                      15,  14
@@ -52,12 +52,12 @@ HiddenItemCoords:
 	hidden_item UNDERGROUND_PATH_NORTH_SOUTH,   4,  34
 	hidden_item UNDERGROUND_PATH_WEST_EAST,    12,   2
 	hidden_item UNDERGROUND_PATH_WEST_EAST,    21,   5
-	hidden_item CELADON_CITY,                  48,  15
+;	hidden_item HIGH_TECH,                     48,  15
 	hidden_item ROUTE_25,                      10,   1
 	hidden_item MT_MOON_B2F,                   33,   9
 	hidden_item SEAFOAM_ISLANDS_B3F,            9,  16
-	hidden_item VERMILION_CITY,                14,  11
-	hidden_item CERULEAN_CITY,                 15,   8
+;	hidden_item SOUTH_CITY,                    14,  11
+;	hidden_item BIRDON,                        15,   8
 	hidden_item ROUTE_4,                       40,   3
 	assert_max_table_length MAX_HIDDEN_ITEMS
 	db -1 ; end

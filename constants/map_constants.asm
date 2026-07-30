@@ -26,17 +26,18 @@ ENDM
 	map_const SILENT_HILL,                   10,  9 ; $00
 	map_const OLD_CITY,                      20, 18 ; $01
 	map_const WEST_CITY,                     20, 18 ; $02
-	map_const CERULEAN_CITY,                 20, 18 ; $03
-	map_const LAVENDER_TOWN,                 10,  9 ; $04
-	map_const VERMILION_CITY,                20, 18 ; $05
-	map_const CELADON_CITY,                  25, 18 ; $06
-	map_const FUCHSIA_CITY,                  20, 18 ; $07
-	map_const CINNABAR_ISLAND,               10,  9 ; $08
-	map_const INDIGO_PLATEAU,                10,  9 ; $09
-	map_const SAFFRON_CITY,                  20, 18 ; $0A
+	map_const BIRDON,                        10,  9 ; $03
+	map_const FONT,                          10,  9 ; $04
+	map_const SOUTH_CITY,                    20, 18 ; $05
+	map_const HIGH_TECH,                     20, 18 ; $06
+	map_const NEW_TYPE,                      20, 18 ; $07
+	map_const PRINCE,                        10,  9 ; $08
+	map_const KANTO,                         30, 27 ; $09
+	map_const STAND,                         20, 18 ; $0A
+	map_const BLUE_FOREST,                   20, 18 ; $0B
+	map_const NORTH_CITY,                    10,  9 ; $6E
 DEF NUM_CITY_MAPS EQU const_value
 
-	map_const UNUSED_MAP_0B,                  0,  0 ; $0B
 
 DEF FIRST_ROUTE_MAP EQU const_value
 	map_const ROUTE_1,                       15,  9 ; $0C
@@ -112,13 +113,13 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const CERULEAN_GYM,                   5,  7 ; $41
 	map_const BIKE_SHOP,                      4,  4 ; $42
 	map_const CERULEAN_MART,                  4,  4 ; $43
-	end_indoor_group CERULEAN_CITY
+	end_indoor_group BIRDON
 
 	map_const MT_MOON_POKECENTER,             7,  4 ; $44
 	end_indoor_group ROUTE_4
 
 	map_const CERULEAN_TRASHED_HOUSE_COPY,    4,  4 ; $45
-	end_indoor_group CERULEAN_CITY_2
+	end_indoor_group BIRDON_2
 
 	map_const ROUTE_5_GATE,                   4,  3 ; $46
 	map_const UNDERGROUND_PATH_ROUTE_5,       4,  4 ; $47
@@ -163,7 +164,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const VERMILION_GYM,                  5,  9 ; $5C
 	map_const VERMILION_PIDGEY_HOUSE,         4,  4 ; $5D
 	map_const VERMILION_DOCK,                14,  6 ; $5E
-	end_indoor_group VERMILION_CITY
+	end_indoor_group SOUTH_CITY
 
 	map_const SS_ANNE_1F,                    20,  9 ; $5F
 	map_const SS_ANNE_2F,                    20,  9 ; $60
@@ -180,7 +181,6 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const VICTORY_ROAD_1F,               10,  9 ; $6C
 	end_indoor_group VICTORY_ROAD
 
-	map_const UNUSED_MAP_6E,                  0,  0 ; $6E
 	map_const UNUSED_MAP_6F,                  0,  0 ; $6F
 	map_const UNUSED_MAP_70,                  0,  0 ; $70
 	map_const LANCES_ROOM,                   13, 13 ; $71
@@ -219,10 +219,10 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const CELADON_DINER,                  5,  4 ; $8A
 	map_const CELADON_CHIEF_HOUSE,            4,  4 ; $8B
 	map_const CELADON_HOTEL,                  7,  4 ; $8C
-	end_indoor_group CELADON_CITY
+	end_indoor_group HIGH_TECH
 
 	map_const LAVENDER_POKECENTER,            7,  4 ; $8D
-	end_indoor_group LAVENDER_TOWN
+	end_indoor_group FONT
 
 	map_const POKEMON_TOWER_1F,              10,  9 ; $8E
 	map_const POKEMON_TOWER_2F,              10,  9 ; $8F
@@ -236,20 +236,20 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const MR_FUJIS_HOUSE,                 4,  4 ; $95
 	map_const LAVENDER_MART,                  4,  4 ; $96
 	map_const LAVENDER_CUBONE_HOUSE,          4,  4 ; $97
-	end_indoor_group LAVENDER_TOWN_2
+	end_indoor_group FONT_2
 
 	map_const FUCHSIA_MART,                   4,  4 ; $98
 	map_const FUCHSIA_BILLS_GRANDPAS_HOUSE,   4,  4 ; $99
 	map_const FUCHSIA_POKECENTER,             7,  4 ; $9A
 	map_const WARDENS_HOUSE,                  5,  4 ; $9B
-	end_indoor_group FUCHSIA_CITY
+	end_indoor_group NEW_TYPE
 
 	map_const SAFARI_ZONE_GATE,               4,  3 ; $9C
 	end_indoor_group SAFARI_ZONE
 
 	map_const FUCHSIA_GYM,                    5,  9 ; $9D
 	map_const FUCHSIA_MEETING_ROOM,           7,  4 ; $9E
-	end_indoor_group FUCHSIA_CITY_2
+	end_indoor_group NEW_TYPE_2
 
 	map_const SEAFOAM_ISLANDS_B1F,           15,  9 ; $9F
 	map_const SEAFOAM_ISLANDS_B2F,           15,  9 ; $A0
@@ -258,10 +258,10 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	end_indoor_group SEAFOAM_ISLANDS
 
 	map_const VERMILION_OLD_ROD_HOUSE,        4,  4 ; $A3
-	end_indoor_group VERMILION_CITY_2
+	end_indoor_group SOUTH_CITY_2
 
 	map_const FUCHSIA_GOOD_ROD_HOUSE,         4,  4 ; $A4
-	end_indoor_group FUCHSIA_CITY_3
+	end_indoor_group NEW_TYPE_3
 
 	map_const POKEMON_MANSION_1F,            15, 14 ; $A5
 	end_indoor_group POKEMON_MANSION
@@ -274,7 +274,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const CINNABAR_POKECENTER,            7,  4 ; $AB
 	map_const CINNABAR_MART,                  4,  4 ; $AC
 	map_const CINNABAR_MART_COPY,             4,  4 ; $AD
-	end_indoor_group CINNABAR_ISLAND
+	end_indoor_group PRINCE
 
 	map_const INDIGO_PLATEAU_LOBBY,           8,  6 ; $AE
 	end_indoor_group INDIGO_PLATEAU
@@ -288,7 +288,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const SILPH_CO_1F,                   15,  9 ; $B5
 	map_const SAFFRON_POKECENTER,             7,  4 ; $B6
 	map_const MR_PSYCHICS_HOUSE,              4,  4 ; $B7
-	end_indoor_group SAFFRON_CITY
+	end_indoor_group STAND
 
 	map_const ROUTE_15_GATE_1F,               4,  5 ; $B8
 	map_const ROUTE_15_GATE_2F,               4,  4 ; $B9
@@ -319,7 +319,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	end_indoor_group ROUTE_12_3
 
 	map_const VERMILION_TRADE_HOUSE,          4,  4 ; $C4
-	end_indoor_group VERMILION_CITY_3
+	end_indoor_group SOUTH_CITY_3
 
 	map_const DIGLETTS_CAVE,                 20, 18 ; $C5
 	end_indoor_group DIGLETTS_CAVE
@@ -368,10 +368,10 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	end_indoor_group CERULEAN_CAVE
 
 	map_const NAME_RATERS_HOUSE,              4,  4 ; $E5
-	end_indoor_group LAVENDER_TOWN_3
+	end_indoor_group FONT_3
 
 	map_const CERULEAN_BADGE_HOUSE,           4,  4 ; $E6
-	end_indoor_group CERULEAN_CITY_3
+	end_indoor_group BIRDON_3
 
 	map_const UNUSED_MAP_E7,                  0,  0 ; $E7
 	map_const ROCK_TUNNEL_B1F,               20, 18 ; $E8

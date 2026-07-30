@@ -4,15 +4,16 @@ MapHeaderPointers::
 	dw SilentHill_h
 	dw OldCity_h
 	dw WestCity_h
-	dw CeruleanCity_h
-	dw LavenderTown_h
-	dw VermilionCity_h
-	dw CeladonCity_h
-	dw FuchsiaCity_h
-	dw CinnabarIsland_h
-	dw IndigoPlateau_h
-	dw SaffronCity_h
-	dw SaffronCity_h 		; UNUSED_MAP_0B
+	dw Birdon_h
+	dw Font_h
+	dw SouthCity_h
+	dw HighTech_h
+	dw NewType_h
+	dw Prince_h
+	dw Kanto_h
+	dw Stand_h
+	dw BlueForest_h 		; UNUSED_MAP_0B
+	dw NorthCity_h 			; UNUSED_MAP_6E
 	dw Route1_h
 	dw Route1P2_h 			; UNUSED_MAP_6A
 	dw Route2_h
@@ -110,7 +111,6 @@ MapHeaderPointers::
 	dw SSAnne2FRooms_h
 	dw SSAnneB1FRooms_h
 	dw VictoryRoad1F_h
-	dw LancesRoom_h ; UNUSED_MAP_6E
 	dw LancesRoom_h ; UNUSED_MAP_6F
 	dw LancesRoom_h ; UNUSED_MAP_70
 	dw LancesRoom_h

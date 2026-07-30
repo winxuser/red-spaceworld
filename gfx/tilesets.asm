@@ -77,3 +77,5 @@ SECTION "Tilesets 5", ROMX
 
 WestCityTS_GFX::	INCBIN "gfx/tilesets/west_city_ts.2bpp"
 WestCityTS_Block::	INCBIN "gfx/blocksets/west_city_ts.bst"
+BirdonTS_GFX::	    INCBIN "gfx/tilesets/birdon_ts.2bpp"
+BirdonTS_Block::	INCBIN "gfx/blocksets/birdon_ts.bst"

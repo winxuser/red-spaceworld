@@ -28,8 +28,10 @@ MapPaletteSets:
 	dw TrashedHousePalSet; TRASHEDHOUSE
 	dw OldCityPalSet     ; OLD_CITY
 	dw WestCityPalSet    ; WEST_CITY
+	dw BirdonPalSet      ; BIRDON
 	assert_table_length NUM_TILESETS
 
+BirdonPalSet:
 WestCityPalSet:
 OldCityPalSet:
 OverworldPalSet:

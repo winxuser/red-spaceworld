@@ -33,6 +33,7 @@ MapPaletteAssignments:
 	dw TrashedHousePalMap ; TRASHEDHOUSE
 	dw OldCityPalMap      ; OLD_CITY
 	dw WestCityPalMap     ; WEST_CITY
+	dw BirdonPalMap       ; BIRDON
 	assert_table_length NUM_TILESETS
 
 OverworldPalMap:
@@ -107,3 +108,6 @@ MartPalMap:
 
 WestCityPalMap:
 	INCLUDE "color/tilesets/west_city_ts.asm"
+
+BirdonPalMap:
+	INCLUDE "color/tilesets/birdon_ts.asm"

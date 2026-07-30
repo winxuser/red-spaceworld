@@ -27,6 +27,7 @@ WarpTileIDPointers:
 	dw .TrashedHouseWarpTileIDs
 	dw .OldCityTSWarpTileIDs
 	dw .WestCityTSWarpTileIDs
+	dw .BirdonTSWarpTileIDs
 	assert_table_length NUM_TILESETS
 
 MACRO warp_tiles
@@ -99,6 +100,9 @@ ENDM
 	warp_tiles $00, $07, $1B, $58, $25, $29
 
 .WestCityTSWarpTileIDs:
+	warp_tiles $00, $07, $1B, $58, $25, $29
+
+.BirdonTSWarpTileIDs:
 	warp_tiles $00, $07, $1B, $58, $25, $29
 
 .ShipPortWarpTileIDs:

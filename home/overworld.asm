@@ -846,8 +846,8 @@ IsBikeRidingAllowed::
 	ld a, [wCurMap]
 	cp ROUTE_23
 	jr z, .allowed
-	cp INDIGO_PLATEAU
-	jr z, .allowed
+;	cp INDIGO_PLATEAU
+;	jr z, .allowed
 
 	ld a, [wCurMapTileset]
 	ld b, a

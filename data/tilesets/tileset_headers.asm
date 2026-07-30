@@ -36,4 +36,5 @@ Tilesets:
 	tileset TrashedHouse,  -1, -1, -1,  -1, TILEANIM_NONE
 	tileset OldCityTS,     -1, -1, -1, $04, TILEANIM_WATER_FLOWER
 	tileset WestCityTS,    -1, -1, -1, $04, TILEANIM_WATER_FLOWER
+	tileset BirdonTS,      -1, -1, -1, $04, TILEANIM_WATER_FLOWER
 	assert_table_length NUM_TILESETS

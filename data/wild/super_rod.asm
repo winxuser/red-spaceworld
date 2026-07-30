@@ -3,11 +3,11 @@ SuperRodData:
 	; map, fishing group
 	dbw SILENT_HILL,         .Group1
 	dbw OLD_CITY,            .Group1
-	dbw CERULEAN_CITY,       .Group3
-	dbw VERMILION_CITY,      .Group4
-	dbw CELADON_CITY,        .Group5
-	dbw FUCHSIA_CITY,        .Group10
-	dbw CINNABAR_ISLAND,     .Group8
+	dbw BIRDON,              .Group3
+	dbw SOUTH_CITY,          .Group4
+	dbw HIGH_TECH,           .Group5
+	dbw NEW_TYPE,            .Group10
+	dbw PRINCE,              .Group8
 	dbw ROUTE_4,             .Group3
 	dbw ROUTE_6,             .Group4
 	dbw ROUTE_10,            .Group5

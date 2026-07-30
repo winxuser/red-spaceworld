@@ -76,7 +76,7 @@ PokemonTower7FWarpToMrFujiHouseScript:
 	ldh [hWarpDestinationMap], a
 	ld a, $1
 	ld [wDestinationWarpID], a
-	ld a, LAVENDER_TOWN
+	ld a, FONT
 	ld [wLastMap], a
 	ld hl, wStatusFlags3
 	set BIT_WARP_FROM_CUR_SCRIPT, [hl]
@@ -230,12 +230,12 @@ PokemonTower7FMrFujiText:
 	SetEvent EVENT_RESCUED_MR_FUJI_2
 	ld a, TOGGLE_MR_FUJIS_HOUSE_MR_FUJI
 	ld [wToggleableObjectIndex], a
-	predef ShowObject
-	ld a, TOGGLE_SAFFRON_CITY_E
-	ld [wToggleableObjectIndex], a
-	predef HideObject
-	ld a, TOGGLE_SAFFRON_CITY_F
-	ld [wToggleableObjectIndex], a
+;	predef ShowObject
+;	ld a, TOGGLE_SAFFRON_CITY_E
+;	ld [wToggleableObjectIndex], a
+;	predef HideObject
+;	ld a, TOGGLE_SAFFRON_CITY_F
+;	ld [wToggleableObjectIndex], a
 	predef ShowObject
 	ld a, SCRIPT_POKEMONTOWER7F_WARP_TO_MR_FUJI_HOUSE
 	ld [wPokemonTower7FCurScript], a

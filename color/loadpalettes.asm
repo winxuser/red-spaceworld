@@ -74,6 +74,8 @@ LoadTilesetPalette:
 	jr z, .checkTime
 	cp WEST_CITY_TS
 	jr z, .checkTime
+	cp BIRDON_TS
+	jr z, .checkTime
 
 	; If it isn't any of the above, skip to day palettes
 	jr .dayPalettes
@@ -195,6 +197,10 @@ LoadTilesetPalette:
 	call z, LoadTownPalette
 	cp FOREST
 	call z, LoadTownPalette
+	cp WEST_CITY_TS
+	call z, LoadTownPalette
+	cp BIRDON_TS
+	call z, LoadTownPalette
 
 	pop hl
 	pop de
@@ -208,17 +214,9 @@ LoadTownPalette:
 	xor a
 	ldh [rWBK], a
 
-	; Get the current map.
+	; Get the current map directly without Saffron/Route 6 overrides.
 	ld a, [wCurMap]
 	ld c, a
-	cp ROUTE_6 ; Route 6 has 2 rows in saffron city; check if player is there or not.
-	jr nz, .notRoute6
-	ld a, [wYCoord]
-	cp 2
-	jr nc, .notRoute6
-	ld c, SAFFRON_CITY
-.notRoute6
-	ld a, c
 	add a
 	ld c, a
 
@@ -271,7 +269,7 @@ LoadTownPalette:
 
 GetTimeOfDayStage::
     push af
-    jr .night        ; <-- ADD THIS LINE FOR DEBUGGING
+;    jr .night         ; <-- KEEP OR REMOVE DEBUG LINE AS NEEDED
 
     ld a, [wRTCHours]
 

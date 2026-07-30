@@ -40,7 +40,7 @@ HiddenEventMaps:
 	hidden_event_map COLOSSEUM
 	hidden_event_map SILENT_HILLS
 	hidden_event_map MT_MOON_B2F
-	hidden_event_map INDIGO_PLATEAU
+;	hidden_event_map INDIGO_PLATEAU
 	hidden_event_map ROUTE_25
 	hidden_event_map ROUTE_9
 	hidden_event_map SS_ANNE_KITCHEN
@@ -87,10 +87,10 @@ HiddenEventMaps:
 	hidden_event_map ROUTE_17
 	hidden_event_map UNDERGROUND_PATH_NORTH_SOUTH
 	hidden_event_map UNDERGROUND_PATH_WEST_EAST
-	hidden_event_map CELADON_CITY
+;	hidden_event_map HIGH_TECH
 	hidden_event_map SEAFOAM_ISLANDS_B3F
-	hidden_event_map VERMILION_CITY
-	hidden_event_map CERULEAN_CITY
+;	hidden_event_map SOUTH_CITY
+;	hidden_event_map BIRDON
 	hidden_event_map ROUTE_4
 	db -1 ; end
 
