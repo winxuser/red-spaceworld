@@ -29,8 +29,18 @@ MapPaletteSets:
 	dw OldCityPalSet     ; OLD_CITY
 	dw WestCityPalSet    ; WEST_CITY
 	dw BirdonPalSet      ; BIRDON
+	dw FontPalSet		 ; FONT
+	dw HighTechPalSet
+	dw KantoPalSet
+	dw NorthCityPalSet
+	dw SouthCityPalSet
 	assert_table_length NUM_TILESETS
 
+SouthCityPalSet:
+NorthCityPalSet:
+KantoPalSet:
+HighTechPalSet:
+FontPalSet:
 BirdonPalSet:
 WestCityPalSet:
 OldCityPalSet:

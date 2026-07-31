@@ -75,6 +75,7 @@ FlyWarpDataPtr:
 	fly_warp_spec STAND,           .Stand
 	fly_warp_spec BLUE_FOREST,     .BlueForest
 	fly_warp_spec NORTH_CITY,      .NorthCity
+	fly_warp_spec SUGAR,           .Sugar
 	fly_warp_spec ROUTE_4,         .Route4
 	fly_warp_spec ROUTE_10,        .Route10
 
@@ -91,5 +92,6 @@ FlyWarpDataPtr:
 .Stand:          fly_warp STAND,            9, 30
 .BlueForest:     fly_warp BLUE_FOREST,      5,  5
 .NorthCity:      fly_warp NORTH_CITY,       5,  5
+.Sugar:          fly_warp SUGAR,            5,  5
 .Route4:         fly_warp ROUTE_4,         11,  6
 .Route10:        fly_warp ROUTE_10,        11, 20

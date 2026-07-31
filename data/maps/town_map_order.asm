@@ -49,4 +49,5 @@ TownMapOrder:
 	db POWER_PLANT
 	db BLUE_FOREST
 	db NORTH_CITY
+	db SUGAR
 TownMapOrderEnd:

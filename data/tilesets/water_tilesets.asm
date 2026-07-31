@@ -12,4 +12,7 @@ WaterTilesets:
 	db OLD_CITY_TS
 	db WEST_CITY_TS
 	db BIRDON_TS
+	db FONT_TS
+	db HIGH_TECH_TS
+	db KANTO_TS
 	db -1 ; end

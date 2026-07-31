@@ -13,9 +13,10 @@ MapHeaderBanks::
 	db BANK(Kanto_h)
 	db BANK(Stand_h)
 	db BANK(BlueForest_h) ; UNUSED_MAP_0B
-	db BANK(NorthCity_h) ; UNUSED_MAP_6E
+	db BANK(NorthCity_h)  ; UNUSED_MAP_6E
+	db BANK(Sugar_h)      ; UNUSED_MAP_6F
 	db BANK(Route1_h)
-	db BANK(Route1P2_h) ; UNUSED_MAP_6A
+	db BANK(Route1P2_h)   ; UNUSED_MAP_6A
 	db BANK(Route2_h)
 	db BANK(Route3_h)
 	db BANK(Route4_h)
@@ -111,7 +112,6 @@ MapHeaderBanks::
 	db BANK(SSAnne2FRooms_h)
 	db BANK(SSAnneB1FRooms_h)
 	db BANK(VictoryRoad1F_h)
-	db $1D ; UNUSED_MAP_6F
 	db $1D ; UNUSED_MAP_70
 	db BANK(LancesRoom_h)
 	db $1D ; UNUSED_MAP_72

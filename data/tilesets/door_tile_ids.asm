@@ -16,6 +16,8 @@ DoorTileIDPointers:
 	dbw OLD_CITY_TS, .OldCityDoorTileIDs
 	dbw WEST_CITY_TS,.WestCityDoorTileIDs
 	dbw BIRDON_TS,   .BirdonDoorTileIDs
+	dbw FONT_TS,     .FontDoorTileIDs
+	dbw HIGH_TECH_TS,.HighTechDoorTileIDs
 	db -1 ; end
 
 MACRO door_tiles
@@ -60,7 +62,8 @@ ENDM
 
 .TrashedHouseDoorTileIDs:
 	door_tiles
-
+.HighTechDoorTileIDs:
+.FontDoorTileIDs:
 .OldCityDoorTileIDs:
 .WestCityDoorTileIDs:
 .BirdonDoorTileIDs:

@@ -31,4 +31,7 @@ DEF MAP_TILESET_SIZE EQU $60 ; tiles
 	const OLD_CITY_TS
 	const WEST_CITY_TS
 	const BIRDON_TS
+	conat FONT_TS
+	const HIGH_TECH_TS
+	const KANTO_TS
 DEF NUM_TILESETS EQU const_value

@@ -20,6 +20,7 @@ ExternalMapEntries:
 	outdoor_map 10,  5, StandName
 	outdoor_map  0,  0, BlueForestName ; unused
 	outdoor_map  0,  0, NorthCityName ; unused
+	outdoor_map  0,  0, SugarName ; unused
 	outdoor_map  2, 10, Route1Name
 	outdoor_map  2, 11, Route1P2Name
 	outdoor_map  2,  6, Route2Name

@@ -34,6 +34,11 @@ MapPaletteAssignments:
 	dw OldCityPalMap      ; OLD_CITY
 	dw WestCityPalMap     ; WEST_CITY
 	dw BirdonPalMap       ; BIRDON
+	dw FontPalMap         ; FONT
+	dw HighTechPalMap     ; HIGH_TECH
+	dw KantoPalMap        ; KANTO
+	dw NorthCityPalMap    ; NORTH_CITY
+	dw SouthCityPalMap    ; SOUTH_CITY
 	assert_table_length NUM_TILESETS
 
 OverworldPalMap:
@@ -111,3 +116,18 @@ WestCityPalMap:
 
 BirdonPalMap:
 	INCLUDE "color/tilesets/birdon_ts.asm"
+	
+FontPalMap:
+	INCLUDE "color/tilesets/font_ts.asm"
+	
+HighTechPalMap:	
+	INCLUDE "color/tilesets/hightech_ts.asm"
+
+KantoPalMap:
+	INCLUDE "color/tilesets/kanto_ts.asm"
+	
+NorthCityPalMap:
+	INCLUDE "color/tilesets/north_city_ts.asm"
+	
+SouthCityPalMap:
+	INCLUDE "color/tilesets/south_city_ts.asm"

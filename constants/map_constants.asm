@@ -36,6 +36,7 @@ ENDM
 	map_const STAND,                         20, 18 ; $0A
 	map_const BLUE_FOREST,                   20, 18 ; $0B
 	map_const NORTH_CITY,                    10,  9 ; $6E
+	map_const SUGAR,                         10,  9 ; $6F
 DEF NUM_CITY_MAPS EQU const_value
 
 
@@ -181,7 +182,6 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const VICTORY_ROAD_1F,               10,  9 ; $6C
 	end_indoor_group VICTORY_ROAD
 
-	map_const UNUSED_MAP_6F,                  0,  0 ; $6F
 	map_const UNUSED_MAP_70,                  0,  0 ; $70
 	map_const LANCES_ROOM,                   13, 13 ; $71
 	map_const UNUSED_MAP_72,                  0,  0 ; $72

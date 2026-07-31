@@ -1,2 +1,2 @@
-	map_header NorthCity, NORTH_CITY, OVERWORLD, 0
+	map_header NorthCity, NORTH_CITY, NORTH_CITY_TS, 0
 	end_map_header

@@ -14,6 +14,7 @@ MapHeaderPointers::
 	dw Stand_h
 	dw BlueForest_h 		; UNUSED_MAP_0B
 	dw NorthCity_h 			; UNUSED_MAP_6E
+	dw Sugar_h              ; UNUSED_MAP_6F
 	dw Route1_h
 	dw Route1P2_h 			; UNUSED_MAP_6A
 	dw Route2_h
@@ -111,7 +112,6 @@ MapHeaderPointers::
 	dw SSAnne2FRooms_h
 	dw SSAnneB1FRooms_h
 	dw VictoryRoad1F_h
-	dw LancesRoom_h ; UNUSED_MAP_6F
 	dw LancesRoom_h ; UNUSED_MAP_70
 	dw LancesRoom_h
 	dw LancesRoom_h ; UNUSED_MAP_72

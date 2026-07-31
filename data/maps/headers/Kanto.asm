@@ -1,2 +1,2 @@
-	map_header Kanto, KANTO, OVERWORLD, 0
+	map_header Kanto, KANTO, KANTO_TS, 0
 	end_map_header
