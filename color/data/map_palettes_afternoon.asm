@@ -1,4 +1,4 @@
-MapPalettesMorning:
+MapPalettesAfternoon:
 ; 0x00: GAMEFREAK_GRAY
 	RGB 31,31,31
 	RGB 21,21,21
@@ -6,45 +6,45 @@ MapPalettesMorning:
 	RGB 0,0,0
 
 ; 0x01: OUTDOOR_GRAY (Ground, Fences, Path)
-	RGB 30, 28, 22
-	RGB 20, 19, 18
-	RGB 12, 12, 13
+	RGB 30, 26, 18
+	RGB 21, 18, 16
+	RGB 13, 11, 11
 	RGB  7,  7,  7
 
 ; 0x02: OUTDOOR_RED (Flowers, Roof Accents)
-	RGB 30, 28, 22
-	RGB 31, 15, 15
-	RGB 20,  6,  6
+	RGB 30, 26, 18
+	RGB 31, 13, 11
+	RGB 20,  5,  4
 	RGB  7,  7,  7
 
 ; 0x03: OUTDOOR_GREEN (Grass)
-	RGB 30, 28, 22
-	RGB 12, 23,  6
-	RGB  4, 13,  3
+	RGB 30, 26, 18
+	RGB 14, 21,  4
+	RGB  5, 12,  2
 	RGB  7,  7,  7
 
 ; 0x04: OUTDOOR_BLUE (Water)
-	RGB 30, 28, 22
-	RGB 10, 19, 28
-	RGB  2,  8, 18
+	RGB 30, 26, 18
+	RGB  8, 17, 26
+	RGB  1,  7, 16
 	RGB  7,  7,  7
 
 ; 0x05: OUTDOOR_YELLOW (Flowers, Accents)
-	RGB 30, 28, 22
-	RGB 31, 25,  6
-	RGB 20, 13,  0
+	RGB 30, 26, 18
+	RGB 31, 22,  2
+	RGB 20, 11,  0
 	RGB  7,  7,  7
 
 ; 0x06: OUTDOOR_BROWN (Roofs, Mountain Rocks)
-	RGB 30, 28, 22
-	RGB 24, 15,  5
-	RGB 14,  6,  2
+	RGB 30, 26, 18
+	RGB 25, 14,  4
+	RGB 15,  5,  1
 	RGB  7,  7,  7
 
 ; 0x07: OUTDOOR_ROOF (Trees & Canopies)
-	RGB 30, 28, 22
-	RGB  8, 20,  8
-	RGB  2,  9,  4
+	RGB 30, 26, 18
+	RGB  7, 18,  6
+	RGB  2,  8,  3
 	RGB  7,  7,  7
 
 ; 0x08: CRYS_TEXTBOX

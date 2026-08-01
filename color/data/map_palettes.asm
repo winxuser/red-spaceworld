@@ -3,52 +3,52 @@
 
 MapPalettes:
 ; 0x00: GAMEFREAK_GRAY
-	RGB 31,31,31
-	RGB 21,21,21
-	RGB 12,12,12
-	RGB 0,0,0
+	RGB 31, 31, 31
+	RGB 21, 21, 21
+	RGB 12, 12, 12
+	RGB  0,  0,  0
 
-; 0x01: OUTDOOR_GRAY
-	RGB 27,31,27
-	RGB 21,21,21
-	RGB 13,13,13
-	RGB 7,7,7
+; 0x01: OUTDOOR_GRAY (Ground Base, Path, Fences)
+	RGB 28, 28, 27
+	RGB 18, 18, 20
+	RGB  9, 10, 12
+	RGB  7,  7,  7
 
-; 0x02: OUTDOOR_RED
-	RGB 27,31,27
-	RGB 31,19,24
-	RGB 30,10,6
-	RGB 7,7,7
+; 0x02: OUTDOOR_RED (Flowers, Roof Accents)
+	RGB 28, 28, 27
+	RGB 31, 12, 12
+	RGB 19,  4,  5
+	RGB  7,  7,  7
 
-; 0x03: OUTDOOR_GREEN
-	RGB 22,31,10
-	RGB 12,25,1
-	RGB 5,14,0
-	RGB 7,7,7
+; 0x03: OUTDOOR_GREEN (Main Grass)
+	RGB 28, 28, 27
+	RGB 10, 24,  6
+	RGB  3, 13,  3
+	RGB  7,  7,  7
 
-; 0x04: OUTDOOR_BLUE
-	RGB 23,23,31
-	RGB 18,19,31
-	RGB 13,12,31
-	RGB 7,7,7
+; 0x04: OUTDOOR_BLUE (Water)
+	RGB 28, 28, 27
+	RGB  6, 18, 29
+	RGB  1,  7, 18
+	RGB  7,  7,  7
 
-; 0x05: OUTDOOR_YELLOW
-	RGB 27,31,27
-	RGB 31,31,7
-	RGB 31,16,1
-	RGB 7,7,7
+; 0x05: OUTDOOR_YELLOW (Flowers, Signs)
+	RGB 28, 28, 27
+	RGB 31, 24,  2
+	RGB 19, 12,  0
+	RGB  7,  7,  7
 
-; 0x06: OUTDOOR_BROWN
-	RGB 27,31,27
-	RGB 24,18,7
-	RGB 20,15,3
-	RGB 7,7,7
+; 0x06: OUTDOOR_BROWN (Roof Shingles & Rocks)
+	RGB 28, 28, 27
+	RGB 24, 14,  4
+	RGB 13,  5,  1
+	RGB  7,  7,  7
 
-; 0x07: OUTDOOR_ROOF
-	RGB 27,31,27
-	RGB 20,31,14
-	RGB 11,23,5
-	RGB 7,7,7
+; 0x07: OUTDOOR_ROOF (Trees & Canopies)
+	RGB 28, 28, 27
+	RGB  6, 20,  8
+	RGB  1,  9,  4
+	RGB  7,  7,  7
 
 ; 0x08: CRYS_TEXTBOX
 	RGB 31,31,31

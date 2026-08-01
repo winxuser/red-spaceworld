@@ -50,8 +50,13 @@ DEF START_MONEY EQU $3000
 	ld [wRTCFrames], a
 	ld [wRTCMinutes], a ; Starts at 0 minutes
 
-	ld a, 7
-	ld [wRTCHours], a   ; Starts at 7 AM
+	ld a, 8
+	ld [wRTCHours], a    ; Starts at 8 AM
+	ld a, 1              ; Morning stage
+	ld [wLastTimeOfDayStage], a
+
+	xor a
+	ld [wTimeOfDayPalettesNeedUpdate], a ; Clear palette update flag
 
 	ld a, 1
 	ld [wRTCDays], a    ; Starts on Day 1

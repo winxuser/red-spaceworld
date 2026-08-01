@@ -1,16 +1,18 @@
 INCLUDE "color/data/map_palettes.asm"
 INCLUDE "color/data/map_palettes_morning.asm"
+INCLUDE "color/data/map_palettes_afternoon.asm"
 INCLUDE "color/data/map_palettes_night.asm"
 INCLUDE "color/data/map_palette_sets.asm"
 INCLUDE "color/data/map_palette_assignments.asm"
 INCLUDE "color/data/roofpalettes.asm"
 INCLUDE "color/data/roofpalettes_morning.asm"
+INCLUDE "color/data/roofpalettes_afternoon.asm"
 INCLUDE "color/data/roofpalettes_night.asm"
 
 DEF TILESET_SIZE EQU $60
 
 ; Load colors for new map and tile placement
-LoadTilesetPalette:
+LoadTilesetPalette::
 	push bc
 	push de
 	push hl
@@ -64,7 +66,7 @@ LoadTilesetPalette:
 	ldh [rWBK], a
 	ld a, h
 
-	and a             ; Is it tileset 0 (OVERWORLD)?
+	and a              ; Is it tileset 0 (OVERWORLD)?
 	jr z, .checkTime
 	cp PLATEAU
 	jr z, .checkTime
@@ -76,27 +78,46 @@ LoadTilesetPalette:
 	jr z, .checkTime
 	cp BIRDON_TS
 	jr z, .checkTime
+	cp FONT_TS
+	jr z, .checkTime
+	cp HIGH_TECH_TS
+	jr z, .checkTime
+	cp KANTO_TS
+	jr z, .checkTime
+	cp NORTH_CITY_TS
+	jr z, .checkTime
+	cp SOUTH_CITY_TS
+	jr z, .checkTime
 
-	; If it isn't any of the above, skip to day palettes
+; If it isn't any of the outside tilesets, use standard day palettes permanently (indoors/caves)
 	jr .dayPalettes
 
 .checkTime
 	call GetTimeOfDayStage
-	and a
-	jr z, .dayPalettes
-	dec a
-	jr nz, .nightPalettes
+	cp 1
+	jr z, .morningPalettes
+	cp 2
+	jr z, .nightPalettes
+	cp 3
+	jr z, .afternoonPalettes
+	jr .dayPalettes
 
-	; Morning
+.dayPalettes
+	; Day (0)
+	ld hl, MapPalettes
+	jr .applyOffset
+
+.morningPalettes
 	ld hl, MapPalettesMorning
+	jr .applyOffset
+
+.afternoonPalettes
+	ld hl, MapPalettesAfternoon
 	jr .applyOffset
 
 .nightPalettes
 	ld hl, MapPalettesNight
 	jr .applyOffset
-
-.dayPalettes
-	ld hl, MapPalettes
 
 .applyOffset
 	add hl, de
@@ -111,7 +132,7 @@ LoadTilesetPalette:
 	jr nz, .nextColor
 	pop de
 	dec b
-	jr nz, .nextPalette
+	jp nz, .nextPalette
 
 	; Start copying palette assignments
 	pop af ; Retrieve wCurMapTileset
@@ -201,6 +222,16 @@ LoadTilesetPalette:
 	call z, LoadTownPalette
 	cp BIRDON_TS
 	call z, LoadTownPalette
+	cp FONT_TS
+	call z, LoadTownPalette
+	cp HIGH_TECH_TS
+	call z, LoadTownPalette
+	cp KANTO_TS
+	call z, LoadTownPalette
+	cp NORTH_CITY_TS
+	call z, LoadTownPalette
+	cp SOUTH_CITY_TS
+	call z, LoadTownPalette
 
 	pop hl
 	pop de
@@ -228,20 +259,28 @@ LoadTownPalette:
 	push hl
 
 	call GetTimeOfDayStage
-	and a
-	jr z, .dayRoofs
-	dec a
-	jr nz, .nightRoofs
+	cp 1
+	jr z, .morningRoofs
+	cp 2
+	jr z, .nightRoofs
+	cp 3
+	jr z, .afternoonRoofs
 
+	; Day (0)
+	ld hl, RoofPalettes
+	jr .applyRoofOffset
+
+.morningRoofs
 	ld hl, RoofPalettesMorning
+	jr .applyRoofOffset
+
+.afternoonRoofs
+	ld hl, RoofPalettesAfternoon
 	jr .applyRoofOffset
 
 .nightRoofs
 	ld hl, RoofPalettesNight
 	jr .applyRoofOffset
-
-.dayRoofs
-	ld hl, RoofPalettes
 
 .applyRoofOffset
 	ld b, 0
@@ -268,35 +307,50 @@ LoadTownPalette:
 	ret
 
 GetTimeOfDayStage::
-    push af
-;    jr .night         ; <-- KEEP OR REMOVE DEBUG LINE AS NEEDED
+	push bc
+;	jr z, .afternoon ; to test the maps for palette changes
 
-    ld a, [wRTCHours]
+	; 1. Save current WRAM bank (Bank 2) and switch to Bank 0
+	ldh a, [rWBK]
+	ld b, a
+	xor a
+	ldh [rWBK], a
 
-    ; NEW GAME FAIL-SAFE:
-    ; If the hour is 0, we treat it as 7 (Morning)
-    ; because 0 is likely just uninitialized memory.
-    and a            ; Is it 0?
-    jr nz, .check_time
-    ld a, 7          ; Default to 7 if 0
+	; 2. Fetch actual RTC hour into C
+	ld a, [wRTCHours]
+	ld c, a
+
+	; 3. Restore Bank 2
+	ld a, b
+	ldh [rWBK], a
+
+	; 4. Evaluate hour stored in C
+	ld a, c
 
 .check_time
-    cp 4
-    jr c, .night    ; 0-3 = Night
-    cp 10
-    jr c, .morning  ; 4-9 = Morning
-    cp 18
-    jr c, .day      ; 10-17 = Day
+	cp 4
+	jr c, .night        ; 00:00 - 03:59 -> Night (2)
+	cp 9
+	jr c, .morning      ; 04:00 - 08:59 -> Morning (1)
+	cp 16
+	jr c, .day          ; 09:00 - 15:59 -> Day (0)
+	cp 18
+	jr c, .afternoon    ; 16:00 - 17:59 -> Afternoon (3)
+	jr .night           ; 18:00 - 23:59 -> Night (2)
 
 .night
-    pop af
-    ld a, 2
-    ret
+	pop bc
+	ld a, 2
+	ret
 .morning
-    pop af
-    ld a, 1
-    ret
+	pop bc
+	ld a, 1
+	ret
 .day
-    pop af
-    xor a
-    ret
+	pop bc
+	xor a               ; 0 = Day
+	ret
+.afternoon
+	pop bc
+	ld a, 3             ; 3 = Afternoon
+	ret

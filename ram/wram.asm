@@ -1239,6 +1239,10 @@ wTrainerPicPointer:: dw
 
 	ds 1
 
+wTimeOfDayPalettesNeedUpdate:: db
+wRTCSubFrames::                db
+wRTCFrames::                   db
+
 UNION
 wTempMoveNameBuffer:: ds MOVE_NAME_LENGTH
 NEXTU
@@ -2257,11 +2261,11 @@ wDayCareMonOT::   ds NAME_LENGTH
 
 wDayCareMon:: box_struct wDayCareMon
 
-wRTCSeconds:: db
-wRTCMinutes:: db
-wRTCHours::   db
-wRTCDays::    db
-wRTCFrames::  db ; Counts up to 60 to track 1 second
+wRTCSeconds::   ds 1  ; Added
+wRTCMinutes::   ds 1
+wRTCHours::     ds 1
+wRTCDays::      ds 1  ; Added
+wLastTimeOfDayStage:: db
 
 wGenderTemp:: db
 
@@ -2303,7 +2307,6 @@ wEXPBarCurEXP::       ds 3
 wEXPBarNeededEXP::    ds 3
 wEXPBarKeepFullFlag:: ds 1
 ENDC
-
 
 SECTION "Stack", WRAM0
 

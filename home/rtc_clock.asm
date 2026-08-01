@@ -1,50 +1,43 @@
 UpdateSoftwareRTC::
-    push af               ; Save register A and flags
+	push af
 
-    ld a, [wRTCFrames]
-    inc a
-    cp 10                 ; Changed from 60 to 10 (60 / 6 = 10)
-    ld [wRTCFrames], a
-    jr nz, .done          ; If not 10 yet, we are done
+	; 1. Increment sub-frames (0 to 59)
+	ld a, [wRTCSubFrames]
+	inc a
+	ld [wRTCSubFrames], a
+	cp 60                  ; 60 VBlanks = 1 real second
+	jr nz, .done
+	xor a
+	ld [wRTCSubFrames], a
 
-    xor a
-    ld [wRTCFrames], a    ; Reset frames
+	; 2. Increment real-second counter (0 to 4)
+	ld a, [wRTCFrames]     ; Reusing wRTCFrames as our 5-second counter
+	inc a
+	ld [wRTCFrames], a
+	cp 5                   ; 5 real seconds passed!
+	jr nz, .done
+	xor a
+	ld [wRTCFrames], a
 
-    ; Increment Seconds
-    ld a, [wRTCSeconds]
-    inc a
-    cp 60
-    ld [wRTCSeconds], a
-    jr nz, .done
+	; 3. Increment 1 in-game minute
+	ld a, [wRTCMinutes]
+	inc a
+	ld [wRTCMinutes], a
+	cp 60
+	jr nz, .done
+	xor a
+	ld [wRTCMinutes], a
 
-    xor a
-    ld [wRTCSeconds], a
+	; 4. Increment 1 in-game hour
+	ld a, [wRTCHours]
+	inc a
+	cp 24
+	jr c, .hour_set
+	xor a                  ; Rollover 24 -> 0
 
-    ; Increment Minutes
-    ld a, [wRTCMinutes]
-    inc a
-    cp 60
-    ld [wRTCMinutes], a
-    jr nz, .done
-
-    xor a
-    ld [wRTCMinutes], a
-
-    ; Increment Hours
-    ld a, [wRTCHours]
-    inc a
-    cp 24
-    ld [wRTCHours], a
-    jr nz, .done
-
-    xor a
-    ld [wRTCHours], a
-
-    ; Increment Days
-    ld a, [wRTCDays]
-    inc a
-    ld [wRTCDays], a
+.hour_set
+	ld [wRTCHours], a
 
 .done
-    pop af                ; Restore register A and flags
-    ret
+	pop af
+	ret
