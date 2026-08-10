@@ -65,7 +65,7 @@ HiddenEventMaps:
 	hidden_event_map POKEMON_MANSION_3F
 	hidden_event_map ROUTE_23
 	hidden_event_map VICTORY_ROAD_2F
-	hidden_event_map UNUSED_MAP_6F
+;	hidden_event_map UNUSED_MAP_6F
 	hidden_event_map BILLS_HOUSE
 	hidden_event_map OLD_CITY
 	hidden_event_map SAFARI_ZONE_WEST_REST_HOUSE

@@ -1,6 +1,6 @@
-Route7_Script:
+WestGate_Script:
 	jp EnableAutoTextBoxDrawing
 
-Route7_TextPointers:
+WestGate_TextPointers:
 
 	text_end ; unused

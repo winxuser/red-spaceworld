@@ -2,7 +2,7 @@ Prince_Object:
 	db $0 ; border block
 
 	def_warp_events
-;	warp_event  4, 11, REDS_HOUSE_2F, 1
+;	warp_event  3,  9, SILENT_HILL, 2
 
 	def_bg_events
 

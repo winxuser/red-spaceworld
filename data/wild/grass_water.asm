@@ -4,14 +4,16 @@ WildDataPointers:
 	dw NothingWildMons          ; OLD_CITY
 	dw NothingWildMons          ; WEST_CITY
 	dw NothingWildMons          ; BIRDON
-	dw NothingWildMons          ; LAVENDER_TOWN
-	dw NothingWildMons          ; VERMILION_CITY
-	dw NothingWildMons          ; CELADON_CITY
-	dw NothingWildMons          ; FUCHSIA_CITY
-	dw NothingWildMons          ; CINNABAR_ISLAND
-	dw NothingWildMons          ; INDIGO_PLATEAU
-	dw NothingWildMons          ; SAFFRON_CITY
-	dw NothingWildMons          ; UNUSED_MAP_0B
+	dw NothingWildMons          ; FONT
+	dw NothingWildMons          ; SOUTH_CITY
+	dw NothingWildMons          ; HIGH_TECH
+	dw NothingWildMons          ; NEW_TYPE
+	dw NothingWildMons          ; PRINCE
+	dw NothingWildMons          ; KANTO
+	dw NothingWildMons          ; STAND
+	dw NothingWildMons          ; BLUE_FOREST
+	dw NothingWildMons          ; NORTH_CITY
+	dw NothingWildMons          ; SUGAR
 	dw Route1WildMons           ; ROUTE_1
 	dw Route1P2WildMons         ; ROUTE_1_P2 unused map 6A
 	dw Route2WildMons           ; ROUTE_2
@@ -62,6 +64,7 @@ WildDataPointers:
 	dw NothingWildMons          ; PEWTER_MART
 	dw NothingWildMons          ; PEWTER_SPEECH_HOUSE
 	dw NothingWildMons          ; PEWTER_POKECENTER
+	dw NothingWildMons          ; ROUTE_4_GATE UNUSED_MAP_70
 	dw MtMoon1FWildMons         ; MT_MOON_1F
 	dw MtMoonB1FWildMons        ; MT_MOON_B1F
 	dw MtMoonB2FWildMons        ; MT_MOON_B2F
@@ -109,9 +112,6 @@ WildDataPointers:
 	dw NothingWildMons          ; SS_ANNE_2F_ROOMS
 	dw NothingWildMons          ; SS_ANNE_B1F_ROOMS
 	dw VictoryRoad1FWildMons    ; VICTORY_ROAD_1F
-	dw NothingWildMons          ; UNUSED_MAP_6E
-	dw NothingWildMons          ; UNUSED_MAP_6F
-	dw NothingWildMons          ; UNUSED_MAP_70
 	dw NothingWildMons          ; LANCES_ROOM
 	dw NothingWildMons          ; UNUSED_MAP_72
 	dw NothingWildMons          ; UNUSED_MAP_73

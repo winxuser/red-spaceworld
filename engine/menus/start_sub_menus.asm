@@ -147,6 +147,24 @@ StartMenu_Pokemon::
 	jr z, .canFly
 	cp WEST_CITY
 	jr z, .canFly
+	cp BIRDON
+	jr z, .canFly
+	cp HIGH_TECH
+	jr z, .canFly
+	cp FONT
+	jr z, .canFly
+	cp SOUTH_CITY
+	jr z, .canFly
+	cp NEW_TYPE
+	jr z, .canFly
+	cp PRINCE
+	jr z, .canFly
+	cp KANTO
+	jr z, .canFly
+	cp BLUE_FOREST
+	jr z, .canFly
+	cp NORTH_CITY
+	jr z, .canFly
 ; end of new block to make "open-air" maps flyable
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks

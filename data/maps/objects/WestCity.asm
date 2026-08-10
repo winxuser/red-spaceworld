@@ -3,6 +3,8 @@ WestCity_Object:
 
 	def_warp_events
 	warp_event 35, 15, ROUTE_2_GATE, 3
+	warp_event 22,  5, WEST_GATE, 1
+	warp_event 23,  5, WEST_GATE, 2
 
 	def_bg_events
 

@@ -1,6 +1,6 @@
-Route7_Script:
+Route9Gate_Script:
 	jp EnableAutoTextBoxDrawing
 
-Route7_TextPointers:
+Route9Gate_TextPointers:
 
 	text_end ; unused

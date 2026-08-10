@@ -1,8 +1,8 @@
 Stand_Object:
-	db $0 ; border block
+	db $00 ; border block
 
 	def_warp_events
-;	warp_event  4, 11, REDS_HOUSE_2F, 1
+;	warp_event  6, 17, SILENT_HILL, 2
 
 	def_bg_events
 

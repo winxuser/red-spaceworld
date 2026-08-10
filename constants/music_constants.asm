@@ -7,7 +7,7 @@
 
 	const_def 1
 
-	const MUSIC_PALLET_TOWN
+	const MUSIC_NEW_BARK_TOWN
 	const MUSIC_POKECENTER
 	const MUSIC_GYM
 	const MUSIC_CITIES1

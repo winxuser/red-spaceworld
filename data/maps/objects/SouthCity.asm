@@ -1,8 +1,10 @@
 SouthCity_Object:
-	db $0 ; border block
+	db $00 ; border block
 
 	def_warp_events
-;	warp_event  4, 11, REDS_HOUSE_2F, 1
+	warp_event 31, 30, ROUTE_7_GATE, 2
+	warp_event 30, 30, ROUTE_7_GATE, 1
+	warp_event 35, 19, ROUTE_9_GATE, 1
 
 	def_bg_events
 

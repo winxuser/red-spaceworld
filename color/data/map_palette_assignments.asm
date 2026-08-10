@@ -131,3 +131,4 @@ NorthCityPalMap:
 	
 SouthCityPalMap:
 	INCLUDE "color/tilesets/south_city_ts.asm"
+

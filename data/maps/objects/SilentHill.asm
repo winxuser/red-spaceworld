@@ -8,7 +8,7 @@ SilentHill_Object:
 
 	def_warp_events
 	warp_event  5,  4, REDS_HOUSE_1F, 1
-	warp_event  3, 12, BIRDON, 1
+	warp_event  3, 12, NORTH_CITY, 1
 	warp_event 14, 11, OAKS_LAB, 1
 	warp_event 15, 11, OAKS_LAB, 2
 	warp_event 13,  4, SILENT_HILL_POKECENTER, 1

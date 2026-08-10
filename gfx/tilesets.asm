@@ -83,5 +83,12 @@ FontTS_GFX::	    INCBIN "gfx/tilesets/font_ts.2bpp"
 FontTS_Block::  	INCBIN "gfx/blocksets/font_ts.bst"
 HighTechTS_GFX::	INCBIN "gfx/tilesets/hightech_ts.2bpp"
 HighTechTS_Block::  INCBIN "gfx/blocksets/hightech_ts.bst"
+
+SECTION "Tilesets 6", ROMX
+
 KantoTS_GFX::	    INCBIN "gfx/tilesets/kanto_ts.2bpp"
 KantoTS_Block::     INCBIN "gfx/blocksets/kanto_ts.bst"
+NorthCityTS_GFX::	INCBIN "gfx/tilesets/north_city_ts.2bpp"
+NorthCityTS_Block:: INCBIN "gfx/blocksets/north_city_ts.bst"
+SouthCityTS_GFX::	INCBIN "gfx/tilesets/south_city_ts.2bpp"
+SouthCityTS_Block:: INCBIN "gfx/blocksets/south_city_ts.bst"

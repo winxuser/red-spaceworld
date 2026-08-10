@@ -65,6 +65,7 @@ MapHeaderPointers::
 	dw PewterMart_h
 	dw PewterSpeechHouse_h
 	dw PewterPokecenter_h
+	dw WestGate_h                 ; UNUSED_MAP_70
 	dw MtMoon1F_h
 	dw MtMoonB1F_h
 	dw MtMoonB2F_h
@@ -112,9 +113,7 @@ MapHeaderPointers::
 	dw SSAnne2FRooms_h
 	dw SSAnneB1FRooms_h
 	dw VictoryRoad1F_h
-	dw LancesRoom_h ; UNUSED_MAP_70
 	dw LancesRoom_h
-	dw LancesRoom_h ; UNUSED_MAP_72
 	dw LancesRoom_h ; UNUSED_MAP_73
 	dw LancesRoom_h ; UNUSED_MAP_74
 	dw LancesRoom_h ; UNUSED_MAP_75
@@ -142,6 +141,7 @@ MapHeaderPointers::
 	dw CeladonChiefHouse_h
 	dw CeladonHotel_h
 	dw LavenderPokecenter_h
+	dw Route9Gate_h ; UNUSED_MAP_72
 	dw PokemonTower1F_h
 	dw PokemonTower2F_h
 	dw PokemonTower3F_h

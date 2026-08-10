@@ -1,23 +1,26 @@
 DoorTileIDPointers:
-	dbw OVERWORLD,   .OverworldDoorTileIDs
-	dbw FOREST,      .ForestDoorTileIDs
-	dbw MART,        .MartDoorTileIDs
-	dbw HOUSE,       .HouseDoorTileIDs
-	dbw FOREST_GATE, .TilesetMuseumDoorTileIDs
-	dbw MUSEUM,      .TilesetMuseumDoorTileIDs
-	dbw GATE,        .TilesetMuseumDoorTileIDs
-	dbw SHIP,        .ShipDoorTileIDs
-	dbw LOBBY,       .LobbyDoorTileIDs
-	dbw MANSION,     .MansionDoorTileIDs
-	dbw LAB,         .LabDoorTileIDs
-	dbw FACILITY,    .FacilityDoorTileIDs
-	dbw PLATEAU,     .PlateauDoorTileIDs
-	dbw TRASHEDHOUSE,.TrashedHouseDoorTileIDs
-	dbw OLD_CITY_TS, .OldCityDoorTileIDs
-	dbw WEST_CITY_TS,.WestCityDoorTileIDs
-	dbw BIRDON_TS,   .BirdonDoorTileIDs
-	dbw FONT_TS,     .FontDoorTileIDs
-	dbw HIGH_TECH_TS,.HighTechDoorTileIDs
+	dbw OVERWORLD,    .OverworldDoorTileIDs
+	dbw FOREST,       .ForestDoorTileIDs
+	dbw MART,         .MartDoorTileIDs
+	dbw HOUSE,        .HouseDoorTileIDs
+	dbw FOREST_GATE,  .TilesetMuseumDoorTileIDs
+	dbw MUSEUM,       .TilesetMuseumDoorTileIDs
+	dbw GATE,         .LobbyDoorTileIDs
+	dbw SHIP,         .ShipDoorTileIDs
+	dbw LOBBY,        .LobbyDoorTileIDs
+	dbw MANSION,      .MansionDoorTileIDs
+	dbw LAB,          .LabDoorTileIDs
+	dbw FACILITY,     .FacilityDoorTileIDs
+	dbw PLATEAU,      .PlateauDoorTileIDs
+	dbw TRASHEDHOUSE, .TrashedHouseDoorTileIDs
+	dbw OLD_CITY_TS,  .OldCityDoorTileIDs
+	dbw WEST_CITY_TS, .WestCityDoorTileIDs
+	dbw BIRDON_TS,    .BirdonDoorTileIDs
+	dbw FONT_TS,      .FontDoorTileIDs
+	dbw HIGH_TECH_TS, .HighTechDoorTileIDs
+	dbw KANTO_TS,     .KantoDoorTileIDs
+	dbw NORTH_CITY_TS,.NorthCityDoorTileIDs
+	dbw SOUTH_CITY_TS,.SouthCityDoorTileIDs
 	db -1 ; end
 
 MACRO door_tiles
@@ -62,9 +65,13 @@ ENDM
 
 .TrashedHouseDoorTileIDs:
 	door_tiles
+
+.SouthCityDoorTileIDs:
+.NorthCityDoorTileIDs:
+.KantoDoorTileIDs:
 .HighTechDoorTileIDs:
 .FontDoorTileIDs:
 .OldCityDoorTileIDs:
 .WestCityDoorTileIDs:
 .BirdonDoorTileIDs:
-	door_tiles $29
+	door_tiles $29, $5a

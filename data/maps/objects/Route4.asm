@@ -1,24 +1,17 @@
 	object_const_def
-	const_export ROUTE4_COOLTRAINER_F1
-	const_export ROUTE4_COOLTRAINER_F2
 	const_export ROUTE4_TM_WHIRLWIND
 
 Route4_Object:
-	db $7a ; border block
+	db $00 ; border block
 
 	def_warp_events
-	warp_event 11,  5, MT_MOON_POKECENTER, 1
-	warp_event 19,  5, MT_MOON_1F, 1
-	warp_event 25,  5, MT_MOON_B1F, 8
+	warp_event 12, 48, WEST_GATE, 3
+	warp_event 13, 48, WEST_GATE, 4
 
 	def_bg_events
-	bg_event 12,  5, TEXT_ROUTE4_POKECENTER_SIGN
-	bg_event 17,  7, TEXT_ROUTE4_MT_MOON_SIGN
 	bg_event 27,  7, TEXT_ROUTE4_SIGN
 
 	def_object_events
-	object_event  9,  8, SPRITE_COOLTRAINER_F, WALK, ANY_DIR, TEXT_ROUTE4_COOLTRAINER_F1
-	object_event 63,  3, SPRITE_COOLTRAINER_F, STAY, RIGHT, TEXT_ROUTE4_COOLTRAINER_F2, OPP_LASS, 4
 	object_event 57,  3, SPRITE_POKE_BALL, STAY, NONE, TEXT_ROUTE4_TM_WHIRLWIND, TM_WHIRLWIND
 
 	def_warps_to ROUTE_4

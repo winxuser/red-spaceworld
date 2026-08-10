@@ -84,10 +84,19 @@ BirdonTS_Coll::
 	coll_tiles $00, $03, $04, $05, $06, $07, $29, $53, $54
 	
 FontTS_Coll::
-	coll_tiles $00, $03, $04, $05, $06, $07, $29, $53, $54
+	coll_tiles $00, $03, $04, $05, $06, $07, $24, $29, $2b, $37, $3a, $5a
 	
 HighTechTS_Coll::
 	coll_tiles $00, $03, $04, $05, $06, $07, $29, $53, $54
 
 KantoTS_Coll::
+	coll_tiles $00, $03, $04, $05, $06, $07, $2b, $2c, $29, $37, $54
+
+NorthCityTS_Coll::
+	coll_tiles $00, $03, $04, $05, $06, $07, $29, $53, $54
+
+SouthCityTS_Coll::
+	coll_tiles $00, $03, $04, $05, $06, $07, $29, $53, $54
+
+SugarTS_Coll::
 	coll_tiles $00, $03, $04, $05, $06, $07, $29, $53, $54

@@ -52,6 +52,16 @@ LoadOverworldSpritePalettes:
     jr z, .checkNight
 	cp BIRDON_TS
     jr z, .checkNight
+	cp FONT_TS
+    jr z, .checkNight
+	cp HIGH_TECH_TS
+    jr z, .checkNight
+	cp KANTO_TS
+    jr z, .checkNight
+	cp NORTH_CITY_TS
+    jr z, .checkNight
+	cp SOUTH_CITY_TS
+    jr z, .checkNight
     ; If it doesn't match any outdoor tilesets, it's an indoor map.
     jr .useDayPalette
 

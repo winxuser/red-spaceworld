@@ -70,11 +70,6 @@ INCLUDE "scripts/Font.asm"
 INCLUDE "data/maps/objects/Font.asm"
 Font_Blocks: INCBIN "maps/Font.blk"
 
-INCLUDE "data/maps/headers/SouthCity.asm"
-INCLUDE "scripts/SouthCity.asm"
-INCLUDE "data/maps/objects/SouthCity.asm"
-SouthCity_Blocks: INCBIN "maps/SouthCity.blk"
-
 INCLUDE "data/maps/headers/HighTech.asm"
 INCLUDE "scripts/HighTech.asm"
 INCLUDE "data/maps/objects/HighTech.asm"
@@ -110,7 +105,23 @@ INCLUDE "scripts/NorthCity.asm"
 INCLUDE "data/maps/objects/NorthCity.asm"
 NorthCity_Blocks: INCBIN "maps/NorthCity.blk"
 
+INCLUDE "data/maps/headers/Sugar.asm"
+INCLUDE "scripts/Sugar.asm"
+INCLUDE "data/maps/objects/Sugar.asm"
+Sugar_Blocks: INCBIN "maps/Sugar.blk"
+
+
 SECTION "Maps 2", ROMX
+
+INCLUDE "data/maps/headers/Route4Gate.asm"
+INCLUDE "scripts/WestGate.asm"
+INCLUDE "data/maps/objects/Route4Gate.asm"
+WestGate_Blocks: INCBIN "maps/Route4Gate.blk"
+
+INCLUDE "data/maps/headers/Route9Gate.asm"
+INCLUDE "scripts/Route9Gate.asm"
+INCLUDE "data/maps/objects/Route9Gate.asm"
+Route9Gate_Blocks: INCBIN "maps/Route9Gate.blk"
 
 INCLUDE "data/maps/headers/BluesHouse.asm"
 INCLUDE "scripts/BluesHouse.asm"
@@ -1264,3 +1275,8 @@ INCLUDE "data/maps/headers/AgathasRoom.asm"
 INCLUDE "scripts/AgathasRoom.asm"
 INCLUDE "data/maps/objects/AgathasRoom.asm"
 AgathasRoom_Blocks: INCBIN "maps/AgathasRoom.blk"
+
+INCLUDE "data/maps/headers/SouthCity.asm"
+INCLUDE "scripts/SouthCity.asm"
+INCLUDE "data/maps/objects/SouthCity.asm"
+SouthCity_Blocks: INCBIN "maps/SouthCity.blk"

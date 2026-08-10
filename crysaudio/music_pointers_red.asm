@@ -6,7 +6,7 @@ Music:
 
 IF GEN_2_MUSIC
 	dba Music_Nothing
-	dba Music_PalletTown
+	dba Music_NewBarkTown
 	dba Music_PokemonCenter
 	dba Music_Gym
 	dba Music_ViridianCity

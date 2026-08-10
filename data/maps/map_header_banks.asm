@@ -65,6 +65,7 @@ MapHeaderBanks::
 	db BANK(PewterMart_h)
 	db BANK(PewterSpeechHouse_h)
 	db BANK(PewterPokecenter_h)
+	db BANK(WestGate_h)                ; UNUSED_MAP_70
 	db BANK(MtMoon1F_h)
 	db BANK(MtMoonB1F_h)
 	db BANK(MtMoonB2F_h)
@@ -112,9 +113,7 @@ MapHeaderBanks::
 	db BANK(SSAnne2FRooms_h)
 	db BANK(SSAnneB1FRooms_h)
 	db BANK(VictoryRoad1F_h)
-	db $1D ; UNUSED_MAP_70
 	db BANK(LancesRoom_h)
-	db $1D ; UNUSED_MAP_72
 	db $1D ; UNUSED_MAP_73
 	db $1D ; UNUSED_MAP_74
 	db $1D ; UNUSED_MAP_75
@@ -142,6 +141,7 @@ MapHeaderBanks::
 	db BANK(CeladonChiefHouse_h)
 	db BANK(CeladonHotel_h)
 	db BANK(LavenderPokecenter_h)
+	db BANK(Route9Gate_h) ; UNUSED_MAP_72
 	db BANK(PokemonTower1F_h)
 	db BANK(PokemonTower2F_h)
 	db BANK(PokemonTower3F_h)

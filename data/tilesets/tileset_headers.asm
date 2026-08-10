@@ -38,5 +38,8 @@ Tilesets:
 	tileset WestCityTS,    -1, -1, -1, $04, TILEANIM_WATER_FLOWER
 	tileset BirdonTS,      -1, -1, -1, $04, TILEANIM_WATER_FLOWER
 	tileset FontTS,        -1, -1, -1, $04, TILEANIM_WATER_FLOWER
+	tileset HighTechTS,    -1, -1, -1, $04, TILEANIM_WATER_FLOWER
 	tileset KantoTS,       -1, -1, -1, $04, TILEANIM_WATER_FLOWER
+	tileset NorthCityTS,   -1, -1, -1, $04, TILEANIM_WATER_FLOWER
+	tileset SouthCityTS,   -1, -1, -1, $04, TILEANIM_WATER_FLOWER
 	assert_table_length NUM_TILESETS

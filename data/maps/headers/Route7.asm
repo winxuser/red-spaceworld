@@ -1,4 +1,3 @@
-	map_header Route7, ROUTE_7, OVERWORLD, WEST | EAST
-;	connection west, CeladonCity, CELADON_CITY, -4
-;	connection east, SaffronCity, SAFFRON_CITY, -4
+	map_header Route7, ROUTE_7, HIGH_TECH_TS, EAST
+	connection east, Route6, ROUTE_6, 19
 	end_map_header
