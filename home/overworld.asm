@@ -1264,21 +1264,106 @@ CollisionCheckOnLand::
 ; clears carry if it is, sets carry if not
 CheckTilePassable::
 	predef GetTileAndCoordsInFrontOfPlayer
-	ld a, [wTileInFrontOfPlayer]
+	push de
+	push bc
+	ld a, [wPlayerDirection]
+	cp PLAYER_DIR_DOWN
+	jr z, .down
+	cp PLAYER_DIR_UP
+	jr z, .up
+	cp PLAYER_DIR_LEFT
+	jr z, .left
+
+.right
+	hlcoord 8, 9
+	inc hl          ; 1 sub-tile right (intermediate tile)
+	call .checkIntermediate
+	jr c, .solid
+	inc hl          ; 2 sub-tiles right (far target tile)
+	ld a, [hl]
+	call .testTile
+	jr c, .solid
+	jr .done
+
+.left
+	hlcoord 8, 9
+	dec hl          ; 1 sub-tile left (intermediate tile)
+	call .checkIntermediate
+	jr c, .solid
+	dec hl          ; 2 sub-tiles left (far target tile)
+	ld a, [hl]
+	call .testTile
+	jr c, .solid
+	jr .done
+
+.up
+	hlcoord 8, 9
+	ld de, -20      ; -SCREEN_WIDTH (1 sub-tile up)
+	add hl, de
+	call .checkIntermediate
+	jr c, .solid
+	add hl, de      ; -SCREEN_WIDTH (2 sub-tiles up)
+	ld a, [hl]
+	call .testTile
+	jr c, .solid
+	jr .done
+
+.down
+	hlcoord 8, 9
+	ld de, 20       ; +SCREEN_WIDTH (1 sub-tile down)
+	add hl, de
+	call .checkIntermediate
+	jr c, .solid
+	add hl, de      ; +SCREEN_WIDTH (2 sub-tiles down)
+	ld a, [hl]
+	call .testTile
+	jr c, .solid
+
+.done
+	pop bc
+	pop de
+	and a           ; Clear carry = passable
+	ret
+
+.solid
+	pop bc
+	pop de
+	scf             ; Set carry = impassable
+	ret
+
+.checkIntermediate
+	ld a, [hl]
+	call .testTile
+	ret nc          ; Passable tile -> proceed normally
+	; If intermediate tile is solid (e.g. shore bank), allow pass-through ONLY if surfing
+	ld a, [wWalkBikeSurfState]
+	cp 2            ; SURFING
+	jr z, .ignoreShore ; If surfing, clear carry and allow stepping onto land
+	scf             ; If walking on land, set carry (blocks hitting fence posts)
+	ret
+.ignoreShore
+	and a
+	ret
+
+.testTile
 	ld c, a
-	ld hl, wTilesetCollisionPtr ; pointer to list of passable tiles
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a ; hl now points to passable tiles
+	push hl
+	ld a, [wTilesetCollisionPtr]
+	ld l, a
+	ld a, [wTilesetCollisionPtr+1]
+	ld h, a
 .loop
 	ld a, [hli]
 	cp $ff
-	jr z, .tileNotPassable
+	jr z, .isSolid
 	cp c
-	ret z
-	jr .loop
-.tileNotPassable
-	scf
+	jr nz, .loop
+	pop hl
+	and a           ; Match found = passable
+	ret
+.isSolid
+	pop hl
+	scf             ; Reached $FF = solid
 	ret
 
 ; check if the player is going to jump down a small ledge
@@ -1907,10 +1992,13 @@ CollisionCheckOnWater::
 	ld a, [wTileInFrontOfPlayer] ; tile in front of player
 	cp $14 ; water tile
 	jr z, .noCollision ; keep surfing if it's a water tile
-	cp $26 ;$32 ; either the left tile of the S.S. Anne boarding platform or the tile on eastern coastlines (depending on the current tileset)
+	cp $26 ;$32 ; either the left tile of the S.S. Anne boarding platform or the tile on eastern coastlines
 	jr z, .checkIfVermilionDockTileset
 	cp $48 ; tile on right on coast lines in Safari Zone
 	jr z, .noCollision ; keep surfing
+	cp $25 ; western shore tile (Block $20)
+	jr z, .noCollision ; keep surfing
+
 ; check if the [land] tile in front of the player is passable
 .checkIfNextTileIsPassable
 	ld hl, wTilesetCollisionPtr ; pointer to list of passable tiles
@@ -1925,10 +2013,6 @@ CollisionCheckOnWater::
 	jr z, .stopSurfing ; stop surfing if the tile is passable
 	jr .loop
 .collision
-
-;	ld a, [wChannelSoundIDs + CHAN5]
-;	cp SFX_COLLISION ; check if collision sound is already playing
-;	jr z, .setCarry
 
 	; ch5 on?
 	ld hl, wChannel5 + wChannel1Flags1 - wChannel1 ; + CHANNEL_FLAGS1
@@ -1955,7 +2039,6 @@ CollisionCheckOnWater::
 	cp SHIP_PORT ; Vermilion Dock tileset
 	jr nz, .noCollision ; keep surfing if it's not the boarding platform tile
 	jr .stopSurfing ; if it is the boarding platform tile, stop surfing
-
 ; function to run the current map's script
 RunMapScript::
 	push hl
