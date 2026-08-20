@@ -15,6 +15,7 @@ MapHeaderPointers::
 	dw BlueForest_h 		; UNUSED_MAP_0B
 	dw NorthCity_h 			; UNUSED_MAP_6E
 	dw Sugar_h              ; UNUSED_MAP_6F
+	dw MtFuji_h             ; UNUSED_MAP_ED
 	dw Route1_h
 	dw Route1P2_h 			; UNUSED_MAP_6A
 	dw Route2_h
@@ -41,12 +42,16 @@ MapHeaderPointers::
 	dw Route23_h
 	dw Route24_h
 	dw Route25_h
+	dw Route26_h                    ; UNUSED_MAP_CD
+	dw Route29_h                    ; UNUSED_MAP_CE
+	dw Route30_h                    ; UNUSED_MAP_E7
 	dw RedsHouse1F_h
 	dw RedsHouse2F_h
 	dw BluesHouse_h
 	dw OaksLab_h
 	dw SilentHillPokecenter_h      ; UNUSED_MAP_69
 	dw Route1Gate1F_h              ; UNUSED_MAP_6B
+	dw Route23Gate_h               ; UNUSED_MAP_75
 	dw OldCityPokecenter1F_h
 	dw OldCityMart_h
 	dw ViridianSchoolHouse_h
@@ -75,6 +80,7 @@ MapHeaderPointers::
 	dw CeruleanGym_h
 	dw BikeShop_h
 	dw CeruleanMart_h
+	dw Route14Gate_h
 	dw MtMoonPokecenter_h
 	dw CeruleanTrashedHouse_h ; CERULEAN_TRASHED_HOUSE_COPY
 	dw Route5Gate_h
@@ -94,7 +100,6 @@ MapHeaderPointers::
 	dw Route11Gate1F_h
 	dw DiglettsCaveRoute11_h
 	dw Route11Gate2F_h
-	dw Route12Gate1F_h
 	dw BillsHouse_h
 	dw VermilionPokecenter_h
 	dw PokemonFanClub_h
@@ -114,9 +119,6 @@ MapHeaderPointers::
 	dw SSAnneB1FRooms_h
 	dw VictoryRoad1F_h
 	dw LancesRoom_h
-	dw LancesRoom_h ; UNUSED_MAP_73
-	dw LancesRoom_h ; UNUSED_MAP_74
-	dw LancesRoom_h ; UNUSED_MAP_75
 	dw HallOfFame_h
 	dw UndergroundPathNorthSouth_h
 	dw ChampionsRoom_h
@@ -142,6 +144,8 @@ MapHeaderPointers::
 	dw CeladonHotel_h
 	dw LavenderPokecenter_h
 	dw Route9Gate_h ; UNUSED_MAP_72
+	dw Route12Gate_h
+	dw Route24Gate_h ; UNUSED_MAP_CC
 	dw PokemonTower1F_h
 	dw PokemonTower2F_h
 	dw PokemonTower3F_h
@@ -156,6 +160,8 @@ MapHeaderPointers::
 	dw FuchsiaBillsGrandpasHouse_h
 	dw FuchsiaPokecenter_h
 	dw WardensHouse_h
+	dw Route16Gate_h
+	dw Route18Gate_h
 	dw SafariZoneGate_h
 	dw FuchsiaGym_h
 	dw FuchsiaMeetingRoom_h
@@ -184,18 +190,16 @@ MapHeaderPointers::
 	dw SilphCo1F_h
 	dw SaffronPokecenter_h
 	dw MrPsychicsHouse_h
-	dw Route15Gate1F_h
+	dw Route20Gate_h ; UNUSED_MAP_73
+	dw Route21Gate_h ; UNUSED_MAP_74
 	dw Route15Gate2F_h
-	dw Route16Gate1F_h
 	dw Route16Gate2F_h
 	dw Route16FlyHouse_h
 	dw Route12SuperRodHouse_h
-	dw Route18Gate1F_h
 	dw Route18Gate2F_h
 	dw SeafoamIslands1F_h
 	dw Route22Gate_h
 	dw VictoryRoad2F_h
-	dw Route12Gate2F_h
 	dw VermilionTradeHouse_h
 	dw DiglettsCave_h
 	dw VictoryRoad3F_h
@@ -204,9 +208,6 @@ MapHeaderPointers::
 	dw RocketHideoutB3F_h
 	dw RocketHideoutB4F_h
 	dw RocketHideoutElevator_h
-	dw RocketHideoutElevator_h ; UNUSED_MAP_CC
-	dw RocketHideoutElevator_h ; UNUSED_MAP_CD
-	dw RocketHideoutElevator_h ; UNUSED_MAP_CE
 	dw SilphCo2F_h
 	dw SilphCo3F_h
 	dw SilphCo4F_h
@@ -231,20 +232,18 @@ MapHeaderPointers::
 	dw CeruleanCave1F_h
 	dw NameRatersHouse_h
 	dw CeruleanBadgeHouse_h
-	dw Route16Gate1F_h ; UNUSED_MAP_E7
 	dw RockTunnelB1F_h
 	dw SilphCo9F_h
 	dw SilphCo10F_h
 	dw SilphCo11F_h
 	dw SilphCoElevator_h
-	dw SilphCo2F_h ; UNUSED_MAP_ED
-	dw SilphCo2F_h ; UNUSED_MAP_EE
+	dw Route16Gate_h ; UNUSED_MAP_EE
 	dw TradeCenter_h
 	dw Colosseum_h
-	dw SilphCo2F_h ; UNUSED_MAP_F1
-	dw SilphCo2F_h ; UNUSED_MAP_F2
-	dw SilphCo2F_h ; UNUSED_MAP_F3
-	dw SilphCo2F_h ; UNUSED_MAP_F4
+	dw Route16Gate_h ; UNUSED_MAP_F1
+	dw Route16Gate_h ; UNUSED_MAP_F2
+	dw Route16Gate_h ; UNUSED_MAP_F3
+	dw Route16Gate_h ; UNUSED_MAP_F4
 	dw LoreleisRoom_h
 	dw BrunosRoom_h
 	dw AgathasRoom_h

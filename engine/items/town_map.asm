@@ -15,7 +15,7 @@ DisplayTownMap:
 	push af
 	ld b, $0
 	call DrawPlayerOrBirdSprite
-	hlcoord 1, 0
+	hlcoord 1, 16
 	ld de, wNameBuffer
 	call PlaceString
 	ld hl, wShadowOAMSprite00
@@ -32,9 +32,6 @@ DisplayTownMap:
 	jr .enterLoop
 
 .townMapLoop
-	hlcoord 0, 0
-	lb bc, 1, 20
-	call ClearScreenArea
 	ld hl, TownMapOrder
 	ld a, [wWhichTownMapLocation]
 	ld c, a
@@ -53,7 +50,7 @@ DisplayTownMap:
 	call WriteTownMapSpriteOAM ; town map cursor sprite
 	pop hl
 	call CopyMapNameBuffer
-	hlcoord 1, 0
+	hlcoord 1, 16
 	ld de, wNameBuffer
 	call PlaceString
 	ld hl, wShadowOAMSprite04
@@ -116,7 +113,7 @@ LoadTownMap_Nest:
 	push hl
 	call DisplayWildLocations
 	call GetMonName
-	hlcoord 1, 0
+	hlcoord 1, 16
 	call PlaceString
 	ld h, b
 	ld l, c
@@ -134,52 +131,107 @@ MonsNestText:
 
 LoadTownMap_Fly::
 	call ClearSprites
-	call LoadTownMap
+	call GBPalWhiteOutWithDelay3
+	call ClearScreen
+	call UpdateSprites
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
 	ld de, BirdSprite
 	ld hl, vSprites tile BIRD_BASE_TILE
 	lb bc, BANK(BirdSprite), 12
 	call CopyVideoData
-	ld de, TownMapUpArrow
-	ld hl, vChars1 tile $6d
-	lb bc, BANK(TownMapUpArrow), (TownMapUpArrowEnd - TownMapUpArrow) / TILE_1BPP_SIZE
-	call CopyVideoDataDouble
+
+	hlcoord 0, 0
+	ld b, $12
+	ld c, $12
+	call TextBoxBorder
+
+	call DisableLCD
+	ld hl, WorldMapTileGraphics
+	ld de, vChars2
+	ld bc, WorldMapTileGraphicsEnd - WorldMapTileGraphics
+	ld a, BANK(WorldMapTileGraphics)
+	call FarCopyData2
+	ld hl, UncompressedMap
+	ld de, wTileMap
+	ld bc, UncompressedMapEnd - UncompressedMap
+	call CopyData
+	call EnableLCD
+
+	ld b, SET_PAL_TOWN_MAP
+	call RunPaletteCommand
+
 	call BuildFlyLocationsList
+
 	ld hl, wUpdateSpritesEnabled
 	ld a, [hl]
 	push af
 	ld [hl], $ff
 	push hl
-	hlcoord 0, 0
+
+	hlcoord 1, 16
 	ld de, ToText
 	call PlaceString
+
+	; Find current map in fly locations list, or fall back to first visited town
 	ld a, [wCurMap]
-	ld b, $0
-	call DrawPlayerOrBirdSprite
+	ld b, a
 	ld hl, wFlyLocationsList
-	decoord 18, 0
-.townMapFlyLoop
-	ld a, ' '
-	ld [de], a
+.findCurMapLoop
+	ld a, [hl]
+	cp $ff
+	jr z, .fallbackToFirstVisited
+	cp b
+	jr z, .initDrawFly
+	inc hl
+	jr .findCurMapLoop
+.fallbackToFirstVisited
+	ld hl, wFlyLocationsList
+.findFirstVisitedLoop
+	ld a, [hl]
+	cp $ff
+	jr z, .initDrawFly
+	cp NOT_VISITED
+	jr nz, .initDrawFly
+	inc hl
+	jr .findFirstVisitedLoop
+
+.initDrawFly
 	push hl
 	push hl
-	hlcoord 3, 0
-	lb bc, 1, 15
+	hlcoord 4, 16
+	lb bc, 1, 13
 	call ClearScreenArea
 	pop hl
 	ld a, [hl]
 	ld b, BIRD_BASE_TILE
 	call DrawPlayerOrBirdSprite
-	hlcoord 3, 0
+	hlcoord 4, 16
 	ld de, wNameBuffer
 	call PlaceString
-	ld c, 15
-	call DelayFrames
-	hlcoord 18, 0
-	ld [hl], '▲'
-	hlcoord 19, 0
-	ld [hl], '▼'
+	pop hl
+
+	call Delay3
+	call GBPalNormal
+	xor a
+	ld [wAnimCounter], a
+	inc a
+	ld [wTownMapSpriteBlinkingEnabled], a
+	jr .townMapFlyLoop
+
+.townMapFlyLoop
+	push hl
+	push hl
+	hlcoord 4, 16
+	lb bc, 1, 13
+	call ClearScreenArea
+	pop hl
+	ld a, [hl]
+	ld b, BIRD_BASE_TILE
+	call DrawPlayerOrBirdSprite
+	hlcoord 4, 16
+	ld de, wNameBuffer
+	call PlaceString
 	pop hl
 .inputLoop
 	push hl
@@ -218,7 +270,6 @@ LoadTownMap_Fly::
 	ld [hl], a
 	ret
 .pressedUp
-	decoord 18, 0
 	inc hl
 	ld a, [hl]
 	cp $ff
@@ -230,7 +281,6 @@ LoadTownMap_Fly::
 	ld hl, wFlyLocationsList
 	jp .townMapFlyLoop
 .pressedDown
-	decoord 19, 0
 	dec hl
 	ld a, [hl]
 	cp $ff
@@ -268,10 +318,6 @@ BuildFlyLocationsList:
 	jr nz, .loop
 	ld [hl], $ff
 	ret
-
-TownMapUpArrow:
-	INCBIN "gfx/town_map/up_arrow.1bpp"
-TownMapUpArrowEnd:
 
 LoadTownMap:
 	call GBPalWhiteOutWithDelay3
@@ -562,13 +608,35 @@ LoadTownMapEntry:
 	ret
 
 CopyMapNameBuffer:
+	push hl
+	push bc
 	ld de, wNameBuffer
+	ld b, 14 ; Max name width
 .copyLoop
 	ld a, [hli]
+	cp '@'
+	jr z, .padSpaces
 	ld [de], a
 	inc de
-	cp '@'
+	dec b
 	jr nz, .copyLoop
+	jr .done
+.padSpaces
+	ld a, b
+	and a
+	jr z, .finish
+	ld a, $04
+.padLoop
+	ld [de], a
+	inc de
+	dec b
+	jr nz, .padLoop
+.finish
+	ld a, '@'
+	ld [de], a
+.done
+	pop bc
+	pop hl
 	ret
 
 INCLUDE "data/maps/town_map_entries.asm"

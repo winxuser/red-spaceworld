@@ -13,6 +13,8 @@ Route21_Object:
 	db $21 ; border block
 
 	def_warp_events
+	warp_event  8, 48, ROUTE_21_GATE, 1
+	warp_event  9, 48, ROUTE_21_GATE, 2
 
 	def_bg_events
 

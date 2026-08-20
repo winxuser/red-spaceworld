@@ -7,9 +7,9 @@ ENDM
 ExternalMapEntries:
 	table_width 3
 	; x, y, name
-	outdoor_map  2, 11, SilentHillName
-	outdoor_map  2,  8, OldCityName
-	outdoor_map  2,  3, WestCityName
+	outdoor_map 10, 12, SilentHillName
+	outdoor_map  8, 10, OldCityName
+	outdoor_map  5, 10, WestCityName
 	outdoor_map 10,  2, BirdonName
 	outdoor_map 14,  5, FontName
 	outdoor_map 10,  9, SouthCityName
@@ -21,11 +21,12 @@ ExternalMapEntries:
 	outdoor_map  0,  0, BlueForestName ; unused
 	outdoor_map  0,  0, NorthCityName ; unused
 	outdoor_map  0,  0, SugarName ; unused
-	outdoor_map  2, 10, Route1Name
-	outdoor_map  2, 11, Route1P2Name
-	outdoor_map  2,  6, Route2Name
-	outdoor_map  4,  3, Route3Name
-	outdoor_map  8,  2, Route4Name
+	outdoor_map  0,  0, MtFujiName ; unused
+	outdoor_map  9, 12, Route1Name
+	outdoor_map  8, 11, Route1P2Name
+	outdoor_map  8, 11, Route2Name
+	outdoor_map  7, 10, Route3Name
+	outdoor_map  5,  8, Route4Name
 	outdoor_map 10,  3, Route5Name
 	outdoor_map 10,  8, Route6Name
 	outdoor_map  8,  5, Route7Name
@@ -47,6 +48,9 @@ ExternalMapEntries:
 	outdoor_map  0,  6, Route23Name
 	outdoor_map 10,  1, Route24Name
 	outdoor_map 11,  0, Route25Name
+	outdoor_map 11,  0, Route26Name
+	outdoor_map 11,  0, Route29Name
+	outdoor_map 11,  0, Route30Name
 	assert_table_length FIRST_INDOOR_MAP
 
 
@@ -60,10 +64,10 @@ ENDM
 InternalMapEntries:
 	table_width 4
 	; indoor map group, x, y, name
-	indoor_map SILENT_HILL,         2, 11, SilentHillName
+	indoor_map SILENT_HILL,        10, 12, SilentHillName
 	indoor_map OLD_CITY,            2,  8, OldCityName
-	indoor_map ROUTE_2,             2,  6, Route2Name
-	indoor_map SILENT_HILLS,        2,  4, SilentHillsName
+	indoor_map ROUTE_2,             8, 11, Route2Name
+	indoor_map SILENT_HILLS,        8, 12, SilentHillsName
 	indoor_map WEST_CITY,           2,  3, WestCityName
 	indoor_map MT_MOON,             6,  2, MountMoonName
 	indoor_map BIRDON,             10,  2, BirdonName
@@ -76,7 +80,7 @@ InternalMapEntries:
 	indoor_map ROCK_TUNNEL,        14,  3, RockTunnelName
 	indoor_map POWER_PLANT,        15,  4, PowerPlantName
 	indoor_map ROUTE_11,           13,  9, Route11Name
-	indoor_map ROUTE_12,           14,  7, Route12Name
+;	indoor_map ROUTE_12,           14,  7, Route12Name
 	indoor_map SEA_COTTAGE,        12,  0, SeaCottageName
 	indoor_map SOUTH_CITY,         10,  9, SouthCityName
 	indoor_map SS_ANNE,             9, 10, SSAnneName
@@ -106,7 +110,7 @@ InternalMapEntries:
 	indoor_map SEAFOAM_ISLANDS_2,   5, 15, SeafoamIslandsName
 	indoor_map ROUTE_22,            0,  7, Route22Name
 	indoor_map VICTORY_ROAD_2,      0,  4, VictoryRoadName
-	indoor_map ROUTE_12_3,         14,  7, Route12Name
+;	indoor_map ROUTE_12_3,         14,  7, Route12Name
 	indoor_map SOUTH_CITY_3,       10,  9, SouthCityName
 	indoor_map DIGLETTS_CAVE,       3,  4, DiglettsCaveName
 	indoor_map VICTORY_ROAD_3,      0,  4, VictoryRoadName

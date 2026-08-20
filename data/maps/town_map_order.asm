@@ -3,12 +3,10 @@ TownMapOrder:
 	db ROUTE_1
 	db SILENT_HILLS
 	db ROUTE_1_P2
-	db OLD_CITY
 	db ROUTE_2
-	db DIGLETTS_CAVE
-	db WEST_CITY
+	db OLD_CITY
 	db ROUTE_3
-	db MT_MOON_1F
+	db WEST_CITY
 	db ROUTE_4
 	db BIRDON
 	db ROUTE_24
@@ -50,4 +48,10 @@ TownMapOrder:
 	db BLUE_FOREST
 	db NORTH_CITY
 	db SUGAR
+	db ROUTE_26
+	db ROUTE_29
+	db ROUTE_30
+	db MT_FUJI
+	db DIGLETTS_CAVE
+	db MT_MOON_1F
 TownMapOrderEnd:

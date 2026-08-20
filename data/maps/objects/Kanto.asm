@@ -1,8 +1,8 @@
 Kanto_Object:
-	db $3B ; border block
+	db $3b ; border block
 
 	def_warp_events
-;	warp_event  5, 38, SILENT_HILL, 2
+	warp_event  6, 27, ROUTE_23_GATE, 1
 
 	def_bg_events
 

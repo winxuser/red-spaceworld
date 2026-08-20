@@ -49,7 +49,7 @@ ENDM
 	door_tiles $1e
 
 .LobbyDoorTileIDs:
-	door_tiles $1c, $38, $1a
+	door_tiles $1c, $12, $38, $1a
 
 .MansionDoorTileIDs:
 	door_tiles $1a, $1c, $53

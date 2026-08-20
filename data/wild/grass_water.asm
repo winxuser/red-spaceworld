@@ -194,7 +194,7 @@ WildDataPointers:
 	dw SeafoamIslands1FWildMons  ; SEAFOAM_ISLANDS_1F
 	dw NothingWildMons          ; ROUTE_22_GATE
 	dw VictoryRoad2FWildMons    ; VICTORY_ROAD_2F
-	dw NothingWildMons          ; ROUTE_12_GATE_2F
+;	dw NothingWildMons          ; ROUTE_12_GATE_2F
 	dw NothingWildMons          ; VERMILION_TRADE_HOUSE
 	dw DiglettsCaveWildMons     ; DIGLETTS_CAVE
 	dw VictoryRoad3FWildMons    ; VICTORY_ROAD_3F

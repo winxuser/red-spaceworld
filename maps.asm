@@ -110,6 +110,61 @@ INCLUDE "scripts/Sugar.asm"
 INCLUDE "data/maps/objects/Sugar.asm"
 Sugar_Blocks: INCBIN "maps/Sugar.blk"
 
+INCLUDE "data/maps/headers/Route14Gate.asm"
+INCLUDE "scripts/Route14Gate.asm"
+INCLUDE "data/maps/objects/Route14Gate.asm"
+Route14Gate_Blocks: INCBIN "maps/Route14Gate.blk"
+
+INCLUDE "data/maps/headers/Route16Gate.asm"
+INCLUDE "scripts/Route16Gate.asm"
+INCLUDE "data/maps/objects/Route16Gate.asm"
+Route16Gate_Blocks: INCBIN "maps/Route16Gate.blk"
+
+INCLUDE "data/maps/headers/Route18Gate.asm"
+INCLUDE "scripts/Route18Gate.asm"
+INCLUDE "data/maps/objects/Route18Gate.asm"
+Route18Gate_Blocks: INCBIN "maps/Route18Gate.blk"
+
+INCLUDE "data/maps/headers/Route20Gate.asm"
+INCLUDE "scripts/Route20Gate.asm"
+INCLUDE "data/maps/objects/Route20Gate.asm"
+Route20Gate_Blocks: INCBIN "maps/Route20Gate.blk"
+
+INCLUDE "data/maps/headers/Route21Gate.asm"
+INCLUDE "scripts/Route21Gate.asm"
+INCLUDE "data/maps/objects/Route21Gate.asm"
+Route21Gate_Blocks: INCBIN "maps/Route21Gate.blk"
+
+INCLUDE "data/maps/headers/Route23Gate.asm"
+INCLUDE "scripts/Route23Gate.asm"
+INCLUDE "data/maps/objects/Route23Gate.asm"
+Route23Gate_Blocks: INCBIN "maps/Route23Gate.blk"
+
+INCLUDE "data/maps/headers/Route24Gate.asm"
+INCLUDE "scripts/Route24Gate.asm"
+INCLUDE "data/maps/objects/Route24Gate.asm"
+Route24Gate_Blocks: INCBIN "maps/Route24Gate.blk"
+
+INCLUDE "data/maps/headers/Route26.asm"
+INCLUDE "scripts/Route26.asm"
+INCLUDE "data/maps/objects/Route26.asm"
+Route26_Blocks: INCBIN "maps/Route26.blk"
+
+INCLUDE "data/maps/headers/Route29.asm"
+INCLUDE "scripts/Route29.asm"
+INCLUDE "data/maps/objects/Route29.asm"
+Route29_Blocks: INCBIN "maps/Route29.blk"
+
+INCLUDE "data/maps/headers/Route30.asm"
+INCLUDE "scripts/Route30.asm"
+INCLUDE "data/maps/objects/Route30.asm"
+Route30_Blocks: INCBIN "maps/Route30.blk"
+
+INCLUDE "data/maps/headers/MtFuji.asm"
+INCLUDE "scripts/MtFuji.asm"
+INCLUDE "data/maps/objects/MtFuji.asm"
+MtFuji_Blocks: INCBIN "maps/MtFuji.blk"
+
 
 SECTION "Maps 2", ROMX
 
@@ -467,14 +522,12 @@ CeladonPokecenter_Blocks:
 RockTunnelPokecenter_Blocks:
 MtMoonPokecenter_Blocks: INCBIN "maps/MtMoonPokecenter.blk"
 
-Route18Gate1F_Blocks:
-Route15Gate1F_Blocks:
 Route11Gate1F_Blocks: INCBIN "maps/Route11Gate1F.blk"
 
 Route18Gate2F_Blocks:
 Route16Gate2F_Blocks:
 Route15Gate2F_Blocks:
-Route12Gate2F_Blocks:
+;Route12Gate2F_Blocks:
 Route11Gate2F_Blocks: INCBIN "maps/Route11Gate2F.blk"
 
 
@@ -582,35 +635,23 @@ INCLUDE "data/maps/headers/Route11Gate2F.asm"
 INCLUDE "scripts/Route11Gate2F.asm"
 INCLUDE "data/maps/objects/Route11Gate2F.asm"
 
-INCLUDE "data/maps/headers/Route12Gate1F.asm"
-INCLUDE "scripts/Route12Gate1F.asm"
-INCLUDE "data/maps/objects/Route12Gate1F.asm"
-Route12Gate1F_Blocks: INCBIN "maps/Route12Gate1F.blk"
+INCLUDE "data/maps/headers/Route12Gate.asm"
+INCLUDE "scripts/Route12Gate.asm"
+INCLUDE "data/maps/objects/Route12Gate.asm"
+Route12Gate_Blocks: INCBIN "maps/Route12Gate.blk"
 
-INCLUDE "data/maps/headers/Route12Gate2F.asm"
-INCLUDE "scripts/Route12Gate2F.asm"
-INCLUDE "data/maps/objects/Route12Gate2F.asm"
-
-INCLUDE "data/maps/headers/Route15Gate1F.asm"
-INCLUDE "scripts/Route15Gate1F.asm"
-INCLUDE "data/maps/objects/Route15Gate1F.asm"
+;INCLUDE "data/maps/headers/Route12Gate2F.asm"
+;INCLUDE "scripts/Route12Gate2F.asm"
+;INCLUDE "data/maps/objects/Route12Gate2F.asm"
 
 INCLUDE "data/maps/headers/Route15Gate2F.asm"
 INCLUDE "scripts/Route15Gate2F.asm"
 INCLUDE "data/maps/objects/Route15Gate2F.asm"
 
-INCLUDE "data/maps/headers/Route16Gate1F.asm"
-INCLUDE "scripts/Route16Gate1F.asm"
-INCLUDE "data/maps/objects/Route16Gate1F.asm"
-Route16Gate1F_Blocks: INCBIN "maps/Route16Gate1F.blk"
 
 INCLUDE "data/maps/headers/Route16Gate2F.asm"
 INCLUDE "scripts/Route16Gate2F.asm"
 INCLUDE "data/maps/objects/Route16Gate2F.asm"
-
-INCLUDE "data/maps/headers/Route18Gate1F.asm"
-INCLUDE "scripts/Route18Gate1F.asm"
-INCLUDE "data/maps/objects/Route18Gate1F.asm"
 
 INCLUDE "data/maps/headers/Route18Gate2F.asm"
 INCLUDE "scripts/Route18Gate2F.asm"

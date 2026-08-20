@@ -16,7 +16,7 @@ RedsHouse2_Coll::
 	coll_tiles $01, $02, $03, $11, $12, $13, $14, $1c, $1a
 
 Pokecenter_Coll::
-	coll_tiles $11, $12, $3b
+	coll_tiles $11, $12, $3b, $3e
 
 Dojo_Coll::
 Gym_Coll::
@@ -31,7 +31,7 @@ House_Coll::
 ForestGate_Coll::
 Museum_Coll::
 Gate_Coll::
-	coll_tiles $01, $12, $14, $1a, $1c, $37, $38, $3b, $3c, $5e
+	coll_tiles $01, $04, $12, $14, $1a, $1c, $37, $38, $3b, $3c, $5e
 
 Ship_Coll::
 	coll_tiles $04, $0d, $17, $1d, $1e, $23, $34, $37, $39, $4a
@@ -87,7 +87,7 @@ FontTS_Coll::
 	coll_tiles $00, $03, $04, $05, $06, $07, $24, $29, $2b, $37, $3a, $5a
 	
 HighTechTS_Coll::
-	coll_tiles $00, $03, $04, $05, $06, $07, $29, $53, $54
+	coll_tiles $00, $03, $04, $05, $06, $07, $29, $53, $54, $5e
 
 KantoTS_Coll::
 	coll_tiles $00, $03, $04, $05, $06, $07, $2b, $2c, $29, $37, $54

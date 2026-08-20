@@ -8,13 +8,10 @@
 	const_export ROUTE23_GUARD5
 
 Route23_Object:
-	db $f ; border block
+	db $00 ; border block
 
 	def_warp_events
-	warp_event  7, 139, ROUTE_22_GATE, 3
-	warp_event  8, 139, ROUTE_22_GATE, 4
-	warp_event  4, 31, VICTORY_ROAD_1F, 1
-	warp_event 14, 31, VICTORY_ROAD_2F, 2
+	warp_event  55, 9, ROUTE_23_GATE, 3
 
 	def_bg_events
 	bg_event  3, 33, TEXT_ROUTE23_VICTORY_ROAD_GATE_SIGN

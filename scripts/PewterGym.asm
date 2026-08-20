@@ -69,9 +69,9 @@ PewterGymScriptReceiveTM34:
 ;	ld a, TOGGLE_GYM_GUY
 ;	ld [wToggleableObjectIndex], a
 ;	predef HideObject
-	ld a, TOGGLE_ROUTE_22_RIVAL_1
-	ld [wToggleableObjectIndex], a
-	predef HideObject
+;	ld a, TOGGLE_ROUTE_22_RIVAL_1
+;	ld [wToggleableObjectIndex], a
+;	predef HideObject
 
 	ResetEvents EVENT_1ST_ROUTE22_RIVAL_BATTLE, EVENT_ROUTE22_RIVAL_WANTS_BATTLE
 

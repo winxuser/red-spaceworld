@@ -23,7 +23,7 @@ ENDM
 ; Each map also has associated data in maps.asm.
 ; Order: towns/cities, then routes, then indoor/dungeon maps
 	const_def
-	map_const SILENT_HILL,                   10,  9 ; $00 half done, need tp fix hide/show
+	map_const SILENT_HILL,                   10,  9 ; $00 half done, need to fix hide/show
 	map_const OLD_CITY,                      20, 18 ; $01 10% done
 	map_const WEST_CITY,                     20, 18 ; $02 10% done
 	map_const BIRDON,                        10,  9 ; $03 10% done
@@ -37,6 +37,7 @@ ENDM
 	map_const BLUE_FOREST,                   20, 18 ; $0B was unused 10% done
 	map_const NORTH_CITY,                    10,  9 ; $6E 10% done
 	map_const SUGAR,                         10,  9 ; $6F 10% done
+	map_const MT_FUJI,                       10,  9 ; $ED
 DEF NUM_CITY_MAPS EQU const_value
 
 
@@ -49,24 +50,27 @@ DEF FIRST_ROUTE_MAP EQU const_value
 	map_const ROUTE_5,                       10, 18 ; $10 missing
 	map_const ROUTE_6,                       25,  9 ; $11 10% done
 	map_const ROUTE_7,                       10, 27 ; $12 10% done
-	map_const ROUTE_8,                       30,  9 ; $13
+	map_const ROUTE_8,                       30,  9 ; $13 missing
 	map_const ROUTE_9,                       35,  9 ; $14 10% done
-	map_const ROUTE_10,                      10, 36 ; $15
-	map_const ROUTE_11,                      30,  9 ; $16
-	map_const ROUTE_12,                      10, 54 ; $17
-	map_const ROUTE_13,                      30,  9 ; $18
-	map_const ROUTE_14,                      10, 27 ; $19
-	map_const ROUTE_15,                      30,  9 ; $1A
-	map_const ROUTE_16,                      20,  9 ; $1B
-	map_const ROUTE_17,                      10, 72 ; $1C
-	map_const ROUTE_18,                      25,  9 ; $1D
-	map_const ROUTE_19,                      10, 27 ; $1E
-	map_const ROUTE_20,                      50,  9 ; $1F
-	map_const ROUTE_21,                      10, 45 ; $20
-	map_const ROUTE_22,                      20,  9 ; $21
-	map_const ROUTE_23,                      10, 72 ; $22
-	map_const ROUTE_24,                      10, 18 ; $23
-	map_const ROUTE_25,                      30,  9 ; $24
+	map_const ROUTE_10,                      10, 18 ; $15 done
+	map_const ROUTE_11,                      25,  9 ; $16 done
+	map_const ROUTE_12,                      10, 18 ; $17 done
+	map_const ROUTE_13,                      50,  9 ; $18 done
+	map_const ROUTE_14,                      10, 18 ; $19 done
+	map_const ROUTE_15,                      15,  9 ; $1A done
+	map_const ROUTE_16,                      10, 27 ; $1B done
+	map_const ROUTE_17,                      15,  9 ; $1C done
+	map_const ROUTE_18,                      10, 45 ; $1D done
+	map_const ROUTE_19,                      25,  9 ; $1E done
+	map_const ROUTE_20,                      10, 27 ; $1F done
+	map_const ROUTE_21,                      10, 27 ; $20 done
+	map_const ROUTE_22,                      20,  9 ; $21 done
+	map_const ROUTE_23,                      30,  9 ; $22 done
+	map_const ROUTE_24,                      10, 18 ; $23 done
+	map_const ROUTE_25,                      35,  9 ; $24
+	map_const ROUTE_26,                      10, 27 ; $CD
+	map_const ROUTE_29,                      10,  5 ; $CE
+	map_const ROUTE_30,                      10,  5 ; $E7
 
 DEF FIRST_INDOOR_MAP EQU const_value
 	map_const REDS_HOUSE_1F,                  5,  4 ; $25 done
@@ -75,6 +79,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const OAKS_LAB,                       4,  8 ; $28 done
 	map_const SILENT_HILL_POKECENTER,         8,  4 ; UNUSED MAP $69 done
 	map_const ROUTE_1_GATE_1F,                5,  4 ; UNUSED MAP $6B  done
+	map_const ROUTE_23_GATE,                  5,  4 ; UNUSED_MAP_75 $75 done
 	end_indoor_group SILENT_HILL
 
 	map_const OLD_CITY_POKECENTER_1F,         8,  4 ; $29
@@ -91,7 +96,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const VIRIDIAN_FOREST_SOUTH_GATE,     5,  4 ; $32
 	end_indoor_group ROUTE_2
 
-	map_const SILENT_HILLS ,                 25, 18 ; UNUSED_MAP $6D
+	map_const SILENT_HILLS ,                 25, 18 ; UNUSED_MAP $6D done
 	end_indoor_group SILENT_HILLS
 
 	map_const MUSEUM_1F,                     10,  4 ; $34
@@ -101,7 +106,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const PEWTER_MART,                    4,  4 ; $38
 	map_const PEWTER_SPEECH_HOUSE,            4,  4 ; $39
 	map_const PEWTER_POKECENTER,              7,  4 ; $3A
-	map_const WEST_GATE,                      5,  4 ; $70
+	map_const WEST_GATE,                      5,  4 ; $70 done
 	end_indoor_group WEST_CITY
 
 	map_const MT_MOON_1F,                    20, 18 ; $3B
@@ -115,6 +120,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const CERULEAN_GYM,                   5,  7 ; $41
 	map_const BIKE_SHOP,                      4,  4 ; $42
 	map_const CERULEAN_MART,                  4,  4 ; $43
+	map_const ROUTE_14_GATE,                  5,  4 ; $B8
 	end_indoor_group BIRDON
 
 	map_const MT_MOON_POKECENTER,             7,  4 ; $44
@@ -154,9 +160,6 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const ROUTE_11_GATE_2F,               4,  4 ; $56
 	end_indoor_group ROUTE_11
 
-	map_const ROUTE_12_GATE_1F,               5,  4 ; $57
-	end_indoor_group ROUTE_12
-
 	map_const BILLS_HOUSE,                    4,  4 ; $58
 	end_indoor_group SEA_COTTAGE
 
@@ -184,9 +187,6 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	end_indoor_group VICTORY_ROAD
 
 	map_const LANCES_ROOM,                   13, 13 ; $71
-	map_const UNUSED_MAP_73,                  0,  0 ; $73
-	map_const UNUSED_MAP_74,                  0,  0 ; $74
-	map_const UNUSED_MAP_75,                  0,  0 ; $75
 	map_const HALL_OF_FAME,                   5,  4 ; $76
 	end_indoor_group POKEMON_LEAGUE
 
@@ -222,6 +222,8 @@ DEF FIRST_INDOOR_MAP EQU const_value
 
 	map_const LAVENDER_POKECENTER,            7,  4 ; $8D
 	map_const ROUTE_9_GATE,                   5,  4 ; $72 done
+	map_const ROUTE_12_GATE,                  5,  4 ; $57
+	map_const ROUTE_24_GATE,                  5,  4 ; $CC
 	end_indoor_group FONT
 
 	map_const POKEMON_TOWER_1F,              10,  9 ; $8E
@@ -242,6 +244,8 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const FUCHSIA_BILLS_GRANDPAS_HOUSE,   4,  4 ; $99
 	map_const FUCHSIA_POKECENTER,             7,  4 ; $9A
 	map_const WARDENS_HOUSE,                  5,  4 ; $9B
+	map_const ROUTE_16_GATE,                  5,  4 ; $BA done
+	map_const ROUTE_18_GATE,                  5,  4 ; $BE
 	end_indoor_group NEW_TYPE
 
 	map_const SAFARI_ZONE_GATE,               4,  3 ; $9C
@@ -288,13 +292,13 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const SILPH_CO_1F,                   15,  9 ; $B5
 	map_const SAFFRON_POKECENTER,             7,  4 ; $B6
 	map_const MR_PSYCHICS_HOUSE,              4,  4 ; $B7
+	map_const ROUTE_20_GATE,                  5,  4 ; $73
+	map_const ROUTE_21_GATE,                  5,  4 ; $74
 	end_indoor_group STAND
 
-	map_const ROUTE_15_GATE_1F,               4,  5 ; $B8
 	map_const ROUTE_15_GATE_2F,               4,  4 ; $B9
 	end_indoor_group ROUTE_15
 
-	map_const ROUTE_16_GATE_1F,               4,  7 ; $BA
 	map_const ROUTE_16_GATE_2F,               4,  4 ; $BB
 	map_const ROUTE_16_FLY_HOUSE,             4,  4 ; $BC
 	end_indoor_group ROUTE_16
@@ -302,7 +306,6 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const ROUTE_12_SUPER_ROD_HOUSE,       4,  4 ; $BD
 	end_indoor_group ROUTE_12_2
 
-	map_const ROUTE_18_GATE_1F,               4,  5 ; $BE
 	map_const ROUTE_18_GATE_2F,               4,  4 ; $BF
 	end_indoor_group ROUTE_18
 
@@ -314,9 +317,6 @@ DEF FIRST_INDOOR_MAP EQU const_value
 
 	map_const VICTORY_ROAD_2F,               15,  9 ; $C2
 	end_indoor_group VICTORY_ROAD_2
-
-	map_const ROUTE_12_GATE_2F,               4,  4 ; $C3
-	end_indoor_group ROUTE_12_3
 
 	map_const VERMILION_TRADE_HOUSE,          4,  4 ; $C4
 	end_indoor_group SOUTH_CITY_3
@@ -332,9 +332,6 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const ROCKET_HIDEOUT_B3F,            15, 14 ; $C9
 	map_const ROCKET_HIDEOUT_B4F,            15, 12 ; $CA
 	map_const ROCKET_HIDEOUT_ELEVATOR,        3,  4 ; $CB
-	map_const UNUSED_MAP_CC,                  0,  0 ; $CC
-	map_const UNUSED_MAP_CD,                  0,  0 ; $CD
-	map_const UNUSED_MAP_CE,                  0,  0 ; $CE
 	end_indoor_group ROCKET_HQ
 
 	map_const SILPH_CO_2F,                   15,  9 ; $CF
@@ -373,7 +370,6 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const CERULEAN_BADGE_HOUSE,           4,  4 ; $E6
 	end_indoor_group BIRDON_3
 
-	map_const UNUSED_MAP_E7,                  0,  0 ; $E7
 	map_const ROCK_TUNNEL_B1F,               20, 18 ; $E8
 	end_indoor_group ROCK_TUNNEL_2
 
@@ -383,7 +379,6 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const SILPH_CO_ELEVATOR,              2,  2 ; $EC
 	end_indoor_group SILPH_CO_2
 
-	map_const UNUSED_MAP_ED,                  0,  0 ; $ED
 	map_const UNUSED_MAP_EE,                  0,  0 ; $EE
 	map_const TRADE_CENTER,                   5,  4 ; $EF
 	map_const COLOSSEUM,                      5,  4 ; $F0

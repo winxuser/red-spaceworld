@@ -1,4 +1,4 @@
-	map_header Route11, ROUTE_11, OVERWORLD, WEST | EAST
-;	connection west, VermilionCity, VERMILION_CITY, -4
-;	connection east, Route12, ROUTE_12, -27
+	map_header Route11, ROUTE_11, FONT_TS, WEST | EAST
+	connection west, Font, FONT, 0
+	connection east, Route12, ROUTE_12, 0
 	end_map_header

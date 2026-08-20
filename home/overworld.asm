@@ -378,13 +378,6 @@ DoBikeSpeedup::
 	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
-	ld a, [wCurMap]
-	cp ROUTE_17 ; Cycling Road
-	jr nz, .goFaster
-	ldh a, [hJoyHeld]
-	and PAD_UP | PAD_LEFT | PAD_RIGHT
-	ret nz
-.goFaster
 	jp AdvancePlayerSprite
 
 ; check if the player has stepped onto a warp after having not collided
@@ -1914,14 +1907,6 @@ JoypadOverworld::
 	ld a, [wStatusFlags7]
 	bit BIT_TRAINER_BATTLE, a
 	jr nz, .notForcedDownwards
-	ld a, [wCurMap]
-	cp ROUTE_17 ; Cycling Road
-	jr nz, .notForcedDownwards
-	ldh a, [hJoyHeld]
-	and PAD_CTRL_PAD | PAD_B | PAD_A
-	jr nz, .notForcedDownwards
-	ld a, PAD_DOWN
-	ldh [hJoyHeld], a ; on the cycling road, if there isn't a trainer and the player isn't pressing buttons, simulate a down press
 .notForcedDownwards
 	ld a, [wStatusFlags5]
 	bit BIT_SCRIPTED_MOVEMENT_STATE, a

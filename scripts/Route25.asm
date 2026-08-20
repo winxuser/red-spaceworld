@@ -25,9 +25,9 @@ Route25ToggleBillsScript:
 	CheckEventAfterBranchReuseHL EVENT_GOT_SS_TICKET, EVENT_MET_BILL_2
 	ret z
 	SetEventReuseHL EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
-	ld a, TOGGLE_NUGGET_BRIDGE_GUY
-	ld [wToggleableObjectIndex], a
-	predef HideObject
+;	ld a, TOGGLE_NUGGET_BRIDGE_GUY
+;	ld [wToggleableObjectIndex], a
+;	predef HideObject
 	ld a, TOGGLE_BILL_1
 	ld [wToggleableObjectIndex], a
 	predef HideObject

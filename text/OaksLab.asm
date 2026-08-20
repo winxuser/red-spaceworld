@@ -362,3 +362,29 @@ _OaksLabScientistText::
 	text "I study #MON as"
 	line "PROF.OAK's AIDE."
 	done
+
+_OaksLabGirlAskToChooseStarterText::
+	text "Prof. Oak told you"
+	line "to choose a #MON"
+	para "first! Go ahead"
+	line "and pick one!"
+	done
+
+_OaksLabGirlGivingItemsText::
+	text "Prof. Oak asked me"
+	line "to give these to"
+	para "you once you had"
+	line "picked your"
+	cont "#MON!"
+	done
+
+_OaksLabGirlGotItemsNotificationText::
+	text "<PLAYER> received"
+	line "the POKéDEX and"
+	para "5 POKé BALLS!"
+	done
+
+_OaksLabGirlAlreadyGaveItemsText::
+	text "Good luck on your"
+	line "#MON journey!"
+	done
