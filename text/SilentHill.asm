@@ -42,7 +42,7 @@ _SilentHillOaksLabSignText::
 	done
 
 _SilentHillSignText::
-	text "PALLET TOWN"
+	text "SILENT HILL"
 	line "Shades of your"
 	cont "journey await!"
 	done

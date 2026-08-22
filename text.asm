@@ -251,7 +251,6 @@ SECTION "Text 10", ROMX
 
 INCLUDE "data/text/text_5.asm"
 
-INCLUDE "text/PalletTown.asm"
 INCLUDE "text/ViridianCity.asm"
 INCLUDE "text/CeruleanCity.asm"
 INCLUDE "text/LavenderTown.asm"
