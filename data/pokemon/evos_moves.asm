@@ -77,8 +77,8 @@ EvosMovesPointerTable:
 	dw VenonatEvosMoves
 	dw DragoniteEvosMoves
 	dw AkueriaEvosMoves
-	dw MissingNo44EvosMoves
-	dw MissingNo45EvosMoves
+	dw HohoEvosMoves
+	dw BoboEvosMoves
 	dw DoduoEvosMoves
 	dw PoliwagEvosMoves
 	dw JynxEvosMoves
@@ -88,23 +88,23 @@ EvosMovesPointerTable:
 	dw DittoEvosMoves
 	dw MeowthEvosMoves
 	dw KrabbyEvosMoves
-	dw MissingNo4FEvosMoves
-	dw MissingNo50EvosMoves
-	dw MissingNo51EvosMoves
+	dw PachimeEvosMoves
+	dw MokokoEvosMoves
+	dw DenryuEvosMoves
 	dw VulpixEvosMoves
 	dw NinetalesEvosMoves
 	dw PikachuEvosMoves
 	dw RaichuEvosMoves
-	dw MissingNo56EvosMoves
-	dw MissingNo57EvosMoves
+	dw MikonEvosMoves
+	dw MonjaEvosMoves
 	dw DratiniEvosMoves
 	dw DragonairEvosMoves
 	dw KabutoEvosMoves
 	dw KabutopsEvosMoves
 	dw HorseaEvosMoves
 	dw SeadraEvosMoves
-	dw MissingNo5EEvosMoves
-	dw MissingNo5FEvosMoves
+	dw JaranraEvosMoves
+	dw HaneiEvosMoves
 	dw SandshrewEvosMoves
 	dw SandslashEvosMoves
 	dw OmanyteEvosMoves
@@ -537,6 +537,7 @@ PinsirEvosMoves:
 
 TangelaEvosMoves:
 ; Evolutions
+	db EVOLVE_LEVEL, 44, DEX_JARANRA
 	db 0
 ; Learnset
 	db 29, ABSORB
@@ -1001,17 +1002,26 @@ AkueriaEvosMoves:
 	db 69, HYDRO_PUMP
 	db 0 ; no more level-up moves
 
-MissingNo44EvosMoves:
-; Evolutions
-	db 0
-; Learnset
-	db 0
+HohoEvosMoves:
+	db EVOLVE_LEVEL, 20, DEX_BOBO
+	db 0 ; no more evolutions
+	db  1, PECK
+	db  1, GROWL
+	db 12, SAND_ATTACK
+	db 21, QUICK_ATTACK
+	db 31, WING_ATTACK
+	db 40, AGILITY
+	db 0 ; no more level-up moves
 
-MissingNo45EvosMoves:
-; Evolutions
-	db 0
-; Learnset
-	db 0
+BoboEvosMoves:
+	db 0 ; no more evolutions
+	db  1, PECK
+	db  1, GROWL
+	db 12, SAND_ATTACK
+	db 21, QUICK_ATTACK
+	db 33, WING_ATTACK
+	db 45, AGILITY
+	db 0 ; no more level-up moves
 
 DoduoEvosMoves:
 ; Evolutions
@@ -1108,23 +1118,38 @@ KrabbyEvosMoves:
 	db 40, HARDEN
 	db 0
 
-MissingNo4FEvosMoves:
-; Evolutions
-	db 0
-; Learnset
-	db 0
+PachimeEvosMoves:
+	db EVOLVE_LEVEL, 16, DEX_MOKOKO
+	db 0 ; no more evolutions
+	db  1, TACKLE
+	db  1, GROWL
+	db  9, THUNDERSHOCK
+	db 16, THUNDER_WAVE
+	db 25, THUNDERBOLT
+	db 33, THUNDER
+	db 0 ; no more level-up moves
 
-MissingNo50EvosMoves:
-; Evolutions
-	db 0
-; Learnset
-	db 0
+MokokoEvosMoves:
+	db EVOLVE_LEVEL, 30, DEX_DENRYU
+	db 0 ; no more evolutions
+	db  1, TACKLE
+	db  1, GROWL
+	db  1, THUNDERSHOCK
+	db 18, THUNDER_WAVE
+	db 27, THUNDERBOLT
+	db 35, THUNDER
+	db 0 ; no more level-up moves
 
-MissingNo51EvosMoves:
-; Evolutions
-	db 0
-; Learnset
-	db 0
+DenryuEvosMoves:
+	db 0 ; no more evolutions
+	db  1, TACKLE
+	db  1, GROWL
+	db  1, THUNDERSHOCK
+	db  1, THUNDER_WAVE
+	db 20, THUNDER_WAVE
+	db 30, THUNDERBOLT
+	db 42, THUNDER
+	db 0 ; no more level-up moves
 
 VulpixEvosMoves:
 ; Evolutions
@@ -1162,17 +1187,24 @@ RaichuEvosMoves:
 ; Learnset
 	db 0
 
-MissingNo56EvosMoves:
-; Evolutions
-	db 0
-; Learnset
-	db 0
+MikonEvosMoves:
+	db EVOLVE_LEVEL, 13, DEX_VULPIX
+	db 0 ; no more evolutions
+	db  1, SCRATCH
+	db  1, LEER
+	db  7, EMBER
+	db 13, ROAR
+	db 0 ; no more level-up moves
 
-MissingNo57EvosMoves:
-; Evolutions
-	db 0
-; Learnset
-	db 0
+MonjaEvosMoves:
+	db EVOLVE_LEVEL, 22, DEX_TANGELA
+	db 0 ; no more evolutions
+	db  1, CONSTRICT
+	db  1, BIND
+	db 10, ABSORB
+	db 18, VINE_WHIP
+	db 26, GROWTH
+	db 0 ; no more level-up moves
 
 DratiniEvosMoves:
 ; Evolutions
@@ -1242,17 +1274,28 @@ SeadraEvosMoves:
 	db 52, HYDRO_PUMP
 	db 0
 
-MissingNo5EEvosMoves:
-; Evolutions
-	db 0
-; Learnset
-	db 0
+JaranraEvosMoves:
+	db 0 ; no more evolutions
+	db  1, CONSTRICT
+	db  1, BIND
+	db  1, ABSORB
+	db  1, VINE_WHIP
+	db 22, GROWTH
+	db 32, MEGA_DRAIN
+	db 44, SLAM
+	db 0 ; no more level-up moves
 
-MissingNo5FEvosMoves:
-; Evolutions
-	db 0
-; Learnset
-	db 0
+HaneiEvosMoves:
+	db 0 ; no more evolutions
+	db  1, TACKLE
+	db  1, ABSORB
+	db 10, TAIL_WHIP
+	db 15, POISONPOWDER
+	db 15, STUN_SPORE
+	db 15, SLEEP_POWDER
+	db 20, LEECH_SEED
+	db 25, MEGA_DRAIN
+	db 0 ; no more level-up moves
 
 SandshrewEvosMoves:
 ; Evolutions

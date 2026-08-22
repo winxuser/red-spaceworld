@@ -1,7 +1,7 @@
-	db DEX_HANARYU ; pokedex id
+	db DEX_HONOGUMA ; pokedex id
 
-	db  50,  60,  40,  50,  50
-	;   hp  atk  def  spd  spc
+	db  45,  65,  40,  60,  50
+	;   hp   atk  def  spd  spc
 
 	db FIRE, FIRE ; type
 	db 45 ; catch rate

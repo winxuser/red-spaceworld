@@ -166,6 +166,15 @@ PokemonCries::
 	mon_cry CRY_TOTODILE,   1132,  232 ; TOTODILE
 	mon_cry CRY_TOTODILE,   1088,  272 ; CROCONAW
 	mon_cry CRY_TOTODILE,   1020,  384 ; FERALIGATR
+	mon_cry CRY_HOOTHOOT,    145,  216 ; HOHO
+	mon_cry CRY_HOOTHOOT,      0,  416 ; BOBO
+	mon_cry CRY_MAREEP,       34,  216 ; PACHIME
+	mon_cry CRY_MAREEP,       -7,  384 ; MOKOKO
+	mon_cry CRY_AMPHAROS,   -124,  232 ; DENRYU
+	mon_cry CRY_VULPIX,      110,  128 ; MIKON
+	mon_cry CRY_GOLEM,        85,  128 ; MONJA
+	mon_cry CRY_GOLEM,      -128,  256 ; JARANRA
+	mon_cry CRY_CLEFFA,       59,  200 ; HANEI
 ;	mon_cry CRY_SENTRET,     138,  184 ; SENTRET
 ;	mon_cry CRY_SENTRET,     107,  258 ; FURRET
 ;	mon_cry CRY_HOOTHOOT,    145,  216 ; HOOTHOOT

@@ -1,16 +1,16 @@
-	db DEX_AKUERIA ; pokedex id
+db DEX_AKUERIA ; pokedex id
 
-	db  75,  60, 70,  65,  60
-	;   hp  atk  def  spd  spc
+	db  90,  75,  85,  80,  100
+	;   hp   atk  def  spd  spc
 
 	db WATER, WATER ; type
 	db 45 ; catch rate
-	db 100 ; base exp
+	db 208 ; base exp
 
 	INCBIN "gfx/pokemon/akueria/front.pic", 0, 1 ; sprite dimensions
 	dw AkueriaPicFront, AkueriaPicBack
 
-	db TACKLE, TAIL_WHIP, BUBBLE, WATER_GUN ; level 1 learnset
+	db TACKLE, TAIL_WHIP, BUBBLE, HYDRO_PUMP ; level 1 learnset
 	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset

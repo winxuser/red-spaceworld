@@ -74,8 +74,8 @@
 	const VENONAT            ; $41
 	const DRAGONITE          ; $42
 	const AKUERIA            ; $43
-	const_skip               ; $44
-	const_skip               ; $45
+	const HOHO               ; $44
+	const BOBO               ; $45
 	const DODUO              ; $46
 	const POLIWAG            ; $47
 	const JYNX               ; $48
@@ -85,23 +85,23 @@
 	const DITTO              ; $4C
 	const MEOWTH             ; $4D
 	const KRABBY             ; $4E
-	const_skip               ; $4F
-	const_skip               ; $50
-	const_skip               ; $51
+	const PACHIME            ; $4F
+	const MOKOKO             ; $50
+	const DENRYU             ; $51
 	const VULPIX             ; $52
 	const NINETALES          ; $53
 	const PIKACHU            ; $54
 	const RAICHU             ; $55
-	const_skip               ; $56
-	const_skip               ; $57
+	const MIKON              ; $56
+	const MONJA              ; $57
 	const DRATINI            ; $58
 	const DRAGONAIR          ; $59
 	const KABUTO             ; $5A
 	const KABUTOPS           ; $5B
 	const HORSEA             ; $5C
 	const SEADRA             ; $5D
-	const_skip               ; $5E
-	const_skip               ; $5F
+	const JARANRA            ; $5E
+	const HANEI              ; $5F
 	const SANDSHREW          ; $60
 	const SANDSLASH          ; $61
 	const OMANYTE            ; $62

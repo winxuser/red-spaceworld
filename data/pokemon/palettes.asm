@@ -162,6 +162,15 @@ IF GEN_2_GRAPHICS
 	db PAL_BLUEMON  ; Kurusu
 	db PAL_BLUEMON  ; Akua
 	db PAL_BLUEMON  ; Akueria
+	db PAL_BROWNMON ; Hoho
+	db PAL_BROWNMON ; Bobo
+	db PAL_PINKMON  ; Pachime
+	db PAL_PINKMON  ; Mokoko
+	db PAL_YELLOWMON; Denryu
+	db PAL_REDMON   ; Mikon
+	db PAL_GREENMON ; Monja
+	db PAL_GREENMON ; Jaranra
+	db PAL_BLUEMON  ; Hanei
 TrainerPalettes: ; Gen II trainer sprites are given their own palettes
 	db PAL_HERO
 	db PAL_YOUNGSTER

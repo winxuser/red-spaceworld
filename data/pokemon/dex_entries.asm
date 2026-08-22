@@ -67,8 +67,8 @@ PokedexEntryPointers:
 	dw VenonatDexEntry
 	dw DragoniteDexEntry
 	dw AkueriaDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw HohoDexEntry
+	dw BoboDexEntry
 	dw DoduoDexEntry
 	dw PoliwagDexEntry
 	dw JynxDexEntry
@@ -78,23 +78,23 @@ PokedexEntryPointers:
 	dw DittoDexEntry
 	dw MeowthDexEntry
 	dw KrabbyDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw PachimeDexEntry
+	dw MokokoDexEntry
+	dw DenryuDexEntry
 	dw VulpixDexEntry
 	dw NinetalesDexEntry
 	dw PikachuDexEntry
 	dw RaichuDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw MikonDexEntry
+	dw MonjaDexEntry
 	dw DratiniDexEntry
 	dw DragonairDexEntry
 	dw KabutoDexEntry
 	dw KabutopsDexEntry
 	dw HorseaDexEntry
 	dw SeadraDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw JaranraDexEntry
+	dw HaneiDexEntry
 	dw SandshrewDexEntry
 	dw SandslashDexEntry
 	dw OmanyteDexEntry
@@ -409,15 +409,15 @@ TangelaDexEntry:
 
 HappaDexEntry:
 	db "LEAF@"
-	db 2,11
-	dw 141
+	db 2, 4
+	dw 138
 	text_far _HappaDexEntry
 	text_end
 
 HanamoguraDexEntry:
-	db "LEAF@"
-	db 3,11
-	dw 384
+	db "DIGGING@"
+	db 3, 3
+	dw 348
 	text_far _HanamoguraDexEntry
 	text_end
 
@@ -541,9 +541,9 @@ GolemDexEntry:
 	text_end
 
 HanaryuDexEntry:
-	db "HERB@"
-	db 5,11
-	dw 2216
+	db "LEAFDRAGON@"
+	db 4, 7
+	dw 158
 	text_far _HanaryuDexEntry
 	text_end
 
@@ -555,9 +555,9 @@ MagmarDexEntry:
 	text_end
 
 HonogumaDexEntry:
-	db "FIREBEAR@"
-	db 1,08
-	dw 174
+	db "FIRE BEAR@"
+	db 2, 0
+	dw 150
 	text_far _HonogumaDexEntry
 	text_end
 
@@ -583,9 +583,9 @@ KoffingDexEntry:
 	text_end
 
 BorubeaDexEntry:
-	db "FIRE BEAR@"
-	db 2,11
-	dw 419
+	db "BLAZING@"
+	db 3, 1
+	dw 330
 	text_far _BorubeaDexEntry
 	text_end
 
@@ -619,22 +619,22 @@ TaurosDexEntry:
 
 DainabeaDexEntry:
 	db "VOLCANO@"
-	db 5,7
-	dw 1753
+	db 4, 11
+	dw 165
 	text_far _DainabeaDexEntry
 	text_end
 
 KurusuDexEntry:
-	db "WATERDINO@"
-	db 1,7
-	dw 175
+	db "SEA SURGE@"
+	db 1, 4
+	dw 100
 	text_far _KurusuDexEntry
 	text_end
 
 AkuaDexEntry:
-	db "AQUA@"
-	db 3,7
-	dw 551
+	db "WAVE RIDER@"
+	db 2, 11
+	dw 280
 	text_far _AkuaDexEntry
 	text_end
 
@@ -660,10 +660,24 @@ DragoniteDexEntry:
 	text_end
 
 AkueriaDexEntry:
-	db "AQUA@"
-	db 7,7
-	dw 1958
+	db "CURRENT@"
+	db 4, 3
+	dw 850
 	text_far _AkueriaDexEntry
+	text_end
+
+HohoDexEntry:
+	db "OWL@"
+	db 2, 4
+	dw 212
+	text_far _HohoDexEntry
+	text_end
+
+BoboDexEntry:
+	db "OWL@"
+	db 5, 3
+	dw 408
+	text_far _BoboDexEntry
 	text_end
 
 DoduoDexEntry:
@@ -729,6 +743,27 @@ KrabbyDexEntry:
 	text_far _KrabbyDexEntry
 	text_end
 
+PachimeDexEntry:
+	db "WOOL@"
+	db 2, 0
+	dw 78
+	text_far _PachimeDexEntry
+	text_end
+
+MokokoDexEntry:
+	db "WOOL@"
+	db 2, 8
+	dw 133
+	text_far _MokokoDexEntry
+	text_end
+
+DenryuDexEntry:
+	db "LIGHT@"
+	db 4, 7
+	dw 615
+	text_far _DenryuDexEntry
+	text_end
+
 VulpixDexEntry:
 	db "FOX@"
 	db 2,0
@@ -755,6 +790,20 @@ RaichuDexEntry:
 	db 2,7
 	dw 660
 	text_far _RaichuDexEntry
+	text_end
+
+MikonDexEntry:
+	db "FOX@"
+	db 0, 6
+	dw 20
+	text_far _MikonDexEntry
+	text_end
+
+MonjaDexEntry:
+	db "VINE@"
+	db 2, 0
+	dw 25
+	text_far _MonjaDexEntry
 	text_end
 
 DratiniDexEntry:
@@ -797,6 +846,20 @@ SeadraDexEntry:
 	db 3,11
 	dw 550
 	text_far _SeadraDexEntry
+	text_end
+
+JaranraDexEntry:
+	db "VINE@"
+	db 3, 0
+	dw 450
+	text_far _JaranraDexEntry
+	text_end
+
+HaneiDexEntry:
+	db "COTTONWEED@"
+	db 1, 4
+	dw 5
+	text_far _HaneiDexEntry
 	text_end
 
 SandshrewDexEntry:

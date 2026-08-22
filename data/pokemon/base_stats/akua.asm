@@ -1,11 +1,11 @@
-	db DEX_AKUA ; pokedex id
+db DEX_AKUA ; pokedex id
 
-	db  55,  55,  60,  55,  55
-	;   hp  atk  def  spd  spc
+	db  65,  60,  70,  65,  70
+	;   hp   atk  def  spd  spc
 
 	db WATER, WATER ; type
 	db 45 ; catch rate
-	db 100 ; base exp
+	db 142 ; base exp
 
 	INCBIN "gfx/pokemon/akua/front.pic", 0, 1 ; sprite dimensions
 	dw AkuaPicFront, AkuaPicBack

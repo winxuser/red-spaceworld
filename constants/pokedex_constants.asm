@@ -164,5 +164,14 @@
 	const DEX_KURUSU     ; 158
 	const DEX_AKUA       ; 159
 	const DEX_AKUERIA    ; 160
+	const DEX_HOHO       ; 161
+	const DEX_BOBO       ; 162
+	const DEX_PACHIME    ; 163
+	const DEX_MOKOKO     ; 164
+	const DEX_DENRYU     ; 165
+	const DEX_MIKON      ; 166
+	const DEX_MONJA      ; 167
+	const DEX_JARANRA    ; 168
+	const DEX_HANEI      ; 169
 
 DEF NUM_POKEMON EQU const_value - 1

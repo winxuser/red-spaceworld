@@ -299,19 +299,23 @@ _TangelaDexEntry::
 	dex
 
 _HappaDexEntry::
-	text "Newly discovered"
-	next "pokemon, current-"
-	next "ly under invest-"
+	text "A gentle #MON"
+	next "that loves soaking"
+	next "up sunlight. It"
 
-	page "igation"
+	page "uses the large"
+	next "leaf on its head"
+	next "to sense breezes"
 	dex
 
 _HanamoguraDexEntry::
-	text "Newly discovered"
-	next "pokemon, current-"
-	next "ly under invest-"
+	text "It digs deep"
+	next "underground for"
+	next "roots. Its leaf"
 
-	page "igation"
+	page "can detect any"
+	next "upcoming shifts"
+	next "in the weather"
 	dex
 
 _GrowlitheDexEntry::
@@ -485,11 +489,13 @@ _GolemDexEntry::
 	dex
 
 _HanaryuDexEntry::
-	text "Newly discovered"
-	next "pokemon, current-"
-	next "ly under invest-"
+	text "Regarded as a"
+	next "noble guardian of"
+	next "the forest. It"
 
-	page "igation"
+	page "commands floral"
+	next "energy to heal"
+	next "injured plants"
 	dex
 
 _MagmarDexEntry::
@@ -503,11 +509,13 @@ _MagmarDexEntry::
 	dex
 
 _HonogumaDexEntry::
-	text "Newly discovered"
-	next "pokemon, current-"
-	next "ly under invest-"
+	text "It has small"
+	next "flames flickering"
+	next "from its ears and"
 
-	page "igation"
+	page "tail. When angry,"
+	next "it puffs out"
+	next "hot smoke"
 	dex
 
 _ElectabuzzDexEntry::
@@ -541,11 +549,13 @@ _KoffingDexEntry::
 	dex
 
 _BorubeaDexEntry::
-	text "Newly discovered"
-	next "pokemon, current-"
-	next "ly under invest-"
+	text "Its fiery temper"
+	next "grows rapidly as"
+	next "it matures. The"
 
-	page "igation"
+	page "flame on its back"
+	next "burns brighter in"
+	next "intense battle"
 	dex
 
 _MankeyDexEntry::
@@ -589,27 +599,33 @@ _TaurosDexEntry::
 	dex
 
 _DainabeaDexEntry::
-	text "Newly discovered"
-	next "pokemon, current-"
-	next "ly under invest-"
+	text "A fierce predator"
+	next "capable of melting"
+	next "boulders with its"
 
-	page "igation"
+	page "fiery breath and"
+	next "paces its domain"
+	next "with great pride"
 	dex
 
 _KurusuDexEntry::
-	text "Newly discovered"
-	next "pokemon, current-"
-	next "ly under invest-"
+	text "Very friendly and"
+	next "playful. It glides"
+	next "through ocean"
 
-	page "igation"
+	page "waves using its"
+	next "small flippers"
+	next "with great joy"
 	dex
 
 _AkuaDexEntry::
-	text "Newly discovered"
-	next "pokemon, current-"
-	next "ly under invest-"
+	text "It rides ocean"
+	next "currents with ease"
+	next "Its smooth body"
 
-	page "igation"
+	page "helps it dart away"
+	next "swiftly from"
+	next "any danger"
 	dex
 
 _FarfetchdDexEntry::
@@ -643,11 +659,33 @@ _DragoniteDexEntry::
 	dex
 
 _AkueriaDexEntry::
-	text "Newly discovered"
-	next "pokemon, current-"
-	next "ly under invest-"
+	text "A majestic marine"
+	next "#MON said to"
+	next "inhabit deep ocean"
 
-	page "igation"
+	page "trenches, wielding"
+	next "control over local"
+	next "water pressure."
+	dex
+
+_HohoDexEntry::
+	text "It always stands"
+	next "on one foot. It"
+	next "changes feet so"
+
+	page "fast, the movement"
+	next "can rarely be"
+	next "seen"
+	dex
+
+_BoboDexEntry::
+	text "Its eyes can see"
+	next "clearly in the"
+	next "dark even if"
+
+	page "there is barely"
+	next "any light at"
+	next "all"
 	dex
 
 _DoduoDexEntry::
@@ -740,6 +778,36 @@ _KrabbyDexEntry::
 	next "sideways"
 	dex
 
+_PachimeDexEntry::
+	text "Its fluffy fleece"
+	next "stores static"
+	next "electricity when"
+
+	page "rubbed against"
+	next "trees or other"
+	next "objects"
+	dex
+
+_MokokoDexEntry::
+	text "Its rubbery skin"
+	next "protects it from"
+	next "getting shocked by"
+
+	page "its own stored"
+	next "electricity when"
+	next "it gets excited"
+	dex
+
+_DenryuDexEntry::
+	text "Its tail shines so"
+	next "brightly that it"
+	next "can be seen from"
+
+	page "space. People use"
+	next "it as a beacon"
+	next "for ships"
+	dex
+
 _VulpixDexEntry::
 	text "At the time of"
 	next "birth, it has"
@@ -778,6 +846,26 @@ _RaichuDexEntry::
 	page "itself from its"
 	next "own high voltage"
 	next "power"
+	dex
+
+_MikonDexEntry::
+	text "It has six tails"
+	next "that grow warm as"
+	next "it absorbs heat"
+
+	page "from the sun"
+	next "during the day"
+	next "time"
+	dex
+
+_MonjaDexEntry::
+	text "Its entire body"
+	next "is covered in thin"
+	next "blue vines"
+
+	page "that obscure"
+	next "its true face"
+	next "completely"
 	dex
 
 _DratiniDexEntry::
@@ -838,6 +926,26 @@ _SeadraDexEntry::
 	page "its wing-like"
 	next "pectoral fins and"
 	next "stout tail"
+	dex
+
+_JaranraDexEntry::
+	text "Thick blue vines"
+	next "wrap tightly around"
+	next "its foes to trap"
+
+	page "them completely"
+	next "in a secure"
+	next "grip"
+	dex
+
+_HaneiDexEntry::
+	text "It floats gently"
+	next "on the breeze"
+	next "to drift about."
+
+	page "Even a light"
+	next "wind can blow"
+	next "it far away."
 	dex
 
 _SandshrewDexEntry::

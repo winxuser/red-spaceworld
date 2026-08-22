@@ -1,11 +1,11 @@
-	db DEX_KURUSU ; pokedex id
+db DEX_KURUSU ; pokedex id
 
-	db  45,  50,  50,  45,  50
-	;   hp  atk  def  spd  spc
+	db  55,  45,  50,  55,  55
+	;   hp   atk  def  spd  spc
 
 	db WATER, WATER ; type
 	db 45 ; catch rate
-	db 66 ; base exp
+	db 64 ; base exp
 
 	INCBIN "gfx/pokemon/kurusu/front.pic", 0, 1 ; sprite dimensions
 	dw KurusuPicFront, KurusuPicBack

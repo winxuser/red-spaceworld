@@ -159,4 +159,9 @@ TitleMons:
 	db KURUSU
 	db AKUA
 	db AKUERIA
+	db HOHO
+	db BOBO
+	db MONJA
+	db JARANRA
+	db HANEI
 TitleMonsEnd:
