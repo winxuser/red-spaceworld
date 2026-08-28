@@ -2269,6 +2269,11 @@ wLastTimeOfDayStage:: db
 
 wGenderTemp:: db
 
+wPlayerGender::
+	; $00 = male
+	; $01 = female
+		ds 1
+
 wMainDataEnd::
 
 
