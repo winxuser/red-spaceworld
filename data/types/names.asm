@@ -1,6 +1,6 @@
 TypeNames:
 	table_width 2
-
+; Physical
 	dw .Normal
 	dw .Fighting
 	dw .Flying
@@ -10,11 +10,12 @@ TypeNames:
 	dw .Bird
 	dw .Bug
 	dw .Ghost
+	dw .Metal
 
 REPT UNUSED_TYPES_END - UNUSED_TYPES
 	dw .Normal
 ENDR
-
+; Special
 	dw .Fire
 	dw .Water
 	dw .Grass
@@ -22,6 +23,7 @@ ENDR
 	dw .Psychic
 	dw .Ice
 	dw .Dragon
+	dw .Dark
 
 	assert_table_length NUM_TYPES
 
@@ -41,3 +43,5 @@ ENDR
 .Bug:      db "BUG@"
 .Ghost:    db "GHOST@"
 .Dragon:   db "DRAGON@"
+.Metal:    db "METAL@"
+.Dark:     db "DARK@"
