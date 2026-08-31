@@ -328,13 +328,10 @@ UpdateMovingBgTiles::
 	ldh [hMovingBGTilesCounter1], a
 
 	ld a, [wMovingBGTilesCounter2]
-	and 3
-	cp 2
+	and 1
 	ld hl, FlowerTile1
-	jr c, .copy
-	ld hl, FlowerTile2
 	jr z, .copy
-	ld hl, FlowerTile3
+	ld hl, FlowerTile2
 .copy
 	ld de, vTileset tile $03
 	ld c, TILE_SIZE
@@ -348,4 +345,3 @@ UpdateMovingBgTiles::
 
 FlowerTile1: INCBIN "gfx/tilesets/flower/flower1.2bpp"
 FlowerTile2: INCBIN "gfx/tilesets/flower/flower2.2bpp"
-FlowerTile3: INCBIN "gfx/tilesets/flower/flower3.2bpp"
