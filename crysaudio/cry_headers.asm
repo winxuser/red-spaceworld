@@ -175,6 +175,27 @@ PokemonCries::
 	mon_cry CRY_GOLEM,        85,  128 ; MONJA
 	mon_cry CRY_GOLEM,      -128,  256 ; JARANRA
 	mon_cry CRY_CLEFFA,       59,  200 ; HANEI
+	mon_cry CRY_SLOWKING,    352,  224 ; PUKU
+	mon_cry CRY_SLOWKING,    368,  300 ; SHIBIREFUGU
+	mon_cry CRY_PICHU,         0,  384 ; PICHU
+	mon_cry CRY_CLEFFA,       59,  200 ; PY
+	mon_cry CRY_CHIKORITA,   232,  232 ; PUPURIN
+	mon_cry CRY_SEEL,        136,  224 ; MIZUO
+	mon_cry CRY_NATU,       -103,  256 ; NATU
+	mon_cry CRY_NATU,       -167,  360 ; NATIO
+	mon_cry CRY_CATERPIE,    187,  192 ; GYOPIN
+	mon_cry CRY_MARILL,      283,  288 ; MARIRU
+	mon_cry CRY_SEEL,        136,  224 ; MANBO1
+	mon_cry CRY_SEEL,         35,  383 ; IKARI
+	mon_cry CRY_VENONAT,     238,  383 ; GUROTESU
+	mon_cry CRY_SQUIRTLE,    -16,  320 ; EKUSHINGU
+	mon_cry CRY_PARAS,        48,  129 ; PARA
+	mon_cry CRY_SPINARAK,     17,  512 ; KOKUMO
+	mon_cry CRY_SPINARAK,   -174,  482 ; TSUHEDDO
+	mon_cry CRY_AMPHAROS,   2217,  384 ; YOROIDORI
+	mon_cry CRY_PIDGEY,      255,  383 ; ANIMON
+	mon_cry CRY_DIGLETT,     220,  100 ; HINAZU
+	mon_cry CRY_SUNFLORA,    -32,  384 ; SANI
 ;	mon_cry CRY_SENTRET,     138,  184 ; SENTRET
 ;	mon_cry CRY_SENTRET,     107,  258 ; FURRET
 ;	mon_cry CRY_HOOTHOOT,    145,  216 ; HOOTHOOT

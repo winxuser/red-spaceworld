@@ -114,38 +114,38 @@ PokedexEntryPointers:
 	dw WeedleDexEntry
 	dw KakunaDexEntry
 	dw BeedrillDexEntry
-	dw MissingNoDexEntry
+	dw PukuDexEntry
 	dw DodrioDexEntry
 	dw PrimeapeDexEntry
 	dw DugtrioDexEntry
 	dw VenomothDexEntry
 	dw DewgongDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw ShibirfuguDexEntry
+	dw PichuDexEntry
 	dw CaterpieDexEntry
 	dw MetapodDexEntry
 	dw ButterfreeDexEntry
 	dw MachampDexEntry
-	dw MissingNoDexEntry
+	dw PyDexEntry
 	dw GolduckDexEntry
 	dw HypnoDexEntry
 	dw GolbatDexEntry
 	dw MewtwoDexEntry
 	dw SnorlaxDexEntry
 	dw MagikarpDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw PupurinDexEntry
+	dw MizuoDexEntry
 	dw MukDexEntry
-	dw MissingNoDexEntry
+	dw NeitiDexEntry
 	dw KinglerDexEntry
 	dw CloysterDexEntry
-	dw MissingNoDexEntry
+	dw NatioDexEntry
 	dw ElectrodeDexEntry
 	dw ClefableDexEntry
 	dw WeezingDexEntry
 	dw PersianDexEntry
 	dw MarowakDexEntry
-	dw MissingNoDexEntry
+	dw GyopinDexEntry
 	dw HaunterDexEntry
 	dw AbraDexEntry
 	dw AlakazamDexEntry
@@ -155,13 +155,13 @@ PokedexEntryPointers:
 	dw BulbasaurDexEntry
 	dw VenusaurDexEntry
 	dw TentacruelDexEntry
-	dw MissingNoDexEntry
+	dw MariruDexEntry
 	dw GoldeenDexEntry
 	dw SeakingDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw Manbo1DexEntry
+	dw IkariDexEntry
+	dw GurotesuDexEntry
+	dw EkushinguDexEntry
 	dw PonytaDexEntry
 	dw RapidashDexEntry
 	dw RattataDexEntry
@@ -171,16 +171,16 @@ PokedexEntryPointers:
 	dw GeodudeDexEntry
 	dw PorygonDexEntry
 	dw AerodactylDexEntry
-	dw MissingNoDexEntry
+	dw ParaDexEntry
 	dw MagnemiteDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw KokumoDexEntry
+	dw TsuheddoDexEntry
 	dw CharmanderDexEntry
 	dw SquirtleDexEntry
 	dw CharmeleonDexEntry
 	dw WartortleDexEntry
 	dw CharizardDexEntry
-	dw MissingNoDexEntry
+	dw YoroidoriDexEntry
 	dw MissingNoDexEntry
 	dw MissingNoDexEntry
 	dw MissingNoDexEntry
@@ -190,6 +190,9 @@ PokedexEntryPointers:
 	dw BellsproutDexEntry
 	dw WeepinbellDexEntry
 	dw VictreebelDexEntry
+	dw AnimonDexEntry
+	dw HinazuDexEntry
+	dw SaniDexEntry
 	assert_table_length NUM_POKEMON_INDEXES
 
 ; string: species name
@@ -995,6 +998,13 @@ BeedrillDexEntry:
 	text_far _BeedrillDexEntry
 	text_end
 
+PukuDexEntry:
+	db "BALL FISH@"
+	db 1,8
+	dw 110
+	text_far _PukuDexEntry
+	text_end
+
 DodrioDexEntry:
 	db "TRIPLEBIRD@"
 	db 5,11
@@ -1030,6 +1040,20 @@ DewgongDexEntry:
 	text_far _DewgongDexEntry
 	text_end
 
+ShibirfuguDexEntry:
+	db "BALL FISH@"
+	db 3,3
+	dw 860
+	text_far _ShibirfuguDexEntry
+	text_end
+
+PichuDexEntry:
+	db "TINY MOUSE@"
+	db 1,0
+	dw 44
+	text_far _PichuDexEntry
+	text_end
+
 CaterpieDexEntry:
 	db "WORM@"
 	db 1,0
@@ -1056,6 +1080,13 @@ MachampDexEntry:
 	db 5,3
 	dw 2870
 	text_far _MachampDexEntry
+	text_end
+
+PyDexEntry:
+	db "STAR SHAPE@"
+	db 1,0
+	dw 66
+	text_far _PyDexEntry
 	text_end
 
 GolduckDexEntry:
@@ -1100,11 +1131,32 @@ MagikarpDexEntry:
 	text_far _MagikarpDexEntry
 	text_end
 
+PupurinDexEntry:
+	db "BALLOON@"
+	db 1,0
+	dw 22
+	text_far _PupurinDexEntry
+	text_end
+
+MizuoDexEntry:
+	db "SLIPPERY@"
+	db 3,11
+	dw 620
+	text_far _MizuoDexEntry
+	text_end
+
 MukDexEntry:
 	db "SLUDGE@"
 	db 3,11
 	dw 660
 	text_far _MukDexEntry
+	text_end
+
+NeitiDexEntry:
+	db "LITTLEBIRD@"
+	db 0,8
+	dw 44
+	text_far _NeitiDexEntry
 	text_end
 
 KinglerDexEntry:
@@ -1119,6 +1171,13 @@ CloysterDexEntry:
 	db 4,11
 	dw 2920
 	text_far _CloysterDexEntry
+	text_end
+
+NatioDexEntry:
+	db "MYSTIC@"
+	db 4,11
+	dw 330
+	text_far _NatioDexEntry
 	text_end
 
 ElectrodeDexEntry:
@@ -1154,6 +1213,13 @@ MarowakDexEntry:
 	db 3,3
 	dw 990
 	text_far _MarowakDexEntry
+	text_end
+
+GyopinDexEntry:
+	db "GOLDFISH@"
+	db 1,04
+	dw 90
+	text_far _GyopinDexEntry
 	text_end
 
 HaunterDexEntry:
@@ -1219,6 +1285,13 @@ TentacruelDexEntry:
 	text_far _TentacruelDexEntry
 	text_end
 
+MariruDexEntry:
+	db "AQUAMOUSE@"
+	db 1,04
+	dw 190
+	text_far _MariruDexEntry
+	text_end
+
 GoldeenDexEntry:
 	db "GOLDFISH@"
 	db 2,0
@@ -1231,6 +1304,34 @@ SeakingDexEntry:
 	db 4,3
 	dw 860
 	text_far _SeakingDexEntry
+	text_end
+
+Manbo1DexEntry:
+	db "SUNFISH@"
+	db 2,07 ; 2 feet, 7 inches
+	dw 620 ; 62.0 lbs
+	text_far _Manbo1DexEntry
+	text_end
+
+IkariDexEntry:
+	db "ANCHOR@"
+	db 4,11 ; 4 feet, 11 inches
+	dw 2100 ; 210.0 lbs
+	text_far _IkariDexEntry
+	text_end
+
+GurotesuDexEntry:
+	db "GROTESQUE@"
+	db 5,03 ; 5 feet, 3 inches
+	dw 1150 ; 115.0 lbs
+	text_far _GurotesuDexEntry
+	text_end
+
+EkushinguDexEntry:
+	db "BAT@"
+	db 5,11 ; 5 feet, 11 inches
+	dw 1650 ; 165.0 lbs
+	text_far _EkushinguDexEntry
 	text_end
 
 PonytaDexEntry:
@@ -1296,11 +1397,32 @@ AerodactylDexEntry:
 	text_far _AerodactylDexEntry
 	text_end
 
+ParaDexEntry:
+	db "MUSHROOM@"
+	db 0,08 ; 0 feet, 8 inches
+	dw 60 ; 6.0 lbs
+	text_far _ParaDexEntry
+	text_end
+
 MagnemiteDexEntry:
 	db "MAGNET@"
 	db 1,0
 	dw 130
 	text_far _MagnemiteDexEntry
+	text_end
+
+KokumoDexEntry:
+	db "SPIDER@"
+	db 1,00 ; 1 foot, 0 inches
+	dw 110 ; 11.0 lbs
+	text_far _KokumoDexEntry
+	text_end
+
+TsuheddoDexEntry::
+	db "TWOHEADED@" ; species classification
+	db 3,03 ; height: 3 feet, 3 inches
+	dw 730 ; weight: 73.0 lbs
+	text_far _TsuheddoDexEntry
 	text_end
 
 CharmanderDexEntry:
@@ -1336,6 +1458,13 @@ CharizardDexEntry:
 	db 5,7
 	dw 2000
 	text_far _CharizardDexEntry
+	text_end
+
+YoroidoriDexEntry:
+	db "ARMORED@"
+	db 5,7
+	dw 1110
+	text_far _YoroidoriDexEntry
 	text_end
 
 OddishDexEntry:
@@ -1378,6 +1507,27 @@ VictreebelDexEntry:
 	db 5,7
 	dw 340
 	text_far _VictreebelDexEntry
+	text_end
+
+AnimonDexEntry:
+	db "METALLIC@"
+	db 2,7
+	dw 660
+	text_far _AnimonDexEntry
+	text_end
+
+HinazuDexEntry:
+	db "CHICK@"
+	db 1,8
+	dw 280
+	text_far _HinazuDexEntry
+	text_end
+
+SaniDexEntry:
+	db "SUNFLOWER@"
+	db 2,7
+	dw 180
+	text_far _SaniDexEntry
 	text_end
 
 MissingNoDexEntry:

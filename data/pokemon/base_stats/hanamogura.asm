@@ -1,4 +1,4 @@
-db DEX_HANAMOGURA ; pokedex id
+	db DEX_HANAMOGURA ; pokedex id
 
 	db  60,  62,  80,  60,  80
 	;   hp   atk  def  spd  spc

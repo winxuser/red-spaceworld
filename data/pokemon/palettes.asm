@@ -2,9 +2,9 @@ MonsterPalettes:
 	table_width 1
 IF GEN_2_GRAPHICS
 	db PAL_MEWMON    ; MISSINGNO
-	db PAL_BULBASAUR
-	db PAL_IVYSAUR
-	db PAL_VENUSAUR
+	db PAL_GREENMON  ; Bulbasaur
+	db PAL_GREENMON  ; IVYSAUR
+	db PAL_GREENMON  ; Venusaur
 	db PAL_CHARMANDER
 	db PAL_CHARMELEON
 	db PAL_CHARIZARD
@@ -171,6 +171,27 @@ IF GEN_2_GRAPHICS
 	db PAL_GREENMON ; Monja
 	db PAL_GREENMON ; Jaranra
 	db PAL_BLUEMON  ; Hanei
+	db PAL_CYANMON  ; Puku
+	db PAL_CYANMON  ; Shibirfugu
+	db PAL_YELLOWMON; Pichu
+	db PAL_PINKMON  ; Py
+	db PAL_PINKMON  ; Pupurin
+	db PAL_BLUEMON  ; Mizuo
+	db PAL_BROWNMON ; Neiti
+	db PAL_BROWNMON ; Natio
+	db PAL_REDMON   ; Gyopin
+	db PAL_PINKMON  ; Mariru
+	db PAL_BLUEMON  ; Manbo1
+	db PAL_BLUEMON  ; Ikari
+	db PAL_BLUEMON  ; Gurotesu
+	db PAL_PURPLEMON; Ekushingu
+	db PAL_REDMON   ; Para.
+	db PAL_PURPLEMON; Kokumo
+	db PAL_PURPLEMON; Tsuheddo
+	db PAL_GRAYMON  ; Yoroidori
+	db PAL_GRAYMON  ; Animon
+	db PAL_BROWNMON ; Hinazu
+	db PAL_YELLOWMON; Sani
 TrainerPalettes: ; Gen II trainer sprites are given their own palettes
 	db PAL_HERO
 	db PAL_YOUNGSTER

@@ -164,4 +164,25 @@ TitleMons:
 	db MONJA
 	db JARANRA
 	db HANEI
+	db PUKU
+	db SHIBIRFUGU
+	db PICHU
+	db PY
+	db PUPURIN
+	db MIZUO
+	db NEITI
+	db NATIO
+	db GYOPIN
+	db MARIRU
+	db MANBO1
+	db IKARI
+	db GUROTESU
+	db EKUSHINGU
+	db PARA
+	db KOKUMO
+	db TSUHEDDO
+	db YOROIDORI
+	db ANIMON
+	db HINAZU
+	db SANI
 TitleMonsEnd:

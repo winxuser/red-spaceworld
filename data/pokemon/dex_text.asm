@@ -1138,6 +1138,15 @@ _BeedrillDexEntry::
 	next "and tail"
 	dex
 
+_PukuDexEntry::
+	text "It inflates its"
+	next "body like a round"
+	next "balloon to intimidate"
+
+	page "foes when it feels"
+	next "threatened"
+	dex
+
 _DodrioDexEntry::
 	text "Uses its three"
 	next "brains to execute"
@@ -1186,6 +1195,26 @@ _DewgongDexEntry::
 	page "steady 8 knots"
 	next "even in intensely"
 	next "cold waters"
+	dex
+
+_ShibirfuguDexEntry::
+	text "It discharges its"
+	next "electricity from"
+	next "its toxic spines."
+
+	page "Swallows water"
+	next "to swell up"
+	next "and shock foes"
+	dex
+
+_PichuDexEntry::
+	text "It is not yet"
+	next "skilled at storing"
+	next "electricity."
+
+	page "It may discharge"
+	next "a shock if it is"
+	next "startled or amused"
 	dex
 
 _CaterpieDexEntry::

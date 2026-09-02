@@ -226,6 +226,7 @@ ROMX $3F
 	"Pics 15"
 ROMX $40
 ROMX $41
+	"Pics 16"
 ROMX $42
 ROMX $43
 ROMX $44
@@ -306,7 +307,7 @@ WRAM0
 	"Party Data"
 	"Main Data"
 	"Current Box Data"
-	org $df00
+	org $df01
 	"Stack"
 VRAM
 	"VRAM"

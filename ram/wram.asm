@@ -2261,10 +2261,10 @@ wDayCareMonOT::   ds NAME_LENGTH
 
 wDayCareMon:: box_struct wDayCareMon
 
-wRTCSeconds::   ds 1  ; Added
+wRTCSeconds::   ds 1
 wRTCMinutes::   ds 1
 wRTCHours::     ds 1
-wRTCDays::      ds 1  ; Added
+wRTCDays::      ds 1
 wLastTimeOfDayStage:: db
 
 wGenderTemp:: db
@@ -2316,7 +2316,7 @@ ENDC
 SECTION "Stack", WRAM0
 
 ; the stack grows downward
-	ds $100 - 1
+	ds $100 - 2
 wStack:: db
 
 ENDSECTION
