@@ -88,6 +88,7 @@ PlayerSpinWhileMovingDown:
 	ld [hli], a ; wPlayerSpinWhileMovingUpOrDownAnimMaxY
 	call GetPlayerTeleportAnimFrameDelay
 	ld [hl], a ; wPlayerSpinWhileMovingUpOrDownAnimFrameDelay
+	ld hl, wFacingDirectionList
 	jp PlayerSpinWhileMovingUpOrDown
 
 _LeaveMapAnim::
@@ -108,6 +109,7 @@ _LeaveMapAnim::
 	ld [hli], a ; wPlayerSpinWhileMovingUpOrDownAnimMaxY
 	call GetPlayerTeleportAnimFrameDelay
 	ld [hl], a ; wPlayerSpinWhileMovingUpOrDownAnimFrameDelay
+	ld hl, wFacingDirectionList
 	call PlayerSpinWhileMovingUpOrDown
 	call IsPlayerStandingOnWarpPadOrHole
 	ld a, b
@@ -515,6 +517,7 @@ _HandleMidJump::
 	ld a, [wPlayerJumpingYScreenCoordsIndex]
 	ld c, a
 	inc a
+	call Ledge60fps
 	cp $10
 	jr nc, .finishedJump
 	ld [wPlayerJumpingYScreenCoordsIndex], a
@@ -541,6 +544,18 @@ _HandleMidJump::
 	res BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	xor a
 	ld [wJoyIgnore], a
+	ret
+
+Ledge60fps:
+	push hl
+	push af
+	ld h, $c2
+	ld l, $0a
+	ld a, [hl]
+	xor $01
+	pop af
+	sub [hl]
+	pop hl
 	ret
 
 PlayerJumpingYScreenCoords:
