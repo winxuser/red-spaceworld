@@ -383,7 +383,7 @@ UpdateSpriteInWalkingAnimation:
 	ldh a, [hCurrentSpriteOffset]
 	add $8
 	ld l, a
-	ldh a, [hRandomAdd]
+	call Random
 	and $7f
 	ld [hl], a                       ; x#SPRITESTATEDATA2_MOVEMENTDELAY:
 	                                 ; set next movement delay to a random value in [0,$7f]
@@ -738,7 +738,6 @@ CanWalkOntoTile:
 	add $8
 	ld l, a
 	call Random
-	ldh a, [hRandomAdd]
 	and $7f
 	ld [hl], a         ; x#SPRITESTATEDATA2_MOVEMENTDELAY: set to a random value in [0,$7f] (again with delay $100 if value is 0)
 	scf                ; set carry (marking failure to walk)

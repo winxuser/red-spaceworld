@@ -40,6 +40,20 @@ Init::
 	or c
 	jr nz, .loop
 
+;Initialize with whatever random garbage is in hram to get an initial seed.
+	ld a, [hJoyLast]	;ffb1
+	and a
+	push af
+	ld a, [hFrameCounter]	;ffd5
+	and a
+	push af
+	ld a, [hDividend2]	;ffe5
+	and a
+	push af
+	ld a, [hSpriteAnimFrameCounter]	;ffea
+	and a
+	push af
+
 	call ClearVram
 
 	ld hl, STARTOF(HRAM)
@@ -47,6 +61,20 @@ Init::
 	call FillMemory
 
 	call ClearSprites
+
+;finish initializing RNG
+	pop af
+    call z, .inc_a
+    ld [hRandomAdd], a
+    pop af
+    call z, .inc_a
+    ld [hRandomAdd + 1], a
+    pop af
+    call z, .inc_a
+    ld [hRandomLast], a
+    pop af
+    call z, .inc_a
+    ld [hRandomLast + 1], a
 
 	ld a, BANK(WriteDMACodeToHRAM)
 	ldh [hLoadedROMBank], a
@@ -106,6 +134,9 @@ Init::
 	ldh [rLCDC], a
 
 	jp PrepareTitleScreen
+.inc_a
+	inc a
+	ret
 
 ClearVram::
 	ld hl, STARTOF(VRAM)

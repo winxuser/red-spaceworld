@@ -2,11 +2,9 @@ InitPlayerData:
 InitPlayerData2:
 
 	call Random
-	ldh a, [hRandomSub]
 	ld [wPlayerID], a
 
 	call Random
-	ldh a, [hRandomAdd]
 	ld [wPlayerID + 1], a
 
 	ld a, $ff

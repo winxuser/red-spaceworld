@@ -267,10 +267,12 @@ hRedrawRowOrColumnMode:: db
 
 hRedrawRowOrColumnDest:: dw
 
-hRandomAdd:: db
+hRandomAdd:: ds 2
 hRandomSub:: db
 
 hFrameCounter:: db ; decremented every V-blank (used for delays)
+
+hRandomLast:: ds 2
 
 ; V-blank sets this to 0 each time it runs.
 ; So, by setting it to a nonzero value and waiting for it to become 0 again,
@@ -285,7 +287,7 @@ hTileAnimations:: db
 
 hMovingBGTilesCounter1:: db
 
-	ds 1
+;	ds 1
 
 hCurrentSpriteOffset:: db ; multiple of $10
 
@@ -405,6 +407,6 @@ hDelayFrameHookBank:: db
 ; Used for convenience in color hack (in the _ColorOverworldSprite function)
 hColorHackTmp:: db
 
-	ds 3
+;	ds 3
 
 ENDSECTION

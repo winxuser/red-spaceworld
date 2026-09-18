@@ -48,10 +48,10 @@ TryDoWildEncounter:
 .CanEncounter
 ; compare encounter chance with a random number to determine if there will be an encounter
 	ld b, a
-	ldh a, [hRandomAdd]
+	call Random
 	cp b
 	jr nc, .CantEncounter2
-	ldh a, [hRandomSub]
+	call Random
 	ld b, a
 	ld hl, WildMonEncounterSlotChances
 .determineEncounterSlot
