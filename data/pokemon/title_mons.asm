@@ -185,4 +185,14 @@ TitleMons:
 	db ANIMON
 	db HINAZU
 	db SANI
+	db PAON
+	db DONFAN
+	db TSUINZU
+	db KIRINRIKI
+	db PEINTA
+	db KONYA
+	db RINRIN
+	db BERURUN
+	db NYOROTONO
+	db YADOKINGU
 TitleMonsEnd:

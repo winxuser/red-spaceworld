@@ -193,6 +193,16 @@ PokedexEntryPointers:
 	dw AnimonDexEntry
 	dw HinazuDexEntry
 	dw SaniDexEntry
+	dw PaonDexEntry
+	dw DonfanDexEntry
+	dw TsuinzuDexEntry
+	dw KirinrikiDexEntry
+	dw PeintaDexEntry
+	dw KonyaDexEntry
+	dw RinrinDexEntry
+	dw BerurunDexEntry
+	dw NyorotonoDexEntry
+	dw YadokinguDexEntry
 	assert_table_length NUM_POKEMON_INDEXES
 
 ; string: species name
@@ -1528,6 +1538,76 @@ SaniDexEntry:
 	db 2,7
 	dw 180
 	text_far _SaniDexEntry
+	text_end
+
+PaonDexEntry::
+	db "LONG NOSE@"
+	db 0,5
+	dw 335
+	text_far _PaonDexEntry
+	text_end
+
+DonfanDexEntry::
+	db "ARMOR@"
+	db 1,1
+	dw 1200
+	text_far _DonfanDexEntry
+	text_end
+
+TsuinzuDexEntry::
+	db "TWIN GHOST@"
+	db 0,6
+	dw 110
+	text_far _TsuinzuDexEntry
+	text_end
+
+KirinrikiDexEntry::
+	db "LONG NECK@"
+	db 1, 5
+	dw 415
+	text_far _KirinrikiDexEntry
+	text_end
+
+PeintaDexEntry::
+	db "PAINTER@"
+	db 1, 2
+	dw 580
+	text_far _PeintaDexEntry
+	text_end
+
+KonyaDexEntry::
+	db "KITTEN@"
+	db 0, 3 ; height: 0.3 m
+	dw 20 ; weight: 2.0 kg
+	text_far _KonyaDexEntry
+	text_end
+
+RinrinDexEntry::
+	db "BELL CAT@"
+	db 0, 6 ; height: 0.6 m
+	dw 120 ; weight: 12.0 kg
+	text_far _RinrinDexEntry
+	text_end
+
+BerurunDexEntry::
+	db "BELL CAT@"
+	db 1, 2 ; height: 1.2 m
+	dw 350 ; weight: 35.0 kg
+	text_far _BerurunDexEntry
+	text_end
+
+NyorotonoDexEntry::
+	db "FROG@"
+	db 1, 1 ; height: 1.1 m
+	dw 339 ; weight: 33.9 kg
+	text_far _NyorotonoDexEntry
+	text_end
+
+YadokinguDexEntry::
+	db "ROYAL@"
+	db 2, 0 ; height: 2.0 m
+	dw 795 ; weight: 79.5 kg
+	text_far _YadokinguDexEntry
 	text_end
 
 MissingNoDexEntry:

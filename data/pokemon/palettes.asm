@@ -192,6 +192,16 @@ IF GEN_2_GRAPHICS
 	db PAL_GRAYMON  ; Animon
 	db PAL_BROWNMON ; Hinazu
 	db PAL_YELLOWMON; Sani
+	db PAL_CYANMON  ; Paon
+	db PAL_BROWNMON ; Donfan
+	db PAL_PURPLEMON; Tsuinzu
+	db PAL_YELLOWMON; Kirinriki
+	db PAL_BROWNMON ; Peinta
+	db PAL_YELLOWMON; Konya
+	db PAL_BROWNMON ; Rinrin
+	db PAL_BROWNMON ; Berurun
+	db PAL_GREENMON ; Nyorotono
+	db PAL_PINKMON  ; Yadokingu
 TrainerPalettes: ; Gen II trainer sprites are given their own palettes
 	db PAL_HERO
 	db PAL_YOUNGSTER

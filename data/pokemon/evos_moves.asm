@@ -203,6 +203,16 @@ EvosMovesPointerTable:
 	dw AnimonEvosMoves
 	dw HinazuEvosMoves
 	dw SaniEvosMoves
+	dw PaonEvosMoves
+	dw DonfanEvosMoves
+	dw TsuinzuEvosMoves
+	dw KirinrikiEvosMoves
+	dw PeintaEvosMoves
+	dw KonyaEvosMoves
+	dw RinrinEvosMoves
+	dw BerurunEvosMoves
+	dw NyorotonoEvosMoves
+	dw YadokinguEvosMoves
 	assert_table_length NUM_POKEMON_INDEXES
 
 RhydonEvosMoves:
@@ -2405,3 +2415,137 @@ SaniEvosMoves:
 	db 10, MEGA_DRAIN
 	db 43, SOLARBEAM
 	db 0 ; end
+
+PaonEvosMoves:
+; Evolutions
+	db EVOLVE_LEVEL, 33, DONFAN
+	db 0
+; Learnset
+	db 1, TACKLE
+	db 1, GROWL
+	db 9, DEFENSE_CURL
+	db 25, TAKE_DOWN
+	db 41, EARTHQUAKE
+	db 0
+
+DonfanEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 1, TACKLE
+	db 1, GROWL
+	db 1, DEFENSE_CURL
+	db 9, DEFENSE_CURL
+	db 25, TAKE_DOWN
+	db 41, EARTHQUAKE
+	db 49, FISSURE
+	db 0
+
+TsuinzuEvosMoves:
+; Evolutions
+	db EVOLVE_LEVEL, 29, KIRINRIKI
+	db 0
+; Learnset
+	db 1, LICK
+	db 7, HYPNOSIS
+	db 13, CONFUSE_RAY
+	db 25, NIGHT_SHADE
+	db 31, SCREECH
+	db 37, AGILITY
+	db 0
+
+KirinrikiEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 1, LICK
+	db 1, HYPNOSIS
+	db 1, CONFUSE_RAY
+	db 7, HYPNOSIS
+	db 13, CONFUSE_RAY
+	db 25, NIGHT_SHADE
+	db 30, PSYBEAM
+	db 37, SCREECH
+	db 44, AGILITY
+	db 51, PSYCHIC_M
+	db 0
+
+PeintaEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 1, MIMIC
+	db 11, MIMIC
+	db 21, MIMIC
+	db 31, MIMIC
+	db 41, MIMIC
+	db 51, MIMIC
+	db 0
+
+KonyaEvosMoves:
+; Evolutions
+	db EVOLVE_LEVEL, 14, MEOWTH
+	db 0
+; Learnset
+	db 1, SCRATCH
+	db 1, GROWL
+	db 4, BITE
+	db 8, PAY_DAY
+	db 12, SCREECH
+	db 16, FURY_SWIPES
+	db 0
+
+RinrinEvosMoves:
+; Evolutions
+	db EVOLVE_LEVEL, 28, BERURUN
+	db 0
+; Learnset
+	db 1, SCRATCH
+	db 1, GROWL
+	db 6, BITE
+	db 12, PAY_DAY
+	db 18, DEFENSE_CURL
+	db 24, SCREECH
+	db 30, FURY_SWIPES
+	db 36, SLASH
+	db 0
+
+BerurunEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 1, SCRATCH
+	db 1, GROWL
+	db 1, BITE
+	db 1, PAY_DAY
+	db 6, BITE
+	db 12, PAY_DAY
+	db 18, DEFENSE_CURL
+	db 24, SCREECH
+	db 32, FURY_SWIPES
+	db 40, SLASH
+	db 0
+
+NyorotonoEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 1, WATER_GUN
+	db 1, HYPNOSIS
+	db 1, DOUBLESLAP
+	db 1, BODY_SLAM
+	db 0
+
+YadokinguEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 1, TACKLE
+	db 1, WATER_GUN
+	db 1, CONFUSION
+	db 6, WATER_GUN
+	db 15, CONFUSION
+	db 20, DISABLE
+	db 29, HEADBUTT
+	db 43, PSYCHIC_M
+	db 0

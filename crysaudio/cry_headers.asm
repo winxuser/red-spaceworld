@@ -196,6 +196,16 @@ PokemonCries::
 	mon_cry CRY_PIDGEY,      255,  383 ; ANIMON
 	mon_cry CRY_DIGLETT,     220,  100 ; HINAZU
 	mon_cry CRY_SUNFLORA,    -32,  384 ; SANI
+	mon_cry CRY_SENTRET,      72,  560 ; PAON
+	mon_cry CRY_DONPHAN,       0,  416 ; DONFAN
+	mon_cry CRY_HOOTHOOT,   -160,  320 ; TSUINZU
+	mon_cry CRY_GIRAFARIG,    65,  512 ; KIRINRIKI
+	mon_cry CRY_PICHU,      -538,  496 ; PEINTA
+	mon_cry CRY_CLEFAIRY,    119,  144 ; KONYA
+	mon_cry CRY_CLEFAIRY,    153,  383 ; RINRIN
+	mon_cry CRY_CLEFAIRY,    170,  383 ; BERURUN
+	mon_cry CRY_CLEFFA,     -675,  456 ; NYOROTONO
+	mon_cry CRY_SLOWKING,    352,  224 ; YADOKINGU
 ;	mon_cry CRY_SENTRET,     138,  184 ; SENTRET
 ;	mon_cry CRY_SENTRET,     107,  258 ; FURRET
 ;	mon_cry CRY_HOOTHOOT,    145,  216 ; HOOTHOOT
@@ -266,8 +276,6 @@ PokemonCries::
 ;	mon_cry CRY_CYNDAQUIL,    57,  320 ; HOUNDOUR
 ;	mon_cry CRY_TOTODILE,   -266,  256 ; HOUNDOOM
 ;	mon_cry CRY_SLUGMA,      763,  256 ; KINGDRA
-;	mon_cry CRY_SENTRET,      72,  560 ; PHANPY
-;	mon_cry CRY_DONPHAN,       0,  416 ; DONPHAN
 ;	mon_cry CRY_GIRAFARIG,   115,  576 ; PORYGON2
 ;	mon_cry CRY_AIPOM,      -352,  384 ; STANTLER
 ;	mon_cry CRY_PICHU,      -538,  496 ; SMEARGLE

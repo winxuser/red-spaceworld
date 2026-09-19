@@ -206,9 +206,6 @@ INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
 INCLUDE "engine/battle/trainer_ai.asm"
 INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
 INCLUDE "engine/pokemon/evos_moves.asm"
-INCLUDE "engine/battle/move_effects/heal.asm"
-INCLUDE "engine/battle/move_effects/transform.asm"
-INCLUDE "engine/battle/move_effects/reflect_light_screen.asm"
 INCLUDE "color/draw_hud_pokeball_gfx.asm"
 
 
@@ -395,6 +392,9 @@ INCLUDE "engine/overworld/emotion_bubbles.asm"
 INCLUDE "engine/items/tm_prices.asm"
 INCLUDE "data/text/text_8.asm"
 INCLUDE "engine/pokemon/mon_gender.asm"
+INCLUDE "engine/battle/move_effects/heal.asm"
+INCLUDE "engine/battle/move_effects/transform.asm"
+INCLUDE "engine/battle/move_effects/reflect_light_screen.asm"
 
 
 SECTION "bank40", ROMX

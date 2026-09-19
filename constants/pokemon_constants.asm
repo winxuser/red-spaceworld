@@ -200,6 +200,16 @@
 	const ANIMON
 	const HINAZU
 	const SANI
+	const PAON
+	const DONFAN
+	const TSUINZU
+	const KIRINRIKI
+	const PEINTA
+	const KONYA
+	const RINRIN
+	const BERURUN
+	const NYOROTONO
+	const YADOKINGU
 
 DEF NUM_POKEMON_INDEXES EQU const_value - 1
 

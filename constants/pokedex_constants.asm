@@ -194,5 +194,15 @@
 	const DEX_ANIMON     ; 188
 	const DEX_HINAZU     ; 189
 	const DEX_SANI       ; 190
+	const DEX_PAON       ; 191
+	const DEX_DONFAN     ; 192
+	const DEX_TSUINZU    ; 193
+	const DEX_KIRINRIKI  ; 194
+	const DEX_PEINTA     ; 195
+	const DEX_KONYA      ; 196
+	const DEX_RINRIN     ; 197
+	const DEX_BERURUN    ; 198
+	const DEX_NYOROTONO  ; 199
+	const DEX_YADOKINGU  ; 200
 
 DEF NUM_POKEMON EQU const_value - 1

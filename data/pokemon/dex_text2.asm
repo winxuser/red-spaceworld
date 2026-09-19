@@ -170,3 +170,103 @@ _SaniDexEntry::
 	next "toward the sun all"
 	next "day while active"
 	dex
+
+_PaonDexEntry::
+	text "It uses its long"
+	next "trunk to dig deep"
+	next "holes in search"
+
+	page "of moisture."
+	next "It bathes in mud"
+	next "to cool its body"
+	dex
+
+_DonfanDexEntry::
+	text "It curls its body"
+	next "into a wheel and"
+	next "charges forward"
+
+	page "at full speed,"
+	next "crushing anything"
+	next "in its path"
+	dex
+
+_TsuinzuDexEntry::
+	text "It consists of"
+	next "two identical"
+	next "ghostly heads."
+
+	page "They constantly"
+	next "whisper thoughts"
+	next "to one another"
+	dex
+
+_KirinrikiDexEntry::
+	text "The head on its"
+	next "tail possesses a"
+	next "small brain."
+
+	page "It bites blindly"
+	next "if anyone comes"
+	next "too close"
+	dex
+
+_PeintaDexEntry::
+	text "A fluid exudes"
+	next "from the tip of"
+	next "its tail. It"
+
+	page "uses this liquid"
+	next "to paint marks"
+	next "on its territory"
+	dex
+
+_KonyaDexEntry::
+	text "It loves shiny"
+	next "objects. It will"
+	next "happily play with"
+
+	page "any coin it can"
+	next "find on the ground"
+	next "for hours on end"
+	dex
+
+_RinrinDexEntry::
+	text "The bell around"
+	next "its neck rings as"
+	next "it moves. It uses"
+
+	page "the sound to shock"
+	next "and disorient its"
+	next "targets in battle"
+	dex
+
+_BerurunDexEntry::
+	text "The huge bell on"
+	next "its neck echoes"
+	next "loudly. Its ring"
+
+	page "can be heard from"
+	next "miles away in the"
+	next "dead of night"
+	dex
+
+_NyorotonoDexEntry::
+	text "Whenever three or"
+	next "more gather, they"
+	next "sing together in"
+
+	page "a loud voice that"
+	next "sounds like a"
+	next "bellowing roar"
+	dex
+
+_YadokinguDexEntry::
+	text "Every time it"
+	next "yawns, Shellder"
+	next "bites down hard,"
+
+	page "injecting poison"
+	next "that makes it"
+	next "much smarter"
+	dex

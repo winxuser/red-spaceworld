@@ -189,5 +189,15 @@ MonPartyData:
 	nybble ICON_BIRD      ; Yoroidori
 	nybble ICON_MON       ; Animon
 	nybble ICON_BIRD      ; Hinazu
-	nybble ICON_MON       ; Sani
+	nybble ICON_GRASS     ; Sani
+	nybble ICON_MON       ; Paon
+	nybble ICON_MON       ; Donfan
+	nybble ICON_FAIRY     ; Tsuinzu
+	nybble ICON_QUADRUPED ; Kirinriki
+	nybble ICON_QUADRUPED ; Peinta
+	nybble ICON_MON       ; Konya
+	nybble ICON_MON       ; Rinrin
+	nybble ICON_MON       ; Berurun
+	nybble ICON_WATER     ; Nyorotono
+	nybble ICON_MON       ; Yadokingu
 	end_nybble_array NUM_POKEMON
