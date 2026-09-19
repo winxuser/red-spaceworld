@@ -66,13 +66,12 @@ LoadTilesetPalette::
 	ldh [rWBK], a
 	ld a, h
 
+; Force Forest to permanently use night palettes
 	and a              ; Is it tileset 0 (OVERWORLD)?
 	jr z, .checkTime
 	cp PLATEAU
 	jr z, .checkTime
 	cp OLD_CITY_TS
-	jr z, .checkTime
-	cp FOREST
 	jr z, .checkTime
 	cp WEST_CITY_TS
 	jr z, .checkTime
@@ -88,6 +87,8 @@ LoadTilesetPalette::
 	jr z, .checkTime
 	cp SOUTH_CITY_TS
 	jr z, .checkTime
+	cp FOREST
+	jr z, .nightPalettes
 
 ; If it isn't any of the outside tilesets, use standard day palettes permanently (indoors/caves)
 	jr .dayPalettes
@@ -215,8 +216,6 @@ LoadTilesetPalette::
 
 	; Add your new outdoor tilesets here!
 	cp OLD_CITY_TS
-	call z, LoadTownPalette
-	cp FOREST
 	call z, LoadTownPalette
 	cp WEST_CITY_TS
 	call z, LoadTownPalette
