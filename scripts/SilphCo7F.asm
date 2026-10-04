@@ -133,7 +133,7 @@ SilphCo7FDefaultScript:
 	ld [wPlayerMovingDirection], a
 	ld a, SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	ld c, 0 ; BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
@@ -227,7 +227,7 @@ SilphCo7FRivalAfterBattleScript:
 	call DisplayTextID
 	ld a, SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
-	call PlaySound
+	rst _PlaySound
 	farcall Music_RivalAlternateStart
 	ld de, .RivalWalkAroundPlayerMovement
 	ld a, [wSavedCoordIndex]
@@ -307,11 +307,11 @@ SilphCo7FSilphWorkerM1Text:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .saved_silph
 	ld hl, .IsOurPresidentOkText
-	call PrintText
+	rst _PrintText
 	jr .done
 .give_lapras
 	ld hl, .HaveThisPokemonText
-	call PrintText
+	rst _PrintText
 	lb bc, LAPRAS, 15
 	call GivePokemon
 	jr nc, .done
@@ -320,15 +320,15 @@ SilphCo7FSilphWorkerM1Text:
 	call z, WaitForTextScrollButtonPress
 	call EnableAutoTextBoxDrawing
 	ld hl, .LaprasDescriptionText
-	call PrintText
+	rst _PrintText
 	ld hl, wStatusFlags4
 	set BIT_GOT_LAPRAS, [hl]
 	jr .done
 .saved_silph
 	ld hl, .SavedText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .HaveThisPokemonText
 	text_far _SilphCo7FSilphWorkerM1HaveThisPokemonText
@@ -351,13 +351,13 @@ SilphCo7FSilphWorkerM2Text:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .saved_silph
 	ld hl, .AfterTheMasterBallText
-	call PrintText
+	rst _PrintText
 	jr .done
 .saved_silph
 	ld hl, .CancelledTheMasterBallText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .AfterTheMasterBallText
 	text_far _SilphCo7FSilphWorkerM2AfterTheMasterBallText
@@ -372,13 +372,13 @@ SilphCo7FSilphWorkerM3Text:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .saved_silph
 	ld hl, .ItWouldBeBadText
-	call PrintText
+	rst _PrintText
 	jr .done
 .saved_silph
 	ld hl, .YouChasedOffTeamRocketText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .ItWouldBeBadText
 	text_far _SilphCo7FSilphWorkerM3ItWouldBeBadText
@@ -393,13 +393,13 @@ SilphCo7FSilphWorkerM4Text:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .saved_silph
 	ld hl, .ItsReallyDangerousHereText
-	call PrintText
+	rst _PrintText
 	jr .done
 .saved_silph
 	ld hl, .SafeAtLastText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .ItsReallyDangerousHereText
 	text_far _SilphCo7FSilphWorkerM4ItsReallyDangerousHereText
@@ -413,7 +413,7 @@ SilphCo7FRocket1Text:
 	text_asm
 	ld hl, SilphCo7TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo7FRocket1BattleText:
 	text_far _SilphCo7FRocket1BattleText
@@ -431,7 +431,7 @@ SilphCo7FScientistText:
 	text_asm
 	ld hl, SilphCo7TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo7FScientistBattleText:
 	text_far _SilphCo7FScientistBattleText
@@ -449,7 +449,7 @@ SilphCo7FRocket2Text:
 	text_asm
 	ld hl, SilphCo7TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo7FRocket2BattleText:
 	text_far _SilphCo7FRocket2BattleText
@@ -467,7 +467,7 @@ SilphCo7FRocket3Text:
 	text_asm
 	ld hl, SilphCo7TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilphCo7FRocket3BattleText:
 	text_far _SilphCo7FRocket3BattleText
@@ -484,8 +484,8 @@ SilphCo7FRocket3AfterBattleText:
 SilphCo7FRivalText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _SilphCo7FRivalText

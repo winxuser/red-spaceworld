@@ -2,7 +2,7 @@ SoftReset_orig:: ; HAX: "SoftReset" label moved elsewhere (calls this after)
 	call StopAllSounds
 	call GBPalWhiteOut
 	ld c, 32
-	call DelayFrames
+	rst _DelayFrames
 	; fallthrough
 
 Init::

@@ -21,7 +21,7 @@ RocketHideoutB4FDoorCallbackScript:
 	jr .set_block
 .unlock_door
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst _PlaySound
 	SetEvent EVENT_ROCKET_HIDEOUT_4_DOOR_UNLOCKED
 .door_already_unlocked
 	ld a, $e ; Floor block
@@ -101,7 +101,7 @@ RocketHideoutB4FGiovanniText:
 	CheckEvent EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI
 	jp nz, .beat_giovanni
 	ld hl, .ImpressedYouGotHereText
-	call PrintText
+	rst _PrintText
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
@@ -120,9 +120,9 @@ RocketHideoutB4FGiovanniText:
 	jr .done
 .beat_giovanni
 	ld hl, RocketHideoutB4FGiovanniHopeWeMeetAgainText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .ImpressedYouGotHereText:
 	text_far _RocketHideoutB4FGiovanniImpressedYouGotHereText
@@ -140,7 +140,7 @@ RocketHideoutB4FRocket1Text:
 	text_asm
 	ld hl, RocketHideout4TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideoutB4FRocket1BattleText:
 	text_far _RocketHideoutB4FRocket1BattleText
@@ -158,7 +158,7 @@ RocketHideoutB4FRocket2Text:
 	text_asm
 	ld hl, RocketHideout4TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideoutB4FRocket2BattleText:
 	text_far _RocketHideoutB4FRocket2BattleText
@@ -176,7 +176,7 @@ RocketHideoutB4FRocket3Text:
 	text_asm
 	ld hl, RocketHideout4TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 RocketHideoutB4FRocket3BattleText:
 	text_far _RocketHideoutB4FRocket3BattleText
@@ -189,14 +189,14 @@ RocketHideoutB4FRocket3EndBattleText:
 RocketHideoutB4FRocket3AfterBattleText:
 	text_asm
 	ld hl, .Text
-	call PrintText
+	rst _PrintText
 	CheckAndSetEvent EVENT_ROCKET_DROPPED_LIFT_KEY
 	jr nz, .done
 	ld a, TOGGLE_ROCKET_HIDEOUT_B4F_ITEM_5
 	ld [wToggleableObjectIndex], a
 	predef ShowObject
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .Text:
 	text_far _RocketHideoutB4FRocket3AfterBattleText

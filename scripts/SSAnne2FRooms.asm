@@ -48,35 +48,35 @@ SSAnne2FRoomsGentleman1Text:
 	text_asm
 	ld hl, SSAnne9TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne2FRoomsFisherText:
 	text_asm
 	ld hl, SSAnne9TrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne2FRoomsGentleman2Text:
 	text_asm
 	ld hl, SSAnne9TrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne2FRoomsCooltrainerFText:
 	text_asm
 	ld hl, SSAnne9TrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnne2FRoomsGentleman3Text:
 	text_asm
 	call SaveScreenTilesToBuffer1
 	ld hl, .Text
-	call PrintText
+	rst _PrintText
 	call LoadScreenTilesFromBuffer1
 	ld a, SNORLAX
 	call DisplayPokedex
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .Text:
 	text_far _SSAnne2FRoomsGentleman3Text
@@ -85,8 +85,8 @@ SSAnne2FRoomsGentleman3Text:
 SSAnne2FRoomsGentleman4Text:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _SSAnne2FRoomsGentleman4Text
@@ -95,8 +95,8 @@ SSAnne2FRoomsGentleman4Text:
 SSAnne2FRoomsGrampsText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _SSAnne2FRoomsGrampsText
@@ -105,8 +105,8 @@ SSAnne2FRoomsGrampsText:
 SSAnne2FRoomsGentleman5Text:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _SSAnne2FRoomsGentleman5Text
@@ -115,8 +115,8 @@ SSAnne2FRoomsGentleman5Text:
 SSAnne2FRoomsLittleBoyText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _SSAnne2FRoomsLittleBoyText
@@ -125,8 +125,8 @@ SSAnne2FRoomsLittleBoyText:
 SSAnne2FRoomsBrunetteGirlText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _SSAnne2FRoomsBrunetteGirlText
@@ -135,8 +135,8 @@ SSAnne2FRoomsBrunetteGirlText:
 SSAnne2FRoomsBeautyText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _SSAnne2FRoomsBeautyText

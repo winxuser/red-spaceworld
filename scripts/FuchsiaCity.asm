@@ -71,10 +71,10 @@ FuchsiaCityGymSignText:
 FuchsiaCityChanseySignText:
 	text_asm
 	ld hl, .Text
-	call PrintText
+	rst _PrintText
 	ld a, CHANSEY
 	call DisplayPokedex
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .Text:
 	text_far _FuchsiaCityChanseySignText
@@ -83,10 +83,10 @@ FuchsiaCityChanseySignText:
 FuchsiaCityVoltorbSignText:
 	text_asm
 	ld hl, .Text
-	call PrintText
+	rst _PrintText
 	ld a, VOLTORB
 	call DisplayPokedex
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .Text:
 	text_far _FuchsiaCityVoltorbSignText
@@ -95,10 +95,10 @@ FuchsiaCityVoltorbSignText:
 FuchsiaCityKangaskhanSignText:
 	text_asm
 	ld hl, .Text
-	call PrintText
+	rst _PrintText
 	ld a, KANGASKHAN
 	call DisplayPokedex
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .Text:
 	text_far _FuchsiaCityKangaskhanSignText
@@ -107,10 +107,10 @@ FuchsiaCityKangaskhanSignText:
 FuchsiaCitySlowpokeSignText:
 	text_asm
 	ld hl, .Text
-	call PrintText
+	rst _PrintText
 	ld a, SLOWPOKE
 	call DisplayPokedex
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .Text:
 	text_far _FuchsiaCitySlowpokeSignText
@@ -119,10 +119,10 @@ FuchsiaCitySlowpokeSignText:
 FuchsiaCityLaprasSignText:
 	text_asm
 	ld hl, .Text
-	call PrintText
+	rst _PrintText
 	ld a, LAPRAS
 	call DisplayPokedex
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .Text:
 	text_far _FuchsiaCityLaprasSignText
@@ -135,21 +135,21 @@ FuchsiaCityFossilSignText:
 	CheckEventReuseA EVENT_GOT_HELIX_FOSSIL
 	jr nz, .got_helix_fossil
 	ld hl, .UndeterminedText
-	call PrintText
+	rst _PrintText
 	jr .done
 .got_dome_fossil
 	ld hl, .OmanyteText
-	call PrintText
+	rst _PrintText
 	ld a, OMANYTE
 	jr .display
 .got_helix_fossil
 	ld hl, .KabutoText
-	call PrintText
+	rst _PrintText
 	ld a, KABUTO
 .display
 	call DisplayPokedex
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .OmanyteText:
 	text_far _FuchsiaCityFossilSignOmanyteText

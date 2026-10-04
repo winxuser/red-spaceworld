@@ -33,3 +33,18 @@ Bankswitch::
 	ldh [hLoadedROMBank], a
 	ld [rROMB], a
 	ret
+
+_LoadMapVramAndColors:
+	ldh a, [hLoadedROMBank]
+	push af
+	ld a, BANK(LoadMapVramAndColors)
+	ld [rROMB], a
+	call LoadMapVramAndColors
+	pop af
+	ld [rROMB], a
+	ret
+
+SetRomBank::
+	ldh [hLoadedROMBank], a
+	ld [rROMB], a
+	ret

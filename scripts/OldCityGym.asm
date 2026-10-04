@@ -106,11 +106,11 @@ OldCityGymMikonText:
 	jr .done
 .afterBeat
 	ld hl, .PostBattleAdviceText
-	call PrintText
+	rst _PrintText
 	jr .done
 .beforeBeat
 	ld hl, .PreBattleText
-	call PrintText
+	rst _PrintText
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
@@ -129,7 +129,7 @@ OldCityGymMikonText:
 	ld [wOldCityGymCurScript], a
 	ld [wCurMapScript], a
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .PreBattleText:
 	text_far _OldCityGymMikonPreBattleText
@@ -163,7 +163,7 @@ OldCityGymCooltrainerMText:
 	text_asm
 	ld hl, OldCityGymTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OldCityGymCooltrainerMBattleText:
 	text_far _OldCityGymCooltrainerMBattleText
@@ -183,26 +183,26 @@ OldCityGymGuideText:
 	bit BIT_BOULDERBADGE, a
 	jr nz, .afterBeat
 	ld hl, OldCityGymGuidePreAdviceText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .OldCityGymGuideBeginAdviceText
 	ld hl, OldCityGymGuideBeginAdviceText
-	call PrintText
+	rst _PrintText
 	jr .OldCityGymGuideAdviceText
 .OldCityGymGuideBeginAdviceText
 	ld hl, OldCityGymGuideFreeServiceText
-	call PrintText
+	rst _PrintText
 .OldCityGymGuideAdviceText
 	ld hl, OldCityGymGuideAdviceText
-	call PrintText
+	rst _PrintText
 	jr .done
 .afterBeat
 	ld hl, OldCityGymGuidePostBattleText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OldCityGymGuidePreAdviceText:
 	text_far _OldCityGymGuidePreAdviceText

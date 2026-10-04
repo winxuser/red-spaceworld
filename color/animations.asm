@@ -17,7 +17,7 @@ SpriteifyPlayerPokemon:
 	ld hl, W2_BgPaletteData
 	ld de, W2_SprPaletteData
 	ld bc, 8
-	call CopyData
+	rst _CopyData
 
 	ld a, 1
 	ld [W2_LastOBP0], a

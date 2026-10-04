@@ -255,7 +255,7 @@ StatusScreen:
 	ld hl, wLoadedMonMoves
 	ld de, wMoves
 	ld bc, NUM_MOVES
-	call CopyData
+	rst _CopyData
 	callfar FormatMovesString
 
 	hlcoord 3, 9

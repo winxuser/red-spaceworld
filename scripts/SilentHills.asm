@@ -41,19 +41,19 @@ SilentHillsYoungster2Text:
 	text_asm
 	ld hl, SilentHillsTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilentHillsYoungster3Text:
 	text_asm
 	ld hl, SilentHillsTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilentHillsYoungster4Text:
 	text_asm
 	ld hl, SilentHillsTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SilentHillsYoungster2BattleText:
 	text_far _SilentHillsYoungster2BattleText

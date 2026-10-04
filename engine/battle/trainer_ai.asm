@@ -297,7 +297,7 @@ ReadMove:
 	ld bc, MOVE_LENGTH
 	call AddNTimes
 	ld de, wEnemyMoveNum
-	call CopyData
+	rst _CopyData
 	pop bc
 	pop de
 	pop hl
@@ -635,10 +635,10 @@ SwitchEnemyMon:
 	ld e, l
 	ld hl, wEnemyMonHP
 	ld bc, MON_STATUS + 1 - MON_HP ; also copies party pos in-between HP and status
-	call CopyData
+	rst _CopyData
 
 	ld hl, AIBattleWithdrawText
-	call PrintText
+	rst _PrintText
 
 	; This wFirstMonsNotOutYet variable is abused to prevent the player from
 	; switching in a new mon in response to this switch.

@@ -8,7 +8,7 @@ CeladonPrizeMenu::
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
 	ld hl, ExchangeCoinsForPrizesText
-	call PrintText
+	rst _PrintText
 ; the following are the menu settings
 	xor a
 	ld [wCurrentMenuItem], a
@@ -29,7 +29,7 @@ CeladonPrizeMenu::
 	call GetPrizeMenuId
 	call UpdateSprites
 	ld hl, WhichPrizeText
-	call PrintText
+	rst _PrintText
 	call HandleMenuInput ; menu choice handler
 	bit B_PAD_B, a
 	jr nz, .noChoice
@@ -83,7 +83,7 @@ GetPrizeMenuId:
 	ld l, a
 	ld de, wPrize1Price
 	ld bc, 6
-	call CopyData
+	rst _CopyData
 	ld a, [wWhichPrizeWindow]
 	cp 2 ; is TM_menu?
 	jr nz, .putMonName
@@ -196,7 +196,7 @@ HandlePrizeChoice:
 	call GetMonName
 .givePrize
 	ld hl, SoYouWantPrizeText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem] ; yes/no answer (Y=0, N=1)
 	and a

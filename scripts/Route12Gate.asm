@@ -17,8 +17,8 @@ GateUpstairsScript_PrintIfFacingUp:
 	ld a, TRUE
 	jr .done
 .up
-	call PrintText
+	rst _PrintText
 	xor a
 .done
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	jp TextScriptEnd
+	rst TextScriptEnd

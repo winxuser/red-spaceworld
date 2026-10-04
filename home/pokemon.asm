@@ -145,7 +145,7 @@ LoadFrontSpriteByMonIndex::
 ;PlayCry::
 ; Play monster a's cry.
 ;	call GetCryData
-;	call PlaySound
+;	rst _PlaySound
 ;	jp WaitForSoundToFinish
 
 ;GetCryData::
@@ -404,7 +404,7 @@ GetMonHeader::
 	call AddNTimes
 	ld de, wMonHeader
 	ld bc, BASE_DATA_SIZE
-	call CopyData
+	rst _CopyData
 	jr .done
 .specialID
 	ld hl, wMonHSpriteDim
@@ -439,7 +439,7 @@ GetPartyMonName::
 	ld de, wNameBuffer
 	push de
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	pop de
 	pop bc
 	pop hl

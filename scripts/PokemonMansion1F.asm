@@ -78,7 +78,7 @@ PokemonMansion1FScientistText:
 	text_asm
 	ld hl, Mansion1TrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 PokemonMansion1FScientistBattleText:
 	text_far _PokemonMansion1FScientistBattleText
@@ -95,7 +95,7 @@ PokemonMansion1FScientistAfterBattleText:
 PokemonMansion1FSwitchText:
 	text_asm
 	ld hl, .Text
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -105,18 +105,18 @@ PokemonMansion1FSwitchText:
 	ld hl, wCurrentMapScriptFlags
 	set BIT_CUR_MAP_LOADED_1, [hl]
 	ld hl, .PressedText
-	call PrintText
+	rst _PrintText
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst _PlaySound
 	CheckAndSetEvent EVENT_MANSION_SWITCH_ON
 	jr z, .done
 	ResetEventReuseHL EVENT_MANSION_SWITCH_ON
 	jr .done
 .not_pressed
 	ld hl, .NotPressedText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .Text:
 	text_far _PokemonMansion1FSwitchText

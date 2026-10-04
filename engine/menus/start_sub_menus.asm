@@ -170,7 +170,7 @@ StartMenu_Pokemon::
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	ld hl, .cannotFlyHereText
-	call PrintText
+	rst _PrintText
 	jp .loop
 .canFly
 	call ChooseFlyDestination
@@ -218,7 +218,7 @@ StartMenu_Pokemon::
 	xor a
 	ld [wMapPalOffset], a
 	ld hl, .flashLightsAreaText
-	call PrintText
+	rst _PrintText
 	call GBPalWhiteOutWithDelay3
 	jp .goBackToMap
 .flashLightsAreaText
@@ -241,11 +241,11 @@ StartMenu_Pokemon::
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	ld hl, .cannotUseTeleportNowText
-	call PrintText
+	rst _PrintText
 	jp .loop
 .canTeleport
 	ld hl, .warpToLastPokemonCenterText
-	call PrintText
+	rst _PrintText
 	ld hl, wStatusFlags6
 	set BIT_FLY_WARP, [hl]
 	set BIT_ESCAPE_WARP, [hl]
@@ -253,7 +253,7 @@ StartMenu_Pokemon::
 	set BIT_UNKNOWN_4_1, [hl]
 	res BIT_NO_BATTLES, [hl]
 	ld c, 60
-	call DelayFrames
+	rst _DelayFrames
 	call GBPalWhiteOutWithDelay3
 	jp .goBackToMap
 .warpToLastPokemonCenterText
@@ -299,7 +299,7 @@ StartMenu_Pokemon::
 	jp .loop
 .notHealthyEnough ; if current HP is less than 1/5 of max HP
 	ld hl, .notHealthyEnoughText
-	call PrintText
+	rst _PrintText
 	jp .loop
 .notHealthyEnoughText
 	text_far _NotHealthyEnoughText
@@ -310,7 +310,7 @@ StartMenu_Pokemon::
 	jp CloseTextDisplay
 .newBadgeRequired
 	ld hl, .newBadgeRequiredText
-	call PrintText
+	rst _PrintText
 	jp .loop
 .newBadgeRequiredText
 	text_far _NewBadgeRequiredText
@@ -338,7 +338,7 @@ StartMenu_Item::
 	dec a ; is the player in the Colosseum or Trade Centre?
 	jr nz, .notInCableClubRoom
 	ld hl, CannotUseItemsHereText
-	call PrintText
+	rst _PrintText
 	jr .exitMenu
 .notInCableClubRoom
 	ld bc, wNumBagItems
@@ -410,7 +410,7 @@ StartMenu_Item::
 	bit BIT_ALWAYS_ON_BIKE, a
 	jr z, .useItem_closeMenu
 	ld hl, CannotGetOffHereText
-	call PrintText
+	rst _PrintText
 	jp ItemMenuLoop
 .notBicycle
 	ld a, [wCurrentMenuItem]
@@ -550,7 +550,7 @@ DrawTrainerInfo:
 	ld hl, vChars2 tile $07
 	ld de, vChars2 tile $00
 	ld bc, $1c tiles
-	call CopyData
+	rst _CopyData
 	ld hl, TrainerInfoTextBoxTileGraphics
 	ld de, vChars2 tile $77
 	ld bc, 8 tiles
@@ -811,7 +811,7 @@ SwitchPartyMon_InitVarOrSwapData:
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyData
+	rst _CopyData
 	ld hl, wPartyMons
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wMenuItemToSwap]
@@ -819,47 +819,47 @@ SwitchPartyMon_InitVarOrSwapData:
 	pop de
 	push hl
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyData
+	rst _CopyData
 	pop de
 	ld hl, wSwitchPartyMonTempBuffer
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyData
+	rst _CopyData
 	ld hl, wPartyMonOT
 	ld a, [wCurrentMenuItem]
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld hl, wPartyMonOT
 	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
 	push hl
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	pop de
 	ld hl, wSwitchPartyMonTempBuffer
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld hl, wPartyMonNicks
 	ld a, [wCurrentMenuItem]
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld hl, wPartyMonNicks
 	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
 	push hl
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	pop de
 	ld hl, wSwitchPartyMonTempBuffer
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	ld a, [wMenuItemToSwap]
 	ld [wSwappedMenuItem], a
 	xor a

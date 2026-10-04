@@ -73,7 +73,7 @@ LancesRoomDefaultScript:
 	ld hl, wCurrentMapScriptFlags
 	set BIT_CUR_MAP_LOADED_1, [hl]
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst _PlaySound
 	jp LanceShowOrHideEntranceBlocks
 
 LanceTriggerMovementCoords:
@@ -140,7 +140,7 @@ LancesRoomLanceText:
 	text_asm
 	ld hl, LancesRoomTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 LancesRoomLanceBeforeBattleText:
 	text_far _LancesRoomLanceBeforeBattleText
@@ -154,4 +154,4 @@ LancesRoomLanceAfterBattleText:
 	text_far _LancesRoomLanceAfterBattleText
 	text_asm
 	SetEvent EVENT_BEAT_LANCE
-	jp TextScriptEnd
+	rst TextScriptEnd

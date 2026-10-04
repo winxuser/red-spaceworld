@@ -148,7 +148,7 @@ HandlePokedexSideMenu:
 	pop af
 	ld [wPokedexNum], a
 ;	call GetCryData
-;	call PlaySound
+;	rst _PlaySound
 	jr .handleMenuInput
 
 .choseArea

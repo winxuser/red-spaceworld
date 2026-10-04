@@ -21,7 +21,7 @@ DisplayTownMap:
 	ld hl, wShadowOAMSprite00
 	ld de, wShadowOAMBackupSprite00
 	ld bc, OBJ_SIZE * 4
-	call CopyData
+	rst _CopyData
 	ld hl, vSprites tile BIRD_BASE_TILE
 	ld de, TownMapCursor
 	lb bc, BANK(TownMapCursor), (TownMapCursorEnd - TownMapCursor) / TILE_1BPP_SIZE
@@ -56,7 +56,7 @@ DisplayTownMap:
 	ld hl, wShadowOAMSprite04
 	ld de, wShadowOAMBackupSprite04
 	ld bc, OBJ_SIZE * 4
-	call CopyData
+	rst _CopyData
 .inputLoop
 	call TownMapSpriteBlinkingAnimation
 	call JoypadLowSensitivity
@@ -65,7 +65,7 @@ DisplayTownMap:
 	and PAD_A | PAD_B | PAD_UP | PAD_DOWN
 	jr z, .inputLoop
 	ld a, SFX_TINK
-	call PlaySound
+	rst _PlaySound
 	bit B_PAD_UP, b
 	jr nz, .pressedUp
 	bit B_PAD_DOWN, b
@@ -155,7 +155,7 @@ LoadTownMap_Fly::
 	ld hl, UncompressedMap
 	ld de, wTileMap
 	ld bc, UncompressedMapEnd - UncompressedMap
-	call CopyData
+	rst _CopyData
 	call EnableLCD
 
 	ld b, SET_PAL_TOWN_MAP
@@ -245,7 +245,7 @@ LoadTownMap_Fly::
 	bit B_PAD_A, b
 	jr nz, .pressedA
 	ld a, SFX_TINK
-	call PlaySound
+	rst _PlaySound
 	bit B_PAD_UP, b
 	jr nz, .pressedUp
 	bit B_PAD_DOWN, b
@@ -253,7 +253,7 @@ LoadTownMap_Fly::
 	jr .pressedB
 .pressedA
 	ld a, SFX_HEAL_AILMENT
-	call PlaySound
+	rst _PlaySound
 	ld a, [hl]
 	ld [wDestinationMap], a
 	ld hl, wStatusFlags6
@@ -341,7 +341,7 @@ LoadTownMap:
 	ld hl, UncompressedMap
 	ld de, wTileMap
 	ld bc, UncompressedMapEnd - UncompressedMap
-	call CopyData
+	rst _CopyData
 	call EnableLCD
 	ld b, SET_PAL_TOWN_MAP
 	call RunPaletteCommand
@@ -658,7 +658,7 @@ TownMapSpriteBlinkingAnimation::
 	ld hl, wShadowOAMBackup
 	ld de, wShadowOAM
 	ld bc, (OAM_COUNT - 4) * 4
-	call CopyData
+	rst _CopyData
 	xor a
 	jr .done
 .hideSprites

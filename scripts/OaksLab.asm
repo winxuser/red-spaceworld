@@ -462,7 +462,7 @@ OaksLabRivalEndBattleScript:
 
 OaksLabRivalStartsExitScript:
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrames
 	ld a, TEXT_OAKSLAB_RIVAL_SMELL_YOU_LATER
 	ldh [hTextID], a
 	call DisplayTextID
@@ -632,19 +632,19 @@ OaksLabRivalText:
 	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB_2
 	jr nz, .beforeChooseMon
 	ld hl, .GrampsIsntAroundText
-	call PrintText
+	rst _PrintText
 	jr .done
 .beforeChooseMon
 	CheckEventReuseA EVENT_GOT_STARTER
 	jr nz, .afterChooseMon
 	ld hl, .GoAheadAndChooseText
-	call PrintText
+	rst _PrintText
 	jr .done
 .afterChooseMon
 	ld hl, .MyPokemonLooksStrongerText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .GrampsIsntAroundText:
 	text_far _OaksLabRivalGrampsIsntAroundText
@@ -697,8 +697,8 @@ OaksLabSelectedPokeBallScript:
 	CheckEventReuseA EVENT_OAK_ASKED_TO_CHOOSE_MON
 	jr nz, OaksLabShowPokeBallPokemonScript
 	ld hl, OaksLabThoseArePokeBallsText
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 OaksLabThoseArePokeBallsText:
 	text_far _OaksLabThoseArePokeBallsText
@@ -724,7 +724,7 @@ OaksLabShowPokeBallPokemonScript:
 	res BIT_NO_TEXT_DELAY, [hl]
 	call ReloadMapData
 	ld c, 10
-	call DelayFrames
+	rst _DelayFrames
 	ld a, [wSpriteIndex]
 	cp OAKSLAB_HONOGUMA_POKE_BALL
 	jr z, OaksLabYouWantHonogumaText
@@ -754,7 +754,7 @@ OaksLabYouWantHappaText:
 	text_end
 
 OaksLabMonChoiceMenu:
-	call PrintText
+	rst _PrintText
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	call YesNoChoice
@@ -783,9 +783,9 @@ OaksLabMonChoiceMenu:
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, OaksLabMonEnergeticText
-	call PrintText
+	rst _PrintText
 	ld hl, OaksLabReceivedMonText
-	call PrintText
+	rst _PrintText
 	xor a
 	ld [wMonDataLocation], a
 	ld a, 5
@@ -800,7 +800,7 @@ OaksLabMonChoiceMenu:
 	ld a, SCRIPT_OAKSLAB_CHOSE_STARTER_SCRIPT
 	ld [wOaksLabCurScript], a
 OaksLabMonChoiceEnd:
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 OaksLabMonEnergeticText:
 	text_far _OaksLabMonEnergeticText
@@ -819,8 +819,8 @@ OaksLabLastMonScript:
 	call GetPointerWithinSpriteStateData1
 	ld [hl], SPRITE_FACING_DOWN
 	ld hl, OaksLabLastMonText
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 OaksLabLastMonText:
 	text_far _OaksLabLastMonText
@@ -835,7 +835,7 @@ OaksLabOak1Text:
 	cp 2
 	jr c, .check_starter_status
 	ld hl, .HowIsYourPokedexComingText
-	call PrintText
+	rst _PrintText
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	predef DisplayDexRating
@@ -845,13 +845,13 @@ OaksLabOak1Text:
 	bit BIT_GOT_STARTER, a
 	jr nz, .already_got_pokemon
 	ld hl, .WhichPokemonDoYouWantText
-	call PrintText
+	rst _PrintText
 	jr .done
 .already_got_pokemon
 	ld hl, .YourPokemonCanFightText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .WhichPokemonDoYouWantText:
 	text_far _OaksLabOak1WhichPokemonDoYouWantText
@@ -868,8 +868,8 @@ OaksLabOak1Text:
 OaksLabPokedexText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _OaksLabPokedexText
@@ -889,7 +889,7 @@ OaksLabGirlText:
 	jr z, .need_starter_first
 
 	ld hl, .GirlGivingItemsText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_POKEDEX
 
 	ld a, TOGGLE_POKEDEX_1   ; (Use your map's exact toggle constant for the Pokédex object)
@@ -901,19 +901,19 @@ OaksLabGirlText:
 	call GiveItem
 
 	ld hl, .GotItemsNotificationText
-	call PrintText
+	rst _PrintText
 	jr .done
 
 .need_starter_first
 	ld hl, .GirlAskToChooseStarterText
-	call PrintText
+	rst _PrintText
 	jr .done
 
 .already_got_items
 	ld hl, .GirlAlreadyGaveItemsText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .GirlAskToChooseStarterText:
 	text_far _OaksLabGirlAskToChooseStarterText
@@ -951,8 +951,8 @@ OaksLabWaitForKeyItemTriggerScript:
 OaksLabRivalFedUpWithWaitingText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _OaksLabRivalFedUpWithWaitingText
@@ -961,8 +961,8 @@ OaksLabRivalFedUpWithWaitingText:
 OaksLabOakChooseMonText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _OaksLabOakChooseMonText
@@ -971,8 +971,8 @@ OaksLabOakChooseMonText:
 OaksLabRivalWhatAboutMeText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _OaksLabRivalWhatAboutMeText
@@ -981,8 +981,8 @@ OaksLabRivalWhatAboutMeText:
 OaksLabOakBePatientText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _OaksLabOakBePatientText
@@ -991,8 +991,8 @@ OaksLabOakBePatientText:
 OaksLabOakDontGoAwayYetText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _OaksLabOakDontGoAwayYetText
@@ -1001,8 +1001,8 @@ OaksLabOakDontGoAwayYetText:
 OaksLabRivalIllTakeThisOneText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _OaksLabRivalIllTakeThisOneText
@@ -1011,8 +1011,8 @@ OaksLabRivalIllTakeThisOneText:
 OaksLabRivalReceivedMonText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _OaksLabRivalReceivedMonText
@@ -1022,8 +1022,8 @@ OaksLabRivalReceivedMonText:
 OaksLabRivalIllTakeYouOnText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _OaksLabRivalIllTakeYouOnText
@@ -1040,8 +1040,8 @@ OaksLabRivalAmIGreatOrWhatText:
 OaksLabRivalSmellYouLaterText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _OaksLabRivalSmellYouLaterText
@@ -1050,8 +1050,8 @@ OaksLabRivalSmellYouLaterText:
 OaksLabScientistText:
 	text_asm
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _OaksLabScientistText

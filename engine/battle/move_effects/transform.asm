@@ -42,7 +42,7 @@ TransformEffect_:
 	ld hl, AnimationTransformMon
 	ld b, BANK(AnimationTransformMon)
 .gotAnimToPlay
-	call Bankswitch
+	rst _Bankswitch
 	ld hl, ReshowSubstituteAnim
 	ld b, BANK(ReshowSubstituteAnim)
 	pop af
@@ -68,7 +68,7 @@ TransformEffect_:
 	inc de
 	inc bc
 	inc bc
-	call CopyData
+	rst _CopyData
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .next
@@ -96,7 +96,7 @@ TransformEffect_:
 	inc de
 ; Attack, Defense, Speed, and Special stats
 	ld bc, (NUM_STATS - 1) * 2
-	call CopyData
+	rst _CopyData
 	ld bc, wBattleMonMoves - wBattleMonPP
 	add hl, bc ; ld hl, wBattleMonMoves
 	ld b, NUM_MOVES

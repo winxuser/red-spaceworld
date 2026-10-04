@@ -110,7 +110,7 @@ FightingDojoKarateMasterText:
 	CheckEventReuseA EVENT_BEAT_KARATE_MASTER
 	jp nz, .defeated_master
 	ld hl, .Text
-	call PrintText
+	rst _PrintText
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
@@ -127,13 +127,13 @@ FightingDojoKarateMasterText:
 	jr .end
 .defeated_dojo
 	ld hl, .StayAndTrainWithUsText
-	call PrintText
+	rst _PrintText
 	jr .end
 .defeated_master
 	ld hl, .IWillGiveYouAPokemonText
-	call PrintText
+	rst _PrintText
 .end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .Text:
 	text_far _FightingDojoKarateMasterText
@@ -155,7 +155,7 @@ FightingDojoBlackbelt1Text:
 	text_asm
 	ld hl, FightingDojoTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FightingDojoBlackbelt1BattleText:
 	text_far _FightingDojoBlackbelt1BattleText
@@ -173,7 +173,7 @@ FightingDojoBlackbelt2Text:
 	text_asm
 	ld hl, FightingDojoTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FightingDojoBlackbelt2BattleText:
 	text_far _FightingDojoBlackbelt2BattleText
@@ -191,7 +191,7 @@ FightingDojoBlackbelt3Text:
 	text_asm
 	ld hl, FightingDojoTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FightingDojoBlackbelt3BattleText:
 	text_far _FightingDojoBlackbelt3BattleText
@@ -209,7 +209,7 @@ FightingDojoBlackbelt4Text:
 	text_asm
 	ld hl, FightingDojoTrainerHeader3
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 FightingDojoBlackbelt4BattleText:
 	text_far _FightingDojoBlackbelt4BattleText
@@ -228,13 +228,13 @@ FightingDojoHitmonleePokeBallText:
 	CheckEitherEventSet EVENT_GOT_HITMONLEE, EVENT_GOT_HITMONCHAN
 	jr z, .GetMon
 	ld hl, FightingDojoBetterNotGetGreedyText
-	call PrintText
+	rst _PrintText
 	jr .done
 .GetMon
 	ld a, HITMONLEE
 	call DisplayPokedex
 	ld hl, .Text
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -251,7 +251,7 @@ FightingDojoHitmonleePokeBallText:
 	predef HideObject
 	SetEvents EVENT_GOT_HITMONLEE, EVENT_DEFEATED_FIGHTING_DOJO
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .Text:
 	text_far _FightingDojoHitmonleePokeBallText
@@ -262,13 +262,13 @@ FightingDojoHitmonchanPokeBallText:
 	CheckEitherEventSet EVENT_GOT_HITMONLEE, EVENT_GOT_HITMONCHAN
 	jr z, .GetMon
 	ld hl, FightingDojoBetterNotGetGreedyText
-	call PrintText
+	rst _PrintText
 	jr .done
 .GetMon
 	ld a, HITMONCHAN
 	call DisplayPokedex
 	ld hl, .Text
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -285,7 +285,7 @@ FightingDojoHitmonchanPokeBallText:
 	ld [wToggleableObjectIndex], a
 	predef HideObject
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .Text:
 	text_far _FightingDojoHitmonchanPokeBallText

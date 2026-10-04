@@ -110,7 +110,7 @@ CinnabarGymOpenGateScript:
 	jr nz, .no_sound
 	call WaitForSoundToFinish
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 .no_sound
 	ld a, [wTrainerHeaderFlagBit]
@@ -207,7 +207,7 @@ CinnabarGymStartBattleScript:
 .not_blaine
 	ld [wCinnabarGymCurScript], a
 	ld [wCurMapScript], a
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 CinnabarGymBlaineText:
 	text_asm
@@ -217,14 +217,14 @@ CinnabarGymBlaineText:
 	jr nz, .afterBeat
 	call z, CinnabarGymReceiveTM38
 	call DisableWaitingAfterTextDisplay
-	jp TextScriptEnd
+	rst TextScriptEnd
 .afterBeat
 	ld hl, .PostBattleAdviceText
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 .beforeBeat
 	ld hl, .PreBattleText
-	call PrintText
+	rst _PrintText
 	ld hl, .ReceivedVolcanoBadgeText
 	ld de, .ReceivedVolcanoBadgeText
 	call SaveEndBattleTextPointers
@@ -266,15 +266,15 @@ CinnabarGymSuperNerd1:
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_0
 	jr nz, .defeated
 	ld hl, .BattleText
-	call PrintText
+	rst _PrintText
 	ld hl, .EndBattleText
 	ld de, .EndBattleText
 	call SaveEndBattleTextPointers
 	jp CinnabarGymStartBattleScript
 .defeated
 	ld hl, .AfterBattleText
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .BattleText:
 	text_far _CinnabarGymSuperNerd1BattleText
@@ -294,15 +294,15 @@ CinnabarGymSuperNerd2:
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_1
 	jr nz, .defeated
 	ld hl, .BattleText
-	call PrintText
+	rst _PrintText
 	ld hl, .EndBattleText
 	ld de, .EndBattleText
 	call SaveEndBattleTextPointers
 	jp CinnabarGymStartBattleScript
 .defeated
 	ld hl, .AfterBattleText
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .BattleText:
 	text_far _CinnabarGymSuperNerd2BattleText
@@ -322,15 +322,15 @@ CinnabarGymSuperNerd3:
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_2
 	jr nz, .defeated
 	ld hl, .BattleText
-	call PrintText
+	rst _PrintText
 	ld hl, .EndBattleText
 	ld de, .EndBattleText
 	call SaveEndBattleTextPointers
 	jp CinnabarGymStartBattleScript
 .defeated
 	ld hl, .AfterBattleText
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .BattleText:
 	text_far _CinnabarGymSuperNerd3BattleText
@@ -350,15 +350,15 @@ CinnabarGymSuperNerd4:
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_3
 	jr nz, .defeated
 	ld hl, .BattleText
-	call PrintText
+	rst _PrintText
 	ld hl, .EndBattleText
 	ld de, .EndBattleText
 	call SaveEndBattleTextPointers
 	jp CinnabarGymStartBattleScript
 .defeated
 	ld hl, .AfterBattleText
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .BattleText:
 	text_far _CinnabarGymSuperNerd4BattleText
@@ -378,15 +378,15 @@ CinnabarGymSuperNerd5:
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_4
 	jr nz, .defeated
 	ld hl, .BattleText
-	call PrintText
+	rst _PrintText
 	ld hl, .EndBattleText
 	ld de, .EndBattleText
 	call SaveEndBattleTextPointers
 	jp CinnabarGymStartBattleScript
 .defeated
 	ld hl, .AfterBattleText
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .BattleText:
 	text_far _CinnabarGymSuperNerd5BattleText
@@ -406,15 +406,15 @@ CinnabarGymSuperNerd6:
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_5
 	jr nz, .defeated
 	ld hl, .BattleText
-	call PrintText
+	rst _PrintText
 	ld hl, .EndBattleText
 	ld de, .EndBattleText
 	call SaveEndBattleTextPointers
 	jp CinnabarGymStartBattleScript
 .defeated
 	ld hl, .AfterBattleText
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .BattleText:
 	text_far _CinnabarGymSuperNerd6BattleText
@@ -434,15 +434,15 @@ CinnabarGymSuperNerd7:
 	CheckEvent EVENT_BEAT_CINNABAR_GYM_TRAINER_6
 	jr nz, .defeated
 	ld hl, .BattleText
-	call PrintText
+	rst _PrintText
 	ld hl, .EndBattleText
 	ld de, .EndBattleText
 	call SaveEndBattleTextPointers
 	jp CinnabarGymStartBattleScript
 .defeated
 	ld hl, .AfterBattleText
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .BattleText:
 	text_far _CinnabarGymSuperNerd7BattleText
@@ -465,8 +465,8 @@ CinnabarGymGymGuideText:
 .afterBeat
 	ld hl, .BeatBlaineText
 .done
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .ChampInMakingText:
 	text_far _CinnabarGymGymGuideChampInMakingText

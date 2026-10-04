@@ -259,8 +259,8 @@ ChampionsRoomRivalText:
 	jr z, .printText
 	ld hl, ChampionsRoomRivalAfterBattleText
 .printText
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .IntroText:
 	text_far _ChampionsRoomRivalIntroText
@@ -288,8 +288,8 @@ ChampionsRoomOakCongratulatesPlayerText:
 	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
+	rst _PrintText
+	rst TextScriptEnd
 
 .Text:
 	text_far _ChampionsRoomOakCongratulatesPlayerText

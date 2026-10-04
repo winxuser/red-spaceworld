@@ -34,7 +34,7 @@ VermilionGymSetDoorTile:
 	jr .replaceTile
 .doorsOpen
 	ld a, SFX_GO_INSIDE
-	call PlaySound
+	rst _PlaySound
 	ld a, $5 ; clear floor tile ID
 .replaceTile
 	ld [wNewTileBlockID], a
@@ -122,11 +122,11 @@ VermilionGymLTSurgeText:
 	jr .text_script_end
 .got_tm24_already
 	ld hl, .PostBattleAdviceText
-	call PrintText
+	rst _PrintText
 	jr .text_script_end
 .before_beat
 	ld hl, .PreBattleText
-	call PrintText
+	rst _PrintText
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
@@ -145,7 +145,7 @@ VermilionGymLTSurgeText:
 	ld [wVermilionGymCurScript], a
 	ld [wCurMapScript], a
 .text_script_end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .PreBattleText:
 	text_far _VermilionGymLTSurgePreBattleText
@@ -177,7 +177,7 @@ VermilionGymGentlemanText:
 	text_asm
 	ld hl, VermilionGymTrainerHeader0
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VermilionGymGentlemanBattleText:
 	text_far _VermilionGymGentlemanBattleText
@@ -195,7 +195,7 @@ VermilionGymSuperNerdText:
 	text_asm
 	ld hl, VermilionGymTrainerHeader1
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VermilionGymSuperNerdBattleText:
 	text_far _VermilionGymSuperNerdBattleText
@@ -213,7 +213,7 @@ VermilionGymSailorText:
 	text_asm
 	ld hl, VermilionGymTrainerHeader2
 	call TalkToTrainer
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 VermilionGymSailorBattleText:
 	text_far _VermilionGymSailorBattleText
@@ -233,13 +233,13 @@ VermilionGymGymGuideText:
 	bit BIT_THUNDERBADGE, a
 	jr nz, .got_thunderbadge
 	ld hl, .ChampInMakingText
-	call PrintText
+	rst _PrintText
 	jr .text_script_end
 .got_thunderbadge
 	ld hl, .BeatLTSurgeText
-	call PrintText
+	rst _PrintText
 .text_script_end
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 .ChampInMakingText:
 	text_far _VermilionGymGymGuideChampInMakingText

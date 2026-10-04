@@ -147,7 +147,7 @@ GainExperience:
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	ld hl, GainedText
-	call PrintText
+	rst _PrintText
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 IF GEN_2_GRAPHICS
@@ -229,7 +229,7 @@ ENDC
 	push hl
 	ld de, wBattleMonLevel
 	ld bc, 1 + NUM_STATS * 2 ; size of stats
-	call CopyData
+	rst _CopyData
 	pop hl
 	ld a, [wPlayerBattleStatus3]
 	bit TRANSFORMED, a
@@ -237,7 +237,7 @@ ENDC
 ; the mon is not transformed, so update the unmodified stats
 	ld de, wPlayerMonUnmodifiedLevel
 	ld bc, 1 + NUM_STATS * 2
-	call CopyData
+	rst _CopyData
 .recalcStatChanges
 	xor a ; battle mon
 	ld [wCalculateWhoseStats], a
@@ -249,7 +249,7 @@ ENDC
 	call SaveScreenTilesToBuffer1
 .printGrewLevelText
 	ld hl, GrewLevelText
-	call PrintText
+	rst _PrintText
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 IF GEN_2_GRAPHICS

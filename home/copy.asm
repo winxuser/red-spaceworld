@@ -6,7 +6,7 @@ FarCopyData::
 	ld a, [wBuffer]
 	ldh [hLoadedROMBank], a
 	ld [rROMB], a
-	call CopyData
+	rst _CopyData
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [rROMB], a

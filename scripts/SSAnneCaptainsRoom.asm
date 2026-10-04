@@ -20,27 +20,27 @@ SSAnneCaptainsRoomCaptainText:
 	CheckEvent EVENT_GOT_HM01
 	jr nz, .got_item
 	ld hl, SSAnneCaptainsRoomRubCaptainsBackText
-	call PrintText
+	rst _PrintText
 	ld hl, SSAnneCaptainsRoomCaptainIFeelMuchBetterText
-	call PrintText
+	rst _PrintText
 	lb bc, HM_CUT, 1
 	call GiveItem
 	jr nc, .bag_full
 	ld hl, SSAnneCaptainsRoomCaptainReceivedHM01Text
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_GOT_HM01
 	jr .done
 .bag_full
 	ld hl, SSAnneCaptainsRoomCaptainHM01NoRoomText
-	call PrintText
+	rst _PrintText
 	ld hl, wStatusFlags3
 	set BIT_NO_NPC_FACE_PLAYER, [hl]
 	jr .done
 .got_item
 	ld hl, SSAnneCaptainsRoomCaptainNotSickAnymoreText
-	call PrintText
+	rst _PrintText
 .done
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnneCaptainsRoomRubCaptainsBackText:
 	text_far _SSAnneCaptainsRoomRubCaptainsBackText
@@ -51,7 +51,7 @@ SSAnneCaptainsRoomRubCaptainsBackText:
 ;	jr nz, .not_audio_engine_3
 ;	ld a, SFX_STOP_ALL_MUSIC
 ;	ld [wNewSoundID], a
-;	call PlaySound
+;	rst _PlaySound
 ;	ld a, 0 ; BANK(Music_PkmnHealed)
 ;	ld [wAudioROMBank], a
 ;.not_audio_engine_3
@@ -69,7 +69,7 @@ SSAnneCaptainsRoomRubCaptainsBackText:
 	SetEvent EVENT_RUBBED_CAPTAINS_BACK
 	ld hl, wStatusFlags3
 	res BIT_NO_NPC_FACE_PLAYER, [hl]
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 SSAnneCaptainsRoomCaptainIFeelMuchBetterText:
 	text_far _SSAnneCaptainsRoomCaptainIFeelMuchBetterText
