@@ -434,6 +434,10 @@ BorubeaPicFront::     INCBIN "gfx/pokemon/borubea/front.pic"
 BorubeaPicBack::      INCBIN "gfx/pokemon/borubea/back.pic"
 DainabeaPicFront::    INCBIN "gfx/pokemon/dainabea/front.pic"
 DainabeaPicBack::     INCBIN "gfx/pokemon/dainabea/back.pic"
+
+
+SECTION "Pics 15", ROMX
+
 KurusuPicFront::      INCBIN "gfx/pokemon/kurusu/front.pic"
 KurusuPicBack::       INCBIN "gfx/pokemon/kurusu/back.pic"
 AkuaPicFront::        INCBIN "gfx/pokemon/akua/front.pic"
@@ -442,9 +446,6 @@ AkueriaPicFront::     INCBIN "gfx/pokemon/akueria/front.pic"
 AkueriaPicBack::      INCBIN "gfx/pokemon/akueria/back.pic"
 HohoPicFront::        INCBIN "gfx/pokemon/hoho/front.pic"
 HohoPicBack::         INCBIN "gfx/pokemon/hoho/back.pic"
-
-SECTION "Pics 15", ROMX
-
 BoboPicFront::        INCBIN "gfx/pokemon/bobo/front.pic"
 BoboPicBack::         INCBIN "gfx/pokemon/bobo/back.pic"
 PachimePicFront::     INCBIN "gfx/pokemon/pachime/front.pic"
@@ -495,16 +496,16 @@ KokumoPicFront::      INCBIN "gfx/pokemon/kokumo/front.pic"
 KokumoPicBack::       INCBIN "gfx/pokemon/kokumo/back.pic"
 TsuheddoPicFront::    INCBIN "gfx/pokemon/tsuheddo/front.pic"
 TsuheddoPicBack::     INCBIN "gfx/pokemon/tsuheddo/back.pic"
+
+
+SECTION "Pics 16", ROMX
+
 YoroidoriPicFront::   INCBIN "gfx/pokemon/yoroidori/front.pic"
 YoroidoriPicBack::    INCBIN "gfx/pokemon/yoroidori/back.pic"
 AnimonPicFront::      INCBIN "gfx/pokemon/animon/front.pic"
 AnimonPicBack::       INCBIN "gfx/pokemon/animon/back.pic"
 HinazuPicFront::      INCBIN "gfx/pokemon/hinazu/front.pic"
 HinazuPicBack::       INCBIN "gfx/pokemon/hinazu/back.pic"
-
-
-SECTION "Pics 16", ROMX
-
 SaniPicFront::        INCBIN "gfx/pokemon/sani/front.pic"
 SaniPicBack::         INCBIN "gfx/pokemon/sani/back.pic"
 PaonPicFront::        INCBIN "gfx/pokemon/paon/front.pic"
@@ -553,16 +554,16 @@ KapoeraPicFront::     INCBIN "gfx/pokemon/kapoera/front.pic"
 KapoeraPicBack::      INCBIN "gfx/pokemon/kapoera/back.pic"
 PudiPicFront::        INCBIN "gfx/pokemon/pudi/front.pic"
 PudiPicBack::         INCBIN "gfx/pokemon/pudi/back.pic"
+
+
+SECTION "Pics 17", ROMX
+
 HanekoPicFront::      INCBIN "gfx/pokemon/haneko/front.pic"
 HanekoPicBack::       INCBIN "gfx/pokemon/haneko/back.pic"
 PoponekoPicFront::    INCBIN "gfx/pokemon/poponeko/front.pic"
 PoponekoPicBack::     INCBIN "gfx/pokemon/poponeko/back.pic"
 WatanekoPicFront::    INCBIN "gfx/pokemon/wataneko/front.pic"
 WatanekoPicBack::     INCBIN "gfx/pokemon/wataneko/back.pic"
-
-
-SECTION "Pics 17", ROMX
-
 BaririnaPicFront::    INCBIN "gfx/pokemon/baririna/front.pic"
 BaririnaPicBack::     INCBIN "gfx/pokemon/baririna/back.pic"
 RippuPicFront::       INCBIN "gfx/pokemon/rippu/front.pic"
@@ -605,16 +606,16 @@ HerugaPicFront::      INCBIN "gfx/pokemon/heruga/front.pic"
 HerugaPicBack::       INCBIN "gfx/pokemon/heruga/back.pic"
 UrufumanPicFront::    INCBIN "gfx/pokemon/urufuman/front.pic"
 UrufumanPicBack::     INCBIN "gfx/pokemon/urufuman/back.pic"
+
+
+SECTION "Pics 18", ROMX
+
 WaurufuPicFront::     INCBIN "gfx/pokemon/waurufu/front.pic"
 WaurufuPicBack::      INCBIN "gfx/pokemon/waurufu/back.pic"
 Porigon2PicFront::    INCBIN "gfx/pokemon/porigon2/front.pic"
 Porigon2PicBack::     INCBIN "gfx/pokemon/porigon2/back.pic"
 NameruPicFront::      INCBIN "gfx/pokemon/nameru/front.pic"
 NameruPicBack::       INCBIN "gfx/pokemon/nameru/back.pic"
-
-
-SECTION "Pics 18", ROMX
-
 HaganeruPicFront::    INCBIN "gfx/pokemon/haganeru/front.pic"
 HaganeruPicBack::     INCBIN "gfx/pokemon/haganeru/back.pic"
 KingudoraPicFront::   INCBIN "gfx/pokemon/kingudora/front.pic"
