@@ -382,6 +382,8 @@ ENDU
 
 	ds 4
 
+hSkipOAMUpdates:: db
+
 hWhoseTurn:: db ; 0 on player's turn, 1 on enemy's turn
 
 hClearLetterPrintingDelayFlags:: db
