@@ -188,7 +188,56 @@ AIMoveChoiceModification2:
 ; encourages moves that are effective against the player's mon (even if non-damaging).
 ; discourage damaging moves that are ineffective or not very effective against the player's mon,
 ; unless there's no damaging move that deals at least neutral damage
+; - Heavily discourages immune moves (multiplier = 0)
+; - Discourages resisted / ineffective moves (multiplier < 1.0)
+; - Encourages super-effective moves (multiplier > 1.0)
 AIMoveChoiceModification3:
+	ld hl, wBuffer - 1
+	ld de, wEnemyMonMoves ; enemy moves
+	ld b, NUM_MOVES + 1
+.nextMove
+	dec b
+	ret z ; processed all 4 moves
+	inc hl
+	ld a, [de]
+	and a
+	ret z ; no more moves in move set
+	inc de
+	call ReadMove
+	; Ignore status moves (power 0) so status moves aren't penalized by type match
+	ld a, [wEnemyMovePower]
+	and a
+	jr z, .nextMove
+	push hl
+	push bc
+	push de
+	callfar AIGetTypeEffectiveness
+	pop de
+	pop bc
+	pop hl
+	ld a, [wTypeEffectiveness]
+	cp 10 ; neutral damage (1.0x = $10 / 16)
+	jr z, .nextMove ; neutral move, no modification needed
+	jr c, .lessEffective
+	dec [hl] ; encourage move (lower value in wBuffer = higher priority)
+	cp 20 ; 2.0x effectiveness
+	jr c, .nextMove
+	dec [hl] ; heavily encourage 4x super-effective moves (e.g. Rock vs Charizard)
+	jr .nextMove
+.lessEffective
+	and a ; is effectiveness 0 (immune)?
+	jr z, .immuneMove
+	inc [hl] ; slightly discourage resisted move (0.5x or 0.25x)
+	jr .nextMove
+.immuneMove
+	ld a, [hl]
+	add $20 ; heavily penalize immune moves (e.g., Thunderbolt vs Ground)
+	ld [hl], a
+	jr .nextMove
+
+; Encourages recovery moves only when enemy HP is below 50%.
+; Encourages high-critical-hit ratio moves (from HighCriticalMoves table).
+AIMoveChoiceModification4:
 	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
 	ld b, NUM_MOVES + 1
@@ -201,62 +250,43 @@ AIMoveChoiceModification3:
 	ret z ; no more moves in move set
 	inc de
 	call ReadMove
-	push hl
-	push bc
-	push de
-	callfar AIGetTypeEffectiveness
-	pop de
-	pop bc
-	pop hl
-	ld a, [wTypeEffectiveness]
-	cp $10
-	jr z, .nextMove
-	jr c, .notEffectiveMove
-	dec [hl] ; slightly encourage this move
-	jr .nextMove
-.notEffectiveMove ; discourages non-effective moves if better moves are available
-	push hl
-	push de
-	push bc
-	ld a, [wEnemyMoveType]
-	ld d, a
-	ld hl, wEnemyMonMoves  ; enemy moves
-	ld b, NUM_MOVES + 1
-	ld c, $0
-.loopMoves
-	dec b
-	jr z, .done
-	ld a, [hli]
-	and a
-	jr z, .done
-	call ReadMove
 	ld a, [wEnemyMoveEffect]
-	cp SUPER_FANG_EFFECT
-	jr z, .betterMoveFound ; Super Fang is considered to be a better move
-	cp SPECIAL_DAMAGE_EFFECT
-	jr z, .betterMoveFound ; any special damage moves are considered to be better moves
-	cp FLY_EFFECT
-	jr z, .betterMoveFound ; Fly is considered to be a better move
-	ld a, [wEnemyMoveType]
-	cp d
-	jr z, .loopMoves
-	ld a, [wEnemyMovePower]
-	and a
-	jr nz, .betterMoveFound ; damaging moves of a different type are considered to be better moves
-	jr .loopMoves
-.betterMoveFound
-	ld c, a
-.done
+	cp HEAL_EFFECT
+	jr z, .checkRecoveryHP
+	jr .checkHighCrit
+.checkRecoveryHP
+	; It's a recovery move. Check if enemy HP is below 50% (fraction value 2).
+	push hl
+	push bc
+	push de
+	ld a, 2 ; 1/2 HP threshold (50%)
+	call AICheckIfHPBelowFraction
+	pop de
+	pop bc
+	pop hl
+	jr c, .preferRecovery ; HP is < 50%, encourage healing!
+	; HP is >= 50%, heavily discourage wasting a turn healing
+	ld a, [hl]
+	add $15
+	ld [hl], a
+	jr .nextMove
+.preferRecovery
+	dec [hl] ; slightly encourage recovery when hurt
+	jr .nextMove
+.checkHighCrit
 	ld a, c
+	push hl
+	push de
+	push bc
+	ld hl, HighCriticalMoves
+	ld de, 1
+	call IsInArray
 	pop bc
 	pop de
 	pop hl
-	and a
-	jr z, .nextMove
-	inc [hl] ; slightly discourage this move
+	jr nc, .nextMove ; not in table, move on
+	dec [hl] ; slightly encourage high-crit moves
 	jr .nextMove
-AIMoveChoiceModification4:
-	ret
 
 ReadMove:
 	push hl
@@ -323,126 +353,138 @@ INCLUDE "data/trainers/ai_pointers.asm"
 
 JugglerAI:
 	cp 25 percent + 1
-	ret nc
-	jp AISwitchIfEnoughMons
+	jp c, AISwitchIfEnoughMons
+	ret
 
 BlackbeltAI:
 	cp 13 percent - 1
-	ret nc
-	jp AIUseXAttack
+	jp c, AIUseDireHit
+	ret
 
 GiovanniAI:
 	cp 25 percent + 1
-	ret nc
-	jp AIUseGuardSpec
+	jp c, AIUseGuardSpec
+	ret
 
 CooltrainerMAI:
 	cp 25 percent + 1
-	ret nc
-	jp AIUseXAttack
+	jp c, AIUseXSpecial
+	ld a, 5
+	call AICheckIfHPBelowFraction
+	jp c, AISwitchIfEnoughMons
+	ret
 
 CooltrainerFAI:
 	; The intended 25% chance to consider switching will not apply.
 	; Uncomment the line below to fix this.
 	cp 25 percent + 1
 	; ret nc
-	ld a, 10
-	call AICheckIfHPBelowFraction
-	jp c, AIUseHyperPotion
+	jp c, AIUseXAccuracy
 	ld a, 5
 	call AICheckIfHPBelowFraction
-	ret nc
-	jp AISwitchIfEnoughMons
+	jp c, AISwitchIfEnoughMons
+	ret
 
 BrockAI:
 ; if his active monster has a status condition, use a full heal
 	ld a, [wEnemyMonStatus]
 	and a
-	ret z
-	jp AIUseFullHeal
+	jp nz, AIUseFullHeal
+	ret
 
 MistyAI:
 	cp 25 percent + 1
-	ret nc
-	jp AIUseXDefend
+	jp c, AIUseXDefend
+	ret
 
 LtSurgeAI:
 	cp 25 percent + 1
-	ret nc
-	jp AIUseXSpeed
+	jp c, AIUseXSpeed
+	ret
 
 ErikaAI:
 	cp 50 percent + 1
-	ret nc
+	jr nc, .erikareturn
 	ld a, 10
 	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseSuperPotion
+	jp c, AIUseSuperPotion
+.erikareturn
+	ret
 
 KogaAI:
 	cp 25 percent + 1
-	ret nc
-	jp AIUseXAttack
+	jp c, AIUseXAttack
+	ret
 
 BlaineAI:
 	cp 25 percent + 1
-	ret nc
-	jp AIUseSuperPotion
+	jr nc, .blainereturn
+	ld a, 10
+	call AICheckIfHPBelowFraction
+	jp c, AIUseHyperPotion
+.blainereturn
+	ret
 
 SabrinaAI:
 	cp 25 percent + 1
-	ret nc
+	jr nc, .sabrinareturn
 	ld a, 10
 	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseHyperPotion
+	jp c, AIUseHyperPotion
+.sabrinareturn
+	ret
 
 Rival2AI:
 	cp 13 percent - 1
-	ret nc
+	jr nc, .rival2return
 	ld a, 5
 	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUsePotion
+	jp c, AIUsePotion
+.rival2return
+	ret
 
 Rival3AI:
 	cp 13 percent - 1
-	ret nc
+	jr nc, .rival3return
 	ld a, 5
 	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseFullRestore
+	jp c, AIUseFullRestore
+.rival3return
+	ret
 
 LoreleiAI:
 	cp 50 percent + 1
-	ret nc
+	jr nc, .loreleireturn
 	ld a, 5
 	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseSuperPotion
+	jp c, AIUseSuperPotion
+.loreleireturn
+	ret
 
 BrunoAI:
 	cp 25 percent + 1
-	ret nc
-	jp AIUseXDefend
+	jp c, AIUseXDefend
+	ret
 
 AgathaAI:
 	cp 8 percent
 	jp c, AISwitchIfEnoughMons
 	cp 50 percent + 1
-	ret nc
+	jr nc, .agathareturn
 	ld a, 4
 	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseSuperPotion
+	jp c, AIUseSuperPotion
+.agathareturn
+	ret
 
 LanceAI:
 	cp 50 percent + 1
-	ret nc
+	jr nc, .lancereturn
 	ld a, 5
 	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseHyperPotion
+	jp c, AIUseHyperPotion
+.lancereturn
+	ret
 
 GenericAI:
 	and a ; clear carry
