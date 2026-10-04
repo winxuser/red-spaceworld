@@ -203,20 +203,20 @@ HandlePokedexListMenu:
 	call PlaceString
 ; find the highest pokedex number among the pokemon the player has seen
 	ld hl, wPokedexSeenEnd - 1
-	ld b, (wPokedexSeenEnd - wPokedexSeen) * 8 + 1
+	ld bc, (wPokedexSeenEnd - wPokedexSeen) * 8 + 1
 .maxSeenPokemonLoop
 	ld a, [hld]
-	ld c, 8
+	ld d, 8
 .maxSeenPokemonInnerLoop
-	dec b
+	dec bc
 	sla a
 	jr c, .storeMaxSeenPokemon
-	dec c
+	dec d
 	jr nz, .maxSeenPokemonInnerLoop
 	jr .maxSeenPokemonLoop
 
 .storeMaxSeenPokemon
-	ld a, b
+	ld a, c
 	ld [wDexMaxSeenMon], a
 .loop
 	xor a

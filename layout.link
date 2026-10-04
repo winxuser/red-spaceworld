@@ -145,7 +145,6 @@ ROMX $1C
 	"bank1C"
 	org $4a69
 	"BattleTransition_BlackScreen"
-	org $5fb6
 	"InitPartyMenuBlkPacket"
 	org $6075
 	"PrepareSuperNintendoVRAMTransfer"
@@ -228,7 +227,9 @@ ROMX $40
 ROMX $41
 	"Pics 16"
 ROMX $42
+	"Pics 17"
 ROMX $43
+	"Pics 18"
 ROMX $44
 ROMX $45
 ROMX $46

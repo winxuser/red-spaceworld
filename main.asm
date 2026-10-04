@@ -199,20 +199,15 @@ INCLUDE "engine/slots/game_corner_slots.asm"
 SECTION "Battle Engine 7", ROMX
 
 INCLUDE "data/moves/moves.asm"
-INCLUDE "data/pokemon/base_stats.asm"
-INCLUDE "data/pokemon/cries.asm"
-INCLUDE "engine/battle/unused_stats_functions.asm"
 INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
 INCLUDE "engine/battle/trainer_ai.asm"
-INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
 INCLUDE "engine/pokemon/evos_moves.asm"
-INCLUDE "color/draw_hud_pokeball_gfx.asm"
+
 
 
 SECTION "Battle Core", ROMX
 
 INCLUDE "engine/battle/core.asm"
-;INCLUDE "engine/battle/effects.asm"
 
 
 SECTION "bank10", ROMX
@@ -251,6 +246,7 @@ SECTION "Battle Engine 8", ROMX
 
 INCLUDE "engine/battle/init_battle_variables.asm"
 INCLUDE "engine/battle/move_effects/paralyze.asm"
+
 
 
 SECTION "Hidden Events 2", ROMX
@@ -402,3 +398,11 @@ SECTION "bank40", ROMX
 INCLUDE "engine/overworld/elevator.asm"
 INCLUDE "engine/movie/hall_of_fame.asm"
 INCLUDE "gfx/trade.asm"
+INCLUDE "engine/battle/unused_stats_functions.asm"
+INCLUDE "color/draw_hud_pokeball_gfx.asm"
+INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
+
+
+SECTION "Base Stats", ROMX
+
+INCLUDE "data/pokemon/base_stats.asm"

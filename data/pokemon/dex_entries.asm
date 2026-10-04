@@ -203,6 +203,57 @@ PokedexEntryPointers:
 	dw BerurunDexEntry
 	dw NyorotonoDexEntry
 	dw YadokinguDexEntry
+	dw AnnonDexEntry
+	dw RedibaDexEntry
+	dw MitsuboshiDexEntry
+	dw PuchikonDexEntry
+	dw EfiDexEntry
+	dw BurakkiDexEntry
+	dw TabanDexEntry
+	dw BetobebiDexEntry
+	dw TeppouoDexEntry
+	dw OkutanDexEntry
+	dw GonguDexEntry
+	dw KapoeraDexEntry
+	dw PudiDexEntry
+	dw HanekoDexEntry
+	dw PoponekoDexEntry
+	dw WatanekoDexEntry
+	dw BaririnaDexEntry
+	dw RippuDexEntry
+	dw ErebebiDexEntry
+	dw BubyiDexEntry
+	dw KireihanaDexEntry
+	dw TsubomittoDexEntry
+	dw MirutankuDexEntry
+	dw BomushikaDexEntry
+	dw GifutoDexEntry
+	dw KotoraDexEntry
+	dw RaitoraDexEntry
+	dw MadamuDexEntry
+	dw NorowaraDexEntry
+	dw KyonpanDexEntry
+	dw YamikarasuDexEntry
+	dw HappiDexEntry
+	dw ShizasuDexEntry
+	dw PurakkusuDexEntry
+	dw DebiruDexEntry
+	dw HerugaDexEntry
+	dw UrufumanDexEntry
+	dw WaurufuDexEntry
+	dw Porigon2DexEntry
+	dw NameruDexEntry
+	dw HaganeruDexEntry
+	dw KingudoraDexEntry
+	dw RaiDexEntry
+	dw EnDexEntry
+	dw SuiDexEntry
+	dw NyuraDexEntry
+	dw HououDexEntry
+	dw TogepiDexEntry
+	dw BuluDexEntry
+	dw TeiruDexEntry
+	dw RiifiDexEntry
 	assert_table_length NUM_POKEMON_INDEXES
 
 ; string: species name
@@ -1563,54 +1614,411 @@ TsuinzuDexEntry::
 
 KirinrikiDexEntry::
 	db "LONG NECK@"
-	db 1, 5
+	db 1,5
 	dw 415
 	text_far _KirinrikiDexEntry
 	text_end
 
 PeintaDexEntry::
 	db "PAINTER@"
-	db 1, 2
+	db 1,2
 	dw 580
 	text_far _PeintaDexEntry
 	text_end
 
 KonyaDexEntry::
 	db "KITTEN@"
-	db 0, 3 ; height: 0.3 m
+	db 0,3 ; height: 0.3 m
 	dw 20 ; weight: 2.0 kg
 	text_far _KonyaDexEntry
 	text_end
 
 RinrinDexEntry::
 	db "BELL CAT@"
-	db 0, 6 ; height: 0.6 m
+	db 0,6 ; height: 0.6 m
 	dw 120 ; weight: 12.0 kg
 	text_far _RinrinDexEntry
 	text_end
 
 BerurunDexEntry::
 	db "BELL CAT@"
-	db 1, 2 ; height: 1.2 m
-	dw 350 ; weight: 35.0 kg
+	db 3, 11 ; height: 3 feet, 11 inches (1.2 m)
+	dw 772 ; weight: 77.2 lbs (35.0 kg)
 	text_far _BerurunDexEntry
 	text_end
 
 NyorotonoDexEntry::
 	db "FROG@"
-	db 1, 1 ; height: 1.1 m
-	dw 339 ; weight: 33.9 kg
+	db 3, 7 ; height: 3 feet, 7 inches (1.1 m)
+	dw 747 ; weight: 74.7 lbs (33.9 kg)
 	text_far _NyorotonoDexEntry
 	text_end
 
 YadokinguDexEntry::
 	db "ROYAL@"
-	db 2, 0 ; height: 2.0 m
-	dw 795 ; weight: 79.5 kg
+	db 6, 7 ; height: 6 feet, 7 inches (2.0 m)
+	dw 1753 ; weight: 175.3 lbs (79.5 kg)
 	text_far _YadokinguDexEntry
 	text_end
 
-MissingNoDexEntry:
+AnnonDexEntry::
+	db "SYMBOL@"
+	db 1, 8 ; height: 1 foot, 8 inches (0.5 m)
+	dw 110 ; weight: 11.0 lbs (5.0 kg)
+	text_far _AnnonDexEntry
+	text_end
+
+RedibaDexEntry::
+	db "FIVE STAR@"
+	db 3, 3 ; height: 3 feet, 3 inches (1.0 m)
+	dw 238 ; weight: 23.8 lbs (10.8 kg)
+	text_far _RedibaDexEntry
+	text_end
+
+MitsuboshiDexEntry::
+	db "FIVE STAR@"
+	db 4, 7 ; height: 4 feet, 7 inches (1.4 m)
+	dw 772 ; weight: 77.2 lbs (35.0 kg)
+	text_far _MitsuboshiDexEntry
+	text_end
+
+PuchikonDexEntry::
+	db "FOAL@"
+	db 2, 4 ; height: 2 feet, 4 inches (0.7 m)
+	dw 331 ; weight: 33.1 lbs (15.0 kg)
+	text_far _PuchikonDexEntry
+	text_end
+
+EfiDexEntry::
+	db "SUN@"
+	db 2, 11 ; height: 2 feet, 11 inches (0.9 m)
+	dw 584 ; weight: 58.4 lbs (26.5 kg)
+	text_far _EfiDexEntry
+	text_end
+
+BurakkiDexEntry::
+	db "MOONLIGHT@"
+	db 3,3 ; height: 3 feet, 3 inches (1.0 m)
+	dw 595 ; weight: 59.5 lbs (27.0 kg)
+	text_far _BurakkiDexEntry
+	text_end
+
+TabanDexEntry::
+	db "SPIRALSHELL@"
+	db 3,3 ; height: 3 feet, 3 inches (1.0 m)
+	dw 882 ; weight: 88.2 lbs (40.0 kg)
+	text_far _TabanDexEntry
+	text_end
+
+BetobebiDexEntry::
+	db "SLUDGE@"
+	db 1,4 ; height: 1 foot, 4 inches (0.4 m)
+	dw 331 ; weight: 33.1 lbs (15.0 kg)
+	text_far _BetobebiDexEntry
+	text_end
+
+TeppouoDexEntry::
+	db "JET@"
+	db 2,0 ; height: 2 feet, 0 inches (0.6 m)
+	dw 265 ; weight: 26.5 lbs (12.0 kg)
+	text_far _TeppouoDexEntry
+	text_end
+
+OkutanDexEntry::
+	db "JET@"
+	db 2,11 ; height: 2 feet, 11 inches (0.9 m)
+	dw 628 ; weight: 62.8 lbs (28.5 kg)
+	text_far _OkutanDexEntry
+	text_end
+
+GonguDexEntry::
+	db "SCUFFLE@"
+	db 2,4 ; height: 2 feet, 4 inches (0.7 m)
+	dw 463 ; weight: 46.3 lbs (21.0 kg)
+	text_far _GonguDexEntry
+	text_end
+
+KapoeraDexEntry::
+	db "SPINNING@"
+	db 4,7 ; height: 4 feet, 7 inches (1.4 m)
+	dw 1058 ; weight: 105.8 lbs (48.0 kg)
+	text_far _KapoeraDexEntry
+	text_end
+
+PudiDexEntry::
+	db "PUPPY@"
+	db 1,4 ; height: 1 foot, 4 inches (0.4 m)
+	dw 88 ; weight: 8.8 lbs (4.0 kg)
+	text_far _PudiDexEntry
+	text_end
+
+HanekoDexEntry::
+	db "COTTONWEED@"
+	db 1, 4 ; height: 1 foot, 4 inches (0.4 m)
+	dw 50 ; weight: 5.0 lbs (2.3 kg)
+	text_far _HanekoDexEntry
+	text_end
+
+PoponekoDexEntry::
+	db "COTTONWEED@"
+	db 2, 0 ; height: 2 feet, 0 inches (0.6 m)
+	dw 220 ; weight: 22.0 lbs (10.0 kg)
+	text_far _PoponekoDexEntry
+	text_end
+
+WatanekoDexEntry::
+	db "COTTONWEED@"
+	db 2, 7 ; height: 2 feet, 7 inches (0.8 m)
+	dw 66 ; weight: 6.6 lbs (3.0 kg)
+	text_far _WatanekoDexEntry
+	text_end
+
+BaririnaDexEntry::
+	db "MIME@"
+	db 2, 0 ; height: 2 feet, 0 inches (0.6 m)
+	dw 287 ; weight: 28.7 lbs (13.0 kg)
+	text_far _BaririnaDexEntry
+	text_end
+
+RippuDexEntry::
+	db "KISS@"
+	db 1, 4 ; height: 1 foot, 4 inches (0.4 m)
+	dw 132 ; weight: 13.2 lbs (6.0 kg)
+	text_far _RippuDexEntry
+	text_end
+
+ErebebiDexEntry::
+	db "ELECTRIC@"
+	db 2, 0 ; height: 2 feet, 0 inches (0.6 m)
+	dw 518 ; weight: 51.8 lbs (23.5 kg)
+	text_far _ErebebiDexEntry
+	text_end
+
+BubyiDexEntry::
+	db "LIVECOAL@"
+	db 2, 4 ; height: 2 feet, 4 inches (0.7 m)
+	dw 472 ; weight: 47.2 lbs (21.4 kg)
+	text_far _BubyiDexEntry
+	text_end
+
+KireihanaDexEntry::
+	db "FLOWER@"
+	db 1, 4 ; height: 1 foot, 4 inches (0.4 m)
+	dw 128 ; weight: 12.8 lbs (5.8 kg)
+	text_far _KireihanaDexEntry
+	text_end
+
+TsubomittoDexEntry::
+	db "FLYCATCHER@"
+	db 5, 7 ; height: 5 feet, 7 inches (1.7 m)
+	dw 342 ; weight: 34.2 lbs (15.5 kg)
+	text_far _TsubomittoDexEntry
+	text_end
+
+MirutankuDexEntry::
+	db "MILK COW@"
+	db 3, 11 ; height: 3 feet, 11 inches (1.2 m)
+	dw 1653 ; weight: 165.3 lbs (75.0 kg)
+	text_far _MirutankuDexEntry
+	text_end
+
+BomushikaDexEntry::
+	db "BOMB SEAL@"
+	db 3, 7 ; height: 3 feet, 7 inches (1.1 m)
+	dw 948 ; weight: 94.8 lbs (43.0 kg)
+	text_far _BomushikaDexEntry
+	text_end
+
+GifutoDexEntry::
+	db "DELIVERY@"
+	db 2, 11 ; height: 2 feet, 11 inches (0.9 m)
+	dw 352 ; weight: 35.2 lbs (16.0 kg)
+	text_far _GifutoDexEntry
+	text_end
+
+KotoraDexEntry::
+	db "TIGER CUB@"
+	db 2, 0 ; height: 2 feet, 0 inches (0.6 m)
+	dw 331 ; weight: 33.1 lbs (15.0 kg)
+	text_far _KotoraDexEntry
+	text_end
+
+RaitoraDexEntry::
+	db "TIGER@"
+	db 4, 3 ; height: 4 feet, 3 inches (1.3 m)
+	dw 915 ; weight: 91.5 lbs (41.5 kg)
+	text_far _RaitoraDexEntry
+	text_end
+
+MadamuDexEntry::
+	db "WILD DUCK@"
+	db 2, 7 ; height: 2 feet, 7 inches (0.8 m)
+	dw 280 ; weight: 28.0 lbs (12.7 kg)
+	text_far _MadamuDexEntry
+	text_end
+
+NorowaraDexEntry::
+	db "VOODOODOLL@"
+	db 1, 8 ; height: 1 foot, 8 inches (0.5 m)
+	dw 88 ; weight: 8.8 lbs (4.0 kg)
+	text_far _NorowaraDexEntry
+	text_end
+
+KyonpanDexEntry::
+	db "ZOMBIEDOLL@"
+	db 3, 3 ; height: 3 feet, 3 inches (1.0 m)
+	dw 287 ; weight: 28.7 lbs (13.0 kg)
+	text_far _KyonpanDexEntry
+	text_end
+
+YamikarasuDexEntry::
+	db "DARK@"
+	db 1, 8 ; height: 1 foot, 8 inches (0.5 m)
+	dw 46 ; weight: 4.6 lbs (2.1 kg)
+	text_far _YamikarasuDexEntry
+	text_end
+
+HappiDexEntry::
+	db "HAPPINESS@"
+	db 2, 0 ; height: 2 feet, 0 inches (0.6 m)
+	dw 340 ; weight: 34.0 lbs (15.4 kg)
+	text_far _HappiDexEntry
+	text_end
+
+ShizasuDexEntry::
+	db "PINCER@"
+	db 5, 11 ; height: 5 feet, 11 inches (1.8 m)
+	dw 2600 ; weight: 260.0 lbs (118.0 kg)
+	text_far _ShizasuDexEntry
+	text_end
+
+PurakkusuDexEntry::
+	db "STAGBEETLE@"
+	db 4, 11 ; height: 4 feet, 11 inches (1.5 m)
+	dw 1200 ; weight: 120.0 lbs (54.4 kg)
+	text_far _PurakkusuDexEntry
+	text_end
+
+DebiruDexEntry::
+	db "DARK@"
+	db 2, 0 ; height: 2 feet, 0 inches (0.6 m)
+	dw 240 ; weight: 24.0 lbs (10.8 kg)
+	text_far _DebiruDexEntry
+	text_end
+
+HerugaDexEntry::
+	db "DARK@"
+	db 4, 7 ; height: 4 feet, 7 inches (1.4 m)
+	dw 770 ; weight: 77.0 lbs (35.0 kg)
+	text_far _HerugaDexEntry
+	text_end
+
+UrufumanDexEntry::
+	db "WOLF-MAN@"
+	db 4, 7 ; height: 4 feet, 7 inches (1.4 m)
+	dw 950 ; weight: 95.0 lbs (43.0 kg)
+	text_far _UrufumanDexEntry
+	text_end
+
+WaurufuDexEntry::
+	db "WEREWOLF@"
+	db 5, 7 ; height: 5 feet, 7 inches (1.7 m)
+	dw 1450 ; weight: 145.0 lbs (65.8 kg)
+	text_far _WaurufuDexEntry
+	text_end
+
+Porigon2DexEntry::
+	db "VIRTUAL@"
+	db 2, 0 ; height: 2 feet, 0 inches (0.6 m)
+	dw 720 ; weight: 72.0 lbs (32.5 kg)
+	text_far _Porigon2DexEntry
+	text_end
+
+NameruDexEntry::
+	db "LICKING@"
+	db 5, 7 ; height: 5 feet, 7 inches (1.7 m)
+	dw 3000 ; weight: 300.0 lbs (136.1 kg)
+	text_far _NameruDexEntry
+	text_end
+
+HaganeruDexEntry::
+	db "IRON SNAKE@"
+	db 30, 2 ; height: 30 feet, 2 inches (9.2 m)
+	dw 8820 ; weight: 882.0 lbs (400.0 kg)
+	text_far _HaganeruDexEntry
+	text_end
+
+KingudoraDexEntry::
+	db "DRAGON@"
+	db 5, 11 ; height: 5 feet, 11 inches (1.8 m)
+	dw 3350 ; weight: 335.0 lbs (152.0 kg)
+	text_far _KingudoraDexEntry
+	text_end
+
+RaiDexEntry::
+	db "THUNDER@"
+	db 6, 3 ; height: 6 feet, 3 inches (1.9 m)
+	dw 3920 ; weight: 392.0 lbs (178.0 kg)
+	text_far _RaiDexEntry
+	text_end
+
+EnDexEntry::
+	db "VOLCANO@"
+	db 6, 11 ; height: 6 feet, 11 inches (2.1 m)
+	dw 4360 ; weight: 436.0 lbs (198.0 kg)
+	text_far _EnDexEntry
+	text_end
+
+SuiDexEntry::
+	db "AURORA@"
+	db 6, 7 ; height: 6 feet, 7 inches (2.0 m)
+	dw 4120 ; weight: 412.0 lbs (187.0 kg)
+	text_far _SuiDexEntry
+	text_end
+
+NyuraDexEntry::
+	db "SHARP CLAW@"
+	db 2, 11 ; height: 2 feet, 11 inches (0.9 m)
+	dw 620 ; weight: 62.0 lbs (28.0 kg)
+	text_far _NyuraDexEntry
+	text_end
+
+HououDexEntry::
+	db "RAINBOW@"
+	db 12, 6 ; height: 12 feet, 6 inches (3.8 m)
+	dw 4390 ; weight: 439.0 lbs (199.0 kg)
+	text_far _HououDexEntry
+	text_end
+
+TogepiDexEntry::
+	db "SPIKE BALL@"
+	db 1, 0 ; height: 1 foot, 0 inches (0.3 m)
+	dw 30 ; weight: 3.0 lbs (1.5 kg)
+	text_far _TogepiDexEntry
+	text_end
+
+BuluDexEntry::
+	db "LITTLE DOG@"
+	db 2, 0 ; height: 2 feet, 0 inches (0.6 m)
+	dw 170 ; weight: 17.0 lbs (7.8 kg)
+	text_far _BuluDexEntry
+	text_end
+
+TeiruDexEntry::
+	db "LONG TAIL@"
+	db 2, 8 ; height: 2 feet, 8 inches (0.8 m)
+	dw 250 ; weight: 25.0 lbs (11.5 kg)
+	text_far _TeiruDexEntry
+	text_end
+
+RiifiDexEntry::
+	db "VERDANT@"
+	db 3, 3 ; height: 3 feet, 3 inches (1.0 m)
+	dw 520 ; weight: 52.0 lbs (23.5 kg)
+	text_far _RiifiDexEntry
+	text_end
+
+MissingNoDexEntry::
 	db "???@"
 	db 10 ; 1.0 m
 	dw 100 ; 10.0 kg

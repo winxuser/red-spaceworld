@@ -270,3 +270,514 @@ _YadokinguDexEntry::
 	next "that makes it"
 	next "much smarter"
 	dex
+
+_AnnonDexEntry::
+	text "Their shapes look"
+	next "like characters"
+	next "on old tablets."
+
+	page "It is said that"
+	next "they possess many"
+	next "odd abilities"
+	dex
+
+_RedibaDexEntry::
+	text "It is timid and"
+	next "prefers to move"
+	next "in large swarms."
+
+	page "When it is cold,"
+	next "they gather to"
+	next "keep each other"
+
+	page "nice and warm"
+	dex
+
+_MitsuboshiDexEntry::
+	text "When the stars"
+	next "flicker in the"
+	next "night sky, it"
+
+	page "flutters about,"
+	next "scattering a fine"
+	next "glowing powder"
+	dex
+
+_PuchikonDexEntry::
+	text "Ever full of"
+	next "energy, its small"
+	next "hooves gallop as"
+
+	page "its tiny mane"
+	next "flares brightly"
+	next "in excitement"
+	dex
+
+_EfiDexEntry::
+	text "Its fine fur can"
+	next "sense air currents"
+	next "to instantly predict"
+
+	page "its opponent's"
+	next "next movement in"
+	next "battle"
+	dex
+
+_BurakkiDexEntry::
+	text "When darkness"
+	next "falls, the rings"
+	next "on its body glow"
+
+	page "faintly, striking"
+	next "fear into anyone"
+	next "nearby"
+	dex
+
+_TabanDexEntry::
+	text "Its sharp, conical"
+	next "shell protects its"
+	next "vulnerable body."
+
+	page "It clamps on to"
+	next "prey with immense"
+	next "biting power"
+	dex
+
+_BetobebiDexEntry::
+	text "It emerges from"
+	next "polluted mud."
+	next "Though tiny, its"
+
+	page "stench is strong"
+	next "enough to cause"
+	next "fainting"
+	dex
+
+_TeppouoDexEntry::
+	text "It squirts water"
+	next "from its mouth with"
+	next "incredible force."
+
+	page "It can accurately"
+	next "shoot down flying"
+	next "bugs from afar"
+	dex
+
+_OkutanDexEntry::
+	text "Its hard skull"
+	next "is like armor."
+	next "It traps prey in"
+
+	page "its suction cups"
+	next "and smashes them"
+	next "with its head"
+	dex
+
+_GonguDexEntry::
+	text "It trains every"
+	next "day to grow"
+	next "stronger. Even if"
+
+	page "it loses, it"
+	next "gets right back"
+	next "up to fight"
+	dex
+
+_KapoeraDexEntry::
+	text "It spins on its"
+	next "head while kicking"
+	next "continuously."
+
+	page "The centrifugal"
+	next "force boosts its"
+	next "attack power"
+	dex
+
+_PudiDexEntry::
+	text "It has a friendly"
+	next "nature and loves"
+	next "people, but it"
+
+	page "spits tiny flames"
+	next "when startled or"
+	next "excited"
+	dex
+
+_HanekoDexEntry::
+	text "It floats gently"
+	next "on the breeze."
+	next "Even a light wind"
+
+	page "can carry it far"
+	next "away to distant"
+	next "places"
+	dex
+
+_PoponekoDexEntry::
+	text "The flower on its"
+	next "head blooms when"
+	next "it gets warm."
+
+	page "It floats higher"
+	next "into the sky to"
+	next "soak up sunlight"
+	dex
+
+_WatanekoDexEntry::
+	text "Riding warm seasonal"
+	next "winds, it drifts"
+	next "across the ocean to"
+
+	page "spread its fluff"
+	next "all over the"
+	next "entire world"
+	dex
+
+_BaririnaDexEntry::
+	text "It mimics every"
+	next "movement of its"
+	next "foe to confuse"
+
+	page "them. It practices"
+	next "pantomime all"
+	next "day long"
+	dex
+
+_RippuDexEntry::
+	text "Its lips are the"
+	next "most sensitive"
+	next "part of its body."
+
+	page "It uses them to"
+	next "examine objects"
+	next "it encounters"
+	dex
+
+_ErebebiDexEntry::
+	text "It rotates its"
+	next "arms to build up"
+	next "electricity."
+
+	page "It easily tires,"
+	next "so it cannot store"
+	next "much energy"
+	dex
+
+_BubyiDexEntry::
+	text "Each time it breathes"
+	next "embers spout from"
+	next "its mouth and nose."
+
+	page "Its body heat"
+	next "can exceed 1,100"
+	next "degrees"
+	dex
+
+_KireihanaDexEntry::
+	text "When it dances,"
+	next "its petals rub"
+	next "together to make"
+
+	page "a pleasant and"
+	next "soothing ringing"
+	next "sound"
+	dex
+
+_TsubomittoDexEntry::
+	text "It lures prey with"
+	next "a honey aroma"
+	next "that smells like"
+
+	page "sweet nectar, then"
+	next "dissolves them in"
+	next "harsh acids"
+	dex
+
+_MirutankuDexEntry::
+	text "Its sweet milk is"
+	next "full of nutrition."
+	next "Drinking it every"
+
+	page "day builds strong"
+	next "bones and cures"
+	next "sickness"
+	dex
+
+_BomushikaDexEntry::
+	text "The ball on its tail"
+	next "is filled with gas."
+	next "It ignites it to"
+
+	page "repel predators"
+	next "and launch heavy"
+	next "attacks"
+	dex
+
+_GifutoDexEntry::
+	text "It carries food"
+	next "bundled up in its"
+	next "tail all day long."
+
+	page "It shares its food"
+	next "with people lost"
+	next "in the snow"
+	dex
+
+_KotoraDexEntry::
+	text "It stores electric"
+	next "charge inside its"
+	next "round body."
+
+	page "When excited, it"
+	next "discharges spark"
+	next "from its fur"
+	dex
+
+_RaitoraDexEntry::
+	text "It paces around"
+	next "its territory to"
+	next "ward off rivals."
+
+	page "The stripes on its"
+	next "body crackle with"
+	next "electric current"
+	dex
+
+_MadamuDexEntry::
+	text "It wields its leek"
+	next "like a master"
+	next "swordsman, able"
+
+	page "to cut down thick"
+	next "trees with a"
+	next "single stroke"
+	dex
+
+_NorowaraDexEntry::
+	text "It sticks pins into"
+	next "its own body to"
+	next "inflict pain on"
+
+	page "anyone who dares"
+	next "to cross its"
+	next "master"
+	dex
+
+_KyonpanDexEntry::
+	text "It hops around in"
+	next "the dark with a"
+	next "talisman on its"
+
+	page "forehead to seal"
+	next "away its wicked"
+	next "curse"
+	dex
+
+_YamikarasuDexEntry::
+	text "It hides in dark"
+	next "places. It is said"
+	next "that seeing one"
+
+	page "brings bad luck to"
+	next "anyone who locks"
+	next "eyes with it"
+	dex
+
+_HappiDexEntry::
+	text "It carries a small"
+	next "egg-shaped stone."
+	next "It bounces around"
+
+	page "happily when it"
+	next "feels safe with"
+	next "its trainer"
+	dex
+
+_ShizasuDexEntry::
+	text "It swings its body"
+	next "to strike with its"
+	next "heavy pincers."
+
+	page "Steel armor keeps"
+	next "it safe from heavy"
+	next "attacks"
+	dex
+
+_PurakkusuDexEntry::
+	text "It pinches its"
+	next "opponents and"
+	next "flips them over."
+
+	page "Its elongated"
+	next "horns contain"
+	next "steel components"
+	dex
+
+_DebiruDexEntry::
+	text "It uses distinct"
+	next "cries to convey"
+	next "its location to"
+
+	page "pack mates when"
+	next "hunting down"
+	next "their prey"
+	dex
+
+_HerugaDexEntry::
+	text "If you are burned"
+	next "by the flames it"
+	next "shoots from its"
+
+	page "mouth, the pain"
+	next "will never go"
+	next "away"
+	dex
+
+_UrufumanDexEntry::
+	text "It stands up on"
+	next "its hind legs and"
+	next "howls when the"
+
+	page "moon is high in"
+	next "the night sky"
+	dex
+
+_WaurufuDexEntry::
+	text "Its long claws can"
+	next "slash through"
+	next "solid rock."
+
+	page "It becomes ferocious"
+	next "under the light of"
+	next "a full moon"
+	dex
+
+_Porigon2DexEntry::
+	text "This upgraded"
+	next "version of Porygon"
+	next "was engineered"
+
+	page "with artificial"
+	next "intelligence to"
+	next "learn new things"
+	dex
+
+_NameruDexEntry::
+	text "Its long tongue is"
+	next "coated in a sticky"
+	next "saliva that can"
+
+	page "numb anything it"
+	next "happens to wrap"
+	next "around"
+	dex
+
+_HaganeruDexEntry::
+	text "It tunnels through"
+	next "the ground at a"
+	next "high speed using"
+
+	page "its hard steel"
+	next "body to crush"
+	next "obstacles"
+	dex
+
+_KingudoraDexEntry::
+	text "It sleeps in the"
+	next "deepest parts of"
+	next "the ocean."
+
+	page "When it yawns, it"
+	next "creates whirlpools"
+	next "that swallow ships"
+	dex
+
+_RaiDexEntry::
+	text "It embodies the"
+	next "speed of lightning."
+	next "The roars it sends"
+
+	page "out send shock"
+	next "waves reverberating"
+	next "through the air"
+	dex
+
+_EnDexEntry::
+	text "Volcanoes erupt"
+	next "when it roars."
+	next "It races across"
+
+	page "the land with"
+	next "flames spouting"
+	next "from its back"
+	dex
+
+_SuiDexEntry::
+	text "Said to be the"
+	next "reincarnation of"
+	next "north winds."
+
+	page "It purifies dirty"
+	next "water instantly"
+	next "as it steps in"
+	dex
+
+_NyuraDexEntry::
+	text "Its sharp claws are"
+	next "hidden in its paws."
+	next "It sneaks up on"
+
+	page "prey under the"
+	next "cover of darkness"
+	next "in total silence"
+	dex
+
+_HououDexEntry::
+	text "Its feathers are"
+	next "said to glow in"
+	next "seven colors."
+
+	page "It is said that"
+	next "anyone who sees"
+	next "it will find joy"
+	dex
+
+_TogepiDexEntry::
+	text "It is said to be"
+	next "filled with joy"
+	next "and good luck."
+
+	page "It shares its"
+	next "happiness with"
+	next "those around it"
+	dex
+
+_BuluDexEntry::
+	text "Although its face"
+	next "looks frightening,"
+	next "it is actually"
+
+	page "timid and affectionate"
+	next "toward those it"
+	next "trusts"
+	dex
+
+_TeiruDexEntry::
+	text "Its tail is ended"
+	next "with a hand-like"
+	next "appendage that"
+
+	page "it uses to grab"
+	next "onto tree branches"
+	next "and pick fruit"
+	dex
+
+_RiifiDexEntry::
+	text "Its body is akin"
+	next "to plant leaves."
+	next "It bathes in the"
+
+	page "sunlight to store"
+	next "energy inside its"
+	next "floral collar"
+	dex

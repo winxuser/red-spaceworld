@@ -210,7 +210,57 @@
 	const BERURUN
 	const NYOROTONO
 	const YADOKINGU
-
+	const ANNON
+	const REDIBA
+	const MITSUBOSHI
+	const PUCHIKON
+	const EFI
+	const BURAKKI
+	const TABAN
+	const BETOBEBI
+	const TEPPOUO
+	const OKUTAN
+	const GONGU
+	const KAPOERA
+	const PUDI
+	const HANEKO
+	const POPONEKO
+	const WATANEKO
+	const BARIRINA
+	const RIPPU
+	const EREBEBI
+	const BUBYI
+	const KIREIHANA
+	const TSUBOMITTO
+	const MIRUTANKU
+	const BOMUSHIKA
+	const GIFUTO
+	const KOTORA
+	const RAITORA
+	const MADAMU
+	const NOROWARA
+	const KYONPAN
+	const YAMIKARASU
+	const HAPPI
+	const SHIZASU
+	const PURAKKUSU
+	const DEBIRU
+	const HERUGA
+	const URUFUMAN
+	const WAURUFU
+	const PORIGON2
+	const NAMERU
+	const HAGANERU
+	const KINGUDORA
+	const RAI
+	const EN
+	const SUI
+	const NYURA
+	const HOUOU
+	const TOGEPI
+	const BULU
+	const TEIRU
+	const RIIFI
 DEF NUM_POKEMON_INDEXES EQU const_value - 1
 
 ; starters

@@ -202,6 +202,57 @@ IF GEN_2_GRAPHICS
 	db PAL_BROWNMON ; Berurun
 	db PAL_GREENMON ; Nyorotono
 	db PAL_PINKMON  ; Yadokingu
+	db PAL_GRAYMON  ; Annon
+	db PAL_GREENMON ; Rediba
+	db PAL_REDMON   ; Mitsuboshi
+	db PAL_REDMON   ; Puchikon
+	db PAL_YELLOWMON; Efi
+	db PAL_GRAYMON  ; Burakki
+	db PAL_GRAYMON  ; Taban
+	db PAL_PURPLEMON; Betobebi
+	db PAL_CYANMON  ; Teppouo
+	db PAL_REDMON   ; Okutan
+	db PAL_BROWNMON ; Gongu
+	db PAL_BROWNMON ; Kapoera
+	db PAL_REDMON   ; Pudi
+	db PAL_GREENMON ; Haneko
+	db PAL_YELLOWMON; Poponeko
+	db PAL_PINKMON  ; Wataneko
+	db PAL_PINKMON  ; Baririna
+	db PAL_PINKMON  ; Rippu
+	db PAL_YELLOWMON; Erebebi
+	db PAL_REDMON   ; Bubyi
+	db PAL_PURPLEMON; Kireihana
+	db PAL_GREENMON ; Tsubomitto
+	db PAL_PINKMON  ; Mirutanku
+	db PAL_REDMON   ; Bomushika
+	db PAL_REDMON   ; Gifuto
+	db PAL_YELLOWMON; Kotora
+	db PAL_YELLOWMON; Raitora
+	db PAL_BROWNMON ; Madamu
+	db PAL_BROWNMON ; Norowara
+	db PAL_PURPLEMON; Kyonpan
+	db PAL_GRAYMON  ; Yamikarasu
+	db PAL_PINKMON  ; Happi
+	db PAL_GREENMON ; Shizasu
+	db PAL_BROWNMON ; Purakkusu
+	db PAL_REDMON   ; Debiru
+	db PAL_REDMON   ; Heruga
+	db PAL_BROWNMON ; Urufuman
+	db PAL_BROWNMON ; Waurufu
+	db PAL_PURPLEMON; Porigon2
+	db PAL_PINKMON  ; Nameru
+	db PAL_GRAYMON  ; Haganeru
+	db PAL_BLUEMON  ; Kingudora
+	db PAL_YELLOWMON; Rai
+	db PAL_REDMON   ; En
+	db PAL_BLUEMON  ; Sui
+	db PAL_BROWNMON ; Nyura
+	db PAL_REDMON   ; Houou
+	db PAL_YELLOWMON; Togepi
+	db PAL_BROWNMON ; Bulu
+	db PAL_BROWNMON ; Teiru
+	db PAL_GREENMON ; Riifi
 TrainerPalettes: ; Gen II trainer sprites are given their own palettes
 	db PAL_HERO
 	db PAL_YOUNGSTER

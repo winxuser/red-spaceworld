@@ -204,5 +204,55 @@
 	const DEX_BERURUN    ; 198
 	const DEX_NYOROTONO  ; 199
 	const DEX_YADOKINGU  ; 200
-
+	const DEX_ANNON      ; 201
+	const DEX_REDIBA     ; 202
+	const DEX_MITSUBOSHI ; 203
+	const DEX_PUCHIKON   ; 204
+	const DEX_EFI        ; 205
+	const DEX_BURAKKI    ; 206
+	const DEX_TABAN      ; 207
+	const DEX_BETOBEBI   ; 208
+	const DEX_TEPPOUO    ; 209
+	const DEX_OKUTAN     ; 210
+	const DEX_GONGU      ; 211
+	const DEX_KAPOERA    ; 212
+	const DEX_PUDI       ; 213
+	const DEX_HANEKO     ; 214
+	const DEX_POPONEKO   ; 215
+	const DEX_WATANEKO   ; 216
+	const DEX_BARIRINA   ; 217
+	const DEX_RIPPU      ; 218
+	const DEX_EREBEBI    ; 219
+	const DEX_BUBYI      ; 220
+	const DEX_KIREIHANA  ; 221
+	const DEX_TSUBOMITTO ; 222
+	const DEX_MIRUTANKU  ; 223
+	const DEX_BOMUSHIKA  ; 224
+	const DEX_GIFUTO     ; 225
+	const DEX_KOTORA     ; 226
+	const DEX_RAITORA    ; 227
+	const DEX_MADAMU     ; 228
+	const DEX_NOROWARA   ; 229
+	const DEX_KYONPAN    ; 230
+	const DEX_YAMIKARASU ; 231
+	const DEX_HAPPI      ; 232
+	const DEX_SHIZASU    ; 233
+	const DEX_PURAKKUSU  ; 234
+	const DEX_DEBIRU     ; 235
+	const DEX_HERUGA     ; 236
+	const DEX_URUFUMAN   ; 237
+	const DEX_WAURUFU    ; 238
+	const DEX_PORIGON2   ; 239
+	const DEX_NAMERU     ; 240
+	const DEX_HAGANERU   ; 241
+	const DEX_KINGUDORA  ; 242
+	const DEX_RAI        ; 243
+	const DEX_EN         ; 244
+	const DEX_SUI        ; 245
+	const DEX_NYURA      ; 246
+	const DEX_HOUOU      ; 247
+	const DEX_TOGEPI     ; 248
+	const DEX_BULU       ; 249
+	const DEX_TEIRU      ; 250
+	const DEX_RIIFI       ; 251
 DEF NUM_POKEMON EQU const_value - 1
