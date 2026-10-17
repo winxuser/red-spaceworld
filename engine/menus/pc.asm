@@ -9,86 +9,81 @@ ActivatePC::
 	set BIT_USING_GENERIC_PC, [hl]
 	call LoadScreenTilesFromBuffer2
 	call Delay3
+
 PCMainMenu:
 	farcall DisplayPCMainMenu
 	ld hl, wMiscFlags
 	set BIT_NO_MENU_BUTTON_SOUND, [hl]
 	call HandleMenuInput
 	bit B_PAD_B, a
-	jp nz, LogOff
+	jr nz, LogOff
+
+	ld a, [wCurrentMenuItem]
+	ld b, a
 	ld a, [wMaxMenuItem]
-	cp 2
-	jr nz, .next ;if not 2 menu items (not counting log off) (2 occurs before you get the pokedex)
-	ld a, [wCurrentMenuItem]
-	and a
-	jp z, BillsPC    ;if current menu item id is 0, it's bills pc
-	cp 1
-	jr z, .playersPC ;if current menu item id is 1, it's players pc
-	jp LogOff        ;otherwise, it's 2, and you're logging off
-.next
-	cp 3
-	jr nz, .next2 ;if not 3 menu items (not counting log off) (3 occurs after you get the pokedex, before you beat the pokemon league)
-	ld a, [wCurrentMenuItem]
-	and a
-	jp z, BillsPC    ;if current menu item id is 0, it's bills pc
-	cp 1
-	jr z, .playersPC ;if current menu item id is 1, it's players pc
-	cp 2
-	jp z, OaksPC     ;if current menu item id is 2, it's oaks pc
-	jp LogOff        ;otherwise, it's 3, and you're logging off
-.next2
-	ld a, [wCurrentMenuItem]
-	and a
-	jp z, BillsPC    ;if current menu item id is 0, it's bills pc
-	cp 1
-	jr z, .playersPC ;if current menu item id is 1, it's players pc
-	cp 2
-	jp z, OaksPC     ;if current menu item id is 2, it's oaks pc
-	cp 3
-	jp z, PKMNLeague ;if current menu item id is 3, it's pkmnleague
-	jp LogOff        ;otherwise, it's 4, and you're logging off
-.playersPC
+	cp b
+	jr z, LogOff ; If selecting the last option (Log Off), exit PC
+
+	ld a, b
+	add a
+	ld c, a
+	ld b, 0
+	ld hl, .PCMenuJumptable
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jp hl
+
+.PCMenuJumptable:
+	dw BillsPC
+	dw PlayersPC
+	dw OaksPC
+	dw PKMNLeague
+
+EnterPC:
+	ld a, SFX_ENTER_PC
+	rst _PlaySound
+	jp WaitForSoundToFinish
+
+PlayersPC:
 	ld hl, wMiscFlags
 	res BIT_NO_MENU_BUTTON_SOUND, [hl]
 	set BIT_USING_GENERIC_PC, [hl]
-	ld a, SFX_ENTER_PC
-	rst _PlaySound
-	call WaitForSoundToFinish
+	call EnterPC
 	ld hl, AccessedMyPCText
 	rst _PrintText
 	farcall PlayerPC
 	jr ReloadMainMenu
+
 OaksPC:
-	ld a, SFX_ENTER_PC
-	rst _PlaySound
-	call WaitForSoundToFinish
+	call EnterPC
 	farcall OpenOaksPC
 	jr ReloadMainMenu
+
 PKMNLeague:
-	ld a, SFX_ENTER_PC
-	rst _PlaySound
-	call WaitForSoundToFinish
+	call EnterPC
 	farcall PKMNLeaguePC
 	jr ReloadMainMenu
+
 BillsPC:
-	ld a, SFX_ENTER_PC
-	rst _PlaySound
-	call WaitForSoundToFinish
+	call EnterPC
 	CheckEvent EVENT_MET_BILL
-	jr nz, .billsPC ;if you've met bill, use that bill's instead of someone's
-	ld hl, AccessedSomeonesPCText
-	jr .printText
-.billsPC
 	ld hl, AccessedBillsPCText
+	jr nz, .printText
+	ld hl, AccessedSomeonesPCText
+
 .printText
 	rst _PrintText
 	farcall BillsPC_
+
 ReloadMainMenu:
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	call ReloadMapData
 	call UpdateSprites
 	jp PCMainMenu
+
 LogOff:
 	ld a, SFX_TURN_OFF_PC
 	rst _PlaySound
@@ -114,16 +109,17 @@ AccessedMyPCText:
 	text_far _AccessedMyPCText
 	text_end
 
-; removes one of the specified item ID [hItemToRemoveID] from bag (if existent)
+; Removes one of the specified item ID [hItemToRemoveID] from bag (if existent)
 RemoveItemByID::
 	ld hl, wBagItems
 	ldh a, [hItemToRemoveID]
 	ld b, a
 	xor a
 	ldh [hItemToRemoveIndex], a
+
 .loop
 	ld a, [hli]
-	cp -1 ; reached terminator?
+	cp -1 ; Reached terminator?
 	ret z
 	cp b
 	jr z, .foundItem
@@ -132,8 +128,9 @@ RemoveItemByID::
 	inc a
 	ldh [hItemToRemoveIndex], a
 	jr .loop
+
 .foundItem
-	ld a, $1
+	ld a, 1
 	ld [wItemQuantity], a
 	ldh a, [hItemToRemoveIndex]
 	ld [wWhichPokemon], a

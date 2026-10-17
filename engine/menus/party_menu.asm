@@ -17,6 +17,7 @@ RedrawPartyMenu_::
 	ld c, a
 	ldh [hPartyMonIndex], a
 	ld [wWhichPartyMenuHPBar], a
+
 .loop
 	ld a, [de]
 	cp $FF ; reached the terminator?
@@ -55,6 +56,7 @@ RedrawPartyMenu_::
 	ld [hli], a ; place the cursor
 	inc hl
 	inc hl
+
 .skipUnfilledRightArrow
 	ld a, [wPartyMenuTypeOrMessageID] ; menu type
 	cp TMHM_PARTY_MENU
@@ -80,21 +82,24 @@ RedrawPartyMenu_::
 	call SetPartyMenuHPBarColor ; color the HP bar (on SGB)
 	pop hl
 	jr .printLevel
+
 .teachMoveMenu
 	push hl
 	predef CanLearnTM ; check if the pokemon can learn the move
 	pop hl
-	ld de, .ableToLearnMoveText
+	ld de, AbleText
 	ld a, c
 	and a
 	jr nz, .placeMoveLearnabilityString
-	ld de, .notAbleToLearnMoveText
+	ld de, NotAbleText
+
 .placeMoveLearnabilityString
 	ld bc, SCREEN_WIDTH + 9 ; 1 row down and 9 columns right
 	push hl
 	add hl, bc
 	call PlaceString
 	pop hl
+
 .printLevel
 	ld bc, 10 ; move 10 columns to the right
 	add hl, bc
@@ -107,10 +112,7 @@ RedrawPartyMenu_::
 	pop bc
 	inc c
 	jp .loop
-.ableToLearnMoveText
-	db "ABLE@"
-.notAbleToLearnMoveText
-	db "NOT ABLE@"
+
 .evolutionStoneMenu
 	push hl
 	ld hl, EvosMovesPointerTable
@@ -134,7 +136,8 @@ RedrawPartyMenu_::
 	ld bc, wEvoDataBufferEnd - wEvoDataBuffer
 	call FarCopyData
 	ld hl, wEvoDataBuffer
-	ld de, .notAbleToEvolveText
+	ld de, NotAbleText
+
 ; loop through the pokemon's evolution entries
 .checkEvolutionsLoop
 	ld a, [hli]
@@ -155,22 +158,21 @@ RedrawPartyMenu_::
 	cp b ; does the player's stone match this evolution entry's stone?
 	jr nz, .checkEvolutionsLoop
 ; if it does match
-	ld de, .ableToEvolveText
+	ld de, AbleText
+
 .placeEvolutionStoneString
-	ld bc, 20 + 9 ; down 1 row and right 9 columns
+	ld bc, SCREEN_WIDTH + 9 ; down 1 row and right 9 columns
 	pop hl
 	push hl
 	add hl, bc
 	call PlaceString
 	pop hl
 	jr .printLevel
-.ableToEvolveText
-	db "ABLE@"
-.notAbleToEvolveText
-	db "NOT ABLE@"
+
 .afterDrawingMonEntries
 	ld b, SET_PAL_PARTY_MENU
 	call RunPaletteCommand
+
 .printMessage
 	ld hl, wStatusFlags5
 	ld a, [hl]
@@ -189,6 +191,7 @@ RedrawPartyMenu_::
 	ld h, [hl]
 	ld l, a
 	rst _PrintText
+
 .done
 	pop hl
 	pop af
@@ -197,6 +200,7 @@ RedrawPartyMenu_::
 	ldh [hAutoBGTransferEnabled], a
 	call Delay3
 	jp GBPalNormal
+
 .printItemUseMessage
 	and $0F
 	ld hl, PartyMenuItemUseMessagePointers
@@ -214,6 +218,12 @@ RedrawPartyMenu_::
 	pop hl
 	rst _PrintText
 	jr .done
+
+; Shared text assets for menu states
+AbleText:
+	db "ABLE@"
+NotAbleText:
+	db "NOT ABLE@"
 
 PartyMenuItemUseMessagePointers:
 	dw AntidoteText
@@ -288,19 +298,18 @@ ReviveText:
 
 RareCandyText:
 	text_far _RareCandyText
-	sound_get_item_1 ; probably supposed to play SFX_LEVEL_UP but the wrong music bank is loaded
+	sound_get_item_1
 	text_promptbutton
 	text_end
 
 SetPartyMenuHPBarColor:
+	ld hl, wWhichPartyMenuHPBar
+	ld a, [hl]
+	inc [hl]
 	ld hl, wPartyMenuHPBarColors
-	ld a, [wWhichPartyMenuHPBar]
 	ld c, a
 	ld b, 0
 	add hl, bc
 	call GetHealthBarColor
 	ld b, SET_PAL_PARTY_MENU_HP_BARS
-	call RunPaletteCommand
-	ld hl, wWhichPartyMenuHPBar
-	inc [hl]
-	ret
+	jp RunPaletteCommand

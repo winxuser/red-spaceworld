@@ -33,15 +33,15 @@ StartMenu_Pokemon::
 	call SaveScreenTilesToBuffer1
 	ld a, FIELD_MOVE_MON_MENU
 	ld [wTextBoxID], a
-	call DisplayTextBoxID ; display pokemon menu options
+	call DisplayTextBoxID
 	ld hl, wFieldMoves
-	lb bc, 2, 12 ; max menu item ID, top menu item Y
+	lb bc, 2, 12
 	ld e, 5
 .adjustMenuVariablesLoop
 	dec e
 	jr z, .storeMenuVariables
 	ld a, [hli]
-	and a ; end of field moves?
+	and a
 	jr z, .storeMenuVariables
 	inc b
 	dec c
@@ -50,16 +50,16 @@ StartMenu_Pokemon::
 .storeMenuVariables
 	ld hl, wTopMenuItemY
 	ld a, c
-	ld [hli], a ; top menu item Y
+	ld [hli], a
 	ldh a, [hFieldMoveMonMenuTopMenuItemX]
-	ld [hli], a ; top menu item X
+	ld [hli], a
 	xor a
-	ld [hli], a ; current menu item ID
+	ld [hli], a
 	inc hl
 	ld a, b
-	ld [hli], a ; max menu item ID
+	ld [hli], a
 	ld a, PAD_A | PAD_B
-	ld [hli], a ; menu watched keys
+	ld [hli], a
 	xor a
 	ld [hl], a
 	call HandleMenuInput
@@ -68,12 +68,11 @@ StartMenu_Pokemon::
 	pop af
 	bit B_PAD_B, a
 	jp nz, .loop
-; if the B button wasn't pressed
 	ld a, [wMaxMenuItem]
 	ld b, a
-	ld a, [wCurrentMenuItem] ; menu selection
+	ld a, [wCurrentMenuItem]
 	cp b
-	jp z, .exitMenu ; if the player chose Cancel
+	jp z, .exitMenu
 	dec b
 	cp b
 	jr z, .choseSwitch
@@ -87,16 +86,16 @@ StartMenu_Pokemon::
 	jp .choseOutOfBattleMove
 .choseSwitch
 	ld a, [wPartyCount]
-	cp 2 ; is there more than one pokemon in the party?
-	jp c, StartMenu_Pokemon ; if not, no switching
-	call SwitchPartyMon_InitVarOrSwapData ; init [wMenuItemToSwap]
+	cp 2
+	jp c, StartMenu_Pokemon
+	call SwitchPartyMon_InitVarOrSwapData
 	ld a, SWAP_MONS_PARTY_MENU
 	ld [wPartyMenuTypeOrMessageID], a
 	call GoBackToPartyMenu
 	jp .checkIfPokemonChosen
 .choseStats
 	call ClearSprites
-	xor a ; PLAYER_PARTY_DATA
+	xor a
 	ld [wMonDataLocation], a
 	predef StatusScreen
 	call ReloadMapData
@@ -133,7 +132,6 @@ StartMenu_Pokemon::
 	jp z, .newBadgeRequired
 	call CheckIfInOutsideMap
 	jr z, .canFly
-; new block to make "open-air" maps flyable
 	ld a, [wCurMap]
 	cp CELADON_MART_ROOF
 	jr z, .canFly
@@ -165,7 +163,6 @@ StartMenu_Pokemon::
 	jr z, .canFly
 	cp NORTH_CITY
 	jr z, .canFly
-; end of new block to make "open-air" maps flyable
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
@@ -276,7 +273,7 @@ StartMenu_Pokemon::
 	ldh [hDividend + 1], a
 	ld a, 5
 	ldh [hDivisor], a
-	ld b, 2 ; number of bytes
+	ld b, 2
 	call Divide
 	ld bc, MON_HP - MON_MAXHP
 	add hl, bc
@@ -297,7 +294,7 @@ StartMenu_Pokemon::
 	pop af
 	ld [wPartyAndBillsPCSavedMenuItem], a
 	jp .loop
-.notHealthyEnough ; if current HP is less than 1/5 of max HP
+.notHealthyEnough
 	ld hl, .notHealthyEnoughText
 	rst _PrintText
 	jp .loop
@@ -316,11 +313,10 @@ StartMenu_Pokemon::
 	text_far _NewBadgeRequiredText
 	text_end
 
-; writes a blank tile to all possible menu cursor positions on the party menu
 ErasePartyMenuCursors::
 	hlcoord 0, 1
-	ld bc, 2 * SCREEN_WIDTH ; menu cursor positions are 2 rows apart
-	ld a, 6 ; 6 menu cursor positions
+	ld bc, 2 * SCREEN_WIDTH
+	ld a, 6
 .loop
 	ld [hl], ' '
 	add hl, bc
@@ -330,12 +326,12 @@ ErasePartyMenuCursors::
 
 ItemMenuLoop:
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
-	  call ReloadMapData
+	call ReloadMapData
 	call RunDefaultPaletteCommand
 
 StartMenu_Item::
 	ld a, [wLinkState]
-	dec a ; is the player in the Colosseum or Trade Centre?
+	dec a
 	jr nz, .notInCableClubRoom
 	ld hl, CannotUseItemsHereText
 	rst _PrintText
@@ -345,7 +341,7 @@ StartMenu_Item::
 	ld hl, wListPointer
 	ld a, c
 	ld [hli], a
-	ld [hl], b ; store item bag pointer in wListPointer (for DisplayListMenuID)
+	ld [hl], b
 	xor a
 	ld [wPrintItemPrices], a
 	ld a, ITEMLISTMENU
@@ -363,7 +359,6 @@ StartMenu_Item::
 	call ReloadMapData
 	jp RedisplayStartMenu
 .choseItem
-; erase menu cursor (blank each tile in front of an item name)
 	ld a, ' '
 	ldcoord_a 5, 4
 	ldcoord_a 5, 6
@@ -375,24 +370,23 @@ StartMenu_Item::
 	ld a, [wCurItem]
 	cp BICYCLE
 	jp z, .useOrTossItem
-; not Bicycle
 	ld a, USE_TOSS_MENU_TEMPLATE
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, wTopMenuItemY
 	ld a, 11
-	ld [hli], a ; top menu item Y
+	ld [hli], a
 	ld a, 14
-	ld [hli], a ; top menu item X
+	ld [hli], a
 	xor a
-	ld [hli], a ; current menu item ID
+	ld [hli], a
 	inc hl
-	inc a ; a = 1
-	ld [hli], a ; max menu item ID
+	inc a
+	ld [hli], a
 	ld a, PAD_A | PAD_B
-	ld [hli], a ; menu watched keys
+	ld [hli], a
 	xor a
-	ld [hl], a ; old menu item id
+	ld [hl], a
 	call HandleMenuInput
 	call PlaceUnfilledArrowMenuCursor
 	bit B_PAD_B, a
@@ -416,8 +410,7 @@ StartMenu_Item::
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .tossItem
-; use item
-	ld [wPseudoItemID], a ; a must be 0 due to above conditional jump
+	ld [wPseudoItemID], a
 	ld a, [wCurItem]
 	cp HM01
 	jr nc, .useItem_partyMenu
@@ -445,7 +438,7 @@ StartMenu_Item::
 	push af
 	call UseItem
 	ld a, [wActionResultOrTookBattleTurn]
-	cp $02
+	cp 2
 	jp z, .partyMenuNotDisplayed
 	call GBPalWhiteOutWithDelay3
 	call RestoreScreenTilesAndReloadTilePatterns
@@ -474,16 +467,12 @@ StartMenu_Item::
 .tossZeroItems
 	jp ItemMenuLoop
 
-CannotUseItemsHereText:
-	text_far _CannotUseItemsHereText
+CannotUseItemsHereText: text_far _CannotUseItemsHereText
 	text_end
-
-CannotGetOffHereText:
-	text_far _CannotGetOffHereText
+CannotGetOffHereText:   text_far _CannotGetOffHereText
 	text_end
 
 INCLUDE "data/items/use_party.asm"
-
 INCLUDE "data/items/use_overworld.asm"
 
 StartMenu_TownMap::
@@ -497,13 +486,13 @@ StartMenu_TownMap::
 	farcall ItemUseTownMap
 	call GBPalWhiteOut
 	call LoadFontTilePatterns
-	call LoadScreenTilesFromBuffer2 ; restore saved screen
+	call LoadScreenTilesFromBuffer2
 	call RunDefaultPaletteCommand
 	call ReloadMapData
 	call LoadGBPal
 	pop af
 	ldh [hTileAnimations], a
-	call DrawStartMenu ; Draw the revamped start menu frame back onto the screen
+	call DrawStartMenu
 	jp RedisplayStartMenu
 
 StartMenu_TrainerInfo::
@@ -530,15 +519,14 @@ StartMenu_TrainerInfo::
 	ldh [hTileAnimations], a
 	jp RedisplayStartMenu
 
-; loads tile patterns and draws everything except for gym leader faces / badges
 DrawTrainerInfo:
 	ld de, RedPicFront
-	lb bc, BANK(RedPicFront), $01
+	lb bc, BANK(RedPicFront), 1
 	ld a, [wPlayerGender]
 	and a
 	jr z, .AreBoy
 	ld de, GreenPicFront
-	lb bc, BANK(GreenPicFront), $01
+	lb bc, BANK(GreenPicFront), 1
 .AreBoy
 	predef DisplayPicCenteredOrUpperRight
 	call DisableLCD
@@ -547,8 +535,8 @@ DrawTrainerInfo:
 	call TrainerInfo_DrawVerticalLine
 	hlcoord 1, 2
 	call TrainerInfo_DrawVerticalLine
-	ld hl, vChars2 tile $07
-	ld de, vChars2 tile $00
+	ld hl, vChars2 tile 7
+	ld de, vChars2 tile 0
 	ld bc, $1c tiles
 	rst _CopyData
 	ld hl, TrainerInfoTextBoxTileGraphics
@@ -571,14 +559,14 @@ DrawTrainerInfo:
 	call FarCopyData2
 	ld hl, TextBoxGraphics
 	ld de, 13 tiles
-	add hl, de ; hl = colon tile pattern
+	add hl, de
 	ld de, vChars1 tile $56
 	ld bc, TILE_SIZE
 	ld a, BANK(TextBoxGraphics)
 	push bc
 	call FarCopyData2
 	pop bc
-	ld hl, TrainerInfoTextBoxTileGraphics tile 8  ; background tile pattern
+	ld hl, TrainerInfoTextBoxTileGraphics tile 8
 	ld de, vChars1 tile $57
 	call TrainerInfo_FarCopyData
 	call EnableLCD
@@ -620,7 +608,7 @@ DrawTrainerInfo:
 	ld de, wPlayTimeHours
 	lb bc, LEFT_ALIGN | 1, 3
 	call PrintNumber
-	ld [hl], $d6 ; colon tile ID
+	ld [hl], $d6
 	inc hl
 	ld de, wPlayTimeMinutes
 	lb bc, LEADING_ZEROES | 1, 2
@@ -635,61 +623,49 @@ TrainerInfo_NameMoneyTimeText:
 	next "MONEY/"
 	next "TIME/@"
 
-; $76 is a circle tile
 TrainerInfo_BadgesText:
-	db $76,"BADGES",$76,"@"
+	db $76, "BADGES", $76, "@"
 
-; draws a text box on the trainer info screen
-; height is always 6
-; INPUT:
-; hl = destination address
-; [wTrainerInfoTextBoxWidthPlus1] = width
-; [wTrainerInfoTextBoxWidth] = width - 1
-; [wTrainerInfoTextBoxNextRowOffset] = distance from the end of a text box row to the start of the next
 TrainerInfo_DrawTextBox:
-	ld a, $79 ; upper left corner tile ID
-	lb de, $7a, $7b ; top edge and upper right corner tile ID's
-	call TrainerInfo_DrawHorizontalEdge ; draw top edge
+	ld a, $79
+	lb de, $7a, $7b
+	call TrainerInfo_DrawHorizontalEdge
 	call TrainerInfo_NextTextBoxRow
 	ld a, [wTrainerInfoTextBoxWidthPlus1]
 	ld e, a
 	ld d, 0
-	ld c, 6 ; height of the text box
+	ld c, 6
 .loop
-	ld [hl], $7c ; left edge tile ID
+	ld [hl], $7c
 	add hl, de
-	ld [hl], $78 ; right edge tile ID
+	ld [hl], $78
 	call TrainerInfo_NextTextBoxRow
 	dec c
 	jr nz, .loop
-	ld a, $7d ; lower left corner tile ID
-	lb de, $77, $7e ; bottom edge and lower right corner tile ID's
+	ld a, $7d
+	lb de, $77, $7e
 
 TrainerInfo_DrawHorizontalEdge:
-	ld [hli], a ; place left corner tile
+	ld [hli], a
 	ld a, [wTrainerInfoTextBoxWidth]
 	ld c, a
 	ld a, d
 .loop
-	ld [hli], a ; place edge tile
+	ld [hli], a
 	dec c
 	jr nz, .loop
 	ld a, e
-	ld [hl], a ; place right corner tile
+	ld [hl], a
 	ret
 
 TrainerInfo_NextTextBoxRow:
-	ld a, [wTrainerInfoTextBoxNextRowOffset] ; distance to the start of the next row
+	ld a, [wTrainerInfoTextBoxNextRowOffset]
 .loop
 	inc hl
 	dec a
 	jr nz, .loop
 	ret
 
-; draws a vertical line
-; INPUT:
-; hl = address of top tile in the line
-; a = tile ID
 TrainerInfo_DrawVerticalLine:
 	ld de, SCREEN_WIDTH
 	ld c, 8
@@ -720,7 +696,7 @@ StartMenu_Option::
 	jp RedisplayStartMenu
 
 SwitchPartyMon::
-	call SwitchPartyMon_InitVarOrSwapData ; swap data
+	call SwitchPartyMon_InitVarOrSwapData
 	ld a, [wSwappedMenuItem]
 	call SwitchPartyMon_ClearGfx
 	ld a, [wCurrentMenuItem]
@@ -734,7 +710,7 @@ SwitchPartyMon_ClearGfx:
 	call AddNTimes
 	ld c, SCREEN_WIDTH * 2
 	ld a, ' '
-.clearMonBGLoop ; clear the mon's row in the party menu
+.clearMonBGLoop
 	ld [hli], a
 	dec c
 	jr nz, .clearMonBGLoop
@@ -754,13 +730,11 @@ SwitchPartyMon_ClearGfx:
 	jp PlaySound
 
 SwitchPartyMon_InitVarOrSwapData:
-; This is used to initialise [wMenuItemToSwap] and to actually swap the data.
 	ld a, [wMenuItemToSwap]
-	and a ; has [wMenuItemToSwap] been initialised yet?
+	and a
 	jr nz, .pickedMonsToSwap
-; If not, initialise [wMenuItemToSwap] so that it matches the current mon.
 	ld a, [wWhichPokemon]
-	inc a ; [wMenuItemToSwap] counts from 1
+	inc a
 	ld [wMenuItemToSwap], a
 	ret
 .pickedMonsToSwap
@@ -771,9 +745,8 @@ SwitchPartyMon_InitVarOrSwapData:
 	ld b, a
 	ld a, [wCurrentMenuItem]
 	ld [wSwappedMenuItem], a
-	cp b ; swapping a mon with itself?
+	cp b
 	jr nz, .swappingDifferentMons
-; can't swap a mon with itself
 	xor a
 	ld [wMenuItemToSwap], a
 	ld [wPartyMenuTypeOrMessageID], a

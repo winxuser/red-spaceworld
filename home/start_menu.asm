@@ -1,15 +1,14 @@
 DisplayStartMenu::
 	ld a, BANK(StartMenu_Pokedex)
-	ldh [hLoadedROMBank], a
-	ld [rROMB], a
-	ld a, [wWalkBikeSurfState] ; walking/biking/surfing
+	call SetRomBank
+	ld a, [wWalkBikeSurfState]
 	ld [wWalkBikeSurfStateCopy], a
 	ld a, SFX_START_MENU
 	rst _PlaySound
 
 RedisplayStartMenu::
 	farcall DrawStartMenu
-	farcall PrintSafariZoneSteps ; print Safari Zone info, if in Safari Zone
+	farcall PrintSafariZoneSteps
 	call UpdateSprites
 .loop
 	farcall PrintStartMenuClock
@@ -19,20 +18,20 @@ RedisplayStartMenu::
 ; check if Up pressed
 	bit B_PAD_UP, a
 	jr z, .checkIfDownPressed
-	ld a, [wCurrentMenuItem] ; menu selection
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .loop
 	ld a, [wLastMenuItem]
 	and a
 	jr nz, .loop
-; if the player pressed tried to go past the top item, wrap around to the bottom
+; if the player tried to go past the top item, wrap around to the bottom
 	CheckEvent EVENT_GOT_TOWN_MAP
-	ld a, 7 ; there are 8 menu items with the town map, so the max index is 7
+	ld a, 7
 	jr nz, .wrapMenuItemId
 	CheckEvent EVENT_GOT_POKEDEX
-	ld a, 6 ; there are 7 menu items with the pokedex, so the max index is 6
+	ld a, 6
 	jr nz, .wrapMenuItemId
-	dec a ; there are only 6 menu items without the pokedex
+	dec a
 .wrapMenuItemId
 	ld [wCurrentMenuItem], a
 	call EraseMenuCursor
@@ -40,36 +39,35 @@ RedisplayStartMenu::
 .checkIfDownPressed
 	bit B_PAD_DOWN, a
 	jr z, .buttonPressed
-; if the player pressed tried to go past the bottom item, wrap around to the top
+; if the player tried to go past the bottom item, wrap around to the top
 	CheckEvent EVENT_GOT_TOWN_MAP
 	ld a, [wCurrentMenuItem]
-	ld c, 8 ; there are 8 menu items with the town map
+	ld c, 8
 	jr nz, .checkIfPastBottom
 	CheckEvent EVENT_GOT_POKEDEX
 	ld a, [wCurrentMenuItem]
-	ld c, 7 ; there are 7 menu items with the pokedex
+	ld c, 7
 	jr nz, .checkIfPastBottom
-	dec c ; there are only 6 menu items without the pokedex
+	dec c
 .checkIfPastBottom
 	cp c
 	jr nz, .loop
-; the player went past the bottom, so wrap to the top
 	xor a
 	ld [wCurrentMenuItem], a
 	call EraseMenuCursor
 	jr .loop
-.buttonPressed ; A, B, or Start button pressed
+.buttonPressed
 	call PlaceUnfilledArrowMenuCursor
 	ld a, [wCurrentMenuItem]
-	ld [wBattleAndStartSavedMenuItem], a ; save current menu selection
+	ld [wBattleAndStartSavedMenuItem], a
 	ld a, b
-	and PAD_B | PAD_START ; was the Start button or B button pressed?
+	and PAD_B | PAD_START
 	jp nz, CloseStartMenu
-	call SaveScreenTilesToBuffer2 ; copy background from wTileMap to wTileMapBackup2
+	call SaveScreenTilesToBuffer2
 	CheckEvent EVENT_GOT_POKEDEX
 	ld a, [wCurrentMenuItem]
 	jr nz, .displayMenuItem
-	inc a ; adjust position to account for missing pokedex menu item
+	inc a
 .displayMenuItem
 	cp 0
 	jp z, StartMenu_Pokedex
@@ -77,12 +75,11 @@ RedisplayStartMenu::
 	jp z, StartMenu_Pokemon
 	cp 2
 	jp z, StartMenu_Item
-	; Check for Town Map
 	ld b, a
 	CheckEvent EVENT_GOT_TOWN_MAP
 	ld a, b
 	jr nz, .displayTownMap
-	inc a ; shift position to account for missing town map menu item
+	inc a
 	jr .displayRemainingMenuItems
 .displayTownMap
 	cp 3
@@ -95,7 +92,6 @@ RedisplayStartMenu::
 	cp 6
 	jp z, StartMenu_Option
 
-; EXIT falls through to here
 CloseStartMenu::
 	call Joypad
 	ldh a, [hJoyPressed]

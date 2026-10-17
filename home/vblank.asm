@@ -1,5 +1,4 @@
 VBlank::
-
 	push af
 	push bc
 	push de
@@ -25,27 +24,17 @@ VBlank::
 	call RedrawRowOrColumn
 	call VBlankCopy
 	call VBlankCopyDouble
-;	call UpdateMovingBgTiles
-	ld a, [hSkipOAMUpdates]
+
+	ldh a, [hSkipOAMUpdates]
 	bit 0, a
 	jr nz, .skipOAM
 	call hDMARoutine
 	ld a, BANK(GbcVBlankHook)
 	call SetRomBank
 	call GbcVBlankHook
-	; HAX: don't update sprites here. They're updated elsewhere to prevent wobbliness.
-	;ld a, BANK(PrepareOAMData)
-	;ldh [hLoadedROMBank], a
-	;ld [rROMB], a
-	nop
-	;call PrepareOAMData
 .skipOAM
-	nop
-	nop
-	nop
 
 	; VBlank-sensitive operations end.
-
 	call Random
 
 	ldh a, [hVBlankOccurred]
@@ -53,48 +42,27 @@ VBlank::
 	jr z, .skipZeroing
 	xor a
 	ldh [hVBlankOccurred], a
-
 .skipZeroing
+
 	ldh a, [hFrameCounter]
 	and a
 	jr z, .skipDec
 	dec a
 	ldh [hFrameCounter], a
-
 .skipDec
+
 	call UpdateSound
-;	call FadeOutAudio
 
-;	ld a, [wAudioROMBank] ; music ROM bank
-;	ldh [hLoadedROMBank], a
-;	ld [rROMB], a
-
-;	cp BANK(Audio1_UpdateMusic)
-;	jr nz, .checkForAudio2
-;.audio1
-;	call Audio1_UpdateMusic
-;	jr .afterMusic
-;.checkForAudio2
-;	cp BANK(Audio2_UpdateMusic)
-;	jr nz, .audio3
-;.audio2
-;	call Music_DoLowHealthAlarm
-;	call Audio2_UpdateMusic
-;	jr .afterMusic
-;.audio3
-;	call Audio3_UpdateMusic
-;.afterMusic
-
-	farcall TrackPlayTime ; keep track of time played
+	farcall TrackPlayTime
 	call UpdateSoftwareRTC
 
 	ldh a, [hDisableJoypadPolling]
 	and a
 	call z, ReadJoypad
 
+	; Restore saved ROM bank using existing SetRomBank helper
 	ld a, [wVBlankSavedROMBank]
-	ldh [hLoadedROMBank], a
-	ld [rROMB], a
+	call SetRomBank
 
 	pop hl
 	pop de
@@ -105,14 +73,7 @@ VBlank::
 
 DelayFrame::
 ; Wait for the next vblank interrupt.
-; As a bonus, this saves battery.
-
-DEF NOT_VBLANKED EQU 1
-
-	call DelayFrameHook ; HAX
-	nop
-	;ld a, NOT_VBLANKED
-	;ldh [hVBlankOccurred], a
+	call DelayFrameHook
 .halt
 	halt
 	ldh a, [hVBlankOccurred]

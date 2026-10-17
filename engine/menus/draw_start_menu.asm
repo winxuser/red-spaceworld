@@ -1,26 +1,26 @@
-; function that displays the start menu
+; Function that displays the start menu
 DrawStartMenu::
+	; Common box parameters (anchor at X=10, Y=0, Width=8)
+	hlcoord 10, 0
+	ld c, $08
+
 	CheckEvent EVENT_GOT_TOWN_MAP
-	hlcoord 10, 0
 	ld b, $10
-	ld c, $08
 	jr nz, .drawTextBoxBorder
+
 	CheckEvent EVENT_GOT_POKEDEX
-; menu with pokedex
-	hlcoord 10, 0
 	ld b, $0e
-	ld c, $08
 	jr nz, .drawTextBoxBorder
-; shorter menu if the player doesn't have the pokedex
-	hlcoord 10, 0
-	ld b, $0c
-	ld c, $08
+
+	ld b, $0c ; Shorter menu if no Pokedex/Town Map
+
 .drawTextBoxBorder
 	call TextBoxBorder
-	; For clock
-	hlcoord 0, 0   ; Top-left corner anchor
-	ld b, 2        ; Inner height
-	ld c, 5        ; Inner width (fits "00:00")
+
+	; Draw clock box in top-left
+	hlcoord 0, 0
+	ld b, 2
+	ld c, 5
 	call TextBoxBorder
 	call PrintStartMenuClock
 
@@ -30,97 +30,77 @@ DrawStartMenu::
 	ld [wTopMenuItemY], a ; Y position of first menu choice
 	ld a, $0b
 	ld [wTopMenuItemX], a ; X position of first menu choice
-	ld a, [wBattleAndStartSavedMenuItem] ; remembered menu selection from last time
+	ld a, [wBattleAndStartSavedMenuItem]
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	xor a
 	ld [wMenuWatchMovingOutOfBounds], a
+
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
 	hlcoord 12, 2
+
 	CheckEvent EVENT_GOT_TOWN_MAP
 	ld a, $08
-	jr nz, .printPokedexText ; must have pokedex to get town map
+	jr nz, .printPokedexText ; Must have Pokedex if player has Town Map
+
 	CheckEvent EVENT_GOT_POKEDEX
 	ld a, $07
 	jr nz, .printPokedexText
-	ld a, $06 ; no pokedex or town map
+
+	ld a, $06 ; No Pokedex or Town Map
 	jr .storeMenuItemCount
+
 .printPokedexText
 	ld de, StartMenuPokedexText
 	call PrintStartMenuItem
+
 .storeMenuItemCount
-	ld [wMaxMenuItem], a ; number of menu items
+	ld [wMaxMenuItem], a ; Number of menu items
 	ld de, StartMenuPokemonText
 	call PrintStartMenuItem
 	ld de, StartMenuItemText
 	call PrintStartMenuItem
+
 	; Check to print town map
 	CheckEvent EVENT_GOT_TOWN_MAP
 	jr z, .printPlayerNameText
 	ld de, StartMenuTownMapText
 	call PrintStartMenuItem
+
 .printPlayerNameText
-	ld de, wPlayerName ; player's name
+	ld de, wPlayerName
 	call PrintStartMenuItem
+
 	ld a, [wStatusFlags4]
 	bit BIT_LINK_CONNECTED, a
-; case for not using link feature
 	ld de, StartMenuSaveText
 	jr z, .printSaveOrResetText
-; case for using link feature
 	ld de, StartMenuResetText
+
 .printSaveOrResetText
 	call PrintStartMenuItem
 	ld de, StartMenuOptionText
 	call PrintStartMenuItem
 	ld de, StartMenuExitText
 	call PlaceString
+
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
 	ret
 
 PrintStartMenuClock::
 	hlcoord 1, 1
-
-	; Print Hours
 	ld de, wRTCHours
 	lb bc, LEADING_ZEROES | 1, 2
 	call PrintNumber
 
-	; Print the ":" divider character
 	ld a, ':'
 	ld [hli], a
 
-	; Print Minutes
 	ld de, wRTCMinutes
 	lb bc, LEADING_ZEROES | 1, 2
-	call PrintNumber
-	ret
-
-StartMenuPokedexText:
-	db "POKéDEX@"
-
-StartMenuPokemonText:
-	db "POKéMON@"
-
-StartMenuItemText:
-	db "ITEM@"
-
-StartMenuTownMapText:
-	db "MAP@"
-
-StartMenuSaveText:
-	db "SAVE@"
-
-StartMenuResetText:
-	db "RESET@"
-
-StartMenuExitText:
-	db "EXIT@"
-
-StartMenuOptionText:
-	db "OPTION@"
+	jp PrintNumber ; Tail-call optimization (jp instead of call + ret)
 
 PrintStartMenuItem:
 	push hl
@@ -130,21 +110,17 @@ PrintStartMenuItem:
 	add hl, de
 	ret
 
-; prints a short blurb about the
-; current selection, just like in GSC
+; Displays a short blurb about the current selection
 DrawMenuAccount::
-; prepare the background
 	hlcoord 0, 13
 	lb bc, 5, 10
 	call ClearScreenArea
 
-; determine which table to use
 	ld a, [wStatusFlags4]
 	bit BIT_LINK_CONNECTED, a
-; use the table replacing "SAVE" with "RESET"
 	ld de, StartMenuDescriptionTable.LinkTable
 	jr nz, .check_pokedex
-; use regular table if we're not in link mode
+
 	CheckEvent EVENT_GOT_TOWN_MAP
 	ld de, StartMenuDescriptionTable.GotTownMap
 	jr nz, .check_pokedex
@@ -154,24 +130,30 @@ DrawMenuAccount::
 	CheckEvent EVENT_GOT_POKEDEX
 	ld a, [wCurrentMenuItem]
 	jr nz, .got_table
-; shift one index forwards to reflect the fact that
-; we haven't gotten a dex yet
-	inc a
+	inc a ; Offset index if Pokedex is missing
 
 .got_table
-; select the correct pointer to the entry, and then load
-; the entry into the DE register for use as a parameter for PlaceString
-	add a
+	add a                  ; Double index for 2-byte pointer table
 	ld l, a
 	ld h, 0
-	add hl, de
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
+	add hl, de             ; Add offset to table base in de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld d, h
+	ld e, l
 
-; finally, display the string.
 	hlcoord 0, 14
-	jp PlaceString
+	jp PlaceString         ; Display description text cleanly
 
 INCLUDE "data/start_menu_descriptions.asm"
 
+; Menu Text Constants
+StartMenuPokedexText: db "POKéDEX@"
+StartMenuPokemonText: db "POKéMON@"
+StartMenuItemText:    db "ITEM@"
+StartMenuTownMapText: db "MAP@"
+StartMenuSaveText:    db "SAVE@"
+StartMenuResetText:   db "RESET@"
+StartMenuExitText:    db "EXIT@"
+StartMenuOptionText:  db "OPTION@"

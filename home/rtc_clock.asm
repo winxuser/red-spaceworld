@@ -1,7 +1,6 @@
 UpdateSoftwareRTC::
 	push af
 
-	; 1. Increment sub-frames (0 to 59)
 	ld a, [wRTCSubFrames]
 	inc a
 	ld [wRTCSubFrames], a
@@ -10,7 +9,6 @@ UpdateSoftwareRTC::
 	xor a
 	ld [wRTCSubFrames], a
 
-	; 2. Increment real-second counter (0 to 4)
 	ld a, [wRTCFrames]     ; Reusing wRTCFrames as our 5-second counter
 	inc a
 	ld [wRTCFrames], a
@@ -19,7 +17,6 @@ UpdateSoftwareRTC::
 	xor a
 	ld [wRTCFrames], a
 
-	; 3. Increment 1 in-game minute
 	ld a, [wRTCMinutes]
 	inc a
 	ld [wRTCMinutes], a
@@ -28,7 +25,6 @@ UpdateSoftwareRTC::
 	xor a
 	ld [wRTCMinutes], a
 
-	; 4. Increment 1 in-game hour
 	ld a, [wRTCHours]
 	inc a
 	cp 24

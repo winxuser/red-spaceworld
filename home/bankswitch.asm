@@ -5,16 +5,12 @@ BankswitchHome::
 	ldh a, [hLoadedROMBank]
 	ld [wBankswitchHomeSavedROMBank], a
 	ld a, [wBankswitchHomeTemp]
-	ldh [hLoadedROMBank], a
-	ld [rROMB], a
-	ret
+	jp SetRomBank
 
 BankswitchBack::
 ; returns from BankswitchHome
 	ld a, [wBankswitchHomeSavedROMBank]
-	ldh [hLoadedROMBank], a
-	ld [rROMB], a
-	ret
+	jp SetRomBank
 
 Bankswitch::
 ; self-contained bankswitch, use this when not in the home bank
@@ -22,8 +18,7 @@ Bankswitch::
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, b
-	ldh [hLoadedROMBank], a
-	ld [rROMB], a
+	call SetRomBank
 	ld bc, .Return
 	push bc
 	jp hl
@@ -38,11 +33,10 @@ _LoadMapVramAndColors:
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(LoadMapVramAndColors)
-	ld [rROMB], a
+	call SetRomBank
 	call LoadMapVramAndColors
 	pop af
-	ld [rROMB], a
-	ret
+	jp SetRomBank
 
 SetRomBank::
 	ldh [hLoadedROMBank], a
