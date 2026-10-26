@@ -45,19 +45,17 @@ _EndNPCMovementScript::
 	ret
 
 PalletMovementScriptPointerTable::
-	dw PalletMovementScript_OakMoveLeft     ; Index 0
+	dw PalletMovementScript_OakMoveLeft      ; Index 0
 	dw PalletMovementScript_PlayerMoveLeft   ; Index 1
 	dw PalletMovementScript_WalkToLab        ; Index 2
 	dw PalletMovementScript_Done             ; Index 3
 
 PalletMovementScript_OakMoveLeft::
-	; Force the sprite engine to process Oak horizontally/manually
 	ld hl, wSpritePlayerStateData1 + 2
 	ld a, NPC_MOVEMENT_LEFT
 	ld [hl], a
 
 	ld hl, wNPCMovementDirections2
-
 	ld a, [wYCoord]
 	cp 9
 	jr nz, .buildLeftSteps
@@ -73,7 +71,7 @@ PalletMovementScript_OakMoveLeft::
 	dec b
 	jr nz, .walkLeftLoop
 
-	ld [hl], $ff            ; Terminator byte
+	ld [hl], $ff
 
 	ld a, [wSpriteIndex]
 	ldh [hSpriteIndex], a
@@ -82,8 +80,7 @@ PalletMovementScript_OakMoveLeft::
 
 	xor a
 	ld [wNumStepsToTake], a
-
-	ld a, $1                ; Move to index 1 (PlayerMoveLeft)
+	inc a
 	ld [wNPCMovementScriptFunctionNum], a
 
 	ld hl, wStatusFlags7
@@ -95,8 +92,8 @@ PalletMovementScript_OakMoveLeft::
 PalletMovementScript_PlayerMoveLeft:
 	ld a, [wStatusFlags5]
 	bit BIT_SCRIPTED_NPC_MOVEMENT, a
-	ret nz ; Wait here until Oak finishes his footsteps
-	; Force Oak to look left
+	ret nz
+
 	ld a, [wSpriteIndex]
 	swap a
 	ld l, a
@@ -115,21 +112,18 @@ PalletMovementScript_PlayerMoveLeft:
 	xor a
 	ld [wSpritePlayerStateData2MovementByte1], a
 
-	; Check which row the sequence started on
 	ld a, [wYCoord]
 	cp 9
 	jr z, .adjustForRow9
 
 	ld a, 4
 	ld [RLEList_ProfOakWalkToLab + 3], a
-	ld a, 4
 	ld [RLEList_PlayerWalkToLab + 3], a
 	jr .decodePaths
 
 .adjustForRow9
 	ld a, 3
 	ld [RLEList_ProfOakWalkToLab + 3], a
-	ld a, 3
 	ld [RLEList_PlayerWalkToLab + 3], a
 
 .decodePaths
@@ -172,32 +166,28 @@ PalletMovementScript_Done:
 	res BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld hl, wStatusFlags4
 	res BIT_INIT_SCRIPTED_MOVEMENT, [hl]
-	jp EndNPCMovementScript
+	jp _EndNPCMovementScript
 
 RLEList_ProfOakWalkToLab:
 	db NPC_MOVEMENT_RIGHT, 5
 	db NPC_MOVEMENT_DOWN, 4
 	db NPC_MOVEMENT_RIGHT, 5
 	db NPC_MOVEMENT_UP, 1
-	db -1 ; end
+	db -1
 
 RLEList_PlayerWalkToLab:
 	db PAD_UP, 3
 	db PAD_RIGHT, 5
 	db PAD_DOWN, 4
 	db PAD_RIGHT, 6
-	db -1 ; end
+	db -1
 
 PewterMuseumGuyMovementScriptPointerTable::
 	dw PewterMovementScript_WalkToMuseum
 	dw PewterMovementScript_Done
 
 PewterMovementScript_WalkToMuseum:
-;	ld a, 0 ; BANK(Music_MuseumGuy)
-;	ld [wAudioROMBank], a
-;	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_MUSEUM_GUY
-;	ld [wNewSoundID], a
 	call PlayMusic
 	ld a, [wSpriteIndex]
 	swap a
@@ -225,14 +215,14 @@ RLEList_PewterMuseumPlayer:
 	db PAD_UP, 3
 	db PAD_LEFT, 13
 	db PAD_UP, 6
-	db -1 ; end
+	db -1
 
 RLEList_PewterMuseumGuy:
 	db NPC_MOVEMENT_UP, 6
 	db NPC_MOVEMENT_LEFT, 13
 	db NPC_MOVEMENT_UP, 3
 	db NPC_MOVEMENT_LEFT, 1
-	db -1 ; end
+	db -1
 
 PewterMovementScript_Done:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -242,18 +232,14 @@ PewterMovementScript_Done:
 	res BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld hl, wStatusFlags4
 	res BIT_INIT_SCRIPTED_MOVEMENT, [hl]
-	jp EndNPCMovementScript
+	jp _EndNPCMovementScript
 
 PewterGymGuyMovementScriptPointerTable::
 	dw PewterMovementScript_WalkToGym
 	dw PewterMovementScript_Done
 
 PewterMovementScript_WalkToGym:
-;	ld a, 0 ; BANK(Music_MuseumGuy)
-;	ld [wAudioROMBank], a
-;	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_MUSEUM_GUY
-;	ld [wNewSoundID], a
 	call PlayMusic
 	ld a, [wSpriteIndex]
 	swap a
@@ -286,7 +272,7 @@ RLEList_PewterGymPlayer:
 	db PAD_LEFT, 11
 	db PAD_UP, 5
 	db PAD_LEFT, 15
-	db -1 ; end
+	db -1
 
 RLEList_PewterGymGuy:
 	db NPC_MOVEMENT_DOWN, 2
@@ -295,12 +281,12 @@ RLEList_PewterGymGuy:
 	db NPC_MOVEMENT_LEFT, 11
 	db NPC_MOVEMENT_DOWN, 5
 	db NPC_MOVEMENT_RIGHT, 3
-	db -1 ; end
+	db -1
 
 SetEnemyTrainerToStayAndFaceAnyDirection::
 	ld a, [wCurMap]
 	cp POKEMON_TOWER_7F
-	ret z ; the Rockets on Pokemon Tower 7F leave after battling, so don't set them
+	ret z
 	ld hl, RivalIDs
 	ld a, [wEngagedTrainerClass]
 	ld b, a
@@ -309,7 +295,7 @@ SetEnemyTrainerToStayAndFaceAnyDirection::
 	cp -1
 	jr z, .notRival
 	cp b
-	ret z ; the rival leaves after battling, so don't set him
+	ret z
 	jr .loop
 .notRival
 	ld a, [wSpriteIndex]
@@ -320,4 +306,4 @@ RivalIDs:
 	db OPP_RIVAL1
 	db OPP_RIVAL2
 	db OPP_RIVAL3
-	db -1 ; end
+	db -1

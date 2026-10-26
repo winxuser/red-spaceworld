@@ -11,19 +11,13 @@ DisplayPokemartDialogue_::
 	ld [wPlayerMonNumber], a
 	inc a
 	ld [wPrintItemPrices], a
+
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld a, BUY_SELL_QUIT_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-
-; This code is useless. It copies the address of the pokemart's inventory to hl,
-; but the address is never used.
-	ld hl, wItemListPointer
-	ld a, [hli]
-	ld l, [hl]
-	ld h, a
 
 	ld a, [wMenuExitMethod]
 	cp CANCELLED_MENU
@@ -32,14 +26,11 @@ DisplayPokemartDialogue_::
 	and a ; buying?
 	jp z, .buyMenu
 	dec a ; selling?
-	jp z, .sellMenu
+	jr z, .sellMenu
 	dec a ; quitting?
 	jp z, .done
-.sellMenu
 
-; the same variables are set again below, so this code has no effect
-	xor a
-	ld [wPrintItemPrices], a
+.sellMenu
 	ld a, INIT_BAG_ITEM_LIST
 	ld [wInitListType], a
 	callfar InitList
@@ -49,25 +40,29 @@ DisplayPokemartDialogue_::
 	jp z, .bagEmpty
 	ld hl, PokemonSellingGreetingText
 	rst _PrintText
-	call SaveScreenTilesToBuffer1 ; save screen
+	call SaveScreenTilesToBuffer1
+
 .sellMenuLoop
-	call LoadScreenTilesFromBuffer1 ; restore saved screen
+	call LoadScreenTilesFromBuffer1
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
-	call DisplayTextBoxID ; draw money text box
+	call DisplayTextBoxID
+
 	ld hl, wNumBagItems
 	ld a, l
 	ld [wListPointer], a
 	ld a, h
 	ld [wListPointer + 1], a
+
 	xor a
 	ld [wPrintItemPrices], a
 	ld [wCurrentMenuItem], a
 	ld a, ITEMLISTMENU
 	ld [wListMenuID], a
 	call DisplayListMenuID
-	jp c, .returnToMainPokemartMenu ; if the player closed the menu
-.confirmItemSale ; if the player is trying to sell a specific item
+	jp c, .returnToMainPokemartMenu
+
+.confirmItemSale
 	call IsKeyItem
 	ld a, [wIsKeyItem]
 	and a
@@ -75,26 +70,25 @@ DisplayPokemartDialogue_::
 	ld a, [wCurItem]
 	call IsItemHM
 	jr c, .unsellableItem
+
 	ld a, PRICEDITEMLISTMENU
 	ld [wListMenuID], a
-	ldh [hHalveItemPrices], a ; halve prices when selling
+	ldh [hHalveItemPrices], a
 	call DisplayChooseQuantityMenu
 	inc a
-	jr z, .sellMenuLoop ; if the player closed the choose quantity menu with the B button
+	jr z, .sellMenuLoop
+
 	ld hl, PokemartTellSellPriceText
-	lb bc, 14, 1 ; location that PrintText always prints to, this is useless
 	rst _PrintText
 	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
-	call DisplayTextBoxID ; yes/no menu
+	call DisplayTextBoxID
+
 	ld a, [wMenuExitMethod]
 	cp CHOSE_SECOND_ITEM
-	jr z, .sellMenuLoop ; if the player chose No or pressed the B button
-
-; The following code is supposed to check if the player chose No, but the above
-; check already catches it.
+	jr z, .sellMenuLoop
 	ld a, [wChosenMenuItem]
 	dec a
 	jr z, .sellMenuLoop
@@ -109,19 +103,20 @@ DisplayPokemartDialogue_::
 	call AddAmountSoldToMoney
 	ld hl, wNumBagItems
 	call RemoveItemFromInventory
-	jp .sellMenuLoop
+	jr .sellMenuLoop
+
 .unsellableItem
 	ld hl, PokemartUnsellableItemText
 	rst _PrintText
 	jp .returnToMainPokemartMenu
+
 .bagEmpty
 	ld hl, PokemartItemBagEmptyText
 	rst _PrintText
 	call SaveScreenTilesToBuffer1
 	jp .returnToMainPokemartMenu
-.buyMenu
 
-; the same variables are set again below, so this code has no effect
+.buyMenu
 	ld a, 1
 	ld [wPrintItemPrices], a
 	ld a, INIT_OTHER_ITEM_LIST
@@ -131,48 +126,52 @@ DisplayPokemartDialogue_::
 	ld hl, PokemartBuyingGreetingText
 	rst _PrintText
 	call SaveScreenTilesToBuffer1
+
 .buyMenuLoop
 	call LoadScreenTilesFromBuffer1
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
+
 	ld hl, wItemList
 	ld a, l
 	ld [wListPointer], a
 	ld a, h
 	ld [wListPointer + 1], a
+
 	xor a
 	ld [wCurrentMenuItem], a
 	inc a
 	ld [wPrintItemPrices], a
-	inc a ; a = 2 (PRICEDITEMLISTMENU)
+	inc a
 	ld [wListMenuID], a
 	call DisplayListMenuID
-	jr c, .returnToMainPokemartMenu ; if the player closed the menu
+	jr c, .returnToMainPokemartMenu
+
 	ld a, 99
 	ld [wMaxItemQuantity], a
 	xor a
-	ldh [hHalveItemPrices], a ; don't halve item prices when buying
+	ldh [hHalveItemPrices], a
 	call DisplayChooseQuantityMenu
 	inc a
-	jr z, .buyMenuLoop ; if the player closed the choose quantity menu with the B button
+	jr z, .buyMenuLoop
+
 	ld a, [wCurItem]
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	call CopyToStringBuffer
+
 	ld hl, PokemartTellBuyPriceText
 	rst _PrintText
 	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
-	call DisplayTextBoxID ; yes/no menu
+	call DisplayTextBoxID
+
 	ld a, [wMenuExitMethod]
 	cp CHOSE_SECOND_ITEM
-	jp z, .buyMenuLoop ; if the player chose No or pressed the B button
-
-; The following code is supposed to check if the player chose No, but the above
-; check already catches it.
+	jr z, .buyMenuLoop
 	ld a, [wChosenMenuItem]
 	dec a
 	jr z, .buyMenuLoop
@@ -184,6 +183,7 @@ DisplayPokemartDialogue_::
 	call AddItemToInventory
 	jr nc, .bagFull
 	call SubtractAmountPaidFromMoney
+
 	ld a, [wBoughtOrSoldItemInMart]
 	and a
 	jr nz, .skipSettingFlag2
@@ -196,6 +196,7 @@ DisplayPokemartDialogue_::
 	ld hl, PokemartBoughtItemText
 	rst _PrintText
 	jp .buyMenuLoop
+
 .returnToMainPokemartMenu
 	call LoadScreenTilesFromBuffer1
 	ld a, MONEY_BOX
@@ -204,19 +205,23 @@ DisplayPokemartDialogue_::
 	ld hl, PokemartAnythingElseText
 	rst _PrintText
 	jp .loop
+
 .isThereEnoughMoney
 	ld de, wPlayerMoney
 	ld hl, hMoney
-	ld c, 3 ; length of money in bytes
+	ld c, 3
 	jp StringCmp
+
 .notEnoughMoney
 	ld hl, PokemartNotEnoughMoneyText
 	rst _PrintText
 	jr .returnToMainPokemartMenu
+
 .bagFull
 	ld hl, PokemartItemBagFullText
 	rst _PrintText
 	jr .returnToMainPokemartMenu
+
 .done
 	ld hl, PokemartThankYouText
 	rst _PrintText

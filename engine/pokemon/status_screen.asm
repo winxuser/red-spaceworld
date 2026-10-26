@@ -45,7 +45,7 @@ DrawHP_:
 	ldh a, [hUILayoutFlags]
 	bit BIT_PARTY_MENU_HP_BAR, a
 	jr z, .printFractionBelowBar
-	ld bc, $9 ; right of bar
+	ld bc, 9 ; right of bar
 	jr .printFraction
 
 .printFractionBelowBar
@@ -162,7 +162,7 @@ StatusScreen:
 	ld a, [wCurrentMenuItem]
 	and a
 	jr z, .drawPage1
-	cp 1
+	dec a
 	jp z, .drawPage2
 	jp .drawPage3
 
@@ -330,7 +330,7 @@ StatusScreen:
 	jr nz, .printMovePPLoop
 
 .ppPrintingDone
-	jp .waitForInput
+	jr .waitForInput
 
 .drawPage3
 	call DrawVerticalDivider
@@ -354,7 +354,7 @@ StatusScreen:
 
 	ld d, STATUS_SCREEN_STATS_BOX
 	call PrintStatsBox
-	jr .waitForInput
+	; fall through to .waitForInput
 
 .waitForInput
 	call Delay3
@@ -381,22 +381,24 @@ StatusScreen:
 	jr .waitForInput
 
 .pressedRight
-	ld a, [wCurrentMenuItem]
+	ld hl, wCurrentMenuItem
+	ld a, [hl]
 	inc a
 	cp 3
-	jr nz, .savePage
+	jr c, .savePage
 	xor a
 	jr .savePage
 
 .pressedLeft
-	ld a, [wCurrentMenuItem]
+	ld hl, wCurrentMenuItem
+	ld a, [hl]
 	dec a
 	cp -1
 	jr nz, .savePage
 	ld a, 2
 
 .savePage
-	ld [wCurrentMenuItem], a
+	ld [hl], a
 	jp .pageLoop
 
 .exitStatus

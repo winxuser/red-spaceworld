@@ -1,13 +1,6 @@
 ; INPUTS - Mon DVs in de, species in wGenderTemp
 ; OUTPUT - Mon's gender in wGenderTemp
 GetMonGender::
-	ld hl, MonGenderRatios
-	ld a, [wGenderTemp]
-	dec a
-	ld c, a
-	ld b, 0
-	add hl, bc ; hl now points to the species gender ratio
-
 ; Attack DV
 	ld a, [de]
 	and $f0
@@ -21,7 +14,13 @@ GetMonGender::
 	or b
 	ld b, a ; b now has the combined DVs
 
-; Get the gender ratio
+; Get the gender ratio pointer using de for the table base
+	ld a, [wGenderTemp]
+	dec a
+	ld l, a
+	ld h, 0
+	ld de, MonGenderRatios
+	add hl, de
 	ld a, [hl]
 
 ; Check for always one or another

@@ -1239,10 +1239,6 @@ wTrainerPicPointer:: dw
 
 	ds 1
 
-wTimeOfDayPalettesNeedUpdate:: db
-wRTCSubFrames::                db
-wRTCFrames::                   db
-
 UNION
 wTempMoveNameBuffer:: ds MOVE_NAME_LENGTH
 NEXTU
@@ -2203,7 +2199,7 @@ wLinkEnemyTrainerName:: ds NAME_LENGTH
 
 wSerialEnemyDataBlock:: ; ds $1a8
 
-	ds 9
+	ds 6
 
 wEnemyPartyCount:: db
 wEnemyPartySpecies:: ds PARTY_LENGTH + 1
@@ -2230,7 +2226,7 @@ ENDR
 
 wTrainerHeaderPtr:: dw
 
-	ds 6
+;	ds 6
 
 ; the trainer the player must face after getting a wrong answer in the Cinnabar
 ; gym quiz
@@ -2240,7 +2236,7 @@ wOpponentAfterWrongAnswer:: db
 ; mostly copied from map-specific map script pointer and written back later
 wCurMapScript:: db
 
-	ds 7
+;	ds 7
 
 wPlayTimeHours:: db
 wPlayTimeMaxed:: db
@@ -2261,10 +2257,13 @@ wDayCareMonOT::   ds NAME_LENGTH
 
 wDayCareMon:: box_struct wDayCareMon
 
-wRTCSeconds::   ds 1
-wRTCMinutes::   ds 1
-wRTCHours::     ds 1
-wRTCDays::      ds 1
+wRTCSeconds:: db
+wRTCMinutes:: db
+wRTCHours::   db
+wRTCDays::    db
+wTimeOfDayPalettesNeedUpdate:: db
+wRTCSubFrames::                db
+wRTCFrames::                   db
 wLastTimeOfDayStage:: db
 
 wGenderTemp:: db
