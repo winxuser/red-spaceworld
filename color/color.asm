@@ -396,14 +396,19 @@ ENDC
 
 	CALL_INDIRECT ClearSpritePaletteMap
 
-	ld a, 3
-	ld [W2_StaticPaletteMapChanged], a
-	xor a
-	ld [W2_TileBasedPalettes], a
+    ld a, 3
+    ld [W2_StaticPaletteMapChanged], a
+    xor a
+    ld [W2_TileBasedPalettes], a
 
-	;xor a
-	ldh [rWBK], a
-	ret
+    ; Force the new Pokémon background palette to refresh.
+    ld a, 1
+    ld [W2_ForceBGPUpdate], a
+
+    ; Restore WRAM bank 0.
+    xor a
+    ldh [rWBK], a
+    ret
 
 ; Slots
 SetPal_Slots:

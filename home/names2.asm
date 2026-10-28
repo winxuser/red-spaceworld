@@ -7,6 +7,8 @@ NamePointers::
 	dw wPartyMonOT ; player's OT names list
 	dw wEnemyMonOT ; enemy's OT names list
 	dw TrainerNames
+	dw PokedexMonsterNames ; this is number 8 in the list, so we reference which number it is later on in the code
+
 
 GetName::
 ; arguments:
@@ -39,7 +41,15 @@ GetName::
 	jr nz, .otherEntries
 	; 1 = MONSTER_NAME
 	call GetMonName
+; Check if getting pokemon name vs pokedex index pokemon name
+	ld a, [wNameListType]
+	cp 8 ; PokedexMonsterNames is 8 in list, check if we want that
+	jr z, .usePokedexLength ; use special routine involving special length for pokedex names
 	ld hl, NAME_LENGTH
+	jr .continue
+.usePokedexLength
+	ld hl, POKEDEX_NAME_LENGTH ; New code for Pokedex name length
+.continue
 	add hl, de
 	ld e, l
 	ld d, h

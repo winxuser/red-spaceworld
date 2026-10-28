@@ -1,7 +1,7 @@
 ; $00-$17 are TX_* constants (see macros/scripts/text.asm)
 
 ; Control characters (see home/text.asm)
-
+	charmap "<LF>",		 $1f ; "line feed", used on town map names
 	charmap "<NULL>",    $00
 	charmap "<PAGE>",    $49
 	charmap "<PKMN>",    $4a ; "<PK><MN>"

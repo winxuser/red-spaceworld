@@ -24,6 +24,32 @@ GetMonName::
 	pop hl
 	ret
 
+GetPokedexMonName::
+	push hl
+	ldh a, [hLoadedROMBank]
+	push af
+	ld a, BANK(PokedexMonsterNames) ; gets the list named "PokedexMonsterNames"
+	ldh [hLoadedROMBank], a
+	ld [rROMB], a
+	ld a, [wNamedObjectIndex]
+	dec a
+	ld hl, PokedexMonsterNames
+	ld c, POKEDEX_NAME_LENGTH -1
+	ld b, 0
+	call AddNTimes
+	ld de, wNameBuffer
+	push de
+	ld bc, POKEDEX_NAME_LENGTH - 1
+	rst _CopyData
+	ld hl, wNameBuffer + POKEDEX_NAME_LENGTH - 1
+	ld [hl], '@'
+	pop de
+	pop af
+	ldh [hLoadedROMBank], a
+	ld [rROMB], a
+	pop hl
+	ret
+
 GetItemName::
 ; given an item ID at [wNamedObjectIndex], store the name of the item in wNameBuffer
 	push hl

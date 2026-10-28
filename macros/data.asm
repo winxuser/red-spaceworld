@@ -93,3 +93,18 @@ MACRO? dname
 	db \1
 	ds n - CHARLEN(\1), '@'
 ENDM
+
+MACRO dpname
+	IF _NARG == 2
+		DEF n = \2
+	ELSE
+		DEF n = POKEDEX_NAME_LENGTH -1
+	ENDC
+	ASSERT STRFIND(\1, "@") == -1, "String terminator \"@\" in name: \1"
+	ASSERT CHARLEN(\1) <= (n - 1), "Name too long: \1"
+	db \1
+	ds n - CHARLEN(\1) - 1, '-' ; pad remaining space with hyphens
+	db "@"                      ; terminator byte as the final entry byte
+ENDM
+
+
