@@ -13,7 +13,7 @@ Overworld_Coll::
 
 RedsHouse1_Coll::
 RedsHouse2_Coll::
-	coll_tiles $01, $02, $03, $11, $12, $13, $14, $1c, $1a
+	coll_tiles $01, $02, $03, $04, $11, $12, $13, $14, $1c, $1a
 
 Pokecenter_Coll::
 	coll_tiles $11, $12, $2a, $2b, $3a, $3b, $3e, $42, $43, $52, $53, $54, $55
@@ -26,7 +26,7 @@ Forest_Coll::
 	coll_tiles $00, $04, $05, $06, $24, $29, $54, $5a
 
 House_Coll::
-	coll_tiles $01, $02, $03, $10, $12, $13, $14, $44, $45, $46, $54, $55, $56
+	coll_tiles $01, $02, $03, $04, $10, $12, $13, $14, $44, $45, $46, $54, $55, $56, $5c, $5e
 
 ForestGate_Coll::
 Museum_Coll::
