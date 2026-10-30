@@ -36,4 +36,6 @@ DEF MAP_TILESET_SIZE EQU $60 ; tiles
 	const KANTO_TS
 	const NORTH_CITY_TS
 	const SOUTH_CITY_TS
+	const TOWER
+	const TRADITIONAL_HOUSE
 DEF NUM_TILESETS EQU const_value

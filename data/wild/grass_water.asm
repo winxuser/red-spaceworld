@@ -14,6 +14,7 @@ WildDataPointers:
 	dw NothingWildMons          ; BLUE_FOREST
 	dw NothingWildMons          ; NORTH_CITY
 	dw NothingWildMons          ; SUGAR
+	dw NothingWildMons          ; MT_FUJI
 	dw Route1WildMons           ; ROUTE_1
 	dw Route1P2WildMons         ; ROUTE_1_P2 unused map 6A
 	dw Route2WildMons           ; ROUTE_2
@@ -40,24 +41,33 @@ WildDataPointers:
 	dw Route23WildMons          ; ROUTE_23
 	dw Route24WildMons          ; ROUTE_24
 	dw Route25WildMons          ; ROUTE_25
+	dw NothingWildMons          ; ROUTE_26
+	dw NothingWildMons          ; ROUTE_29
+	dw NothingWildMons          ; ROUTE_30
 	dw NothingWildMons          ; REDS_HOUSE_1F
 	dw NothingWildMons          ; REDS_HOUSE_2F
 	dw NothingWildMons          ; BLUES_HOUSE
 	dw NothingWildMons          ; OAKS_LAB
 	dw NothingWildMons          ; SILENT_HILL_POKECENTER unused map 69
 	dw NothingWildMons          ; ROUTE_1_GATE_1F  UNUSED_MAP_6C
-	dw NothingWildMons          ; OLD_CITY_POKECENTER_1F UNUSED_MAP_6B
-	dw NothingWildMons          ; VIRIDIAN_MART
-	dw NothingWildMons          ; VIRIDIAN_SCHOOL_HOUSE
-	dw NothingWildMons          ; VIRIDIAN_NICKNAME_HOUSE
-	dw NothingWildMons          ; VIRIDIAN_GYM
-	dw NothingWildMons          ; DIGLETTS_CAVE_ROUTE_2
-	dw NothingWildMons          ; VIRIDIAN_FOREST_NORTH_GATE
-	dw NothingWildMons          ; ROUTE_2_TRADE_HOUSE
-	dw NothingWildMons          ; ROUTE_2_GATE
-	dw NothingWildMons          ; VIRIDIAN_FOREST_SOUTH_GATE
+	dw NothingWildMons          ; ROUTE_23_GATE
 	dw SilentHillsWildMons      ; SILENT_HILLS UNUSED_MAP_6D
-	dw NothingWildMons          ; MUSEUM_1F
+	dw NothingWildMons          ; OLD_CITY_POKECENTER_1F UNUSED_MAP_6B
+	dw NothingWildMons          ; OLD_CITY_MART
+	dw NothingWildMons          ; OLD_CITY_SCHOOL
+	dw NothingWildMons          ; OLD_CITY_HOUSE
+	dw NothingWildMons          ; OLD_CITY_GYM
+	dw NothingWildMons          ; OLD_CITY_MUSEUM
+	dw OldCityTower1FWildMons   ; OLD_CITY_TOWER_1F
+	dw OldCityTower2FWildMons   ; OLD_CITY_TOWER_2F
+	dw OldCityTower3FWildMons   ; OLD_CITY_TOWER_3F
+	dw OldCityTower4FWildMons   ; OLD_CITY_TOWER_4F
+	dw OldCityTower5FWildMons   ; OLD_CITY_TOWER_5F
+	dw NothingWildMons          ; OLD_CITY_KURTS_HOUSE
+	dw NothingWildMons          ; OLD_CITY_POKECENTER_2F
+	dw NothingWildMons          ; ROUTE_2_GATE
+	dw NothingWildMons          ; ROUTE_2_HOUSE
+	dw NothingWildMons          ; VIRIDIAN_FOREST_SOUTH_GATE
 	dw NothingWildMons          ; MUSEUM_2F
 	dw NothingWildMons          ; PEWTER_GYM
 	dw NothingWildMons          ; PEWTER_NIDORAN_HOUSE
@@ -116,7 +126,6 @@ WildDataPointers:
 	dw NothingWildMons          ; UNUSED_MAP_72
 	dw NothingWildMons          ; UNUSED_MAP_73
 	dw NothingWildMons          ; UNUSED_MAP_74
-	dw NothingWildMons          ; UNUSED_MAP_75
 	dw NothingWildMons          ; HALL_OF_FAME
 	dw NothingWildMons          ; UNDERGROUND_PATH_NORTH_SOUTH
 	dw NothingWildMons          ; CHAMPIONS_ROOM
@@ -141,13 +150,8 @@ WildDataPointers:
 	dw NothingWildMons          ; CELADON_CHIEF_HOUSE
 	dw NothingWildMons          ; CELADON_HOTEL
 	dw NothingWildMons          ; LAVENDER_POKECENTER
-	dw PokemonTower1FWildMons   ; POKEMON_TOWER_1F
-	dw PokemonTower2FWildMons   ; POKEMON_TOWER_2F
-	dw PokemonTower3FWildMons   ; POKEMON_TOWER_3F
-	dw PokemonTower4FWildMons   ; POKEMON_TOWER_4F
-	dw PokemonTower5FWildMons   ; POKEMON_TOWER_5F
-	dw PokemonTower6FWildMons   ; POKEMON_TOWER_6F
-	dw PokemonTower7FWildMons   ; POKEMON_TOWER_7F
+	dw NothingWildMons          ; POKEMON_TOWER_6F
+	dw NothingWildMons          ; POKEMON_TOWER_7F
 	dw NothingWildMons          ; MR_FUJIS_HOUSE
 	dw NothingWildMons          ; LAVENDER_MART
 	dw NothingWildMons          ; LAVENDER_CUBONE_HOUSE
@@ -204,8 +208,6 @@ WildDataPointers:
 	dw NothingWildMons          ; ROCKET_HIDEOUT_B4F
 	dw NothingWildMons          ; ROCKET_HIDEOUT_ELEVATOR
 	dw NothingWildMons          ; UNUSED_MAP_CC
-	dw NothingWildMons          ; UNUSED_MAP_CD
-	dw NothingWildMons          ; UNUSED_MAP_CE
 	dw NothingWildMons          ; SILPH_CO_2F
 	dw NothingWildMons          ; SILPH_CO_3F
 	dw NothingWildMons          ; SILPH_CO_4F
@@ -230,13 +232,11 @@ WildDataPointers:
 	dw CeruleanCave1FWildMons   ; CERULEAN_CAVE_1F
 	dw NothingWildMons          ; NAME_RATERS_HOUSE
 	dw NothingWildMons          ; CERULEAN_BADGE_HOUSE
-	dw NothingWildMons          ; UNUSED_MAP_E7
 	dw RockTunnelB1FWildMons    ; ROCK_TUNNEL_B1F
 	dw NothingWildMons          ; SILPH_CO_9F
 	dw NothingWildMons          ; SILPH_CO_10F
 	dw NothingWildMons          ; SILPH_CO_11F
 	dw NothingWildMons          ; SILPH_CO_ELEVATOR
-	dw NothingWildMons          ; UNUSED_MAP_ED
 	dw NothingWildMons          ; UNUSED_MAP_EE
 	dw NothingWildMons          ; TRADE_CENTER
 	dw NothingWildMons          ; COLOSSEUM
@@ -282,11 +282,11 @@ INCLUDE "data/wild/maps/Route10.asm"
 INCLUDE "data/wild/maps/Route12.asm"
 INCLUDE "data/wild/maps/Route8.asm"
 INCLUDE "data/wild/maps/Route7.asm"
-INCLUDE "data/wild/maps/PokemonTower1F.asm"
-INCLUDE "data/wild/maps/PokemonTower2F.asm"
-INCLUDE "data/wild/maps/PokemonTower3F.asm"
-INCLUDE "data/wild/maps/PokemonTower4F.asm"
-INCLUDE "data/wild/maps/PokemonTower5F.asm"
+INCLUDE "data/wild/maps/OldCityTower1F.asm"
+INCLUDE "data/wild/maps/OldCityTower2F.asm"
+INCLUDE "data/wild/maps/OldCityTower3F.asm"
+INCLUDE "data/wild/maps/OldCityTower4F.asm"
+INCLUDE "data/wild/maps/OldCityTower5F.asm"
 INCLUDE "data/wild/maps/PokemonTower6F.asm"
 INCLUDE "data/wild/maps/PokemonTower7F.asm"
 INCLUDE "data/wild/maps/Route13.asm"

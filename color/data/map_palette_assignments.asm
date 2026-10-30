@@ -39,6 +39,8 @@ MapPaletteAssignments:
 	dw KantoPalMap        ; KANTO
 	dw NorthCityPalMap    ; NORTH_CITY
 	dw SouthCityPalMap    ; SOUTH_CITY
+	dw TowerPalMap        ; TOWER
+	dw TraditionalHousePalMap; TRADITIONAL_HOOUSE
 	assert_table_length NUM_TILESETS
 
 OverworldPalMap:
@@ -132,3 +134,8 @@ NorthCityPalMap:
 SouthCityPalMap:
 	INCLUDE "color/tilesets/south_city_ts.asm"
 
+TowerPalMap:
+	INCLUDE "color/tilesets/tower.asm"
+
+TraditionalHousePalMap:
+	INCLUDE "color/tilesets/traditional_house.asm"

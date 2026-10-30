@@ -67,7 +67,6 @@ InternalMapEntries:
 	indoor_map SILENT_HILL,        10, 12, SilentHillName
 	indoor_map OLD_CITY,            2,  8, OldCityName
 	indoor_map ROUTE_2,             8, 11, Route2Name
-	indoor_map SILENT_HILLS,        8, 12, SilentHillsName
 	indoor_map WEST_CITY,           2,  3, WestCityName
 	indoor_map MT_MOON,             6,  2, MountMoonName
 	indoor_map BIRDON,             10,  2, BirdonName

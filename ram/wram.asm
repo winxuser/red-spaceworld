@@ -939,7 +939,7 @@ wPayDayMoney:: ds 3
 
 NEXTU
 ; evolution data for one mon
-wEvoDataBuffer:: ds NUM_EVOS_IN_BUFFER * 4 + 1 ; enough for Eevee's three 4-byte evolutions and 0 terminator
+wEvoDataBuffer:: ds 6 * 4 + 1 ; enough for Eevee's three 4-byte evolutions and 0 terminator
 wEvoDataBufferEnd::
 
 NEXTU
@@ -1782,8 +1782,12 @@ wMainDataStart::
 wPokedexOwned:: flag_array NUM_POKEMON
 wPokedexOwnedEnd::
 
+ds 2
+
 wPokedexSeen:: flag_array NUM_POKEMON
 wPokedexSeenEnd::
+
+ds 2
 
 wNumBagItems:: db
 ; item, quantity
@@ -1995,7 +1999,7 @@ wCeruleanCityCurScript:: db
 	ds 7
 wSSAnneBowCurScript:: db
 wSilentHillsCurScript:: db
-wMuseum1FCurScript:: db
+wOldCityMuseumCurScript:: db
 wRoute13CurScript:: db
 wRoute14CurScript:: db
 wRoute17CurScript:: db
@@ -2013,9 +2017,9 @@ wRoute18CurScript:: db
 wRoute20CurScript:: db
 wSSAnneB1FRoomsCurScript:: db
 wVermilionCityCurScript:: db
-wPokemonTower2FCurScript:: db
-wPokemonTower3FCurScript:: db
-wPokemonTower4FCurScript:: db
+wOldCityTower2FCurScript:: db
+wOldCityTower3FCurScript:: db
+wOldCityTower4FCurScript:: db
 wPokemonTower5FCurScript:: db
 wPokemonTower6FCurScript:: db
 wPokemonTower7FCurScript:: db
@@ -2057,10 +2061,10 @@ wLancesRoomCurScript:: db
 	ds 4
 wSilphCo10FCurScript:: db
 wSilphCo11FCurScript:: db
-	ds 1
+;	ds 1
 wFuchsiaGymCurScript:: db
 wSaffronGymCurScript:: db
-	ds 1
+;	ds 1
 wCinnabarGymCurScript:: db
 wGameCornerCurScript:: db
 wRoute16Gate1FCurScript:: db
@@ -2068,13 +2072,13 @@ wBillsHouseCurScript:: db
 wRoute5GateCurScript:: db
 wPowerPlantCurScript:: ; overload
 wRoute7GateCurScript:: db
-	ds 1
+;	ds 1
 wSSAnne2FCurScript:: db
 wSeafoamIslandsB3FCurScript:: db
 wRoute23CurScript:: db
 wSeafoamIslandsB4FCurScript:: db
 wRoute18Gate1FCurScript:: db
-	ds 6
+;	ds 4
 wGameProgressFlagsEnd::
 
 UNION
@@ -2093,7 +2097,7 @@ wObtainedHiddenCoinsFlags:: flag_array MAX_HIDDEN_COINS
 ; $02 = surfing
 wWalkBikeSurfState:: db
 
-	ds 10
+;	ds 10 ; can add stuff here
 
 wTownVisitedFlag:: flag_array NUM_CITY_MAPS
 
@@ -2142,6 +2146,7 @@ wWhichDungeonWarp:: db
 wUnusedCardKeyGateID:: db
 
 	ds 8
+
 
 wStatusFlags1:: db
 	ds 1
@@ -2236,7 +2241,6 @@ wOpponentAfterWrongAnswer:: db
 ; mostly copied from map-specific map script pointer and written back later
 wCurMapScript:: db
 
-;	ds 7
 
 wPlayTimeHours:: db
 wPlayTimeMaxed:: db

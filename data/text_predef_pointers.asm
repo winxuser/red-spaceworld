@@ -35,8 +35,8 @@ TextPredefs::
 	add_tx_pre UnusedBenchGuyText3                  ; 1D XXX unused
 	add_tx_pre UnusedPredefText                     ; 1E XXX unused
 	add_tx_pre PokemonCenterPCText                  ; 1F
-	add_tx_pre ViridianSchoolNotebook               ; 20
-	add_tx_pre ViridianSchoolBlackboard             ; 21
+	add_tx_pre OldCitySchoolNotebook                ; 20
+	add_tx_pre OldCitySchoolBlackboard              ; 21
 	add_tx_pre JustAMomentText                      ; 22
 	add_tx_pre OpenBillsPCText                      ; 23
 	add_tx_pre FoundHiddenItemText                  ; 24

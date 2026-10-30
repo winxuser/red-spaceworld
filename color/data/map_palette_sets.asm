@@ -34,6 +34,8 @@ MapPaletteSets:
 	dw KantoPalSet
 	dw NorthCityPalSet
 	dw SouthCityPalSet
+	dw TowerPalSet
+	dw TraditionalHousePalSet
 	assert_table_length NUM_TILESETS
 
 SouthCityPalSet:
@@ -68,6 +70,8 @@ ShipPalSet:
 ShipPortPalSet:
 ClubPalSet:
 FacilityPalSet:
+TowerPalSet:
+TraditionalHousePalSet:
 	db INDOOR_GRAY
 	db INDOOR_RED
 	db INDOOR_GREEN

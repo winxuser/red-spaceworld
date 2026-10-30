@@ -96,7 +96,7 @@ ENDM
 
 	toggle_consts_for OLD_CITY_GYM
 
-	toggle_consts_for MUSEUM_1F
+	toggle_consts_for OLD_CITY_MUSEUM
 	const TOGGLE_OLD_AMBER                     ; 34
 
 	toggle_consts_for CERULEAN_CAVE_1F
@@ -104,19 +104,19 @@ ENDM
 	const TOGGLE_CERULEAN_CAVE_1F_ITEM_2       ; 36 X
 	const TOGGLE_CERULEAN_CAVE_1F_ITEM_3       ; 37 X
 
-	toggle_consts_for POKEMON_TOWER_2F
-	const TOGGLE_POKEMON_TOWER_2F_RIVAL        ; 38
+	toggle_consts_for OLD_CITY_TOWER_2F
+	const TOGGLE_OLD_CITY_TOWER_2F_RIVAL        ; 38
 
-	toggle_consts_for POKEMON_TOWER_3F
-	const TOGGLE_POKEMON_TOWER_3F_ITEM         ; 39 X
+	toggle_consts_for OLD_CITY_TOWER_3F
+	const TOGGLE_OLDCITYTOWER_3F_ITEM         ; 39 X
 
-	toggle_consts_for POKEMON_TOWER_4F
-	const TOGGLE_POKEMON_TOWER_4F_ITEM_1       ; 3A X
-	const TOGGLE_POKEMON_TOWER_4F_ITEM_2       ; 3B X
-	const TOGGLE_POKEMON_TOWER_4F_ITEM_3       ; 3C X
+	toggle_consts_for OLD_CITY_TOWER_4F
+	const TOGGLE_OLDCITY_TOWER_4F_ITEM_1       ; 3A X
+	const TOGGLE_OLDCITY_TOWER_4F_ITEM_2       ; 3B X
+	const TOGGLE_OLDCITY_TOWER_4F_ITEM_3       ; 3C X
 
-	toggle_consts_for POKEMON_TOWER_5F
-	const TOGGLE_POKEMON_TOWER_5F_ITEM         ; 3D X
+;	toggle_consts_for OLD_CITY_TOWER_5F
+;	const TOGGLE_POKEMON_TOWER_5F_ITEM         ; 3D X
 
 	toggle_consts_for POKEMON_TOWER_6F
 	const TOGGLE_POKEMON_TOWER_6F_ITEM_1       ; 3E X

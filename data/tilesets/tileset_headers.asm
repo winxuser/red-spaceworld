@@ -42,4 +42,6 @@ Tilesets:
 	tileset KantoTS,       -1, -1, -1, $04, TILEANIM_WATER_FLOWER
 	tileset NorthCityTS,   -1, -1, -1, $04, TILEANIM_WATER_FLOWER
 	tileset SouthCityTS,   -1, -1, -1, $04, TILEANIM_WATER_FLOWER
+	tileset Tower,         -1, -1, -1,  -1, TILEANIM_NONE
+	tileset TraditionalHouse,-1, -1, -1,  -1, TILEANIM_NONE
 	assert_table_length NUM_TILESETS

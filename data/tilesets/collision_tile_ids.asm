@@ -16,7 +16,7 @@ RedsHouse2_Coll::
 	coll_tiles $01, $02, $03, $11, $12, $13, $14, $1c, $1a
 
 Pokecenter_Coll::
-	coll_tiles $11, $12, $3b, $3e
+	coll_tiles $11, $12, $2a, $2b, $3a, $3b, $3e, $42, $43, $52, $53, $54, $55
 
 Dojo_Coll::
 Gym_Coll::
@@ -26,7 +26,7 @@ Forest_Coll::
 	coll_tiles $00, $04, $05, $06, $24, $29, $54, $5a
 
 House_Coll::
-	coll_tiles $01, $04, $05, $12, $14, $5c, $5e,
+	coll_tiles $01, $02, $03, $10, $12, $13, $14, $44, $45, $46, $54, $55, $56
 
 ForestGate_Coll::
 Museum_Coll::
@@ -100,3 +100,9 @@ SouthCityTS_Coll::
 
 SugarTS_Coll::
 	coll_tiles $00, $03, $04, $05, $06, $07, $29, $53, $54
+
+Tower_Coll::
+	coll_tiles $0c, $0d, $10, $1c, $1d, $1e, $1f, $21, $3d, $48, $49, $4a, $4b, $4c, $56, $58
+
+TraditionalHouse_Coll::
+	coll_tiles $01, $02, $03, $04, $10, $12, $13, $14, $44, $45, $46, $54, $55, $56

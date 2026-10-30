@@ -10,30 +10,30 @@ TMNotebook::
 	text_waitbutton
 	text_end
 
-ViridianSchoolNotebook::
+OldCitySchoolNotebook::
 	text_asm
-	ld hl, ViridianSchoolNotebookText1
-	call PrintText
+	ld hl, OldCitySchoolNotebookText1
+	rst _PrintText
 	call TurnPageSchoolNotebook
 	jr nz, .doneReading
-	ld hl, ViridianSchoolNotebookText2
-	call PrintText
+	ld hl, OldCitySchoolNotebookText2
+	rst _PrintText
 	call TurnPageSchoolNotebook
 	jr nz, .doneReading
-	ld hl, ViridianSchoolNotebookText3
-	call PrintText
+	ld hl, OldCitySchoolNotebookText3
+	rst _PrintText
 	call TurnPageSchoolNotebook
 	jr nz, .doneReading
-	ld hl, ViridianSchoolNotebookText4
-	call PrintText
-	ld hl, ViridianSchoolNotebookText5
-	call PrintText
+	ld hl, OldCitySchoolNotebookText4
+	rst _PrintText
+	ld hl, OldCitySchoolNotebookText5
+	rst _PrintText
 .doneReading
-	jp TextScriptEnd
+	rst TextScriptEnd
 
 TurnPageSchoolNotebook:
 	ld hl, TurnPageText
-	call PrintText
+	rst _PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -43,23 +43,23 @@ TurnPageText:
 	text_far _TurnPageText
 	text_end
 
-ViridianSchoolNotebookText5:
-	text_far _ViridianSchoolNotebookText5
+OldCitySchoolNotebookText5:
+	text_far _OldCitySchoolNotebookText5
 	text_waitbutton
 	text_end
 
-ViridianSchoolNotebookText1:
-	text_far _ViridianSchoolNotebookText1
+OldCitySchoolNotebookText1:
+	text_far _OldCitySchoolNotebookText1
 	text_end
 
-ViridianSchoolNotebookText2:
-	text_far _ViridianSchoolNotebookText2
+OldCitySchoolNotebookText2:
+	text_far _OldCitySchoolNotebookText2
 	text_end
 
-ViridianSchoolNotebookText3:
-	text_far _ViridianSchoolNotebookText3
+OldCitySchoolNotebookText3:
+	text_far _OldCitySchoolNotebookText3
 	text_end
 
-ViridianSchoolNotebookText4:
-	text_far _ViridianSchoolNotebookText4
+OldCitySchoolNotebookText4:
+	text_far _OldCitySchoolNotebookText4
 	text_end

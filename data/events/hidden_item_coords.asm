@@ -17,7 +17,7 @@ HiddenItemCoords:
 	hidden_item ROCKET_HIDEOUT_B1F,            21,  15
 	hidden_item ROCKET_HIDEOUT_B3F,            27,  17
 	hidden_item ROCKET_HIDEOUT_B4F,            25,   1
-	hidden_item POKEMON_TOWER_5F,               4,  12
+;	hidden_item OLD_CITY_TOWER_5F,              4,  12
 	hidden_item ROUTE_13,                       1,  14
 	hidden_item ROUTE_13,                      16,  13
 	hidden_item POKEMON_MANSION_B1F,            1,   9

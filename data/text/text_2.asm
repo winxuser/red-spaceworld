@@ -489,12 +489,12 @@ _TurnPageText::
 	text "Turn the page?"
 	done
 
-_ViridianSchoolNotebookText5::
+_OldCitySchoolNotebookText5::
 	text "GIRL: Hey! Don't"
 	line "look at my notes!@"
 	text_end
 
-_ViridianSchoolNotebookText1::
+_OldCitySchoolNotebookText1::
 	text "Looked at the"
 	line "notebook!"
 
@@ -513,7 +513,7 @@ _ViridianSchoolNotebookText1::
 	cont "#MON trainers."
 	prompt
 
-_ViridianSchoolNotebookText2::
+_OldCitySchoolNotebookText2::
 	text "Second page..."
 
 	para "A healthy #MON"
@@ -526,7 +526,7 @@ _ViridianSchoolNotebookText2::
 	cont "effective!"
 	prompt
 
-_ViridianSchoolNotebookText3::
+_OldCitySchoolNotebookText3::
 	text "Third page..."
 
 	para "#MON trainers"
@@ -539,7 +539,7 @@ _ViridianSchoolNotebookText3::
 	cont "at #MON GYMs."
 	prompt
 
-_ViridianSchoolNotebookText4::
+_OldCitySchoolNotebookText4::
 	text "Fourth page..."
 
 	para "The goal for"
@@ -636,14 +636,14 @@ _LinkCableInfoText3::
 	cont "#MON."
 	prompt
 
-_ViridianSchoolBlackboardText1::
+_OldCitySchoolBlackboardText1::
 	text "The blackboard"
 	line "describes #MON"
 	cont "STATUS changes"
 	cont "during battles."
 	prompt
 
-_ViridianSchoolBlackboardText2::
+_OldCitySchoolBlackboardText2::
 	text "Which heading do"
 	line "you want to read?"
 	done

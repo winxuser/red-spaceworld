@@ -52,18 +52,24 @@ MapHeaderPointers::
 	dw SilentHillPokecenter_h      ; UNUSED_MAP_69
 	dw Route1Gate1F_h              ; UNUSED_MAP_6B
 	dw Route23Gate_h               ; UNUSED_MAP_75
+	dw SilentHills_h               ; UNUSED_MAP_6D
 	dw OldCityPokecenter1F_h
 	dw OldCityMart_h
-	dw ViridianSchoolHouse_h
-	dw ViridianNicknameHouse_h
+	dw OldCitySchool_h
+	dw OldCityHouse_h
 	dw OldCityGym_h
-	dw DiglettsCaveRoute2_h
-	dw ViridianForestNorthGate_h
-	dw Route2TradeHouse_h
+	dw OldCityMuseum_h
+	dw OldCityTower1F_h
+	dw OldCityTower2F_h
+	dw OldCityTower3F_h
+	dw OldCityTower4F_h
+	dw OldCityTower5F_h
+	dw OldCityKurtsHouse_h
+	dw OldCityPokecenter2F_h
+	dw BillsHouse_h
 	dw Route2Gate_h
+	dw Route2House_h
 	dw ViridianForestSouthGate_h
-	dw SilentHills_h               ; UNUSED_MAP_6D
-	dw Museum1F_h
 	dw Museum2F_h
 	dw PewterGym_h
 	dw PewterNidoranHouse_h
@@ -100,7 +106,6 @@ MapHeaderPointers::
 	dw Route11Gate1F_h
 	dw DiglettsCaveRoute11_h
 	dw Route11Gate2F_h
-	dw BillsHouse_h
 	dw VermilionPokecenter_h
 	dw PokemonFanClub_h
 	dw VermilionMart_h
@@ -146,11 +151,6 @@ MapHeaderPointers::
 	dw Route9Gate_h ; UNUSED_MAP_72
 	dw Route12Gate_h
 	dw Route24Gate_h ; UNUSED_MAP_CC
-	dw PokemonTower1F_h
-	dw PokemonTower2F_h
-	dw PokemonTower3F_h
-	dw PokemonTower4F_h
-	dw PokemonTower5F_h
 	dw PokemonTower6F_h
 	dw PokemonTower7F_h
 	dw MrFujisHouse_h

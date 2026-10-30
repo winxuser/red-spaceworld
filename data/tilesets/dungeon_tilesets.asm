@@ -10,4 +10,6 @@ DungeonTilesets:
 	db FACILITY
 	db CEMETERY
 	db GYM
+	db TOWER
+	db HOUSE
 	db -1 ; end

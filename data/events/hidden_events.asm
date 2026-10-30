@@ -12,9 +12,9 @@ HiddenEventMaps:
 	hidden_event_map OAKS_LAB
 	hidden_event_map OLD_CITY_POKECENTER_1F
 	hidden_event_map OLD_CITY_MART
-	hidden_event_map VIRIDIAN_SCHOOL_HOUSE
+	hidden_event_map OLD_CITY_SCHOOL
 	hidden_event_map OLD_CITY_GYM
-	hidden_event_map MUSEUM_1F
+	hidden_event_map OLD_CITY_MUSEUM
 	hidden_event_map PEWTER_GYM
 	hidden_event_map PEWTER_MART
 	hidden_event_map PEWTER_POKECENTER
@@ -49,7 +49,7 @@ HiddenEventMaps:
 	hidden_event_map ROCKET_HIDEOUT_B3F
 	hidden_event_map ROCKET_HIDEOUT_B4F
 	hidden_event_map SAFFRON_POKECENTER
-	hidden_event_map POKEMON_TOWER_5F
+;	hidden_event_map OLD_CITY_TOWER_5F
 	hidden_event_map ROUTE_13
 	hidden_event_map SAFARI_ZONE_GATE
 	hidden_event_map SAFARI_ZONE_WEST
@@ -150,15 +150,15 @@ DEF ANY_FACING EQU $d0
 
 	hidden_events_for OLD_CITY_POKECENTER_1F
 	hidden_event  0,  4, PrintBenchGuyText, SPRITE_FACING_LEFT
-	hidden_event 13,  3, OpenPokemonCenterPC, SPRITE_FACING_UP
+	hidden_event 13,  1, OpenPokemonCenterPC, SPRITE_FACING_UP
 	db -1 ; end
 
 	hidden_events_for OLD_CITY_MART
 	db -1 ; end
 
-	hidden_events_for VIRIDIAN_SCHOOL_HOUSE
-	hidden_text_predef  3,  4, PrintNotebookText, ViridianSchoolNotebook
-	hidden_text_predef  3,  0, PrintBlackboardLinkCableText, ViridianSchoolBlackboard
+	hidden_events_for OLD_CITY_SCHOOL
+	hidden_text_predef  3,  4, PrintNotebookText, OldCitySchoolNotebook
+	hidden_text_predef  3,  0, PrintBlackboardLinkCableText, OldCitySchoolBlackboard
 	db -1 ; end
 
 	hidden_events_for OLD_CITY_GYM
@@ -166,7 +166,7 @@ DEF ANY_FACING EQU $d0
 	hidden_event  6, 15, GymStatues, SPRITE_FACING_UP
 	db -1 ; end
 
-	hidden_events_for MUSEUM_1F
+	hidden_events_for OLD_CITY_MUSEUM
 	hidden_event  2,  3, AerodactylFossil, SPRITE_FACING_UP
 	hidden_event  2,  6, KabutopsFossil, SPRITE_FACING_UP
 	db -1 ; end

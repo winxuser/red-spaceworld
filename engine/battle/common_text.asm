@@ -2,12 +2,6 @@ PrintBeginningBattleText:
 	ld a, [wIsInBattle]
 	dec a
 	jr nz, .trainerBattle
-	ld a, [wCurMap]
-	cp POKEMON_TOWER_3F
-	jr c, .notPokemonTower
-	cp POKEMON_TOWER_7F + 1
-	jr c, .pokemonTower
-.notPokemonTower
 	ld a, [wEnemyMonSpecies2]
 	call PlayCry
 	ld hl, WildMonAppearedText
@@ -20,44 +14,14 @@ PrintBeginningBattleText:
 .trainerBattle
 	call .playSFX
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrames
 	ld hl, TrainerWantsToFightText
 .wildBattle
 	push hl
 	callfar DrawAllPokeballs
 	pop hl
-	call PrintText
+	rst _PrintText
 	jr .done
-.pokemonTower
-	ld b, SILPH_SCOPE
-	call IsItemInBag
-	ld a, [wEnemyMonSpecies2]
-	ld [wCurPartySpecies], a
-	cp RESTLESS_SOUL
-	jr z, .isMarowak
-	ld a, b
-	and a
-	jr z, .noSilphScope
-	callfar LoadEnemyMonData
-	jr .notPokemonTower
-.noSilphScope
-	ld hl, EnemyAppearedText
-	call PrintText
-	ld hl, GhostCantBeIDdText
-	call PrintText
-	jr .done
-.isMarowak
-	ld a, b
-	and a
-	jr z, .noSilphScope
-	ld hl, EnemyAppearedText
-	call PrintText
-	ld hl, UnveiledGhostText
-	call PrintText
-	callfar LoadEnemyMonData
-	callfar MarowakAnim
-	ld hl, WildMonAppearedText
-	call PrintText
 
 .playSFX
 ;	xor a
@@ -65,7 +29,7 @@ PrintBeginningBattleText:
 ;	ld a, $80
 ;	ld [wTempoModifier], a
 	ld a, SFX_TRAINER_APPEARED
-	call PlaySound
+	rst _PlaySound
 	jp WaitForSoundToFinish
 .done
 	ret
@@ -84,14 +48,6 @@ EnemyAppearedText:
 
 TrainerWantsToFightText:
 	text_far _TrainerWantsToFightText
-	text_end
-
-UnveiledGhostText:
-	text_far _UnveiledGhostText
-	text_end
-
-GhostCantBeIDdText:
-	text_far _GhostCantBeIDdText
 	text_end
 
 PrintSendOutMonMessage:

@@ -165,6 +165,57 @@ INCLUDE "scripts/MtFuji.asm"
 INCLUDE "data/maps/objects/MtFuji.asm"
 MtFuji_Blocks: INCBIN "maps/MtFuji.blk"
 
+INCLUDE "data/maps/headers/OldCitySchool.asm"
+INCLUDE "scripts/OldCitySchool.asm"
+INCLUDE "data/maps/objects/OldCitySchool.asm"
+CeladonMansionRoofHouse_Blocks:
+OldCitySchool_Blocks: INCBIN "maps/OldCitySchool.blk"
+
+INCLUDE "data/maps/headers/OldCityMuseum.asm"
+INCLUDE "scripts/OldCityMuseum.asm"
+INCLUDE "data/maps/objects/OldCityMuseum.asm"
+OldCityMuseum_Blocks: INCBIN "maps/OldCityMuseum.blk"
+
+INCLUDE "data/maps/headers/OldCityTower1F.asm"
+INCLUDE "scripts/OldCityTower1F.asm"
+INCLUDE "data/maps/objects/OldCityTower1F.asm"
+OldCityTower1F_Blocks: INCBIN "maps/OldCityTower1F.blk"
+
+INCLUDE "data/maps/headers/OldCityTower2F.asm"
+INCLUDE "scripts/OldCityTower2F.asm"
+INCLUDE "data/maps/objects/OldCityTower2F.asm"
+OldCityTower2F_Blocks: INCBIN "maps/OldCityTower2F.blk"
+
+INCLUDE "data/maps/headers/OldCityTower3F.asm"
+INCLUDE "scripts/OldCityTower3F.asm"
+INCLUDE "data/maps/objects/OldCityTower3F.asm"
+OldCityTower3F_Blocks: INCBIN "maps/OldCityTower3F.blk"
+
+INCLUDE "data/maps/headers/OldCityTower4F.asm"
+INCLUDE "scripts/OldCityTower4F.asm"
+INCLUDE "data/maps/objects/OldCityTower4F.asm"
+OldCityTower4F_Blocks: INCBIN "maps/OldCityTower4F.blk"
+
+INCLUDE "data/maps/headers/OldCityTower5F.asm"
+INCLUDE "scripts/OldCityTower5F.asm"
+INCLUDE "data/maps/objects/OldCityTower5F.asm"
+OldCityTower5F_Blocks: INCBIN "maps/OldCityTower5F.blk"
+
+INCLUDE "data/maps/headers/OldCityHouse.asm"
+INCLUDE "scripts/OldCityHouse.asm"
+INCLUDE "data/maps/objects/OldCityHouse.asm"
+OldCityKurtsHouse_Blocks:
+OldCityHouse_Blocks: INCBIN "maps/OldCityHouse.blk"
+
+INCLUDE "data/maps/headers/OldCityKurtsHouse.asm"
+INCLUDE "scripts/OldCityKurtsHouse.asm"
+INCLUDE "data/maps/objects/OldCityKurtsHouse.asm"
+
+INCLUDE "data/maps/headers/OldCityPokecenter2F.asm"
+INCLUDE "scripts/OldCityPokecenter2F.asm"
+INCLUDE "data/maps/objects/OldCityPokecenter2F.asm"
+OldCityPokecenter2F_Blocks: INCBIN "maps/OldCityPokecenter2F.blk"
+
 
 SECTION "Maps 2", ROMX
 
@@ -209,6 +260,8 @@ INCLUDE "data/maps/objects/SilphCo6F.asm"
 SilphCo6F_Blocks: INCBIN "maps/SilphCo6F.blk"
 
 
+
+
 SECTION "Maps 3", ROMX
 
 ;INCLUDE "data/maps/headers/CinnabarIsland.asm"
@@ -223,22 +276,18 @@ MrPsychicsHouse_Blocks:
 NameRatersHouse_Blocks:
 MrFujisHouse_Blocks:
 Route16FlyHouse_Blocks:
-Route2TradeHouse_Blocks:
+Route2House_Blocks:
 SaffronPidgeyHouse_Blocks:
 VermilionPidgeyHouse_Blocks:
 LavenderCuboneHouse_Blocks:
 CeruleanTradeHouse_Blocks:
 PewterNidoranHouse_Blocks:
-PewterSpeechHouse_Blocks:
-ViridianNicknameHouse_Blocks: INCBIN "maps/ViridianNicknameHouse.blk"
+PewterSpeechHouse_Blocks: INCBIN "maps/TraditionalHouse.blk"
 
-CeladonMansionRoofHouse_Blocks:
-ViridianSchoolHouse_Blocks: INCBIN "maps/ViridianSchoolHouse.blk"
 
 CeruleanTrashedHouse_Blocks: INCBIN "maps/CeruleanTrashedHouse.blk"
 
-DiglettsCaveRoute11_Blocks:
-DiglettsCaveRoute2_Blocks: INCBIN "maps/DiglettsCaveRoute2.blk"
+DiglettsCaveRoute11_Blocks: INCBIN "maps/DiglettsCaveRoute2.blk"
 
 
 SECTION "Maps 4", ROMX
@@ -249,16 +298,6 @@ SECTION "Maps 4", ROMX
 INCLUDE "data/maps/headers/OaksLab.asm"
 INCLUDE "scripts/OaksLab.asm"
 INCLUDE "data/maps/objects/OaksLab.asm"
-
-
-INCLUDE "data/maps/headers/ViridianSchoolHouse.asm"
-INCLUDE "scripts/ViridianSchoolHouse.asm"
-INCLUDE "data/maps/objects/ViridianSchoolHouse.asm"
-
-INCLUDE "data/maps/headers/ViridianNicknameHouse.asm"
-	ds 1
-INCLUDE "scripts/ViridianNicknameHouse.asm"
-INCLUDE "data/maps/objects/ViridianNicknameHouse.asm"
 
 INCLUDE "data/maps/headers/PewterNidoranHouse.asm"
 INCLUDE "scripts/PewterNidoranHouse.asm"
@@ -319,13 +358,9 @@ INCLUDE "data/maps/headers/MrPsychicsHouse.asm"
 INCLUDE "scripts/MrPsychicsHouse.asm"
 INCLUDE "data/maps/objects/MrPsychicsHouse.asm"
 
-INCLUDE "data/maps/headers/DiglettsCaveRoute2.asm"
-INCLUDE "scripts/DiglettsCaveRoute2.asm"
-INCLUDE "data/maps/objects/DiglettsCaveRoute2.asm"
-
-INCLUDE "data/maps/headers/Route2TradeHouse.asm"
-INCLUDE "scripts/Route2TradeHouse.asm"
-INCLUDE "data/maps/objects/Route2TradeHouse.asm"
+INCLUDE "data/maps/headers/Route2House.asm"
+INCLUDE "scripts/Route2House.asm"
+INCLUDE "data/maps/objects/Route2House.asm"
 
 INCLUDE "data/maps/headers/Route5Gate.asm"
 INCLUDE "scripts/Route5Gate.asm"
@@ -938,8 +973,6 @@ VermilionMart_Blocks: INCBIN "maps/VermilionMart.blk"
 CopycatsHouse2F_Blocks:
 RedsHouse2F_Blocks: INCBIN "maps/RedsHouse2F.blk"
 
-Museum1F_Blocks: INCBIN "maps/Museum1F.blk"
-
 Museum2F_Blocks: INCBIN "maps/Museum2F.blk"
 
 SaffronPokecenter_Blocks:
@@ -952,8 +985,7 @@ UndergroundPathRoute7Copy_Blocks:
 UndergroundPathRoute6_Blocks:
 UndergroundPathRoute5_Blocks: INCBIN "maps/UndergroundPathRoute5.blk"
 
-ViridianForestSouthGate_Blocks:
-ViridianForestNorthGate_Blocks: INCBIN "maps/ViridianForestNorthGate.blk"
+ViridianForestSouthGate_Blocks: INCBIN "maps/ViridianForestNorthGate.blk"
 
 INCLUDE "data/maps/headers/RedsHouse2F.asm"
 INCLUDE "scripts/RedsHouse2F.asm"
@@ -961,10 +993,6 @@ INCLUDE "data/maps/objects/RedsHouse2F.asm"
 
 
 SECTION "Maps 16", ROMX
-
-INCLUDE "data/maps/headers/Museum1F.asm"
-INCLUDE "scripts/Museum1F.asm"
-INCLUDE "data/maps/objects/Museum1F.asm"
 
 INCLUDE "data/maps/headers/Museum2F.asm"
 INCLUDE "scripts/Museum2F.asm"
@@ -1041,10 +1069,6 @@ INCLUDE "data/maps/headers/SaffronPokecenter.asm"
 INCLUDE "scripts/SaffronPokecenter.asm"
 INCLUDE "data/maps/objects/SaffronPokecenter.asm"
 
-INCLUDE "data/maps/headers/ViridianForestNorthGate.asm"
-INCLUDE "scripts/ViridianForestNorthGate.asm"
-INCLUDE "data/maps/objects/ViridianForestNorthGate.asm"
-
 INCLUDE "data/maps/headers/ViridianForestSouthGate.asm"
 INCLUDE "scripts/ViridianForestSouthGate.asm"
 INCLUDE "data/maps/objects/ViridianForestSouthGate.asm"
@@ -1085,31 +1109,6 @@ UndergroundPathWestEast_Blocks: INCBIN "maps/UndergroundPathWestEast.blk"
 
 SSAnneB1FRooms_Blocks:
 SSAnne2FRooms_Blocks: INCBIN "maps/SSAnne2FRooms.blk"
-
-INCLUDE "data/maps/headers/PokemonTower1F.asm"
-INCLUDE "scripts/PokemonTower1F.asm"
-INCLUDE "data/maps/objects/PokemonTower1F.asm"
-PokemonTower1F_Blocks: INCBIN "maps/PokemonTower1F.blk"
-
-INCLUDE "data/maps/headers/PokemonTower2F.asm"
-INCLUDE "scripts/PokemonTower2F.asm"
-INCLUDE "data/maps/objects/PokemonTower2F.asm"
-PokemonTower2F_Blocks: INCBIN "maps/PokemonTower2F.blk"
-
-INCLUDE "data/maps/headers/PokemonTower3F.asm"
-INCLUDE "scripts/PokemonTower3F.asm"
-INCLUDE "data/maps/objects/PokemonTower3F.asm"
-PokemonTower3F_Blocks: INCBIN "maps/PokemonTower3F.blk"
-
-INCLUDE "data/maps/headers/PokemonTower4F.asm"
-INCLUDE "scripts/PokemonTower4F.asm"
-INCLUDE "data/maps/objects/PokemonTower4F.asm"
-PokemonTower4F_Blocks: INCBIN "maps/PokemonTower4F.blk"
-
-INCLUDE "data/maps/headers/PokemonTower5F.asm"
-INCLUDE "scripts/PokemonTower5F.asm"
-INCLUDE "data/maps/objects/PokemonTower5F.asm"
-PokemonTower5F_Blocks: INCBIN "maps/PokemonTower5F.blk"
 
 INCLUDE "data/maps/headers/PokemonTower6F.asm"
 INCLUDE "scripts/PokemonTower6F.asm"

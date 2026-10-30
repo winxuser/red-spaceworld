@@ -124,27 +124,27 @@ ToggleableObjectStates:
 	toggleable_objects_for OLD_CITY_GYM
 ;	toggle_object_state OLDCITY_YOUNGSTER,   ON
 
-	toggleable_objects_for MUSEUM_1F
-	toggle_object_state MUSEUM1F_OLD_AMBER, ON
+	toggleable_objects_for OLD_CITY_MUSEUM
+	toggle_object_state OLDCITYMUSEUM_OLD_AMBER, ON
 
 	toggleable_objects_for CERULEAN_CAVE_1F
 	toggle_object_state CERULEANCAVE1F_FULL_RESTORE, ON
 	toggle_object_state CERULEANCAVE1F_MAX_ELIXER,   ON
 	toggle_object_state CERULEANCAVE1F_NUGGET,       ON
 
-	toggleable_objects_for POKEMON_TOWER_2F
-	toggle_object_state POKEMONTOWER2F_RIVAL, ON
+	toggleable_objects_for OLD_CITY_TOWER_2F
+	toggle_object_state OLDCITYTOWER2F_RIVAL, ON
 
-	toggleable_objects_for POKEMON_TOWER_3F
-	toggle_object_state POKEMONTOWER3F_ESCAPE_ROPE, ON
+	toggleable_objects_for OLD_CITY_TOWER_3F
+	toggle_object_state OLDCITYTOWER3F_ESCAPE_ROPE, ON
 
-	toggleable_objects_for POKEMON_TOWER_4F
-	toggle_object_state POKEMONTOWER4F_ELIXER,    ON
-	toggle_object_state POKEMONTOWER4F_AWAKENING, ON
-	toggle_object_state POKEMONTOWER4F_HP_UP,     ON
+	toggleable_objects_for OLD_CITY_TOWER_4F
+	toggle_object_state OLDCITYTOWER4F_ELIXER,    ON
+	toggle_object_state OLDCITYTOWER4F_AWAKENING, ON
+	toggle_object_state OLDCITYTOWER4F_HP_UP,     ON
 
-	toggleable_objects_for POKEMON_TOWER_5F
-	toggle_object_state POKEMONTOWER5F_NUGGET, ON
+;	toggleable_objects_for OLD_CITY_TOWER_5F
+;	toggle_object_state POKEMONTOWER5F_NUGGET, ON
 
 	toggleable_objects_for POKEMON_TOWER_6F
 	toggle_object_state POKEMONTOWER6F_RARE_CANDY, ON

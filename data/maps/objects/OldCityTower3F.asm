@@ -1,0 +1,22 @@
+	object_const_def
+	const_export OLDCITYTOWER3F_CHANNELER1
+	const_export OLDCITYTOWER3F_CHANNELER2
+	const_export OLDCITYTOWER3F_CHANNELER3
+	const_export OLDCITYTOWER3F_ESCAPE_ROPE
+
+OldCityTower3F_Object:
+	db $00 ; border block
+
+	def_warp_events
+	warp_event  7,  7, OLD_CITY_TOWER_2F, 2
+	warp_event  0,  1, OLD_CITY_TOWER_4F, 1
+
+	def_bg_events
+
+	def_object_events
+	object_event  1,  4, SPRITE_CHANNELER, STAY, LEFT, TEXT_OLDCITYTOWER3F_CHANNELER1, OPP_CHANNELER, 5
+	object_event  0,  4, SPRITE_CHANNELER, STAY, DOWN, TEXT_OLDCITYTOWER3F_CHANNELER2, OPP_CHANNELER, 6
+	object_event  0,  5, SPRITE_CHANNELER, STAY, DOWN, TEXT_OLDCITYTOWER3F_CHANNELER3, OPP_CHANNELER, 8
+	object_event  7,  3, SPRITE_POKE_BALL, STAY, NONE, TEXT_OLDCITYTOWER3F_ESCAPE_ROPE, ESCAPE_ROPE
+
+	def_warps_to OLD_CITY_TOWER_3F

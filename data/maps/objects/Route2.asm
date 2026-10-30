@@ -6,6 +6,7 @@ Route2_Object:
 
 	def_warp_events
 	warp_event  6,  5, ROUTE_2_GATE, 1
+	warp_event 15,  4, ROUTE_2_HOUSE, 1
 
 	def_bg_events
 	bg_event 24, 10, TEXT_ROUTE2_SIGN

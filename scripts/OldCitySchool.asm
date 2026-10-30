@@ -1,0 +1,15 @@
+OldCitySchool_Script:
+	jp EnableAutoTextBoxDrawing
+
+OldCitySchool_TextPointers:
+	def_text_pointers
+	dw_const OldCitySchoolBrunetteGirlText, TEXT_OLDCITYSCHOOL_BRUNETTE_GIRL
+	dw_const OldCitySchoolCooltrainerFText, TEXT_OLDCITYSCHOOL_COOLTRAINER_F
+
+OldCitySchoolBrunetteGirlText:
+	text_far _OldCitySchoolBrunetteGirlText
+	text_end
+
+OldCitySchoolCooltrainerFText:
+	text_far _OldCitySchoolCooltrainerFText
+	text_end

@@ -144,13 +144,7 @@ ItemUseBall:
 
 	call LoadScreenTilesFromBuffer1
 	ld hl, ItemUseText00
-	call PrintText
-
-; If the player is fighting an unidentified ghost, set the value that indicates
-; the Pokémon can't be caught and skip the capture calculations.
-	callfar IsGhostBattle
-	ld b, $10 ; can't be caught value
-	jp z, .setAnimData
+	rst _PrintText
 
 	ld a, [wBattleType]
 	dec a
@@ -160,20 +154,10 @@ ItemUseBall:
 	ld hl, wGrassRate
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
-	call CopyData ; save the player's name in the Wild Monster data (part of the Cinnabar Island Missingno. glitch)
+	rst _CopyData ; save the player's name in the Wild Monster data (part of the Cinnabar Island Missingno. glitch)
 	jp .captured
 
 .notOldManBattle
-; If the player is fighting the ghost Marowak, set the value that indicates the
-; Pokémon can't be caught and skip the capture calculations.
-	ld a, [wCurMap]
-	cp POKEMON_TOWER_6F
-	jr nz, .loop
-	ld a, [wEnemyMonSpecies2]
-	cp RESTLESS_SOUL
-	ld b, $10 ; can't be caught value
-	jp z, .setAnimData
-
 ; Get the first random number. Let it be called Rand1.
 ; Rand1 must be within a certain range according the kind of ball being thrown.
 ; The ranges are as follows.
@@ -417,7 +401,7 @@ ItemUseBall:
 
 .skipShakeCalculations
 	ld c, 20
-	call DelayFrames
+	rst _DelayFrames
 
 ; Do the animation.
 	ld a, TOSS_ANIM
@@ -516,7 +500,7 @@ ItemUseBall:
 	jr z, .oldManCaughtMon ; if so, don't give the player the caught Pokémon
 
 	ld hl, ItemUseBallText05
-	call PrintText
+	rst _PrintText
 
 ; Add the caught Pokémon to the Pokédex.
 	predef IndexToPokedex
@@ -539,7 +523,7 @@ ItemUseBall:
 	jr nz, .skipShowingPokedexData ; if so, don't show the Pokédex data
 
 	ld hl, ItemUseBallText06
-	call PrintText
+	rst _PrintText
 	call ClearSprites
 	ld a, [wEnemyMonSpecies]
 	ld [wPokedexNum], a
@@ -563,14 +547,14 @@ ItemUseBall:
 	jr nz, .printTransferredToPCText
 	ld hl, ItemUseBallText08
 .printTransferredToPCText
-	call PrintText
+	rst _PrintText
 	jr .done
 
 .oldManCaughtMon
 	ld hl, ItemUseBallText05
 
 .printMessage
-	call PrintText
+	rst _PrintText
 	call ClearSprites
 
 .done
@@ -908,7 +892,7 @@ ItemUseMedicine:
 	add hl, bc ; hl now points to party stats
 	ld de, wBattleMonStats
 	ld bc, NUM_STATS * 2
-	call CopyData ; copy party stats to in-battle stat data
+	rst _CopyData ; copy party stats to in-battle stat data
 	predef DoubleOrHalveSelectedStats
 	jp .doneHealing
 .healHP
@@ -1233,7 +1217,7 @@ ItemUseMedicine:
 	ld a, 1
 	ldh [hAutoBGTransferEnabled], a
 	ld c, 50
-	call DelayFrames
+	rst _DelayFrames
 	call WaitForTextScrollButtonPress
 	jr .done
 .canceledItemUse
@@ -1309,16 +1293,16 @@ ItemUseMedicine:
 .gotStatName
 	ld de, wStringBuffer
 	ld bc, STAT_NAME_LENGTH
-	call CopyData ; copy the stat's name to wStringBuffer
+	rst _CopyData ; copy the stat's name to wStringBuffer
 	ld a, SFX_HEAL_AILMENT
-	call PlaySound
+	rst _PlaySound
 	ld hl, VitaminStatRoseText
-	call PrintText
+	rst _PrintText
 	jp RemoveUsedItem
 .vitaminNoEffect
 	pop hl
 	ld hl, VitaminNoEffectText
-	call PrintText
+	rst _PrintText
 	jp GBPalWhiteOut
 .recalculateStats
 	ld bc, MON_STATS
@@ -1432,7 +1416,7 @@ INCLUDE "data/battle/stat_names.asm"
 ; SAFARI_BAIT during Safari Game encounters
 ItemUseBait:
 	ld hl, ThrewBaitText
-	call PrintText
+	rst _PrintText
 	ld hl, wEnemyMonActualCatchRate
 	srl [hl] ; halve catch rate
 	ld a, BAIT_ANIM
@@ -1445,7 +1429,7 @@ ItemUseBait:
 ; SAFARI_ROCK during Safari Game encounters
 ItemUseRock:
 	ld hl, ThrewRockText
-	call PrintText
+	rst _PrintText
 	ld hl, wEnemyMonActualCatchRate
 	ld a, [hl]
 	add a ; double catch rate
@@ -1522,7 +1506,7 @@ ItemUseEscapeRope:
 	ret nz ; if so, return
 	call ItemUseReloadOverworldData
 	ld c, 30
-	call DelayFrames
+	rst _DelayFrames
 	jp RemoveUsedItem
 .notUsable
 	jp ItemUseNotTime
@@ -1596,7 +1580,7 @@ ItemUseCardKey:
 	jr .loop
 .done
 	ld hl, ItemUseText00
-	call PrintText
+	rst _PrintText
 	ld hl, wStatusFlags1
 	set BIT_UNUSED_CARD_KEY, [hl] ; never checked
 	ret
@@ -1685,7 +1669,7 @@ ItemUsePokeFlute:
 	call ArePlayerCoordsInArray
 	jr nc, .noSnorlaxToWakeUp
 	ld hl, PlayedFluteHadEffectText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_FIGHT_ROUTE12_SNORLAX
 	ret
 .notRoute12
@@ -1698,7 +1682,7 @@ ItemUsePokeFlute:
 	call ArePlayerCoordsInArray
 	jr nc, .noSnorlaxToWakeUp
 	ld hl, PlayedFluteHadEffectText
-	call PrintText
+	rst _PrintText
 	SetEvent EVENT_FIGHT_ROUTE16_SNORLAX
 	ret
 .noSnorlaxToWakeUp
@@ -1732,14 +1716,14 @@ ItemUsePokeFlute:
 	jp z, PrintText ; if no pokemon were asleep
 ; if some pokemon were asleep
 	ld hl, PlayedFluteHadEffectText
-	call PrintText
+	rst _PrintText
 	ld a, [wLowHealthAlarm]
 	and $80
 	jr nz, .skipMusic
 	call WaitForSoundToFinish ; wait for sound to end
 
 	ld a, SFX_POKEFLUTE_IN_BATTLE
-	call PlaySound
+	rst _PlaySound
 	call WaitForSoundToFinish
 ;	farcall Music_PokeFluteInBattle ; play in-battle pokeflute music
 ;.musicWaitLoop ; wait for music to finish playing
@@ -1806,17 +1790,17 @@ PlayedFluteHadEffectText:
 	jr nz, .done
 ; play out-of-battle pokeflute music
 	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
+	rst _PlaySound
 	ld a, SFX_POKEFLUTE
 	ld c, 0 ; BANK(SFX_Pokeflute)
-	call PlaySound
+	rst _PlaySound
 ;.musicWaitLoop ; wait for music to finish playing
 ;	ld a, [wChannelSoundIDs + CHAN3]
 ;	cp SFX_POKEFLUTE
 ;	jr z, .musicWaitLoop
 	call PlayDefaultMusic ; start playing normal music again
 .done
-	jp TextScriptEnd ; end text
+	rst TextScriptEnd ; end text
 
 ItemUseCoinCase:
 	ld a, [wIsInBattle]
@@ -1910,11 +1894,11 @@ FishingInit:
 	jr z, .surfing
 	call ItemUseReloadOverworldData
 	ld hl, ItemUseText00
-	call PrintText
+	rst _PrintText
 	ld a, SFX_HEAL_AILMENT
-	call PlaySound
+	rst _PlaySound
 	ld c, 80
-	call DelayFrames
+	rst _DelayFrames
 	and a
 	ret
 .surfing
@@ -1983,7 +1967,7 @@ ItemUsePPRestore:
 	jr c, .printWhichTechniqueMessage ; if so, print the raise PP message
 	ld hl, RestorePPWhichTechniqueText ; otherwise, print the restore PP message
 .printWhichTechniqueMessage
-	call PrintText
+	rst _PrintText
 	xor a
 	ld [wPlayerMoveListIndex], a
 	callfar MoveSelectionMenu ; move selection menu
@@ -2009,7 +1993,7 @@ ItemUsePPRestore:
 	cp 3 << 6 ; have 3 PP Ups already been used?
 	jr c, .PPNotMaxedOut
 	ld hl, PPMaxedOutText
-	call PrintText
+	rst _PrintText
 	jr .chooseMove
 .PPNotMaxedOut
 	ld a, [hl]
@@ -2019,7 +2003,7 @@ ItemUsePPRestore:
 	ld [wUsingPPUp], a
 	call RestoreBonusPP ; add the bonus PP to current PP
 	ld hl, PPIncreasedText
-	call PrintText
+	rst _PrintText
 .done
 	pop af
 	ld [wWhichPokemon], a
@@ -2037,12 +2021,12 @@ ItemUsePPRestore:
 	call AddNTimes
 	ld de, wBattleMonPP
 	ld bc, NUM_MOVES
-	call CopyData ; copy party data to in-battle data
+	rst _CopyData ; copy party data to in-battle data
 .skipUpdatingInBattleData
 	ld a, SFX_HEAL_AILMENT
-	call PlaySound
+	rst _PlaySound
 	ld hl, PPRestoredText
-	call PrintText
+	rst _PrintText
 	jr .done
 .useEther
 	call .restorePP
@@ -2180,9 +2164,9 @@ ItemUseTMHM:
 	jr nc, .printBootedUpMachineText
 	ld hl, BootedUpHMText
 .printBootedUpMachineText
-	call PrintText
+	rst _PrintText
 	ld hl, TeachMachineMoveText
-	call PrintText
+	rst _PrintText
 	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
@@ -2203,7 +2187,7 @@ ItemUseTMHM:
 	ld hl, wStringBuffer
 	ld de, wTempMoveNameBuffer
 	ld bc, MOVE_NAME_LENGTH
-	call CopyData ; save the move name because DisplayPartyMenu will overwrite it
+	rst _CopyData ; save the move name because DisplayPartyMenu will overwrite it
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
 	ld a, TMHM_PARTY_MENU
@@ -2213,7 +2197,7 @@ ItemUseTMHM:
 	ld hl, wTempMoveNameBuffer
 	ld de, wStringBuffer
 	ld bc, MOVE_NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	pop af
 	jr nc, .checkIfAbleToLearnMove
 ; if the player canceled teaching the move
@@ -2237,7 +2221,7 @@ ItemUseTMHM:
 	ld a, SFX_DENIED
 	call PlaySoundWaitForCurrent
 	ld hl, MonCannotLearnMachineMoveText
-	call PrintText
+	rst _PrintText
 	jr .chooseMon
 .checkIfAlreadyLearnedMove
 	callfar CheckIfMoveIsKnown ; check if the pokemon already knows the move
@@ -2273,9 +2257,9 @@ MonCannotLearnMachineMoveText:
 
 PrintItemUseTextAndRemoveItem:
 	ld hl, ItemUseText00
-	call PrintText
+	rst _PrintText
 	ld a, SFX_HEAL_AILMENT
-	call PlaySound
+	rst _PlaySound
 	call WaitForTextScrollButtonPress ; wait for button press
 
 RemoveUsedItem:
@@ -2304,9 +2288,9 @@ ThrowBallAtTrainerMon:
 	ld [wAltAnimationID], a
 	predef MoveAnimation ; do animation
 	ld hl, ThrowBallAtTrainerMonText1
-	call PrintText
+	rst _PrintText
 	ld hl, ThrowBallAtTrainerMonText2
-	call PrintText
+	rst _PrintText
 	jr RemoveUsedItem
 
 NoCyclingAllowedHere:
@@ -2569,7 +2553,7 @@ TossItem_::
 	call GetItemName
 	call CopyToStringBuffer
 	ld hl, IsItOKToTossItemText
-	call PrintText
+	rst _PrintText
 	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
@@ -2589,14 +2573,14 @@ TossItem_::
 	call GetItemName
 	call CopyToStringBuffer
 	ld hl, ThrewAwayItemText
-	call PrintText
+	rst _PrintText
 	pop hl
 	and a
 	ret
 .tooImportantToToss
 	push hl
 	ld hl, TooImportantToTossText
-	call PrintText
+	rst _PrintText
 	pop hl
 	scf
 	ret
@@ -2632,7 +2616,7 @@ IsKeyItem_::
 	ld de, wBuffer
 	ld bc, 15 ; only 11 bytes are actually used
 	ASSERT 15 >= (NUM_ITEMS + 7) / 8
-	call CopyData
+	rst _CopyData
 	pop af
 	dec a
 	ld c, a
@@ -2694,7 +2678,7 @@ SendNewMonToBox:
 	push bc
 	push hl
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	pop hl
 	ld d, h
 	ld e, l
@@ -2708,7 +2692,7 @@ SendNewMonToBox:
 	ld hl, wPlayerName
 	ld de, wBoxMon1OT
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 
 	ld a, [wBoxCount]
 	dec a
@@ -2731,7 +2715,7 @@ SendNewMonToBox:
 	push bc
 	push hl
 	ld bc, NAME_LENGTH
-	call CopyData
+	rst _CopyData
 	pop hl
 	ld d, h
 	ld e, l
@@ -2768,7 +2752,7 @@ SendNewMonToBox:
 	push bc
 	push hl
 	ld bc, BOXMON_STRUCT_LENGTH
-	call CopyData
+	rst _CopyData
 	pop hl
 	ld d, h
 	ld e, l
@@ -2784,7 +2768,7 @@ SendNewMonToBox:
 	ld hl, wEnemyMon
 	ld de, wBoxMon1
 	ld bc, wEnemyMonDVs - wEnemyMon
-	call CopyData
+	rst _CopyData
 	ld hl, wPlayerID
 	ld a, [hli]
 	ld [de], a

@@ -52,18 +52,24 @@ MapHeaderBanks::
 	db BANK(SilentHillPokecenter_h)    ; UNUSED_MAP_69
 	db BANK(Route1Gate1F_h)            ; UNUSED_MAP_6B
 	db BANK(Route23Gate_h)             ; UNUSED_MAP_75
+	db BANK(SilentHills_h)             ; UNUSED_MAP_6D
 	db BANK(OldCityPokecenter1F_h)
 	db BANK(OldCityMart_h)
-	db BANK(ViridianSchoolHouse_h)
-	db BANK(ViridianNicknameHouse_h)
+	db BANK(OldCitySchool_h)
+	db BANK(OldCityHouse_h)
 	db BANK(OldCityGym_h)
-	db BANK(DiglettsCaveRoute2_h)
-	db BANK(ViridianForestNorthGate_h)
-	db BANK(Route2TradeHouse_h)
+	db BANK(OldCityMuseum_h)
+	db BANK(OldCityTower1F_h)
+	db BANK(OldCityTower2F_h)
+	db BANK(OldCityTower3F_h)
+	db BANK(OldCityTower4F_h)
+	db BANK(OldCityTower5F_h)
+	db BANK(OldCityKurtsHouse_h)
+	db BANK(OldCityPokecenter2F_h)
+	db BANK(BillsHouse_h)
 	db BANK(Route2Gate_h)
+	db BANK(Route2House_h)
 	db BANK(ViridianForestSouthGate_h)
-	db BANK(SilentHills_h)             ; UNUSED_MAP_6D
-	db BANK(Museum1F_h)
 	db BANK(Museum2F_h)
 	db BANK(PewterGym_h)
 	db BANK(PewterNidoranHouse_h)
@@ -100,7 +106,6 @@ MapHeaderBanks::
 	db BANK(Route11Gate1F_h)
 	db BANK(DiglettsCaveRoute11_h)
 	db BANK(Route11Gate2F_h)
-	db BANK(BillsHouse_h)
 	db BANK(VermilionPokecenter_h)
 	db BANK(PokemonFanClub_h)
 	db BANK(VermilionMart_h)
@@ -146,11 +151,6 @@ MapHeaderBanks::
 	db BANK(Route9Gate_h) ; UNUSED_MAP_72
 	db BANK(Route12Gate_h)
 	db BANK(Route24Gate_h) ; UNUSED_MAP_CC
-	db BANK(PokemonTower1F_h)
-	db BANK(PokemonTower2F_h)
-	db BANK(PokemonTower3F_h)
-	db BANK(PokemonTower4F_h)
-	db BANK(PokemonTower5F_h)
 	db BANK(PokemonTower6F_h)
 	db BANK(PokemonTower7F_h)
 	db BANK(MrFujisHouse_h)
