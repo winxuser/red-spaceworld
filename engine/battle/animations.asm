@@ -2058,14 +2058,24 @@ AnimationBoundUpAndDown:
 	jp AnimationShowMonPic
 
 AnimationTransformMon:
-; Redraws this mon's sprite as the back/front sprite of the opposing mon.
-; Used in Transform.
+; Redraw the transformed Pokemon using the target's sprite.
+; Do not refresh the palette until Transform finishes copying
+; the target's species, DVs, and shiny status.
 	ld a, [wEnemyMonSpecies]
 	ld [wChangeMonPicPlayerTurnSpecies], a
 	ld a, [wBattleMonSpecies]
 	ld [wChangeMonPicEnemyTurnSpecies], a
 
+	call ChangeMonPic_NoPaletteRefresh
+	ret
+
 ChangeMonPic:
+	call ChangeMonPic_NoPaletteRefresh
+	; Other callers still need the usual palette update.
+	ld b, SET_PAL_BATTLE
+	jp RunPaletteCommand
+
+ChangeMonPic_NoPaletteRefresh:
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
@@ -2093,8 +2103,7 @@ ChangeMonPic:
 	pop af
 	ld [wBattleMonSpecies2], a
 .done
-	ld b, SET_PAL_BATTLE
-	jp RunPaletteCommand
+	ret
 
 AnimationHideEnemyMonPic:
 ; Hides the enemy mon's sprite

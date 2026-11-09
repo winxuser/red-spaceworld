@@ -148,6 +148,16 @@ StatusScreen:
 	ld [wGenderTemp], a
 	call PrintGenderStatusScreen
 
+    ; Check the selected Pokemon's actual DVs.
+    ld de, wLoadedMonDVs
+    callfar CheckShininess
+    jr nc, .notShiny
+
+    hlcoord 19, 0
+    ld a, '[SHINY]'
+    ld [hl], a
+
+.notShiny
 	hlcoord 14, 0
 	call PrintLevel
 

@@ -117,11 +117,22 @@ HoFShowMonOrPlayer:
 	call LoadFrontSpriteByMonIndex
 	predef LoadMonBackPic
 .next1
-	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
-	ld c, 0
-	call RunPaletteCommand
-	ld a, %11100100
-	ldh [rBGP], a
+    ld b, SET_PAL_POKEMON_WHOLE_SCREEN
+    ld c, 0
+
+    ; Identify Hall of Fame Pokemon for the palette routine.
+    ; Keep the final player portrait using the original command.
+    ld a, [wHoFMonOrPlayer]
+    and a
+    jr nz, .normalPaletteCommand
+
+    ld c, 3
+
+.normalPaletteCommand
+    call RunPaletteCommand
+
+    ld a, %11100100
+    ldh [rBGP], a
 	ld c, $31 ; back pic
 	call HoFLoadMonPlayerPicTileIDs
 	ld d, $a0

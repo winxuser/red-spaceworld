@@ -1440,10 +1440,12 @@ EnemySendOutFirstMon:
 	hlcoord 0, 0
 	lb bc, 4, 11
 	call ClearScreenArea
-	ld b, SET_PAL_BATTLE
-	call RunPaletteCommand
-	call GBPalNormal
-	ld hl, TrainerSentOutText
+    ; Keep the player's trainer palette during enemy send-out.
+    ld b, SET_PAL_BATTLE_AFTER_BLACK
+    call RunPaletteCommand
+
+    call GBPalNormal
+    ld hl, TrainerSentOutText
 	rst _PrintText
 	ld a, [wEnemyMonSpecies2]
 	ld [wCurPartySpecies], a
@@ -1455,6 +1457,32 @@ EnemySendOutFirstMon:
 	ldh [hStartTileID], a
 	hlcoord 15, 6
 	predef AnimateSendingOutMon
+	; Only play sparkles for shiny enemy Pokemon.
+	ldh a, [rWBK]
+	ld c, a
+
+	ld a, 1
+	ldh [rWBK], a
+
+	ld a, [wEnemyMonShiny]
+	ld b, a
+
+	ld a, c
+	ldh [rWBK], a
+
+	ld a, b
+	and a
+	jr z, .skipTrainerShinySparkle
+
+	callfar LoadShinySparkleGFX
+	callfar LoadShinySparklePalette
+	callfar DarkenShinyBattleScreen
+	call DelayFrame
+	callfar EnemyShinySparkle
+	callfar RestoreShinyBattleScreen
+	call DelayFrame
+
+.skipTrainerShinySparkle
 	ld a, [wEnemyMonSpecies2]
 	call PlayCry
 	call DrawEnemyHUDAndHPBar
@@ -1659,6 +1687,18 @@ LoadBattleMonFromParty:
 	ld de, wBattleMonDVs
 	ld bc, MON_PP - MON_DVS
 	rst _CopyData
+	; Determine whether the player's Pokemon is shiny
+	; using its actual DVs.
+	push hl
+	ld de, wBattleMonDVs
+	farcall CheckShininess
+	; Carry set = shiny.
+	ld a, 0
+	jr nc, .notShinyPlayerMon
+	inc a
+.notShinyPlayerMon
+	ld [wBattleMonShiny], a
+	pop hl
 	ld de, wBattleMonPP
 	ld bc, NUM_MOVES
 	rst _CopyData
@@ -1703,6 +1743,18 @@ LoadEnemyMonFromParty:
 	ld de, wEnemyMonDVs
 	ld bc, MON_PP - MON_DVS
 	rst _CopyData
+	; Check the link opponent's actual Pokemon DVs.
+	; Preserve HL because it points to the remaining party data.
+	push hl
+	ld de, wEnemyMonDVs
+	farcall CheckShininess
+	; Carry set = shiny.
+	ld a, 0
+	jr nc, .notShinyLinkEnemyMon
+	inc a
+.notShinyLinkEnemyMon
+	ld [wEnemyMonShiny], a
+	pop hl
 	ld de, wEnemyMonPP
 	ld bc, NUM_MOVES
 	rst _CopyData
@@ -1783,6 +1835,35 @@ SendOutMon:
 	call PlayAltAnimation
 	hlcoord 4, 11
 	predef AnimateSendingOutMon
+
+	; Only play sparkles for shiny player Pokemon.
+	; The shiny flag is stored in WRAM bank 1.
+	ldh a, [rWBK]
+	ld c, a
+
+	ld a, 1
+	ldh [rWBK], a
+
+	ld a, [wBattleMonShiny]
+	ld b, a
+
+	; Restore the original WRAM bank.
+	ld a, c
+	ldh [rWBK], a
+
+    ; Skip the animation if this Pokemon isn't shiny.
+	ld a, b
+	and a
+	jr z, .skipPlayerShinySparkle
+
+	callfar LoadShinySparkleGFX
+	callfar LoadShinySparklePalette
+	callfar DarkenShinyBattleScreen
+	call DelayFrame
+	callfar ShinySparkle
+	callfar RestoreShinyBattleScreen
+	call DelayFrame
+.skipPlayerShinySparkle
 	ld a, [wCurPartySpecies]
 	call PlayCry
 	call PrintEmptyString
@@ -1851,7 +1932,18 @@ IF GEN_2_GRAPHICS
 	ld a, [wBattleMonSpecies]
 	ld [wGenderTemp], a
 	call PrintPlayerMonGender
-	call PrintEXPBarAt1711
+
+	; Display the shiny symbol for shiny player Pokemon.
+	ld a, [wBattleMonShiny]
+	cp 1
+	jr nz, .noShinySymbol
+
+	hlcoord 18, 8
+	ld a, '[SHINY]'
+	ld [hl], a
+
+.noShinySymbol
+        call PrintEXPBarAt1711
 ELSE
 	call CenterMonName
 	call PlaceString
@@ -1919,6 +2011,17 @@ DrawEnemyHUDAndHPBar:
 	ld a, [wEnemyMonSpecies]
 	ld [wGenderTemp], a
 	call PrintEnemyMonGender
+
+	; Display the shiny symbol for shiny enemy Pokemon.
+	ld a, [wEnemyMonShiny]
+	cp 1
+	jr nz, .noShinySymbol
+
+	hlcoord 10, 1
+	ld a, '[SHINY]'
+	ld [hl], a
+
+.noShinySymbol
 IF GEN_2_GRAPHICS
 	hlcoord 6, 1
  ELSE
@@ -6125,13 +6228,24 @@ LoadEnemyMonData:
 	ld a, ATKDEFDV_TRAINER
 	ld b, SPDSPCDV_TRAINER
 	jr z, .storeDVs
-	call BattleRandom
-	ld b, a
-	call BattleRandom
+    call BattleRandom
+    ld b, a
+    call BattleRandom
+
 .storeDVs
-	ld hl, wEnemyMonDVs
-	ld [hli], a
-	ld [hl], b
+    ld hl, wEnemyMonDVs
+    ld [hli], a
+    ld [hl], b
+    ; Determine whether the enemy Pokemon is shiny
+    ; using its actual DVs.
+    ld de, wEnemyMonDVs
+    farcall CheckShininess
+    ; Carry set = shiny.
+    ld a, 0
+    jr nc, .notShinyEnemyMon
+    inc a
+.notShinyEnemyMon
+    ld [wEnemyMonShiny], a
 	ld de, wEnemyMonLevel
 	ld a, [wCurEnemyLevel]
 	ld [de], a
@@ -6881,10 +6995,45 @@ _InitBattleCommon:
 	lb bc, 4, 10
 	call ClearScreenArea
 	call ClearSprites
-	ld a, [wIsInBattle]
-	dec a ; is it a wild battle?
-	call z, DrawEnemyHUDAndHPBar ; draw enemy HUD and HP bar if it's a wild battle
-	call StartBattle
+    ld a, [wIsInBattle]
+    dec a ; is it a wild battle?
+    call z, DrawEnemyHUDAndHPBar
+
+    ; Only play this animation for wild battles.
+    ld a, [wIsInBattle]
+    cp 1
+    jr nz, .skipWildShinySparkle
+; Only animate shiny wild Pokemon.
+    ld a, 1
+    ldh [rWBK], a
+
+    ld a, [wEnemyMonShiny]
+    ld b, a
+
+    xor a
+    ldh [rWBK], a
+
+    ld a, b
+    and a
+    jr z, .skipWildShinySparkle
+
+    ; Load the enemy sparkle graphics and palette.
+    callfar LoadShinySparkleGFX
+    callfar LoadShinySparklePalette
+
+    ; Darken the battlefield.
+    callfar DarkenShinyBattleScreen
+    call DelayFrame
+
+    ; Display sparkles around the wild Pokemon.
+    callfar EnemyShinySparkle
+
+    ; Restore the original battlefield colours.
+    callfar RestoreShinyBattleScreen
+    call DelayFrame
+
+.skipWildShinySparkle
+    call StartBattle
 	callfar EndOfBattle
 	pop af
 	ld [wLetterPrintingDelayFlags], a

@@ -49,6 +49,9 @@ DEF W2_DrewRowOrColumn             EQU $d78b
 ; transformed)
 DEF W2_BattleMonPalette            EQU $d78c
 
+; Used while displaying shiny Pokemon sparkles.
+DEF W2_ShinyPaletteBackup          EQU $d800
+
 ; Used by "WindowTransferBgRowsAndColors" function. Analagous to H_VBCOPYBGNUMROWS.
 DEF W2_VBCOPYBGNUMROWS             EQU $d78d
 

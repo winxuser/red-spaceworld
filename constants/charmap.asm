@@ -169,9 +169,9 @@
 	charmap "!",         $e7
 	charmap ".",         $e8
 
-	charmap "ァ",         $e9 ; Caught idecator
-	charmap "%",          $ea ; %
-	charmap "ェ",         $eb ; katakana small e, unused
+	charmap "ァ",        $e9 ; Caught idecator
+	charmap "%",         $ea ; %
+	charmap "[SHINY]",   $eb ; Shiny symbol
 
 	charmap "▷",         $ec
 	charmap "▶",         $ed

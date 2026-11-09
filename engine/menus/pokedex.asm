@@ -5,6 +5,11 @@ ShowPokedexMenu:
 	ld a, [wListScrollOffset]
 	push af
 	xor a
+
+	; Initialise Pokedex preview settings.
+	ld [wPokedexShinyView], a
+	ld [wPokedexSpritePending], a
+
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
 	ld [wLastMenuItem], a
@@ -99,12 +104,37 @@ HandlePokedexListMenu:
 	ld a, c
 	ld [wDexMaxSeenMon], a
 .loop
-	xor a
-	ldh [hAutoBGTransferEnabled], a
+    xor a
+    ldh [hAutoBGTransferEnabled], a
 
-	hlcoord 1, 1
-	lb bc, 7, 7
-	call ClearScreenArea
+    ; Check whether the player is holding a direction.
+    ldh a, [hJoyHeld]
+    and PAD_UP | PAD_DOWN | PAD_LEFT | PAD_RIGHT
+    jr z, .loadSelectedSprite
+
+    ; Scrolling: skip expensive sprite decompression.
+    ld a, [wPokedexSpritePending]
+    and a
+    jp nz, .drawPokedexList
+
+    ; Clear the previous sprite only once.
+    ld a, 1
+    ld [wPokedexSpritePending], a
+
+    hlcoord 1, 1
+    lb bc, 7, 7
+    call ClearScreenArea
+
+    jp .drawPokedexList
+
+.loadSelectedSprite
+    ; Direction released: allow the sprite to load.
+    xor a
+    ld [wPokedexSpritePending], a
+
+    hlcoord 1, 1
+    lb bc, 7, 7
+    call ClearScreenArea
 
 	call GetSelectedPokedexNum
 	push hl
@@ -148,13 +178,14 @@ HandlePokedexListMenu:
 	ld [wPokedexNum], a
 
 .skipSpriteLoading
-	pop bc
-	pop de
-	pop hl
+    pop bc
+    pop de
+    pop hl
 
-	hlcoord 10, 1
-	lb bc, 15, 9 ; clear inner area of the right-side list box
-	call ClearScreenArea
+.drawPokedexList
+    hlcoord 10, 1
+    lb bc, 15, 9
+    call ClearScreenArea
 	hlcoord 10, 3
 	ld a, [wListScrollOffset]
 	ld [wPokedexNum], a
@@ -209,11 +240,12 @@ HandlePokedexListMenu:
 	pop de
 	pop af
 	ld [wPokedexNum], a
-	dec d
-	jr nz, .printPokemonLoop
+    dec d
+    jr nz, .printPokemonLoop
 
-	; Draw the menu cursor at the current menu item position
-	hlcoord 10, 2
+.drawPokedexCursor
+    ; Draw the menu cursor at its current position.
+    hlcoord 10, 2
 	ld a, [wCurrentMenuItem]
 	ld bc, 2 * SCREEN_WIDTH
 	call AddNTimes
@@ -225,10 +257,32 @@ HandlePokedexListMenu:
 	call GBPalNormal
 
 .waitForInput
-	call JoypadLowSensitivity
-	ldh a, [hJoy5]
-	and PAD_UP | PAD_DOWN | PAD_LEFT | PAD_RIGHT | PAD_A | PAD_B | PAD_SELECT | PAD_START
-	jr z, .waitForInput
+    call JoypadLowSensitivity
+	; If scrolling has stopped, load the selected sprite.
+    ldh a, [hJoyHeld]
+    and PAD_UP | PAD_DOWN | PAD_LEFT | PAD_RIGHT
+    jr nz, .checkSpriteInput
+
+    ld a, [wPokedexSpritePending]
+    and a
+    jp nz, .loop
+
+.checkSpriteInput
+
+    ; Faster initial repeat when holding UP or DOWN.
+    ; The normal menu delay is 30 frames.
+    ; Reduce it to 10 frames for Pokedex navigation.
+    ldh a, [hJoyPressed]
+    and PAD_UP | PAD_DOWN
+    jr z, .checkInput
+
+    ld a, 10
+    ldh [hFrameCounter], a
+
+.checkInput
+    ldh a, [hJoy5]
+    and PAD_UP | PAD_DOWN | PAD_LEFT | PAD_RIGHT | PAD_A | PAD_B | PAD_SELECT | PAD_START
+    jr z, .waitForInput
 
 	; Clear current cursor arrow before moving
 	push af
@@ -258,12 +312,16 @@ HandlePokedexListMenu:
 	jp .loop
 
 .pressedUp
-	ld a, [wCurrentMenuItem]
-	and a
-	jr z, .scrollUpPage
-	dec a
-	ld [wCurrentMenuItem], a
-	jp .loop
+    ld a, [wCurrentMenuItem]
+    and a
+    jr z, .scrollUpPage
+
+    dec a
+    ld [wCurrentMenuItem], a
+
+    ; List has not scrolled.
+    ; Update only the cursor.
+    jp .cursorOnlyMove
 .scrollUpPage
 	ld a, [wListScrollOffset]
 	and a
@@ -285,9 +343,13 @@ HandlePokedexListMenu:
 	cp [hl]
 	pop af
 	jp z, .loop
-	inc a
-	ld [wCurrentMenuItem], a
-	jp .loop
+    inc a
+    ld [wCurrentMenuItem], a
+
+    ; List has not scrolled.
+    ; Update only the cursor.
+    jp .cursorOnlyMove
+
 .scrollDownPage
 	ld a, [wDexMaxSeenMon]
 	cp 7
@@ -324,24 +386,43 @@ HandlePokedexListMenu:
 	ld [wListScrollOffset], a
 	jp .loop
 
+.cursorOnlyMove
+    ; Disable automatic background transfers while editing tiles.
+    xor a
+    ldh [hAutoBGTransferEnabled], a
+
+    ; If the sprite is already pending, don't clear it again.
+    ld a, [wPokedexSpritePending]
+    and a
+    jr nz, .cursorOnlyDraw
+
+    ; Mark the Pokemon sprite for loading when movement stops.
+    ld a, 1
+    ld [wPokedexSpritePending], a
+
+    ; Clear the old Pokemon sprite once.
+    hlcoord 1, 1
+    lb bc, 7, 7
+    call ClearScreenArea
+
+.cursorOnlyDraw
+    ; The old cursor was cleared by the input handler.
+    ; Draw the new cursor without rebuilding the Pokemon list.
+    jp .drawPokedexCursor
+
 .checkIfSelectPressed
-	call GetSelectedPokedexNum
-	push hl
-	push de
-	push bc
-	ld hl, wPokedexSeen
-	call IsPokemonBitSet
-	jr z, .skipCry
-	call PokedexToIndex
-	ld a, [wPokedexNum]
-	push af
-	call PlayCry
-	pop af
-.skipCry
-	pop bc
-	pop de
-	pop hl
-	jp .loop
+    ; Switch between normal and shiny colours.
+    call TogglePokedexShinyPreview
+
+    ; Restore the cursor that the input handler erased.
+    hlcoord 10, 2
+    ld a, [wCurrentMenuItem]
+    ld bc, 2 * SCREEN_WIDTH
+    call AddNTimes
+    ld [hl], '▶'
+
+    ; No need to redraw the Pokemon, list, or borders.
+    jp .waitForInput
 
 .checkIfStartPressed
 	call GetSelectedPokedexNum
@@ -377,6 +458,26 @@ HandlePokedexListMenu:
 	ldh [hTileAnimations], a
 	and a
 	ret
+
+TogglePokedexShinyPreview:
+    ; Save the current Pokemon's internal index.
+    ld a, [wPokedexNum]
+    push af
+
+    ; Toggle normal / shiny preview.
+    ld a, [wPokedexShinyView]
+    xor 1
+    ld [wPokedexShinyView], a
+
+    ; Refresh the Pokemon's palette.
+    ld b, SET_PAL_POKEDEX
+    call RunPaletteCommand
+    call GBPalNormal
+
+    ; Restore the current Pokemon's internal index.
+    pop af
+    ld [wPokedexNum], a
+    ret
 
 GetSelectedPokedexNum:
 	ld a, [wListScrollOffset]
@@ -627,8 +728,25 @@ ShowPokedexDataInternal:
 .waitForButtonPress
 	call JoypadLowSensitivity
 	ldh a, [hJoy5]
-	and PAD_A | PAD_B
+	and PAD_A | PAD_B | PAD_SELECT | PAD_UP | PAD_DOWN
 	jr z, .waitForButtonPress
+
+	bit B_PAD_SELECT, a
+	jr nz, .toggleShinyPreview
+
+	bit B_PAD_UP, a
+	jp nz, .previousPokedexEntry
+
+	bit B_PAD_DOWN, a
+	jp nz, .nextPokedexEntry
+
+	jp .exitDataScreen
+
+.toggleShinyPreview
+    call TogglePokedexShinyPreview
+    jr .waitForButtonPress
+
+.exitDataScreen
 	pop af
 	ldh [hTileAnimations], a
 	call GBPalWhiteOut
@@ -641,6 +759,71 @@ ShowPokedexDataInternal:
 	ld a, $77
 	ldh [rAUDVOL], a
 	ret
+
+.previousPokedexEntry
+	; Save current internal Pokemon index.
+	ld a, [wPokedexNum]
+	push af
+
+	; Convert the internal index to Pokedex number.
+	call IndexToPokedex
+
+.searchPrevious
+	ld a, [wPokedexNum]
+	dec a
+	jr z, .noEntryChange
+
+	ld [wPokedexNum], a
+	ld hl, wPokedexSeen
+	call IsPokemonBitSet
+	jr z, .searchPrevious
+
+	jp .changePokedexEntry
+
+.nextPokedexEntry
+	; Save current internal Pokemon index.
+	ld a, [wPokedexNum]
+	push af
+
+	; Convert the internal index to Pokedex number.
+	call IndexToPokedex
+
+.searchNext
+	ld a, [wPokedexNum]
+	ld b, a
+	ld a, [wDexMaxSeenMon]
+	cp b
+	jr z, .noEntryChange
+	jr c, .noEntryChange
+
+	ld a, b
+	inc a
+	ld [wPokedexNum], a
+
+	ld hl, wPokedexSeen
+	call IsPokemonBitSet
+	jr z, .searchNext
+
+.changePokedexEntry
+	; Convert the selected Pokedex number back
+	; into the Pokemon's internal species index.
+	call PokedexToIndex
+
+	; Discard the previous internal species index.
+	pop af
+
+	; Restore tile animation state before reopening.
+	pop af
+	ldh [hTileAnimations], a
+
+	; Display the newly selected Pokemon.
+	jp ShowPokedexDataInternal
+
+.noEntryChange
+	; Restore the original internal species index.
+	pop af
+	ld [wPokedexNum], a
+	jp .waitForButtonPress
 
 HeightWeightText:
 	db   "HT  ?′??″"

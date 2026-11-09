@@ -81,12 +81,46 @@ TransformEffect_:
 	dec de
 .next
 ; DVs
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
+        ld a, [hli]
+        ld [de], a
+        inc de
+        ld a, [hli]
+        ld [de], a
+        inc de
+
+        ; Save source and destination pointers.
+        push hl
+        push de
+
+        ; Check the transformed Pokemon's new DVs.
+        ldh a, [hWhoseTurn]
+        and a
+        jr nz, .enemyTransformedShiny
+
+        ; Player used Transform.
+        ld de, wBattleMonDVs
+        farcall CheckShininess
+        ld a, 0
+        jr nc, .storePlayerShiny
+        inc a
+.storePlayerShiny
+        ld [wBattleMonShiny], a
+        jr .transformShinyDone
+
+.enemyTransformedShiny
+        ; Enemy used Transform.
+        ld de, wEnemyMonDVs
+        farcall CheckShininess
+        ld a, 0
+        jr nc, .storeEnemyShiny
+        inc a
+.storeEnemyShiny
+        ld [wEnemyMonShiny], a
+
+.transformShinyDone
+        pop de
+        pop hl
+
 ; Skip level and max HP
 	inc hl
 	inc hl
@@ -130,6 +164,13 @@ TransformEffect_:
 	ld hl, wEnemyMonStatMods
 	ld de, wPlayerMonStatMods
 	call .copyBasedOnTurn ; stat mods
+
+        ; Transform has now finished copying the Pokemon's
+        ; species, DVs, stats, and shiny status.
+        ; Reload the battle palettes using the new data.
+	ld b, SET_PAL_BATTLE
+	call RunPaletteCommand
+
 	ld hl, TransformedText
 	jp PrintText
 

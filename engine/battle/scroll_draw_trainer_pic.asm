@@ -1,10 +1,9 @@
 _ScrollTrainerPicAfterBattle:
-; Load the enemy trainer's pic and scrolls it into
-; the screen from the right.
 	xor a
 	ld [wEnemyMonSpecies2], a
 	ld b, SET_PAL_BATTLE
 	call RunPaletteCommand
+
 	callfar _LoadTrainerPic
 	hlcoord 19, 0
 	ld c, $0

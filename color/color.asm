@@ -33,7 +33,26 @@ SetPal_BattleBlack:
 ; and enemy scroll in, not at other times. The only difference is the timing of when it
 ; requests a palette update.
 SetPal_BattleAfterBlack:
-	call SetPal_Battle_Common
+    call SetPal_Battle_Common
+
+    ; During the battle introduction, palette slot 0 is used
+    ; by the player's trainer sprite and the text box.
+    ; Use the trainer palette instead of the active Pokemon's palette.
+    ld a, 2
+    ldh [rWBK], a
+
+IF GEN_2_GRAPHICS
+    ld d, PAL_HERO
+ELSE
+    ld d, PAL_REDMON
+ENDC
+    ld e, 0
+    farcall LoadSGBPalette
+
+    xor a
+    ldh [rWBK], a
+
+    ; Wait 3 frames (if LCD is on) to allow tilemap updates to apply.
 
 	; Wait 3 frames (if LCD is on) to allow tilemap updates to apply. Prevents garbage
 	; from appearing on player/enemy silhouettes.
@@ -82,22 +101,20 @@ SetPal_Battle_Common:
 	bit TRANSFORMED, a
 	jr z, .getBattleMonPal
 
-	; If transformed, don't trust the "DetermineBackSpritePaletteID" function.
-	ld a, $02
-	ldh [rWBK], a
-	ld a, [W2_BattleMonPalette]
+; Transformed Pokemon:
+; Determine the palette from its current species.
+	ld a, [wBattleMonSpecies]
+	call DetermineBackSpritePaletteID
 	ld b, a
-	xor a
-	ldh [rWBK], a
 	jr .getEnemyMonPal
 
 .getBattleMonPal
-	ld a, [wBattleMonSpecies]        ; player Pokemon ID
+	ld a, [wBattleMonSpecies]
 	call DetermineBackSpritePaletteID
 	ld b, a
 
 .getEnemyMonPal
-	ld a, [wEnemyMonSpecies2]         ; enemy Pokemon ID (without transform effect?)
+	ld a, [wEnemyMonSpecies2]
 	call DeterminePaletteID
 	ld c, a
 
@@ -110,15 +127,73 @@ SetPal_Battle_Common:
 
 	; Player palette
 	push bc
+
+    ; Read shiny flag from WRAM bank 1.
+	ld a, 1
+	ldh [rWBK], a
+
+	ld a, [wBattleMonShiny]
+	ld d, a
+
+    ; Restore WRAM bank 2.
+	ld a, 2
+	ldh [rWBK], a
+
+    ; Check shiny flag.
+	ld a, d
+	cp 1
+	jr nz, .normalPlayerPalette
+
+    ; Shiny Pokemon
+	ld d, b
+	ld e, 0
+	farcall LoadShinyPalette
+	jr .playerPaletteDone
+
+.normalPlayerPalette
+    ; Normal Pokemon
 	ld d, b
 	ld e, 0
 	farcall LoadSGBPalette
 
-	; Enemy palette
+.playerPaletteDone
+
+    ; Enemy palette
 	pop bc
 	ld d, c
 	ld e, 1
+
+    ; Check whether the enemy Pokemon is shiny.
+    ; The shiny flag is in WRAM bank 1.
+	ld a, 1
+	ldh [rWBK], a
+
+	ld a, [wEnemyMonShiny]
+	ld b, a
+
+    ; Restore WRAM bank 2 for the palette loader.
+	ld a, 2
+	ldh [rWBK], a
+
+    ; Species 0 means we're displaying the enemy trainer.
+    ; Always use the trainer's individual palette.
+	ld a, [wEnemyMonSpecies2]
+	and a
+	jr z, .normalEnemyPalette
+
+    ; Otherwise check whether the enemy Pokemon is shiny.
+	ld a, b
+	and a
+	jr z, .normalEnemyPalette
+
+    ; Load the shiny version of the Pokemon palette.
+	farcall LoadShinyPalette
+	jr .enemyPaletteDone
+
+.normalEnemyPalette
 	farcall LoadSGBPalette
+
+.enemyPaletteDone
 
 	; Player lifebar
 	ld a, [wPlayerHPBarColor]
@@ -294,12 +369,31 @@ IF GEN_2_GRAPHICS
 	farcall LoadSGBPalette
 ENDC
 
-	; Load pokemon palette
+	; Load Pokemon palette.
 	pop af
 	ld d, a
 	ld e, 0
+
+	; Preserve the normal palette ID.
+	push de
+
+	; Check the selected Pokemon's actual DVs.
+	ld de, wLoadedMonDVs
+	farcall CheckShininess
+
+	; Restore the palette ID without losing carry.
+	pop de
+	jr nc, .normalPokemonPalette
+
+	; Shiny Pokemon: load Spaceworld shiny colours.
+	farcall LoadShinyPalette
+	jr .pokemonPaletteDone
+
+.normalPokemonPalette
+	; Normal Pokemon: load original colours.
 	farcall LoadSGBPalette
 
+.pokemonPaletteDone
 
 	; Set palette map
 	xor a
@@ -359,8 +453,24 @@ SetPal_Pokedex:
 	ld a, 2
 	ldh [rWBK], a
 
+	; Preserve the Pokemon's normal palette category.
+	push de
+
+	; Check the Pokedex preview mode.
+	ld a, [wPokedexShinyView]
+	and a
+	jr z, .normalPokedexPalette
+
+	; Shiny preview: load Spaceworld shiny colours.
+	pop de
+	farcall LoadShinyPalette
+	jr .pokedexPaletteDone
+
+.normalPokedexPalette
+	pop de
 	farcall LoadSGBPalette
 
+.pokedexPaletteDone
 IF DEF(_BLUE)
 	ld d, PAL_BLUEMON
 ELSE
@@ -396,19 +506,19 @@ ENDC
 
 	CALL_INDIRECT ClearSpritePaletteMap
 
-    ld a, 3
-    ld [W2_StaticPaletteMapChanged], a
-    xor a
-    ld [W2_TileBasedPalettes], a
+	ld a, 3
+	ld [W2_StaticPaletteMapChanged], a
+	xor a
+	ld [W2_TileBasedPalettes], a
 
-    ; Force the new Pokémon background palette to refresh.
-    ld a, 1
-    ld [W2_ForceBGPUpdate], a
+	; Force the new Pokémon background palette to refresh.
+	ld a, 1
+	ld [W2_ForceBGPUpdate], a
 
-    ; Restore WRAM bank 0.
-    xor a
-    ldh [rWBK], a
-    ret
+	; Restore WRAM bank 0.
+	xor a
+	ldh [rWBK], a
+	ret
 
 ; Slots
 SetPal_Slots:
@@ -722,6 +832,11 @@ SetPal_PartyMenu:
 ; 1: make palettes black
 ; 2: previously used during trades, now unused.
 SetPal_PokemonWholeScreen:
+	; c = 3 means a Hall of Fame Pokemon.
+	ld a, c
+	cp 3
+	jr z, .hallOfFamePokemon
+
 	ld a, c
 	dec a
 	ld a, PAL_BLACK
@@ -731,9 +846,46 @@ SetPal_PokemonWholeScreen:
 	ld a, PAL_MEWMON
 	jr z, .loadPalette
 	ld a, [wWholeScreenPaletteMonSpecies]
-	; Use the "BackSprite" version for the player sprite in the hall of fame.
+    ; Normal whole-screen palette.
+	call DetermineBackSpritePaletteID
+	jr .loadPalette
+.hallOfFamePokemon
+	; Get this Pokemon's normal palette category.
+	ld a, [wWholeScreenPaletteMonSpecies]
 	call DetermineBackSpritePaletteID
 
+	; Preserve the normal palette ID in D.
+	ld d, a
+	push de
+
+	; Find the current party Pokemon's DVs.
+	ld a, [wHoFPartyMonIndex]
+	ld hl, wPartyMon1DVs
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call AddNTimes
+
+	; Check for genuine Gen 2 shiny DVs.
+	ld d, h
+	ld e, l
+	farcall CheckShininess
+
+	; Restore palette ID into D.
+	; POP DE preserves the carry flag from CheckShininess.
+	pop de
+	jr nc, .normalHoFPalette
+
+	; Shiny Pokemon: load its Spaceworld palette.
+	ld e, 0
+	ld a, 2
+	ldh [rWBK], a
+	farcall LoadShinyPalette
+
+	; Skip the normal palette loader.
+	jr .remainingPalettes
+
+.normalHoFPalette
+	ld a, d
+	jr .loadPalette
 .loadPalette
 	ld d, a
 	ld a, 2
@@ -742,6 +894,7 @@ SetPal_PokemonWholeScreen:
 	ld e, 0
 	farcall LoadSGBPalette
 
+.remainingPalettes
 	ld d, PAL_MEWMON
 	ld e, 1
 	push de
@@ -964,6 +1117,274 @@ INCLUDE "color/super_palettes.asm"
 INCLUDE "color/data/badgepalettemap.asm"
 
 INCLUDE "color/dmg.asm"
+
+; Graphics for the shiny Pokemon sparkle animation.
+ShinySparkleGFX::
+    INCBIN "gfx/battle/shiny_sparkle.2bpp"
+ShinySparkleGFXEnd::
+
+; Load four shiny sparkle tiles into sprite VRAM.
+LoadShinySparkleGFX::
+	ld de, ShinySparkleGFX
+	ld hl, vSprites tile $31
+	lb bc, BANK(ShinySparkleGFX), 4
+	jp CopyVideoData
+
+; Load a yellow GBC sprite palette for shiny sparkles.
+LoadShinySparklePalette::
+	ld a, 2
+	ldh [rWBK], a
+
+	ld d, PAL_YELLOWMON
+	ld e, 4
+	farcall LoadSGBPalette_Sprite
+
+	ld a, 1
+	ld [W2_ForceOBPUpdate], a
+
+	xor a
+	ldh [rWBK], a
+	ret
+
+ShinySparkle::
+    ; Clear our four sparkle sprites.
+	xor a
+	ld hl, wShadowOAMSprite36
+	ld b, OBJ_SIZE * 4
+
+.clearInitial
+	ld [hli], a
+	dec b
+	jr nz, .clearInitial
+
+	; Sparkle 1 - upper left
+	ld hl, wShadowOAMSprite36
+	ld a, 76
+	ld [hli], a       ; Y
+	ld a, 30
+	ld [hli], a       ; X
+	ld a, $31
+	ld [hli], a       ; Tile ID
+	ld a, 4
+	ld [hl], a        ; Yellow palette
+
+	ld c, 10
+	rst _DelayFrames
+
+	; Sparkle 2 - upper right
+	ld hl, wShadowOAMSprite37
+	ld a, 65
+	ld [hli], a
+	ld a, 56
+	ld [hli], a
+	ld a, $32
+	ld [hli], a
+	ld a, 4
+	ld [hl], a
+
+	ld c, 10
+	rst _DelayFrames
+
+	; Sparkle 3 - lower left
+	ld hl, wShadowOAMSprite38
+	ld a, 104
+	ld [hli], a
+	ld a, 22
+	ld [hli], a
+	ld a, $33
+	ld [hli], a
+	ld a, 4
+	ld [hl], a
+
+	ld c, 10
+	rst _DelayFrames
+
+	; Sparkle 4 - lower right
+	ld hl, wShadowOAMSprite39
+	ld a, 104
+	ld [hli], a
+	ld a, 70
+	ld [hli], a
+	ld a, $34
+	ld [hli], a
+	ld a, 4
+	ld [hl], a
+
+	; Hold the final frame for six frames.
+	ld c, 10
+	rst _DelayFrames
+
+	; Clear only our four sparkle sprites.
+	xor a
+	ld hl, wShadowOAMSprite36
+	ld b, OBJ_SIZE * 4
+
+.clearFinal
+	ld [hli], a
+	dec b
+	jr nz, .clearFinal
+
+	; Update hardware OAM.
+	call DelayFrame
+	ret
+
+DarkenShinyBattleScreen::
+	; Save current WRAM bank and switch to bank 2.
+	ldh a, [rWBK]
+	ld b, a
+	ld a, 2
+	ldh [rWBK], a
+	push bc
+
+	; Back up all 8 background palettes (64 bytes).
+	ld hl, W2_BgPaletteData
+	ld de, W2_ShinyPaletteBackup
+	ld bc, $40
+	rst _CopyData
+
+	; Darken all 32 RGB555 colours to approximately
+	; half their original brightness.
+	ld hl, W2_BgPaletteData
+	ld b, 32
+
+.darkLoop
+	; Each GBC colour consists of two bytes.
+	; Clear the lowest bit of each colour component,
+	; then divide the 15-bit colour value by 2.
+
+	ld a, [hli]
+	and $de
+	ld e, a
+
+	ld a, [hl]
+	and $7b
+	srl a
+	ld [hl], a
+
+	dec hl
+	rr e
+	ld a, e
+	ld [hli], a
+
+	inc hl
+	dec b
+	jr nz, .darkLoop
+
+	; Request a background palette refresh.
+	ld a, 1
+	ld [W2_ForceBGPUpdate], a
+
+	; Restore original WRAM bank.
+	pop bc
+	ld a, b
+	ldh [rWBK], a
+	ret
+
+
+RestoreShinyBattleScreen::
+	; Save current WRAM bank and switch to bank 2.
+	ldh a, [rWBK]
+	ld b, a
+	ld a, 2
+	ldh [rWBK], a
+	push bc
+
+	; Restore the original 64 palette bytes.
+	ld hl, W2_ShinyPaletteBackup
+	ld de, W2_BgPaletteData
+	ld bc, $40
+	rst _CopyData
+
+	; Request a background palette refresh.
+	ld a, 1
+	ld [W2_ForceBGPUpdate], a
+
+	; Restore original WRAM bank.
+	pop bc
+	ld a, b
+	ldh [rWBK], a
+	ret
+
+EnemyShinySparkle::
+	; Clear four sparkle sprites.
+	xor a
+	ld hl, wShadowOAMSprite36
+	ld b, OBJ_SIZE * 4
+
+.clearInitial
+	ld [hli], a
+	dec b
+	jr nz, .clearInitial
+
+	; Sparkle 1 - upper left
+	ld hl, wShadowOAMSprite36
+	ld a, 28              ; Y
+	ld [hli], a
+	ld a, 100             ; X
+	ld [hli], a
+	ld a, $31
+	ld [hli], a
+	ld a, 4
+	ld [hl], a
+
+	ld c, 10
+	rst _DelayFrames
+
+	; Sparkle 2 - upper right
+	ld hl, wShadowOAMSprite37
+	ld a, 35              ; Y
+	ld [hli], a
+	ld a, 145             ; X
+	ld [hli], a
+	ld a, $32
+	ld [hli], a
+	ld a, 4
+	ld [hl], a
+
+	ld c, 10
+	rst _DelayFrames
+
+	; Sparkle 3 - lower left
+	ld hl, wShadowOAMSprite38
+	ld a, 65              ; Y
+	ld [hli], a
+	ld a, 95              ; X
+	ld [hli], a
+	ld a, $33
+	ld [hli], a
+	ld a, 4
+	ld [hl], a
+
+	ld c, 10
+	rst _DelayFrames
+
+	; Sparkle 4 - lower right
+	ld hl, wShadowOAMSprite39
+	ld a, 70              ; Y
+	ld [hli], a
+	ld a, 150             ; X
+	ld [hli], a
+	ld a, $34
+	ld [hli], a
+	ld a, 4
+	ld [hl], a
+
+	; Hold final frame.
+	ld c, 10
+	rst _DelayFrames
+
+	; Clear sparkle sprites.
+	xor a
+	ld hl, wShadowOAMSprite36
+	ld b, OBJ_SIZE * 4
+
+.clearFinal
+	ld [hli], a
+	dec b
+	jr nz, .clearFinal
+
+	call DelayFrame
+	ret
 
 ; Copy of sound engine used by dmg-mode to play jingle
 SECTION "bank31", ROMX

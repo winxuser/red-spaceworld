@@ -288,6 +288,16 @@ wMenuItemToSwap:: db
 ; keeps track of what section of the list is on screen
 wListScrollOffset:: db
 
+; Pokedex shiny palette preview
+; 0 = normal Pokemon colours
+; 1 = Spaceworld shiny Pokemon colours
+wPokedexShinyView:: db
+
+; Pokedex sprite loading optimisation
+; 0 = sprite is up to date
+; 1 = sprite needs loading after scrolling stops
+wPokedexSpritePending:: db
+
 ; If non-zero, then when wrapping is disabled and the player tries to go past
 ; the top or bottom of the menu, return from HandleMenuInput. This is useful for
 ; menus that have too many items to display at once on the screen because it
@@ -1230,6 +1240,11 @@ wEnemyMonBaseExp:: db
 
 wBattleMonNick:: ds NAME_LENGTH
 wBattleMon:: battle_struct wBattleMon
+
+; Shiny Pokemon flags
+; 0 = normal, 1 = shiny
+wEnemyMonShiny:: db
+wBattleMonShiny:: db
 
 wTrainerClass:: db
 

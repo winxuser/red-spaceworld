@@ -57,3 +57,34 @@ startPaletteTransfer:
 	ret
 
 INCLUDE "data/sgb/sgb_palettes.asm"
+
+LoadShinyPalette::
+	; Save current WRAM bank and switch to bank 2.
+	ldh a, [rWBK]
+	ld b, a
+	ld a, 2
+	ldh [rWBK], a
+	push bc
+	; Preserve the destination palette slot.
+	push de
+	ld a, d
+	sub PAL_MEWMON
+	ld l, a
+	ld h, 0
+
+	; Each palette contains 8 bytes.
+	add hl, hl
+	add hl, hl
+	add hl, hl
+
+	; Point to the corresponding shiny RGB data.
+	ld de, ShinyPalettes
+	add hl, de
+
+	; Restore the destination palette slot.
+	pop de
+	ld a, e
+
+	; Copy the palette into GBC background palette memory.
+	ld de, W2_BgPaletteData
+	jp startPaletteTransfer
