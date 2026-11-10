@@ -41,8 +41,8 @@ EnterMap::
 OverworldLoop::
 	call DelayFrame
 OverworldLoopLessDelay::
-;	call DelayFrame
 	call LoadGBPal
+	farcall CheckOverworldTimeOfDay
 	ld a, [wMovementFlags]
 	bit BIT_LEDGE_OR_FISHING, a
 	call nz, HandleMidJump

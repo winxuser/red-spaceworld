@@ -208,30 +208,36 @@ LoadTilesetPalette::
 	ld a, b
 	ldh [rWBK], a ; Restore previous wram bank
 
+	; Load town roof palettes only for supported outdoor tilesets.
 	ld a, c
-	and a ; Check whether tileset 0 is loaded
-	call z, LoadTownPalette
-	cp PLATEAU ; tileset 0 isn't the only outside tileset
-	call z, LoadTownPalette
+	and a
+	jr z, .loadTownRoofs
 
-	; Add your new outdoor tilesets here!
+	cp PLATEAU
+	jr z, .loadTownRoofs
 	cp OLD_CITY_TS
-	call z, LoadTownPalette
+	jr z, .loadTownRoofs
 	cp WEST_CITY_TS
-	call z, LoadTownPalette
+	jr z, .loadTownRoofs
 	cp BIRDON_TS
-	call z, LoadTownPalette
+	jr z, .loadTownRoofs
 	cp FONT_TS
-	call z, LoadTownPalette
+	jr z, .loadTownRoofs
 	cp HIGH_TECH_TS
-	call z, LoadTownPalette
+	jr z, .loadTownRoofs
 	cp KANTO_TS
-	call z, LoadTownPalette
+	jr z, .loadTownRoofs
 	cp NORTH_CITY_TS
-	call z, LoadTownPalette
+	jr z, .loadTownRoofs
 	cp SOUTH_CITY_TS
-	call z, LoadTownPalette
+	jr z, .loadTownRoofs
 
+	jr .doneTownRoofs
+
+.loadTownRoofs
+	call LoadTownPalette
+
+.doneTownRoofs
 	pop hl
 	pop de
 	pop bc
@@ -353,3 +359,48 @@ GetTimeOfDayStage::
 	pop bc
 	ld a, 3             ; 3 = Afternoon
 	ret
+
+CheckOverworldTimeOfDay::
+    push af
+    push bc
+    push de
+    push hl
+	; Save the currently selected WRAM bank.
+    ldh a, [rWBK]
+    push af
+
+    ; Determine the current time-of-day stage.
+    call GetTimeOfDayStage
+
+    ; Compare against the previous stage.
+    ld b, a
+    ld a, [wLastTimeOfDayStage]
+    cp b
+    jr z, .done
+
+    ; Record the new stage.
+    ld a, b
+    ld [wLastTimeOfDayStage], a
+
+    ; Request an overworld palette refresh.
+    ld a, 1
+    ld [wTimeOfDayPalettesNeedUpdate], a
+
+    ; Keep the existing working palette refresh.
+    ld b, SET_PAL_OVERWORLD
+    call RunPaletteCommand
+
+    ; Clear the update flag.
+    xor a
+    ld [wTimeOfDayPalettesNeedUpdate], a
+
+.done
+    ; Restore the original WRAM bank.
+    pop af
+    ldh [rWBK], a
+
+    pop hl
+    pop de
+    pop bc
+    pop af
+    ret
