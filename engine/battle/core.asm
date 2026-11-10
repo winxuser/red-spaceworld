@@ -5405,43 +5405,101 @@ AdjustDamageForMoveType:
 .done
 	ret
 
-; function to tell how effective the type of an enemy attack is on the player's current pokemon
-; this doesn't take into account the effects that dual types can have
-; (e.g. 4x weakness / resistance, weaknesses and resistances canceling)
-; the result is stored in [wTypeEffectiveness]
-; as far is can tell, this is only used once in some AI code to help decide which move to use
+; AI Type Effectiveness, dual-type support
+;
+; Calculates the combined effectiveness of an enemy move
+; against the player's Pokemon.
+;
+; Results:
+;    0 = Immune
+;    2 = 0.25x (integer approximation)
+;    5 = 0.5x
+;   10 = 1x
+;   20 = 2x
+;   40 = 4x
+;
+; Uses the existing TypeEffects table.
+
 AIGetTypeEffectiveness:
+	; Enemy move type
 	ld a, [wEnemyMoveType]
-	ld d, a                    ; d = type of enemy move
+	ld b, a
+
+	; Player's first and second types
 	ld hl, wBattleMonType
-	ld b, [hl]                 ; b = type 1 of player's pokemon
-	inc hl
-	ld c, [hl]                 ; c = type 2 of player's pokemon
-	; initialize to neutral effectiveness
-	ld a, $10 ; bug: should be EFFECTIVE (10)
+	ld a, [hli]
+	ld d, a
+	ld e, [hl]
+
+	; Start with neutral effectiveness (1x)
+	ld a, EFFECTIVE
 	ld [wTypeEffectiveness], a
+
 	ld hl, TypeEffects
+
 .loop
+	; Read attacking type
 	ld a, [hli]
 	cp $ff
 	ret z
-	cp d                      ; match the type of the move
-	jr nz, .nextTypePair1
-	ld a, [hli]
-	cp b                      ; match with type 1 of pokemon
-	jr z, .done
-	cp c                      ; or match with type 2 of pokemon
-	jr z, .done
-	jr .nextTypePair2
-.nextTypePair1
-	inc hl
-.nextTypePair2
-	inc hl
-	jr .loop
-.done
+
+	; Does this matchup concern our move type?
+	cp b
+	jr nz, .nextPair
+
+	; Read defending type
 	ld a, [hl]
-	ld [wTypeEffectiveness], a ; store damage multiplier
-	ret
+	cp d
+	jr z, .matchingPair
+	cp e
+	jr z, .matchingPair
+
+.nextPair
+	; Skip defending type and multiplier
+	inc hl
+	inc hl
+	jp .loop
+
+.matchingPair
+	; HL points to defending type.
+	; Advance to the effectiveness multiplier.
+	inc hl
+	ld a, [hl]
+
+	cp NO_EFFECT
+	jr z, .immune
+
+	cp NOT_VERY_EFFECTIVE
+	jr z, .resisted
+
+	cp SUPER_EFFECTIVE
+	jr z, .superEffective
+	; Neutral or other unhandled multiplier.
+	jr .donePair
+
+.immune
+	; Any immunity makes the overall result zero.
+	xor a
+	ld [wTypeEffectiveness], a
+	jr .donePair
+
+.resisted
+	; Apply 0.5x to current effectiveness.
+	ld a, [wTypeEffectiveness]
+	srl a
+	ld [wTypeEffectiveness], a
+	jr .donePair
+
+.superEffective
+	; Apply 2x to current effectiveness.
+	ld a, [wTypeEffectiveness]
+	add a
+	ld [wTypeEffectiveness], a
+
+.donePair
+	; Advance past the multiplier to the next entry.
+	inc hl
+	jp .loop
 
 INCLUDE "data/types/type_matchups.asm"
 

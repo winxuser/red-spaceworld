@@ -107,7 +107,10 @@ AIMoveChoiceModificationFunctionPointers:
 	dw AIMoveChoiceModification1
 	dw AIMoveChoiceModification2
 	dw AIMoveChoiceModification3
-	dw AIMoveChoiceModification4 ; unused, does nothing
+	dw AIMoveChoiceModification4
+	dw AIMoveChoiceModification5
+	dw AIMoveChoiceModification6
+    dw AIMoveChoiceModification7
 
 ; discourages moves that cause no damage but only a status ailment if player's mon already has one
 AIMoveChoiceModification1:
@@ -220,7 +223,7 @@ AIMoveChoiceModification3:
 	jr z, .nextMove ; neutral move, no modification needed
 	jr c, .lessEffective
 	dec [hl] ; encourage move (lower value in wBuffer = higher priority)
-	cp 20 ; 2.0x effectiveness
+	cp 40 ; 2.0x effectiveness
 	jr c, .nextMove
 	dec [hl] ; heavily encourage 4x super-effective moves (e.g. Rock vs Charizard)
 	jr .nextMove
@@ -274,19 +277,475 @@ AIMoveChoiceModification4:
 	dec [hl] ; slightly encourage recovery when hurt
 	jr .nextMove
 .checkHighCrit
-	ld a, c
-	push hl
-	push de
-	push bc
-	ld hl, HighCriticalMoves
-	ld de, 1
-	call IsInArray
+    ; DE points to the next move, so step back
+    ; to retrieve the current move ID.
+    dec de
+    ld a, [de]
+    inc de
+
+    push hl
+    push de
+    push bc
+
+    ld hl, HighCriticalMoves
+    ld de, 1
+    call IsInArray
+
+    pop bc
+    pop de
+    pop hl
+
+    jr nc, .nextMove
+
+    ; Slightly encourage high-critical-hit moves.
+    dec [hl]
+    jr .nextMove
 	pop bc
 	pop de
 	pop hl
 	jr nc, .nextMove ; not in table, move on
 	dec [hl] ; slightly encourage high-crit moves
 	jr .nextMove
+
+; AI Layer 5 - Smart Stat Modification AI
+;
+; Discourages stat-changing moves when:
+; - The user's stat is already at maximum (+6)
+; - The target's stat is already at minimum (-6)
+;
+; Supports all six stats and both 1-stage and 2-stage effects.
+
+AIMoveChoiceModification5:
+    ld hl, wBuffer - 1
+    ld de, wEnemyMonMoves
+    ld b, NUM_MOVES + 1
+
+.nextMove
+    dec b
+    ret z
+
+    inc hl
+
+    ld a, [de]
+    and a
+    ret z
+
+    inc de
+
+    call ReadMove
+
+    ld a, [wEnemyMoveEffect]
+
+    push hl
+    push bc
+    push de
+
+    call .CheckStatLimit
+
+    pop de
+    pop bc
+    pop hl
+
+    jr nc, .nextMove
+
+    ; Move cannot change the stat any further.
+    ; Heavily discourage it.
+    ld a, [hl]
+    add 5
+    ld [hl], a
+
+    jr .nextMove
+
+.CheckStatLimit
+
+    ; One-stage stat increases ($0A-$0F).
+    cp ATTACK_UP1_EFFECT
+    jr c, .notStatMove
+
+    cp EVASION_UP1_EFFECT + 1
+    jr c, .upOne
+
+    ; One-stage stat decreases ($12-$17).
+    cp ATTACK_DOWN1_EFFECT
+    jr c, .notStatMove
+
+    cp EVASION_DOWN1_EFFECT + 1
+    jr c, .downOne
+
+    ; Two-stage stat increases ($32-$37).
+    cp ATTACK_UP2_EFFECT
+    jr c, .notStatMove
+
+    cp EVASION_UP2_EFFECT + 1
+    jr c, .upTwo
+
+    ; Two-stage stat decreases ($3A-$3F).
+    cp ATTACK_DOWN2_EFFECT
+    jr c, .notStatMove
+
+    cp EVASION_DOWN2_EFFECT + 1
+    jr c, .downTwo
+
+.notStatMove
+    and a
+    ret
+
+.upOne
+    sub ATTACK_UP1_EFFECT
+    jr .checkEnemyStat
+
+.upTwo
+    sub ATTACK_UP2_EFFECT
+
+.checkEnemyStat
+    ld c, a
+    ld b, 0
+
+    ld hl, wEnemyMonStatMods
+    add hl, bc
+
+    ld a, [hl]
+    cp 13
+    jr z, .atLimit
+
+    and a
+    ret
+
+.downOne
+    sub ATTACK_DOWN1_EFFECT
+    jr .checkPlayerStat
+
+.downTwo
+    sub ATTACK_DOWN2_EFFECT
+
+.checkPlayerStat
+    ld c, a
+    ld b, 0
+
+    ld hl, wPlayerMonStatMods
+    add hl, bc
+
+    ld a, [hl]
+    cp 1
+    jr z, .atLimit
+
+    and a
+    ret
+
+
+.atLimit
+    scf
+    ret
+
+; AI Layer 6 - Smart Status and Defensive Move AI
+;
+; Discourages non-damaging moves when their effect
+; is already active or cannot be applied again.
+
+AIMoveChoiceModification6:
+    ld hl, wBuffer - 1
+    ld de, wEnemyMonMoves
+    ld b, NUM_MOVES + 1
+
+.nextMove
+    dec b
+    ret z
+
+    inc hl
+
+    ld a, [de]
+    and a
+    ret z
+
+    inc de
+    call ReadMove
+
+    push hl
+    push de
+    push bc
+
+    call .CheckRedundantStatusMove
+
+    pop bc
+    pop de
+    pop hl
+
+    jr nc, .nextMove
+
+    ; Heavily discourage a redundant move.
+    ld a, [hl]
+    add 5
+    ld [hl], a
+
+    jr .nextMove
+
+.CheckRedundantStatusMove
+
+    ; Ignore damaging moves, including attacks with
+    ; secondary status effects.
+    ld a, [wEnemyMovePower]
+    and a
+    jp nz, .notRedundant
+
+    ld a, [wEnemyMoveEffect]
+
+    ; Major status conditions
+    cp SLEEP_EFFECT
+    jr z, .checkMajorStatus
+
+    cp POISON_EFFECT
+    jr z, .checkMajorStatus
+
+    cp PARALYZE_EFFECT
+    jr z, .checkMajorStatus
+
+    ; Confusion
+    cp CONFUSION_EFFECT
+    jr z, .checkConfusion
+
+    ; Leech Seed
+    cp LEECH_SEED_EFFECT
+    jr z, .checkLeechSeed
+
+    ; Substitute
+    cp SUBSTITUTE_EFFECT
+    jr z, .checkSubstitute
+
+    ; Reflect
+    cp REFLECT_EFFECT
+    jr z, .checkReflect
+
+    ; Light Screen
+    cp LIGHT_SCREEN_EFFECT
+    jr z, .checkLightScreen
+
+    jp .notRedundant
+
+.checkMajorStatus
+    ld a, [wBattleMonStatus]
+    and a
+    jr nz, .redundant
+    jr .notRedundant
+
+.checkConfusion
+    ld a, [wPlayerBattleStatus1]
+    bit CONFUSED, a
+    jr nz, .redundant
+    jr .notRedundant
+
+.checkLeechSeed
+    ld a, [wPlayerBattleStatus2]
+    bit SEEDED, a
+    jr nz, .redundant
+    jr .notRedundant
+
+.checkSubstitute
+    ld a, [wEnemyBattleStatus2]
+    bit HAS_SUBSTITUTE_UP, a
+    jr nz, .redundant
+    jr .notRedundant
+
+.checkReflect
+    ld a, [wEnemyBattleStatus3]
+    bit HAS_REFLECT_UP, a
+    jr nz, .redundant
+    jr .notRedundant
+
+.checkLightScreen
+    ld a, [wEnemyBattleStatus3]
+    bit HAS_LIGHT_SCREEN_UP, a
+    jr nz, .redundant
+
+.notRedundant
+    and a
+    ret
+
+.redundant
+    scf
+    ret
+
+; Layer 7 - Attack Strength Awareness
+;
+; Encourages powerful damaging attacks and STAB.
+; Leaves fixed-damage and special-effect attacks alone.
+AIMoveChoiceModification7:
+    ld hl, wBuffer - 1
+    ld de, wEnemyMonMoves
+    ld b, NUM_MOVES + 1
+
+.nextMove
+    dec b
+    ret z
+
+    inc hl
+
+    ld a, [de]
+    and a
+    ret z
+
+    inc de
+    call ReadMove
+
+    push hl
+    push bc
+    push de
+
+    call .ScoreAttack
+
+    pop de
+    pop bc
+    pop hl
+
+    jr .nextMove
+
+.ScoreAttack
+    ; Ignore non-damaging moves.
+    ld a, [wEnemyMovePower]
+    and a
+    ret z
+
+    ; Fixed-damage and unusual damage mechanics
+    ; need separate evaluation later.
+    ld a, [wEnemyMoveEffect]
+
+    cp SPECIAL_DAMAGE_EFFECT
+    ret z
+
+    cp SUPER_FANG_EFFECT
+    ret z
+
+    cp OHKO_EFFECT
+    ret z
+
+    cp TWO_TO_FIVE_ATTACKS_EFFECT
+    ret z
+
+    cp EFFECT_1E
+    ret z
+
+    cp ATTACK_TWICE_EFFECT
+    ret z
+
+    ld a, [wEnemyMovePower]
+
+    cp 100
+    jr nc, .veryStrong
+
+    cp 70
+    jr nc, .strong
+
+    cp 40
+    jr c, .weak
+
+    jr .checkSTAB
+
+.veryStrong
+    ; Strongly prefer attacks with 100+ base power.
+    dec [hl]
+    dec [hl]
+    jr .checkSTAB
+
+.strong
+    ; Slightly prefer attacks with 70-99 base power.
+    dec [hl]
+    jr .checkSTAB
+
+.weak
+    ; Slightly discourage attacks below 40 power.
+    inc [hl]
+
+.checkSTAB
+    ; Consider the offensive and defensive stats.
+    call .ScoreStatMatchup
+
+    ; Consider move accuracy.
+    call .ScoreAccuracy
+
+    ; Check same-type attack bonus.
+    ld a, [wEnemyMoveType]
+    ld b, a
+
+    ld a, [wEnemyMonType]
+    cp b
+    jr z, .preferSTAB
+
+    ld a, [wEnemyMonType + 1]
+    cp b
+    ret nz
+
+.preferSTAB
+    ; Prefer attacks matching the user's type.
+    dec [hl]
+    ret
+
+.ScoreAccuracy
+    ld a, [wEnemyMoveAccuracy]
+
+    ; 90% accuracy or better: no penalty.
+    cp 230
+    ret nc
+
+    ; 75% to 89%: small penalty.
+    cp 191
+    jr nc, .smallPenalty
+
+    ; Below 75%: stronger penalty.
+    inc [hl]
+    inc [hl]
+    ret
+
+.smallPenalty
+    inc [hl]
+    ret
+
+.ScoreStatMatchup
+    push hl
+
+    ld a, [wEnemyMoveType]
+    cp SPECIAL
+    jr nc, .specialStats
+
+    ; Physical attack
+    ld hl, wEnemyMonAttack
+    ld de, wBattleMonDefense
+    jr .compareStats
+
+.specialStats
+    ; Special attack
+    ld hl, wEnemyMonSpecial
+    ld de, wBattleMonSpecial
+
+.compareStats
+    ; Compare high bytes first.
+    ld a, [de]
+    ld b, a
+    ld a, [hli]
+    cp b
+    jr c, .defenseHigher
+    jr nz, .attackHigher
+
+    ; High bytes equal: compare low bytes.
+    inc de
+    ld a, [de]
+    ld b, a
+    ld a, [hl]
+    cp b
+    jr c, .defenseHigher
+    jr z, .equalStats
+
+.attackHigher
+    pop hl
+    dec [hl]
+    ret
+
+.defenseHigher
+    pop hl
+    inc [hl]
+    ret
+
+.equalStats
+    pop hl
+    ret
 
 ReadMove:
 	push hl
