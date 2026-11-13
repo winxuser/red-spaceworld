@@ -1,10 +1,7 @@
 ShowPokedexMenu:
-	call GBPalWhiteOut
-	call ClearScreen
-	call UpdateSprites
-	ld a, [wListScrollOffset]
-	push af
-	xor a
+    ld a, [wListScrollOffset]
+    push af
+    xor a
 
 	; Initialise Pokedex preview settings.
 	ld [wPokedexShinyView], a
@@ -93,12 +90,28 @@ HandlePokedexListMenu:
 	ld a, [hld]
 	ld d, 8
 .maxSeenPokemonInnerLoop
-	dec bc
-	sla a
-	jr c, .storeMaxSeenPokemon
-	dec d
-	jr nz, .maxSeenPokemonInnerLoop
-	jr .maxSeenPokemonLoop
+    dec bc
+    sla a
+    jr c, .storeMaxSeenPokemon
+    dec d
+    jr nz, .maxSeenPokemonInnerLoop
+
+    ; Stop before reading beyond wPokedexSeen.
+    ; BC = 1 means all valid bits have been checked.
+    ld a, b
+    and a
+    jr nz, .maxSeenPokemonLoop
+
+    ld a, c
+    cp 1
+    jr z, .noSeenPokemon
+
+    jr .maxSeenPokemonLoop
+
+.noSeenPokemon
+    xor a
+    ld [wDexMaxSeenMon], a
+    jr .loop
 
 .storeMaxSeenPokemon
 	ld a, c
@@ -128,15 +141,24 @@ HandlePokedexListMenu:
     jp .drawPokedexList
 
 .loadSelectedSprite
-    ; Direction released: allow the sprite to load.
-    xor a
-    ld [wPokedexSpritePending], a
+    ; If the sprite is pending, its area was
+    ; already cleared during cursor movement.
+    ld a, [wPokedexSpritePending]
+    and a
+    jr nz, .spriteAlreadyCleared
 
+    ; Clear the sprite area if it wasn't
+    ; previously cleared.
     hlcoord 1, 1
     lb bc, 7, 7
     call ClearScreenArea
 
-	call GetSelectedPokedexNum
+.spriteAlreadyCleared
+    ; Direction released: allow sprite loading.
+    xor a
+    ld [wPokedexSpritePending], a
+
+    call GetSelectedPokedexNum
 	push hl
 	push de
 	push bc
@@ -151,8 +173,8 @@ HandlePokedexListMenu:
 	ldh [hAutoBGTransferEnabled], a
 
     ; Transfer the top and middle thirds.
-	call DelayFrame
-	call DelayFrame
+;	call DelayFrame
+;	call DelayFrame
 
 	xor a
 	ldh [hAutoBGTransferEnabled], a
@@ -189,13 +211,23 @@ HandlePokedexListMenu:
 	hlcoord 10, 3
 	ld a, [wListScrollOffset]
 	ld [wPokedexNum], a
-	ld d, 7
-	ld a, [wDexMaxSeenMon]
-	cp 7
-	jr nc, .printPokemonLoop
-	ld d, a
-	dec a
-	ld [wMaxMenuItem], a
+    ld d, 7
+    ld a, [wDexMaxSeenMon]
+    and a
+    jr z, .noSeenEntries
+
+    cp 7
+    jr nc, .printPokemonLoop
+
+    ld d, a
+    dec a
+    ld [wMaxMenuItem], a
+    jr .printPokemonLoop
+
+.noSeenEntries
+    xor a
+    ld [wMaxMenuItem], a
+    jp .drawPokedexCursor
 ; loop to print pokemon pokedex numbers and names inside the right box
 .printPokemonLoop
 	ld a, [wPokedexNum]
@@ -849,24 +881,23 @@ DrawTileLine:
 INCLUDE "data/pokemon/dex_entries.asm"
 
 PokedexToIndex:
-	push bc
-	push hl
-	ld a, [wPokedexNum]
-	ld b, a
-	ld c, 0
-	ld hl, PokedexOrder
+    push bc
+    push hl
 
-.loop
-	inc c
-	ld a, [hli]
-	cp b
-	jr nz, .loop
+    ld a, [wPokedexNum]
+    dec a
+    ld c, a
+    ld b, 0
 
-	ld a, c
-	ld [wPokedexNum], a
-	pop hl
-	pop bc
-	ret
+    ld hl, PokedexReverseOrder
+    add hl, bc
+
+    ld a, [hl]
+    ld [wPokedexNum], a
+
+    pop hl
+    pop bc
+    ret
 
 IndexToPokedex:
 	push bc
@@ -887,3 +918,4 @@ IndexToPokedex:
 	ret
 
 INCLUDE "data/pokemon/dex_order.asm"
+INCLUDE "data/pokemon/dex_reverse.asm"
