@@ -2086,13 +2086,33 @@ LoadSurfingPlayerSpriteGraphics::
 	jr LoadPlayerSpriteGraphicsCommon
 
 LoadBikePlayerSpriteGraphics::
-	ld de, RedBikeSprite
-	ld a, [wPlayerGender]
-	and a
-	jr z, .AreGuy2
-	ld de, GreenBikeSprite
-.AreGuy2
-	ld hl, vNPCSprites
+    ld a, [wRidingVehicle]
+    cp 1
+    jr z, .skateboard
+
+    ; Bicycle graphics
+    ld de, RedBikeSprite
+    ld a, [wPlayerGender]
+    and a
+    jr z, .done
+    ld de, GreenBikeSprite
+    jr .done
+
+.skateboard
+    ; Male skateboard graphics
+    ld de, RedSkateboardSprite
+    ld a, [wPlayerGender]
+    and a
+    jr z, .done
+
+    ; Female skateboard graphics (not available yet)
+    ; ld de, GreenSkateboardSprite
+
+    ; Temporary female fallback
+    ld de, GreenBikeSprite
+
+.done
+    ld hl, vNPCSprites
 
 LoadPlayerSpriteGraphicsCommon::
 	push de

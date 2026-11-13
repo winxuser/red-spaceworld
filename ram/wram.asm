@@ -2112,7 +2112,11 @@ wObtainedHiddenCoinsFlags:: flag_array MAX_HIDDEN_COINS
 ; $02 = surfing
 wWalkBikeSurfState:: db
 
-;	ds 10 ; can add stuff here
+; 0 = Bicycle
+; 1 = Skateboard
+wRidingVehicle:: db
+
+	ds 5 ; can add stuff here
 
 wTownVisitedFlag:: flag_array NUM_CITY_MAPS
 
@@ -2287,10 +2291,9 @@ wLastTimeOfDayStage:: db
 
 wGenderTemp:: db
 
-wPlayerGender::
-	; $00 = male
-	; $01 = female
-		ds 1
+wPlayerGender:: ds 1
+; $00 = male
+; $01 = female
 
 wMainDataEnd::
 

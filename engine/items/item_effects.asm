@@ -60,7 +60,7 @@ ItemUsePtrTable:
 	dw UnusableItem      ; DOME_FOSSIL
 	dw UnusableItem      ; HELIX_FOSSIL
 	dw UnusableItem      ; SECRET_KEY
-	dw UnusableItem      ; ITEM_2C
+	dw ItemUseSkateboard ; SKATEBOARD
 	dw UnusableItem      ; BIKE_VOUCHER
 	dw ItemUseXAccuracy  ; X_ACCURACY
 	dw ItemUseEvoStone   ; LEAF_STONE
@@ -619,33 +619,69 @@ ItemUseTownMap:
 	jp nz, ItemUseNotTime
 	farjp DisplayTownMap
 
+ItemUseSkateboard:
 ItemUseBicycle:
 	ld a, [wIsInBattle]
 	and a
 	jp nz, ItemUseNotTime
+
 	ld a, [wWalkBikeSurfState]
 	ld [wWalkBikeSurfStateCopy], a
-	cp 2 ; is the player surfing?
+	cp 2 ; surfing?
 	jp z, ItemUseNotTime
-	dec a ; is player already bicycling?
+
+	cp 1 ; already riding?
 	jr nz, .tryToGetOnBike
-; get off bike
+
+	; Determine which vehicle was selected.
+	ld a, [wCurItem]
+	cp SKATEBOARD
+	ld a, 0 ; Bicycle
+	jr nz, .compareVehicle
+	inc a ; Skateboard
+
+.compareVehicle
+	ld hl, wRidingVehicle
+	cp [hl]
+	jr nz, .switchVehicle
+
+	; Using the same vehicle: dismount.
 	call ItemUseReloadOverworldData
 	xor a
-	ld [wWalkBikeSurfState], a ; change player state to walking
-	call PlayDefaultMusic ; play walking music
+	ld [wWalkBikeSurfState], a
+	call PlayDefaultMusic
 	ld hl, GotOffBicycleText
 	jr .printText
+
+.switchVehicle
+	; Change vehicles without dismounting.
+	call ItemUseReloadOverworldData
+	jr .setVehicle
+
 .tryToGetOnBike
 	call IsBikeRidingAllowed
 	jp nc, NoCyclingAllowedHere
+
 	call ItemUseReloadOverworldData
-	xor a ; no keys pressed
-	ldh [hJoyHeld], a ; current joypad state
+
+	xor a
+	ldh [hJoyHeld], a
 	inc a
-	ld [wWalkBikeSurfState], a ; change player state to bicycling
+	ld [wWalkBikeSurfState], a
+
+.setVehicle
+	; Set vehicle only after successful use.
+	ld a, [wCurItem]
+	cp SKATEBOARD
+	ld a, 0 ; Bicycle
+	jr nz, .storeVehicle
+	inc a ; Skateboard
+
+.storeVehicle
+	ld [wRidingVehicle], a
 	ld hl, GotOnBicycleText
-	call PlayDefaultMusic ; play bike riding music
+	call PlayDefaultMusic
+
 .printText
 	jp PrintText
 

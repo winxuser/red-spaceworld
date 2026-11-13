@@ -370,6 +370,8 @@ StartMenu_Item::
 	ld a, [wCurItem]
 	cp BICYCLE
 	jp z, .useOrTossItem
+	cp SKATEBOARD
+	jp z, .useOrTossItem
 	ld a, USE_TOSS_MENU_TEMPLATE
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -399,7 +401,11 @@ StartMenu_Item::
 	call CopyToStringBuffer
 	ld a, [wCurItem]
 	cp BICYCLE
+	jr z, .checkBikeRestriction
+	cp SKATEBOARD
 	jr nz, .notBicycle
+
+.checkBikeRestriction
 	ld a, [wStatusFlags6]
 	bit BIT_ALWAYS_ON_BIKE, a
 	jr z, .useItem_closeMenu
