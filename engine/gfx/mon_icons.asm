@@ -55,7 +55,69 @@ GetAnimationSpeed:
 	ld bc, OBJ_SIZE * 4
 	ld a, [wCurrentMenuItem]
 	call AddNTimes
-	ld c, ICONOFFSET
+        ld c, ICONOFFSET
+
+IF USE_CUSTOM_PARTY_ICONS
+	; Dynamic party icons use slot-based tile IDs.
+	; Custom icons always use two-frame animation.
+	; Original Ball and Helix fallbacks shake vertically.
+
+	ld a, [wPartyMenuAnimMonEnabled]
+	and a
+	jr z, .originalIconAnimation
+
+	; Preserve animation registers.
+	push hl
+	push bc
+
+	; Get selected Pokemon species.
+	ld a, [wCurrentMenuItem]
+	ld hl, wPartySpecies
+	ld e, a
+	ld d, 0
+	add hl, de
+	ld a, [hl]
+
+	; Preserve species for original fallback lookup.
+	push af
+
+	; Check whether this Pokemon has custom artwork.
+	ld e, a
+	farcall FindCustomPartyIconGfx
+
+	; E = 1 if custom artwork exists.
+	ld a, e
+	and a
+	jr z, .checkFallback
+
+	; Custom artwork: use two-frame animation.
+	pop af
+	pop bc
+	pop hl
+	jr .editTileIDS
+
+.checkFallback
+	; Restore species and get its original icon.
+	pop af
+	call GetPartyMonSpriteID
+
+	; Restore animation registers.
+	pop bc
+	pop hl
+
+	; Original Ball and Helix icons shake.
+	cp ICON_BALL << 2
+	jr z, .editCoords
+
+	cp ICON_HELIX << 2
+	jr z, .editCoords
+
+	; Other fallback icons use two frames.
+	jr .editTileIDS
+
+.originalIconAnimation
+ENDC
+	; Original Gen 1 animation behaviour.
 	ld a, [hl]
 	cp ICON_BALL << 2
 	jr z, .editCoords
@@ -165,19 +227,41 @@ LoadMonPartySpriteGfxWithLCDDisabled:
 INCLUDE "data/icon_pointers.asm"
 
 WriteMonPartySpriteOAMByPartyIndex:
-; Write OAM blocks for the party mon in [hPartyMonIndex].
+; Write the party icon for the Pokemon at hPartyMonIndex.
+
 	push hl
 	push de
 	push bc
+
+IF USE_CUSTOM_PARTY_ICONS
+	; Dynamic mode:
+	; Each party position has its own four-tile icon.
+
+	ldh a, [hPartyMonIndex]
+
+	; Multiply party index by four.
+	add a
+	add a
+
+	add CUSTOM_PARTY_ICON_BASE_TILE
+	ld [wOAMBaseTile], a
+
+	; Draw four independent tiles.
+	call WriteDynamicPartySpriteOAM
+
+ELSE
+	; Original Gen 1 icon system.
 	ldh a, [hPartyMonIndex]
 	ld hl, wPartySpecies
 	ld e, a
 	ld d, 0
 	add hl, de
+
 	ld a, [hl]
 	call GetPartyMonSpriteID
 	ld [wOAMBaseTile], a
 	call WriteMonPartySpriteOAM
+ENDC
 	pop bc
 	pop de
 	pop hl
@@ -243,6 +327,12 @@ WriteMonPartySpriteOAM:
 	add $10
 	ld b, a
 	pop af
+
+IF USE_CUSTOM_PARTY_ICONS
+	cp $28 ; Custom Ponyta
+	jr z, .helix
+ENDC
+
 	cp ICON_HELIX << 2
 	jr z, .helix
 	call WriteSymmetricMonPartySpriteOAM
@@ -252,6 +342,29 @@ WriteMonPartySpriteOAM:
 ; Make a copy of the OAM buffer with the first animation frame written so that
 ; we can flip back to it from the second frame by copying it back.
 .makeCopy
+	ld hl, wShadowOAM
+	ld de, wMonPartySpritesSavedOAM
+	ld bc, OBJ_SIZE * 4 * PARTY_LENGTH
+	jp CopyData
+
+WriteDynamicPartySpriteOAM::
+	; Locate this party member's four OAM entries.
+	ld c, $10
+	ld h, HIGH(wShadowOAM)
+
+	ldh a, [hPartyMonIndex]
+	swap a
+	ld l, a
+
+	; Set the sprite's screen position.
+	add $10
+	ld b, a
+
+	; Draw all four tiles independently.
+	call WriteAsymmetricMonPartySpriteOAM
+
+	; Save the first-frame OAM arrangement.
+	; The animation routine uses this to restore frame 1.
 	ld hl, wShadowOAM
 	ld de, wMonPartySpritesSavedOAM
 	ld bc, OBJ_SIZE * 4 * PARTY_LENGTH
@@ -276,6 +389,16 @@ GetPartyMonSpriteID:
 	and $f0
 	srl a ; value == ICON constant << 2
 	srl a
+	ret
+
+GetOriginalPartyIconCategory::
+	ld a, e
+	call GetPartyMonSpriteID
+	; Convert tile ID (ICON_* << 2)
+	; back into the original icon category.
+	srl a
+	srl a
+	ld e, a
 	ret
 
 INCLUDE "data/pokemon/menu_icons.asm"

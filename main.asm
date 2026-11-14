@@ -407,3 +407,18 @@ INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
 SECTION "Base Stats", ROMX
 
 INCLUDE "data/pokemon/base_stats.asm"
+
+
+SECTION "Custom Party Icons 1", ROMX
+
+INCLUDE "gfx/icons/custom_icons.asm"
+
+
+SECTION "Custom Party Icons A", ROMX
+
+INCLUDE "gfx/icons/custom_icons_a.asm"
+
+
+SECTION "Custom Party Icons B", ROMX
+
+INCLUDE "gfx/icons/custom_icons_b.asm"

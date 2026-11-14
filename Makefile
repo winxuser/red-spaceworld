@@ -187,6 +187,29 @@ gfx/tilesets/reds_house.2bpp: tools/gfx += --preserve=0x48
 
 gfx/trade/game_boy.2bpp: tools/gfx += --remove-duplicates
 
+CUSTOM_PARTY_ICON_PNGS := $(wildcard gfx/icons/custom/*.png)
+CUSTOM_PARTY_ICON_2BPPS := $(CUSTOM_PARTY_ICON_PNGS:.png=.2bpp)
+
+# Track the set of custom icon filenames.
+.PHONY: force-custom-icon-scan
+force-custom-icon-scan:
+
+gfx/icons/custom_icon_manifest.txt: force-custom-icon-scan
+	@find gfx/icons/custom -maxdepth 1 -name '*.png' -print | sort > $@.tmp
+	@if ! cmp -s $@.tmp $@; then \
+		mv $@.tmp $@; \
+	else \
+		rm $@.tmp; \
+	fi
+
+# Regenerate icon assembly and pointer tables when new
+# PNGs are added or the generator changes.
+data/pokemon/custom_icon_pointers.asm: tools/generate_custom_icons.py gfx/icons/custom_icon_manifest.txt $(CUSTOM_PARTY_ICON_PNGS)
+	python3 tools/generate_custom_icons.py
+
+# Generate the pointer table and convert all icon graphics
+# before assembling main.asm.
+$(filter %main.o,$(all_objs)): data/pokemon/custom_icon_pointers.asm $(CUSTOM_PARTY_ICON_2BPPS)
 
 ### Catch-all graphics rules
 

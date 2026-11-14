@@ -295,8 +295,11 @@ ROMX $7A
 ROMX $7B
 ROMX $7C
 ROMX $7D
+    "Custom Party Icons A"
 ROMX $7E
+    "Custom Party Icons B"
 ROMX $7F
+    "Custom Party Icons 1"
 WRAM0
 	"Audio RAM"
 	org $c100

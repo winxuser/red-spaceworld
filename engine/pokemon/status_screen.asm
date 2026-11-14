@@ -40,17 +40,27 @@ DrawHP_:
 	push de
 	push hl
 	push hl
+
+	; HP numbers on the left, HP bar on the right.
+	ldh a, [hUILayoutFlags]
+	bit BIT_PARTY_MENU_HP_BAR, a
+	jr z, .drawBar
+	; Move HP bar seven tiles right.
+	ld bc, 7
+	add hl, bc
+.drawBar
 	call DrawHPBar
 	pop hl
+
 	ldh a, [hUILayoutFlags]
 	bit BIT_PARTY_MENU_HP_BAR, a
 	jr z, .printFractionBelowBar
-	ld bc, 9 ; right of bar
-	jr .printFraction
 
+	; Print HP numbers at the original starting position.
+	ld bc, 0
+	jr .printFraction
 .printFractionBelowBar
 	ld bc, SCREEN_WIDTH + 1 ; below bar
-
 .printFraction
 	add hl, bc
 	ld de, wLoadedMonHP
@@ -148,14 +158,14 @@ StatusScreen:
 	ld [wGenderTemp], a
 	call PrintGenderStatusScreen
 
-    ; Check the selected Pokemon's actual DVs.
-    ld de, wLoadedMonDVs
-    callfar CheckShininess
-    jr nc, .notShiny
+	; Check the selected Pokemon's actual DVs.
+	ld de, wLoadedMonDVs
+	callfar CheckShininess
+	jr nc, .notShiny
 
-    hlcoord 19, 0
-    ld a, '[SHINY]'
-    ld [hl], a
+	hlcoord 19, 0
+	ld a, '[SHINY]'
+	ld [hl], a
 
 .notShiny
 	hlcoord 14, 0

@@ -3,7 +3,14 @@ DrawPartyMenu_::
 	ldh [hAutoBGTransferEnabled], a
 	call ClearScreen
 	call UpdateSprites
-	farcall LoadMonPartySpriteGfxWithLCDDisabled ; load pokemon icon graphics
+
+IF USE_CUSTOM_PARTY_ICONS
+	; Load custom or fallback icons into all six party slots.
+	farcall LoadAllDynamicPartyIconGfx
+ELSE
+	; Original Gen 1 party icon system.
+	farcall LoadMonPartySpriteGfxWithLCDDisabled
+ENDC
 
 RedrawPartyMenu_::
 	ld a, [wPartyMenuTypeOrMessageID]
@@ -191,8 +198,17 @@ RedrawPartyMenu_::
 	ld h, [hl]
 	ld l, a
 	rst _PrintText
-
 .done
+	; Draw CANCEL in the normal party menu only.
+	ld a, [wPartyMenuTypeOrMessageID]
+	and a
+	jr nz, .skipCancelText
+	push hl
+	hlcoord 12, 16
+	ld de, PartyMenuCancelText
+	call PlaceString
+	pop hl
+.skipCancelText
 	pop hl
 	pop af
 	ld [hl], a
@@ -200,7 +216,6 @@ RedrawPartyMenu_::
 	ldh [hAutoBGTransferEnabled], a
 	call Delay3
 	jp GBPalNormal
-
 .printItemUseMessage
 	and $0F
 	ld hl, PartyMenuItemUseMessagePointers
@@ -224,6 +239,8 @@ AbleText:
 	db "ABLE@"
 NotAbleText:
 	db "NOT ABLE@"
+PartyMenuCancelText:
+	db "CANCEL@"
 
 PartyMenuItemUseMessagePointers:
 	dw AntidoteText

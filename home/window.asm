@@ -19,9 +19,18 @@ HandleMenuInput_::
 .loop2
 	push hl
 	ld a, [wPartyMenuAnimMonEnabled]
-	and a ; is it a pokemon selection menu?
+	and a
 	jr z, .getJoypadState
-	farcall AnimatePartyMon ; shake mini sprite of selected pokemon
+
+	; CANCEL is not a Pokemon.
+	; Do not animate beyond the party's last slot.
+	ld a, [wCurrentMenuItem]
+	ld hl, wPartyCount
+	cp [hl]
+	jr nc, .getJoypadState
+
+	farcall AnimatePartyMon
+
 .getJoypadState
 	pop hl
 	call JoypadLowSensitivity
@@ -145,6 +154,22 @@ PlaceMenuCursor::
 	ld bc, SCREEN_WIDTH * 2
 .getOldMenuItemScreenPosition
 	pop af
+
+	; Party menu CANCEL has its own cursor position.
+	ld d, a
+	ld a, [wPartyMenuAnimMonEnabled]
+	and a
+	ld a, d
+	jr z, .oldMenuItemLoop
+
+	ld a, [wPartyCount]
+	cp d
+	ld a, d
+	jr nz, .oldMenuItemLoop
+
+	; Previous selection was CANCEL.
+	hlcoord 11, 16
+	jr .checkForArrow1
 .oldMenuItemLoop
 	add hl, bc
 	dec a
@@ -171,6 +196,23 @@ PlaceMenuCursor::
 	ld bc, SCREEN_WIDTH * 2
 .getCurrentMenuItemScreenPosition
 	pop af
+
+	; Party menu CANCEL has its own cursor position.
+	ld d, a
+	ld a, [wPartyMenuAnimMonEnabled]
+	and a
+	ld a, d
+	jr z, .currentMenuItemLoop
+
+	ld a, [wPartyCount]
+	cp d
+	ld a, d
+	jr nz, .currentMenuItemLoop
+
+	; Current selection is CANCEL.
+	hlcoord 11, 16
+	jr .checkForArrow2
+
 .currentMenuItemLoop
 	add hl, bc
 	dec a

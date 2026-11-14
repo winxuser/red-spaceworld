@@ -223,7 +223,26 @@ PartyMenuInit::
 ; if party is not empty, the max menu item ID is ([wPartyCount] - 1)
 ; otherwise, it is 0
 .storeMaxMenuItemID
+	; Normally the maximum selection is party count - 1.
+	ld b, a
+
+	; Only add CANCEL to the normal party menu.
+	ld a, [wPartyMenuTypeOrMessageID]
+	and a
+	jr nz, .noCancelOption
+
+	; Do not allow CANCEL during forced Pokemon selection.
+	ld a, [wForcePlayerToChooseMon]
+	and a
+	jr nz, .noCancelOption
+
+	; Add one selection after the final Pokemon.
+	inc b
+
+.noCancelOption
+	ld a, b
 	ld [hli], a ; max menu item ID
+
 	ld a, [wForcePlayerToChooseMon]
 	and a
 	ld a, PAD_A | PAD_B
@@ -247,8 +266,15 @@ HandlePartyMenuInput::
 	ld b, a
 	xor a
 	ld [wPartyMenuAnimMonEnabled], a
+	; Do not save CANCEL as the selected Pokemon.
 	ld a, [wCurrentMenuItem]
+	ld hl, wPartyCount
+	cp [hl]
+	jr z, .skipSavingPartySelection
+
 	ld [wPartyAndBillsPCSavedMenuItem], a
+
+.skipSavingPartySelection
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
 	ld a, [wMenuItemToSwap]
@@ -261,7 +287,14 @@ HandlePartyMenuInput::
 	ld a, [wPartyCount]
 	and a
 	jr z, .noPokemonChosen
+
+	; CANCEL is immediately after the last Pokemon.
+	; Do not treat it as a party member.
 	ld a, [wCurrentMenuItem]
+	ld hl, wPartyCount
+	cp [hl]
+	jr z, .noPokemonChosen
+
 	ld [wWhichPokemon], a
 	ld hl, wPartySpecies
 	ld b, 0
@@ -278,8 +311,17 @@ HandlePartyMenuInput::
 	scf
 	ret
 .swappingPokemon
+	; B cancels the swap.
 	bit B_PAD_B, b
-	jr z, .handleSwap ; if not, handle swapping the pokemon
+	jr nz, .cancelSwap
+
+	; Selecting CANCEL also cancels the swap.
+	ld a, [wCurrentMenuItem]
+	ld hl, wPartyCount
+	cp [hl]
+	jr z, .cancelSwap
+
+	jr .handleSwap
 .cancelSwap ; if the B button was pressed
 	farcall ErasePartyMenuCursors
 	xor a
@@ -291,7 +333,7 @@ HandlePartyMenuInput::
 	ld a, [wCurrentMenuItem]
 	ld [wWhichPokemon], a
 	farcall SwitchPartyMon
-	jr HandlePartyMenuInput
+	jp HandlePartyMenuInput
 
 DrawPartyMenu::
 	ld hl, DrawPartyMenu_

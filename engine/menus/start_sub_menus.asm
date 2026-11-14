@@ -702,11 +702,40 @@ StartMenu_Option::
 	jp RedisplayStartMenu
 
 SwitchPartyMon::
+	; Check whether a Pokemon was already selected.
+	ld a, [wMenuItemToSwap]
+	and a
+	push af
 	call SwitchPartyMon_InitVarOrSwapData
 	ld a, [wSwappedMenuItem]
 	call SwitchPartyMon_ClearGfx
 	ld a, [wCurrentMenuItem]
 	call SwitchPartyMon_ClearGfx
+	; Restore the original swap-selection state.
+	pop af
+
+IF USE_CUSTOM_PARTY_ICONS
+	; No previous selection means no swap occurred.
+	jr z, .redraw
+
+	; Skip refresh when selecting the same Pokemon.
+	ld a, [wSwappedMenuItem]
+	ld b, a
+	ld a, [wCurrentMenuItem]
+	cp b
+	jr z, .redraw
+
+	; Refresh the first affected party slot.
+	ld a, [wSwappedMenuItem]
+	ld e, a
+	farcall RefreshDynamicPartyIconSlot
+
+	; Refresh the second affected party slot.
+	ld a, [wCurrentMenuItem]
+	ld e, a
+	farcall RefreshDynamicPartyIconSlot
+.redraw
+ENDC
 	jp RedrawPartyMenu_
 
 SwitchPartyMon_ClearGfx:
