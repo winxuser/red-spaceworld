@@ -422,3 +422,11 @@ INCLUDE "gfx/icons/custom_icons_a.asm"
 SECTION "Custom Party Icons B", ROMX
 
 INCLUDE "gfx/icons/custom_icons_b.asm"
+INCLUDE "gfx/trainer_card/spaceworld.asm"
+
+
+; Spaceworld 1997 trainer card routines
+SECTION "Spaceworld Trainer Card Engine", ROMX
+
+INCLUDE "engine/menus/spaceworld_trainer_card.asm"
+

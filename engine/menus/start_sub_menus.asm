@@ -502,28 +502,23 @@ StartMenu_TownMap::
 	jp RedisplayStartMenu
 
 StartMenu_TrainerInfo::
-	call GBPalWhiteOut
-	call ClearScreen
-	call UpdateSprites
-	ldh a, [hTileAnimations]
-	push af
-	xor a
-	ldh [hTileAnimations], a
-	call DrawTrainerInfo
-	predef DrawBadges
-	ld b, SET_PAL_TRAINER_CARD
-	call RunPaletteCommand
-	call GBPalNormal
-	call WaitForTextScrollButtonPress
-	call GBPalWhiteOut
-	call LoadFontTilePatterns
-	call LoadScreenTilesFromBuffer2
-	call RunDefaultPaletteCommand
-	call ReloadMapData
-	call LoadGBPal
-	pop af
-	ldh [hTileAnimations], a
-	jp RedisplayStartMenu
+    ; Open our Spaceworld 1997 trainer card.
+    farcall SpaceworldTrainerCard_MainPage
+
+    ; Fade out before returning to the Start Menu.
+    call GBPalWhiteOut
+
+    ; Restore the normal font and screen graphics.
+    call LoadFontTilePatterns
+    call LoadScreenTilesFromBuffer2
+
+    ; Restore normal overworld palettes and map data.
+    call RunDefaultPaletteCommand
+    call ReloadMapData
+    call LoadGBPal
+
+    ; Return directly to the Start Menu.
+    jp RedisplayStartMenu
 
 DrawTrainerInfo:
 	ld de, RedPicFront
