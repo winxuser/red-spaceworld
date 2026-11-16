@@ -8,7 +8,7 @@ EnterMap::
 	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	call LoadMapData
-	farcall ClearVariablesOnEnterMap
+	farcall SpaceworldLocation_ClearVariablesAndTestBanner
 	ld hl, wStatusFlags2
 	bit BIT_WILD_ENCOUNTER_COOLDOWN, [hl]
 	jr z, .skipGivingThreeStepsOfNoRandomBattles
@@ -42,7 +42,7 @@ OverworldLoop::
 	call DelayFrame
 OverworldLoopLessDelay::
 	call LoadGBPal
-	farcall CheckOverworldTimeOfDay
+	farcall SpaceworldLocation_UpdateAndCheckTimeOfDay
 	ld a, [wMovementFlags]
 	bit BIT_LEDGE_OR_FISHING, a
 	call nz, HandleMidJump
@@ -687,7 +687,7 @@ CheckMapConnections::
 	call RunPaletteCommand
 ; Since the sprite set shouldn't change, this will just update VRAM slots at
 ; x#SPRITESTATEDATA2_IMAGEBASEOFFSET without loading any tile patterns.
-	farcall InitMapSprites
+	farcall SpaceworldLocation_InitConnectedMapSprites
 	call LoadTileBlockMap
 	jp OverworldLoopLessDelay
 
@@ -2441,7 +2441,7 @@ LoadMapData::
 	ld [wSpriteSetID], a
 	call LoadTextBoxTilePatterns
 	call LoadMapHeader
-	farcall InitMapSprites ; load tile pattern data for sprites
+	farcall SpaceworldLocation_InitMapSpritesAndFont
 	call LoadTileBlockMap
 	call LoadTilesetTilePatternData
 	call LoadCurrentMapView

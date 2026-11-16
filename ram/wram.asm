@@ -2116,7 +2116,9 @@ wWalkBikeSurfState:: db
 ; 1 = Skateboard
 wRidingVehicle:: db
 
-	ds 5 ; can add stuff here
+wSpaceworldLocationTimer:: db
+wSpaceworldLocationPending:: db
+    ds 3 ; remaining reserved bytes
 
 wTownVisitedFlag:: flag_array NUM_CITY_MAPS
 
@@ -2333,7 +2335,6 @@ wEXPBarCurEXP::       ds 3
 wEXPBarNeededEXP::    ds 3
 wEXPBarKeepFullFlag:: ds 1
 ENDC
-
 SECTION "Stack", WRAM0
 
 ; the stack grows downward

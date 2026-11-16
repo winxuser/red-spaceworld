@@ -293,6 +293,7 @@ ROMX $78
 ROMX $79
 ROMX $7A
 ROMX $7B
+    "Spaceworld Location Popup"
 ROMX $7C
     "Spaceworld Trainer Card Graphics"
 ROMX $7D

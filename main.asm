@@ -429,4 +429,5 @@ INCLUDE "gfx/trainer_card/spaceworld.asm"
 SECTION "Spaceworld Trainer Card Engine", ROMX
 
 INCLUDE "engine/menus/spaceworld_trainer_card.asm"
+INCLUDE "engine/overworld/spaceworld_location_popup.asm"
 
