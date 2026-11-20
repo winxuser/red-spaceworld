@@ -57,8 +57,14 @@ DisplayListMenuID::
 
 DisplayListMenuIDLoop::
 	xor a
-	ldh [hAutoBGTransferEnabled], a ; disable transfer
+	ldh [hAutoBGTransferEnabled], a
 	call PrintListMenuEntries
+	; Draw the title and selected item description.
+	ld a, [wPackMenuActive]
+	and a
+	jr z, .skipPackDescription
+	callfar DrawPackDescription
+.skipPackDescription
 	ld a, 1
 	ldh [hAutoBGTransferEnabled], a ; enable transfer
 	call Delay3
@@ -80,7 +86,7 @@ DisplayListMenuIDLoop::
 	jr .buttonAPressed
 .notOldManBattle
 	call LoadGBPal
-	call HandleMenuInput
+	call PackHandleMenuInput
 	push af
 	call PlaceMenuCursor
 	pop af

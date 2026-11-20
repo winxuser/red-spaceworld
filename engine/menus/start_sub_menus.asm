@@ -348,7 +348,23 @@ StartMenu_Item::
 	ld [wListMenuID], a
 	ld a, [wBagSavedMenuItem]
 	ld [wCurrentMenuItem], a
-	call DisplayListMenuID
+    ; Enable the PACK-specific menu layout.
+    ld a, 1
+    ld [wPackMenuActive], a
+	; Hide overworld sprites during the PACK transition.
+    call ClearSprites
+    call DelayFrame
+    ; Clear the overworld before replacing VRAM graphics.
+    call ClearScreen
+    ; Load the original PACK icon graphics.
+    callfar LoadPackGraphics
+    call DisplayListMenuID
+	; Preserve the menu's return flags while
+	; disabling the PACK-specific layout.
+	push af
+	xor a
+	ld [wPackMenuActive], a
+	pop af
 	ld a, [wCurrentMenuItem]
 	ld [wBagSavedMenuItem], a
 	jr nc, .choseItem
@@ -360,10 +376,10 @@ StartMenu_Item::
 	jp RedisplayStartMenu
 .choseItem
 	ld a, ' '
-	ldcoord_a 5, 4
-	ldcoord_a 5, 6
-	ldcoord_a 5, 8
-	ldcoord_a 5, 10
+	ldcoord_a 1, 4
+	ldcoord_a 1, 6
+	ldcoord_a 1, 8
+	ldcoord_a 1, 10
 	call PlaceUnfilledArrowMenuCursor
 	xor a
 	ld [wMenuItemToSwap], a

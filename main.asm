@@ -34,6 +34,7 @@ INCLUDE "engine/link/cable_club_npc.asm"
 INCLUDE "engine/menus/text_box.asm"
 INCLUDE "engine/battle/move_effects/drain_hp.asm"
 INCLUDE "engine/menus/players_pc.asm"
+INCLUDE "engine/menus/pack_input.asm"
 INCLUDE "engine/pokemon/remove_mon.asm"
 INCLUDE "engine/events/display_pokedex.asm"
 
@@ -379,6 +380,11 @@ INCLUDE "data/battle_anims/subanimations.asm"
 INCLUDE "data/battle_anims/frame_blocks.asm"
 INCLUDE "engine/movie/evolution.asm"
 INCLUDE "color/animations.asm"
+
+
+SECTION "Item Descriptions", ROMX
+
+INCLUDE "engine/items/print_item_description.asm"
 
 
 SECTION "Overflow", ROMX

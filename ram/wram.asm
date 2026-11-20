@@ -2225,7 +2225,7 @@ wLinkEnemyTrainerName:: ds NAME_LENGTH
 
 wSerialEnemyDataBlock:: ; ds $1a8
 
-	ds 6
+	ds 5
 
 wEnemyPartyCount:: db
 wEnemyPartySpecies:: ds PARTY_LENGTH + 1
@@ -2296,6 +2296,10 @@ wGenderTemp:: db
 wPlayerGender:: ds 1
 ; $00 = male
 ; $01 = female
+
+; 0 = normal menu
+; 1 = player's PACK menu
+wPackMenuActive:: db
 
 wMainDataEnd::
 
