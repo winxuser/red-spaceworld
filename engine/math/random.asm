@@ -1,47 +1,104 @@
+; Algorithm: xorshift32 (13, 17, 5)
+;
+; State layout:
+;   hRandomAdd      = bits  0-7
+;   hRandomAdd + 1  = bits  8-15
+;   hRandomLast     = bits 16-23
+;   hRandomLast + 1 = bits 24-31
+;
+; Returns:
+;   A = low byte of updated RNG state
+;
+; Period:
+;   2^32 - 1 for any nonzero initial state
+;
+; No additional RAM required.
 Random_::
-    ; Load X[n] (hRandomAdd) into bc
-    ld hl, hRandomAdd + 1
-    ld a, [hld]
-    ld b, a
-    ld a, [hl]
-    ld c, a
+    call .LoadState
 
-    ; Load X[n-1] (hRandomLast) into de
-    ld hl, hRandomLast + 1
-    ld a, [hld]
-    ld d, a
-    ld a, [hl]
-    ld e, a
+    ; X << 8
+    ld b, c
+    ld c, d
+    ld d, e
+    ld e, 0
 
-    ; Update X[n-1] = X[n]
-    ld hl, hRandomLast
-    ld a, c
-    ld [hli], a
-    ld [hl], b
+    ; Remaining 5-bit shift.
+    ld a, 5
 
-    ; Perform Xor-Shift calculation
-    ld a, c
-    add a, a
-    add a, a
-    add a, a
-    xor c
-    ld c, a
-    ld a, d
-    add a, a
-    xor d
-    ld b, a
-    rra
-    xor b
-    xor c
-    ld b, e
-    ld c, a
+.shiftLeft13
+    sla e
+    rl d
+    rl c
+    rl b
+    dec a
+    jr nz, .shiftLeft13
 
-    ; Store result into X[n] (hRandomAdd)
+    call .XorState
+    call .LoadState
+
+    ; X >> 16
+    ld e, c
+    ld d, b
+
+    ; Shift the remaining 16-bit value right 1.
+    srl d
+    rr e
+
+    ; Upper 16 bits of X >> 17 are zero.
+    ld bc, 0
+
+    call .XorState
+    call .LoadState
+
+    ld a, 5
+
+.shiftLeft5
+    sla e
+    rl d
+    rl c
+    rl b
+    dec a
+    jr nz, .shiftLeft5
+
+    call .XorState
+
+    ; Return the new random byte.
+    ldh a, [hRandomAdd]
+    ret
+
+.LoadState
     ld hl, hRandomAdd
-    ld a, c
-    ld [hli], a
-    ld [hl], b
+    ld e, [hl]
+    inc hl
+    ld d, [hl]
 
-    ; Return 8-bit random value in register a
-    ld a, c
+    ld hl, hRandomLast
+    ld c, [hl]
+    inc hl
+    ld b, [hl]
+    ret
+
+.XorState
+    ; Lower 16 bits.
+    ld hl, hRandomAdd
+
+    ld a, [hl]
+    xor e
+    ld [hli], a
+
+    ld a, [hl]
+    xor d
+    ld [hl], a
+
+    ; Upper 16 bits.
+    ld hl, hRandomLast
+
+    ld a, [hl]
+    xor c
+    ld [hli], a
+
+    ld a, [hl]
+    xor b
+    ld [hl], a
+
     ret
