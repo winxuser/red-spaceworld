@@ -450,6 +450,9 @@ StartMenu_Item::
 .useItem_closeMenu
 	xor a
 	ld [wPseudoItemID], a
+	; Restore overworld graphics overwritten by PACK icons
+	; before running item animations or changing vehicles.
+	call ReloadMapData
 	call UseItem
 	ld a, [wActionResultOrTookBattleTurn]
 	and a
