@@ -1,3 +1,6 @@
+; Automatically generated custom party icon pointers
+; Do not edit manually.
+
 CustomPartyIconPointers::
     db ABRA
     db BANK(CustomAbraIcon)
@@ -34,6 +37,10 @@ CustomPartyIconPointers::
     db BLASTOISE
     db BANK(CustomBlastoiseIcon)
     dw CustomBlastoiseIcon
+
+    db BOBO
+    db BANK(CustomBoboIcon)
+    dw CustomBoboIcon
 
     db BULBASAUR
     db BANK(CustomBulbasaurIcon)
@@ -203,6 +210,14 @@ CustomPartyIconPointers::
     db BANK(CustomGyaradosIcon)
     dw CustomGyaradosIcon
 
+    db HANARYU
+    db BANK(CustomHanaryuIcon)
+    dw CustomHanaryuIcon
+
+    db HAPPA
+    db BANK(CustomHappaIcon)
+    dw CustomHappaIcon
+
     db HAUNTER
     db BANK(CustomHaunterIcon)
     dw CustomHaunterIcon
@@ -214,6 +229,10 @@ CustomPartyIconPointers::
     db HITMONLEE
     db BANK(CustomHitmonleeIcon)
     dw CustomHitmonleeIcon
+
+    db HOHO
+    db BANK(CustomHohoIcon)
+    dw CustomHohoIcon
 
     db HORSEA
     db BANK(CustomHorseaIcon)

@@ -7,6 +7,7 @@ gfx/icons/custom/articuno.png
 gfx/icons/custom/beedrill.png
 gfx/icons/custom/bellsprout.png
 gfx/icons/custom/blastoise.png
+gfx/icons/custom/bobo.png
 gfx/icons/custom/bulbasaur.png
 gfx/icons/custom/butterfree.png
 gfx/icons/custom/caterpie.png
@@ -49,9 +50,12 @@ gfx/icons/custom/graveler.png
 gfx/icons/custom/grimer.png
 gfx/icons/custom/growlithe.png
 gfx/icons/custom/gyarados.png
+gfx/icons/custom/hanaryu.png
+gfx/icons/custom/happa.png
 gfx/icons/custom/haunter.png
 gfx/icons/custom/hitmonchan.png
 gfx/icons/custom/hitmonlee.png
+gfx/icons/custom/hoho.png
 gfx/icons/custom/horsea.png
 gfx/icons/custom/hypno.png
 gfx/icons/custom/ivysaur.png

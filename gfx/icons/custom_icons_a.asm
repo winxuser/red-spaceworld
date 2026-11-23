@@ -28,6 +28,9 @@ CustomBellsproutIcon::
 CustomBlastoiseIcon::
     INCBIN "gfx/icons/custom/blastoise.2bpp"
 
+CustomBoboIcon::
+    INCBIN "gfx/icons/custom/bobo.2bpp"
+
 CustomBulbasaurIcon::
     INCBIN "gfx/icons/custom/bulbasaur.2bpp"
 
@@ -154,6 +157,12 @@ CustomGrowlitheIcon::
 CustomGyaradosIcon::
     INCBIN "gfx/icons/custom/gyarados.2bpp"
 
+CustomHanaryuIcon::
+    INCBIN "gfx/icons/custom/hanaryu.2bpp"
+
+CustomHappaIcon::
+    INCBIN "gfx/icons/custom/happa.2bpp"
+
 CustomHaunterIcon::
     INCBIN "gfx/icons/custom/haunter.2bpp"
 
@@ -162,6 +171,9 @@ CustomHitmonchanIcon::
 
 CustomHitmonleeIcon::
     INCBIN "gfx/icons/custom/hitmonlee.2bpp"
+
+CustomHohoIcon::
+    INCBIN "gfx/icons/custom/hoho.2bpp"
 
 CustomHorseaIcon::
     INCBIN "gfx/icons/custom/horsea.2bpp"
@@ -222,9 +234,3 @@ CustomMachopIcon::
 
 CustomMagikarpIcon::
     INCBIN "gfx/icons/custom/magikarp.2bpp"
-
-CustomMagmarIcon::
-    INCBIN "gfx/icons/custom/magmar.2bpp"
-
-CustomMagnemiteIcon::
-    INCBIN "gfx/icons/custom/magnemite.2bpp"

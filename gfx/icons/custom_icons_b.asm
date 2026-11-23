@@ -1,6 +1,12 @@
 ; Automatically generated custom party icon graphics
 ; Do not edit manually.
 
+CustomMagmarIcon::
+    INCBIN "gfx/icons/custom/magmar.2bpp"
+
+CustomMagnemiteIcon::
+    INCBIN "gfx/icons/custom/magnemite.2bpp"
+
 CustomMagnetonIcon::
     INCBIN "gfx/icons/custom/magneton.2bpp"
 
