@@ -1,14 +1,42 @@
-MACRO map_const
-	const \1
-	DEF \1_WIDTH EQU \2
-	DEF \1_HEIGHT EQU \3
+
+; Map groups.
+DEF MAPGROUP_NIHON EQU 0
+DEF MAPGROUP_REGION_2 EQU 1
+DEF NUM_MAP_GROUPS EQU 2
+
+; Start a new map group.
+; Each group has its own map numbering.
+MACRO new_map_group
+    REDEF CURRENT_MAP_GROUP EQU \1
+    const_def
 ENDM
+
+; Define a map in the current group.
+; Keep the original map constant for Gen 1 compatibility.
+MACRO map_const
+    const \1
+    DEF GROUP_\1 EQU CURRENT_MAP_GROUP
+    DEF MAP_\1 EQU \1
+    DEF \1_WIDTH EQU \2
+    DEF \1_HEIGHT EQU \3
+ENDM
+
 
 ; "Indoor" maps are grouped sequentially (see data/maps/town_map_entries.asm)
 DEF NUM_INDOOR_MAP_GROUPS EQU 0
 MACRO end_indoor_group
 	DEF INDOORGROUP_\1 EQU const_value
 	REDEF NUM_INDOOR_MAP_GROUPS EQU NUM_INDOOR_MAP_GROUPS + 1
+ENDM
+
+; Region 2 indoor map groups.
+; Keep these independent from Nihon's indoor groups.
+DEF NUM_REGION2_INDOOR_MAP_GROUPS EQU 0
+
+MACRO end_region2_indoor_group
+    DEF INDOORGROUP_REGION2_\1 EQU const_value
+    REDEF NUM_REGION2_INDOOR_MAP_GROUPS EQU \
+        NUM_REGION2_INDOOR_MAP_GROUPS + 1
 ENDM
 
 ; map ids
@@ -22,8 +50,9 @@ ENDM
 ; - WildDataPointers (see data/wild/grass_water.asm)
 ; Each map also has associated data in maps.asm.
 ; Order: towns/cities, then routes, then indoor/dungeon maps
-	const_def
-	map_const SILENT_HILL,                   10,  9 ; $00 half done, need to fix hide/show
+; Order: towns/cities, then routes, then indoor/dungeon maps
+    new_map_group MAPGROUP_NIHON
+    map_const SILENT_HILL,                   10, 9
 	map_const OLD_CITY,                      20, 18 ; $01 10% done
 	map_const WEST_CITY,                     20, 18 ; $02 10% done
 	map_const BIRDON,                        10,  9 ; $03 10% done
@@ -395,3 +424,26 @@ DEF NUM_MAPS EQU const_value
 DEF LAST_MAP EQU $ff
 
 ASSERT NUM_MAPS <= LAST_MAP, "map IDs overlap LAST_MAP"
+
+
+; Region 2 map constants
+
+    new_map_group MAPGROUP_REGION_2
+
+    ; Region 2 towns and routes.
+;    map_const PALLET_TOWN,                   10, 9
+;    map_const ROUTE_1_KANTO,                 10, 18
+
+DEF FIRST_REGION2_INDOOR_MAP EQU const_value
+
+;	map_const PALLET_HOUSE,                  5, 4
+;    end_region2_indoor_group PALLET_TOWN
+
+
+DEF NUM_REGION2_MAPS EQU const_value
+
+ASSERT NUM_REGION2_MAPS <= LAST_MAP, \
+    "Region 2 map IDs overlap LAST_MAP"
+
+
+

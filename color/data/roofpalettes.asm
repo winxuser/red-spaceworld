@@ -10,8 +10,12 @@ RoofPalettes:
 	dw CinnabarRoof
 	dw IndigoRoof
 	dw SaffronRoof
-	dw PalletRoof    ; unused map $0B
-	dw PalletRoof    ; ROUTE_1
+    dw PalletRoof    ; BLUE_FOREST
+    dw PalletRoof    ; NORTH_CITY
+    dw PalletRoof    ; SUGAR
+    dw PalletRoof    ; MT_FUJI
+    dw PalletRoof    ; ROUTE_1
+    dw PalletRoof    ; ROUTE_1_P2
 	dw ViridianRoof  ; ROUTE_2
 	dw PewterRoof    ; ROUTE_3
 	dw PewterRoof    ; ROUTE_4
@@ -36,6 +40,11 @@ RoofPalettes:
 	dw IndigoRoof    ; ROUTE_23
 	dw CeruleanRoof  ; ROUTE_24
 	dw CeruleanRoof  ; ROUTE_25
+    dw PewterRoof    ; ROUTE_26
+    dw PewterRoof    ; ROUTE_29
+    dw PewterRoof    ; ROUTE_30
+
+    ASSERT (@ - RoofPalettes) / 2 == FIRST_INDOOR_MAP
 
 PalletRoof:
 	RGB 24,18,7
@@ -80,3 +89,10 @@ IndigoRoof:
 SaffronRoof:
 	RGB 31,27,0
 	RGB 28,22,0
+
+; Region 2 daytime roof palettes.
+Region2RoofPalettes:
+;    dw PalletRoof    ; Pallet Town
+;    dw PalletRoof    ; ROute 1 Kanto
+
+    ASSERT (@ - Region2RoofPalettes) / 2 == FIRST_REGION2_INDOOR_MAP

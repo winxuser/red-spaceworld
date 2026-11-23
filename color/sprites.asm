@@ -40,13 +40,17 @@ LoadOverworldSpritePalettes:
     ld hl, SpritePalettesPokecenter
     jr z, .gotPaletteList
 
-    ; Indigo Plateau Lobby uses the Pokemon Center palettes.
+    ; Nihon-specific Indigo Plateau Lobby exception.
+    ld a, [wCurMapGroup]
+    cp MAPGROUP_NIHON
+    jr nz, .normalSpritePalette
+
     ld a, [wCurMap]
     cp INDIGO_PLATEAU_LOBBY
     jr z, .gotPaletteList
 
-    ; All other maps use normal sprite palettes,
-    ; regardless of the time of day.
+.normalSpritePalette
+    ; All other maps use normal sprite palettes.
     ld hl, SpritePalettes
 
 .gotPaletteList
@@ -108,11 +112,17 @@ ColorOverworldSprite::
 	cp SPR_PAL_RANDOM
 	jr nz, .norandomColor
 
-	; Bill is always brown
-	ld a, [wCurMap]
-	cp BILLS_HOUSE
-	ld a, SPR_PAL_BROWN
-	jr z, .norandomColor
+    ; Bill's House exception only applies to Nihon.
+    ld a, [wCurMapGroup]
+    cp MAPGROUP_NIHON
+    jr nz, .randomColor
+
+    ld a, [wCurMap]
+    cp BILLS_HOUSE
+    ld a, SPR_PAL_BROWN
+    jr z, .norandomColor
+
+.randomColor
 
 	; This is a (somewhat) random but consistent color
 	ldh a, [hSpriteOffset2]

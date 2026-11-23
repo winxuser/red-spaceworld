@@ -251,9 +251,16 @@ LoadTownMap_Fly::
 	bit B_PAD_DOWN, b
 	jr nz, .pressedDown
 	jr .pressedB
+
 .pressedA
 	ld a, SFX_HEAL_AILMENT
 	rst _PlaySound
+
+	; The current Fly destination list contains Nihon maps.
+	ld a, MAPGROUP_NIHON
+	ld [wDestinationMapGroup], a
+
+	; Save the selected destination map.
 	ld a, [hl]
 	ld [wDestinationMap], a
 	ld hl, wStatusFlags6
@@ -577,35 +584,92 @@ ZeroOutDuplicatesInList:
 	inc hl
 	jr .zeroDuplicatesLoop
 
+PUSHS
+SECTION FRAGMENT "Region 2 Town Map Data", ROMX
+
 LoadTownMapEntry:
 ; in: a = map number
-; out: lower nybble of [de] = x, upper nybble of [de] = y, hl = address of name
-	cp FIRST_INDOOR_MAP
-	jr c, .external
-	ld hl, InternalMapEntries
+; out: [de] = packed map coordinates
+;      hl = address of location name
+
+    ; Select the correct region.
+    push af
+    ld a, [wCurMapGroup]
+    cp MAPGROUP_REGION_2
+    jr nz, .nihon
+
+    pop af
+
+    ; Region 2 outdoor maps.
+    cp FIRST_REGION2_INDOOR_MAP
+    jr nc, .region2Indoor
+
+    ld hl, Region2ExternalMapEntries
+    jr .externalEntry
+
+.region2Indoor
+    ; No Region 2 indoor groups registered yet.
+    ; Use Pallet Town as a safe temporary fallback.
+    IF NUM_REGION2_INDOOR_MAP_GROUPS == 0
+        xor a
+        ld hl, Region2ExternalMapEntries
+        jr .externalEntry
+    ELSE
+        ; Search Region 2's indoor-group boundaries.
+        ld hl, Region2InternalMapEntries
+
+.region2IndoorLoop
+        cp [hl]
+        jr c, .region2IndoorFound
+
+        ld bc, 4
+        add hl, bc
+        jr .region2IndoorLoop
+
+.region2IndoorFound
+        inc hl
+        jr .readEntry
+    ENDC
+
+.nihon
+    pop af
+
+    ; Original Nihon lookup.
+    cp FIRST_INDOOR_MAP
+    jr c, .external
+
+    ld hl, InternalMapEntries
+
 .internalLoop
-	cp [hl]
-	jr c, .foundInternalEntry
-	ld bc, 4
-	add hl, bc
-	jr .internalLoop
+    cp [hl]
+    jr c, .foundInternalEntry
+    ld bc, 4
+    add hl, bc
+    jr .internalLoop
+
 .foundInternalEntry
-	inc hl
-	jr .readEntry
+    inc hl
+    jr .readEntry
+
 .external
-	ld hl, ExternalMapEntries
-	ld c, a
-	ld b, 0
-	add hl, bc
-	add hl, bc
-	add hl, bc
+    ld hl, ExternalMapEntries
+
+.externalEntry
+    ld c, a
+    ld b, 0
+    add hl, bc
+    add hl, bc
+    add hl, bc
+
 .readEntry
-	ld a, [hli]
-	ld [de], a
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ret
+    ld a, [hli]
+    ld [de], a
+    ld a, [hli]
+    ld h, [hl]
+    ld l, a
+    ret
+
+POPS
 
 CopyMapNameBuffer:
 	push hl

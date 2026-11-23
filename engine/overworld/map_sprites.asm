@@ -253,17 +253,37 @@ ReadSpriteSheetData:
 
 ; Loads sprite set for outside maps (cities and routes) and sets VRAM slots.
 ; sets carry if the map is a city or route, unsets carry if not
+
 InitOutsideMapSprites:
-	ld a, [wCurMap]
-	cp FIRST_INDOOR_MAP ; is the map a city or a route?
-	ret nc ; if not, return
-	ld hl, MapSpriteSets
-	add l
-	ld l, a
-	jr nc, .noCarry
-	inc h
+        ; Select the sprite set table for the current map group.
+        ld a, [wCurMapGroup]
+        cp MAPGROUP_REGION_2
+        jr z, .region2
+
+        ; Nihon outdoor maps.
+        ld a, [wCurMap]
+        cp FIRST_INDOOR_MAP
+        ret nc
+        ld hl, MapSpriteSets
+        jr .gotTable
+
+.region2
+        ; Region 2 outdoor maps.
+        ld a, [wCurMap]
+        cp FIRST_REGION2_INDOOR_MAP
+        ret nc
+        ld hl, Region2MapSpriteSets
+
+.gotTable
+        ; A = map ID
+        ; HL = selected group's sprite set table.
+        add l
+        ld l, a
+        jr nc, .noCarry
+        inc h
 .noCarry
-	ld a, [hl] ; a = spriteSetID
+        ld a, [hl] ; a = spriteSetID
+
 	cp FIRST_SPLIT_SET - 1 ; does the map have 2 sprite sets?
 	call nc, GetSplitMapSpriteSetID ; if so, choose the appropriate one
 	ld b, a ; b = spriteSetID

@@ -4,6 +4,13 @@ SetLastBlackoutMap:
 ; Safari rest houses don't count.
 
 	push hl
+
+	; Safari Zone rest houses belong to Nihon.
+	; Region 2 maps must not match their map IDs.
+	ld a, [wCurMapGroup]
+	cp MAPGROUP_NIHON
+	jr nz, .notresthouse
+
 	ld hl, SafariZoneRestHouses
 	ld a, [wCurMap]
 	ld b, a
@@ -16,6 +23,10 @@ SetLastBlackoutMap:
 	jr .done
 
 .notresthouse
+	; Save the outdoor map's group.
+	ld a, [wLastMapGroup]
+	ld [wLastBlackoutMapGroup], a
+	; Save the outdoor map number.
 	ld a, [wLastMap]
 	ld [wLastBlackoutMap], a
 .done

@@ -149,6 +149,7 @@ ROMX $1C
 	org $6075
 	"PrepareSuperNintendoVRAMTransfer"
 	"bank1C_extension"
+	"Region 2 Town Map Data"
 	org $75e8
 	"Engine Save"
 ROMX $1D

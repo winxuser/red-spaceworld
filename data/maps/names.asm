@@ -59,3 +59,16 @@ PokemonMansionName:  db "<PKMN> MANSION@"
 SafariZoneName:      db "SAFARI ZONE@"
 CeruleanCaveName:    db "CERULEAN CAVE@"
 PowerPlantName:      db "POWER PLANT@"
+
+
+; Region 2 location names
+PUSHS
+SECTION FRAGMENT "Region 2 Town Map Data", ROMX
+
+;PalletTownName:
+;    db "PALLET TOWN@"
+;Route1KantoName:
+;    db "ROUTE 1 KANTO@"
+
+POPS
+

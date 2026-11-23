@@ -38,14 +38,23 @@ DungeonWarpData:
 	fly_warp POKEMON_MANSION_2F,  18, 14
 
 
+Region2DungeonWarpList:
+    db -1 ; No Region 2 dungeon warps yet.
+
+Region2DungeonWarpData:
+    ; Destination coordinates will go here when
+    ; Region 2 dungeon maps are implemented.
+
+
 MACRO special_warp_spec
 	db \1
 	fly_warp \1, \2, \3
 	db \4
 ENDM
 
+
 NewGameWarp:
-	special_warp_spec REDS_HOUSE_2F, 3, 6, REDS_HOUSE_2
+    special_warp_spec REDS_HOUSE_2F, 3, 6, REDS_HOUSE_2
 TradeCenterPlayerWarp:
 	special_warp_spec TRADE_CENTER,  3, 4, CLUB
 TradeCenterFriendWarp:
@@ -79,6 +88,8 @@ FlyWarpDataPtr:
 	fly_warp_spec ROUTE_4,         .Route4
 	fly_warp_spec ROUTE_10,        .Route10
 
+	 db -1 ; End of Nihon Fly destinations
+
 .SilentHill:     fly_warp SILENT_HILL,      5,  5
 .OldCity:        fly_warp OLD_CITY,        27, 29
 .WestCity:       fly_warp WEST_CITY,       24, 15
@@ -95,3 +106,8 @@ FlyWarpDataPtr:
 .Sugar:          fly_warp SUGAR,            5,  5
 .Route4:         fly_warp ROUTE_4,         11,  6
 .Route10:        fly_warp ROUTE_10,        11, 20
+
+; Region 2 Fly destinations.
+; No destinations are available yet.
+Region2FlyWarpDataPtr:
+    db -1

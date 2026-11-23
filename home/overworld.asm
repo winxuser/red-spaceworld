@@ -496,6 +496,10 @@ WarpFound2::
 	call CheckIfInOutsideMap
 	jr nz, .indoorMaps
 ; this is for handling "outside" maps that can't have the 0xFF destination map
+	; Remember the outdoor map and its group.
+	ld a, [wCurMapGroup]
+	ld [wLastMapGroup], a
+
 	ld a, [wCurMap]
 	ld [wLastMap], a
 	ld a, [wCurMapWidth]
@@ -536,16 +540,17 @@ WarpFound2::
 	res BIT_EXITING_DOOR, [hl]
 	jr .done
 .goBackOutside
+	; Restore the previous outdoor map and its region.
+	ld a, [wLastMapGroup]
+	ld [wCurMapGroup], a
+
 	ld a, [wLastMap]
 	ld [wCurMap], a
 	call PlayMapChangeSound
 	xor a
 	ld [wMapPalOffset], a
 .done
-	ld hl, wMovementFlags
-	set BIT_STANDING_ON_DOOR, [hl] ; have the player's sprite step out from the door (if there is one)
-	call IgnoreInputForHalfSecond
-	jp EnterMap
+	farjp EnterWarpWithMapGroup
 
 ContinueCheckWarpsNoCollisionLoop::
 	inc b ; increment warp number
@@ -2145,20 +2150,14 @@ LoadMapHeader::
 	ldh [hPreviousTileset], a
 	bit BIT_NO_PREVIOUS_MAP, b
 	ret nz
-	ld hl, MapHeaderPointers
-	ld a, [wCurMap]
-	sla a
-	jr nc, .noCarry1
-	inc h
-.noCarry1
-	add l
-	ld l, a
-	jr nc, .noCarry2
-	inc h
-.noCarry2
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a ; hl = base of map header
+    ; Look up the current map's header pointer.
+    ; Temporarily select the ROM bank containing
+    ; the Region 2 pointer table and helper.
+    ld a, BANK(Region2MapHeaderPointers)
+    call BankswitchHome
+    call GetMapHeaderPointerByGroup
+    call BankswitchBack
+    ; hl = base of map header
 	ld de, wCurMapHeader
 	ld c, wCurMapHeaderEnd - wCurMapHeader
 .copyFixedHeaderLoop
@@ -2396,9 +2395,8 @@ LoadMapHeader::
 	ld a, BANK(MapSongBanks)
 	ldh [hLoadedROMBank], a
 	ld [rROMB], a
-	ld hl, MapSongBanks
-	add hl, bc
-	add hl, bc
+	; Select the music table using the current map group.
+	call GetMapSongByGroup
 	ld a, [hli]
 	ld [wMapMusicSoundID], a ; music 1
 	ld a, [hl]
@@ -2481,12 +2479,10 @@ SwitchToMapRomBank::
 	push bc
 	ld c, a
 	ld b, $00
-	ld a, BANK(MapHeaderBanks)
-	call BankswitchHome
-	ld hl, MapHeaderBanks
-	add hl, bc
-	ld a, [hl]
-	ldh [hMapROMBank], a
+    ld a, BANK(MapHeaderBanks)
+    call BankswitchHome
+    call GetMapHeaderBankByGroup
+    ldh [hMapROMBank], a
 	call BankswitchBack
 	ldh a, [hMapROMBank]
 	ldh [hLoadedROMBank], a
@@ -2495,7 +2491,7 @@ SwitchToMapRomBank::
 	pop hl
 	ret
 
-IgnoreInputForHalfSecond:
+IgnoreInputForHalfSecond::
 	ld a, 30
 	ld [wIgnoreInputCounter], a
 	ld hl, wStatusFlags5

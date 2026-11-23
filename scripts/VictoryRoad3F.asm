@@ -57,6 +57,9 @@ VictoryRoad3FDefaultScript:
 	db -1 ; end
 
 .check_switch_hole
+	ld a, GROUP_VICTORY_ROAD_2F
+	ld [wDestinationMapGroup], a
+
 	ld a, VICTORY_ROAD_2F
 	ld [wDungeonWarpDestinationMap], a
 	ld hl, .SwitchOrHoleCoords

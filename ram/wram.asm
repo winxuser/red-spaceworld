@@ -2225,7 +2225,7 @@ wLinkEnemyTrainerName:: ds NAME_LENGTH
 
 wSerialEnemyDataBlock:: ; ds $1a8
 
-	ds 5
+	ds 1
 
 wEnemyPartyCount:: db
 wEnemyPartySpecies:: ds PARTY_LENGTH + 1
@@ -2251,8 +2251,6 @@ wEnemyMon{d:n}Nick:: ds NAME_LENGTH
 ENDR
 
 wTrainerHeaderPtr:: dw
-
-;	ds 6
 
 ; the trainer the player must face after getting a wrong answer in the Cinnabar
 ; gym quiz
@@ -2300,6 +2298,11 @@ wPlayerGender:: ds 1
 ; 0 = normal menu
 ; 1 = player's PACK menu
 wPackMenuActive:: db
+
+wCurMapGroup:: db
+wLastMapGroup:: db
+wDestinationMapGroup:: db
+wLastBlackoutMapGroup:: db
 
 wMainDataEnd::
 

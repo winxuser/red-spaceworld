@@ -133,7 +133,6 @@ ENDM
 .TraditionalHouseWarpTileIDs:
 	warp_tiles
 
-
 .ShipPortWarpTileIDs:
 .ClubWarpTileIDs:
 	warp_tiles ; end

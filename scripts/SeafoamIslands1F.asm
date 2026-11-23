@@ -32,6 +32,9 @@ SeafoamIslands1F_Script:
 	ld [wToggleableObjectIndex], a
 	predef_jump ShowObject
 .noBoulderWasPushed
+	ld a, GROUP_SEAFOAM_ISLANDS_B1F
+	ld [wDestinationMapGroup], a
+
 	ld a, SEAFOAM_ISLANDS_B1F
 	ld [wDungeonWarpDestinationMap], a
 	ld hl, Seafoam1HolesCoords

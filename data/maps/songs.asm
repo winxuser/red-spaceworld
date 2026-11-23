@@ -248,3 +248,41 @@ MapSongBanks::
 	db MUSIC_DUNGEON1, 0 ; BRUNOS_ROOM
 	db MUSIC_POKEMON_TOWER, 0 ; AGATHAS_ROOM
 	assert_table_length NUM_MAPS
+
+
+; Region 2 map music
+
+Region2MapSongBanks::
+    table_width 2
+
+    ; Temporary music for Region 2 map $00.
+    ; Replace when Pallet Town is added.
+;    db MUSIC_CITIES1, 0 ; Pallet Town
+;    db MUSIC_ROUTES1, 0 ; Route 1 Kanto
+;    db MUSIC_NEW_BARK_TOWN, 0 ; Pallet House
+
+    assert_table_length NUM_REGION2_MAPS
+
+
+; Select the music entry for the current map group.
+; Input:  bc = map ID (b = 0)
+; Output: hl = pointer to the map's music entry
+; Requires the MapSongBanks ROM bank to be selected.
+
+GetMapSongByGroup::
+    ld a, [wCurMapGroup]
+    cp MAPGROUP_REGION_2
+    jr z, .region2
+
+    ; Nihon music table.
+    ld hl, MapSongBanks
+    jr .lookup
+
+.region2
+    ; Region 2 music table.
+    ld hl, Region2MapSongBanks
+
+.lookup
+    add hl, bc
+    add hl, bc
+    ret

@@ -171,6 +171,11 @@ LoadTilesetPalette::
 	ld a, 2
 	ldh [rWBK], a
 
+	; Nihon-specific map palette overrides.
+	ld a, [wCurMapGroup]
+	cp MAPGROUP_NIHON
+	jr nz, .notCeladonRoof
+
 	; Check for celadon mart roof (make the "outside" blue)
 	ld a, b
 	cp CELADON_MART_ROOF
@@ -184,6 +189,9 @@ LoadTilesetPalette::
 	ld [hli], a
 .notCeladonRoof
 	; Check for celadon 1st floor (change bench color from blue to yellow)
+	ld a, [wCurMapGroup]
+	cp MAPGROUP_NIHON
+	jr nz, .notCeladon1st
 	ld a, b
 	cp CELADON_MART_1F
 	jr nz, .notCeladon1st
@@ -250,16 +258,24 @@ LoadTownPalette:
 	xor a
 	ldh [rWBK], a
 
-	; Get the current map directly without Saffron/Route 6 overrides.
+
+	; Get the current map's roof palette offset.
 	ld a, [wCurMap]
-	ld c, a
 	add a
 	ld c, a
 
+	; Read the map group while WRAM bank 0 is selected.
+	ld a, [wCurMapGroup]
+	push af
+
+	; Switch back to WRAM bank 2.
 	ld a, $02
 	ldh [rWBK], a
-	push bc ; push previous wram bank
 
+	; Recover map group and preserve the previous WRAM bank.
+	pop af
+	push bc
+	ld b, a ; B = current map group
 	push de
 	push hl
 
@@ -273,19 +289,34 @@ LoadTownPalette:
 
 	; Day (0)
 	ld hl, RoofPalettes
+	ld a, b
+	cp MAPGROUP_REGION_2
+	jr nz, .applyRoofOffset
+	ld hl, Region2RoofPalettes
 	jr .applyRoofOffset
 
 .morningRoofs
 	ld hl, RoofPalettesMorning
+	ld a, b
+	cp MAPGROUP_REGION_2
+	jr nz, .applyRoofOffset
+	ld hl, Region2RoofPalettesMorning
 	jr .applyRoofOffset
 
 .afternoonRoofs
 	ld hl, RoofPalettesAfternoon
+	ld a, b
+	cp MAPGROUP_REGION_2
+	jr nz, .applyRoofOffset
+	ld hl, Region2RoofPalettesAfternoon
 	jr .applyRoofOffset
 
 .nightRoofs
 	ld hl, RoofPalettesNight
-	jr .applyRoofOffset
+	ld a, b
+	cp MAPGROUP_REGION_2
+	jr nz, .applyRoofOffset
+	ld hl, Region2RoofPalettesNight
 
 .applyRoofOffset
 	ld b, 0

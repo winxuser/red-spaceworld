@@ -53,11 +53,19 @@ DEF START_MONEY EQU $3000
 	ld a, 1              ; Morning stage
 	ld [wLastTimeOfDayStage], a
 
-	xor a
-	ld [wTimeOfDayPalettesNeedUpdate], a ; Clear palette update flag
+    xor a
+    ld [wTimeOfDayPalettesNeedUpdate], a ; Clear palette update flag
 
-	ld a, 1
-	ld [wRTCDays], a    ; Starts on Day 1
+    ; Initialise map groups to Nihon.
+
+	ld a, MAPGROUP_NIHON
+	ld [wCurMapGroup], a
+	ld [wLastMapGroup], a
+	ld [wDestinationMapGroup], a
+	ld [wLastBlackoutMapGroup], a
+
+    ld a, 1
+    ld [wRTCDays], a    ; Starts on Day 1
 
 	jp InitializeToggleableObjectsFlags
 

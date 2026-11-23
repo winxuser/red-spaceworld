@@ -1,10 +1,22 @@
 LoadWildData::
-	ld hl, WildDataPointers
-	ld a, [wCurMap]
+    ; Select the wild encounter table for this map group.
+    ld a, [wCurMapGroup]
+    cp MAPGROUP_REGION_2
+    jr z, .region2
 
-	; get wild data for current map
-	ld c, a
-	ld b, 0
+    ; Nihon encounter table.
+    ld hl, WildDataPointers
+    jr .gotTable
+
+.region2
+    ; Region 2 encounter table.
+    ld hl, Region2WildDataPointers
+
+.gotTable
+    ; Get the current map number.
+    ld a, [wCurMap]
+    ld c, a
+    ld b, 0
 	add hl, bc
 	add hl, bc
 	ld a, [hli]

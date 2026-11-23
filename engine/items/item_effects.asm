@@ -1513,10 +1513,16 @@ ItemUseEscapeRope:
 	ld a, [wIsInBattle]
 	and a
 	jr nz, .notUsable
+	; Agatha's Room restriction applies only to Nihon.
+	ld a, [wCurMapGroup]
+	cp GROUP_AGATHAS_ROOM
+	jr nz, .checkTileset
+
 	ld a, [wCurMap]
 	cp AGATHAS_ROOM
 	jr z, .notUsable
-	ld a, [wCurMapTileset]
+.checkTileset
+        ld a, [wCurMapTileset]
 	ld b, a
 	ld hl, EscapeRopeTilesets
 .loop

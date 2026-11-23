@@ -248,3 +248,34 @@ MapHeaderBanks::
 	db BANK(BrunosRoom_h)
 	db BANK(AgathasRoom_h)
 	assert_table_length NUM_MAPS
+
+
+; Region 2 map header banks.
+; Initial test: map $00 uses Silent Hill's existing header.
+Region2MapHeaderBanks::
+;    db BANK(PalletTown_h)
+;    db BANK(Route1Kanto_h)
+;    db BANK(PalletHouse_h)
+
+; Return the ROM bank containing the requested map header.
+; Input:  c = map ID
+; Output: a = map header ROM bank
+; Requires ROM bank 3 to be selected.
+
+GetMapHeaderBankByGroup::
+    ld a, [wCurMapGroup]
+    cp MAPGROUP_REGION_2
+    jr z, .region2
+
+    ; Nihon: original map bank table.
+    ld hl, MapHeaderBanks
+    jr .lookup
+
+.region2
+    ; Region 2: independent map bank table.
+    ld hl, Region2MapHeaderBanks
+
+.lookup
+    add hl, bc
+    ld a, [hl]
+    ret

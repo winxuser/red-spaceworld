@@ -1,3 +1,7 @@
+SECTION FRAGMENT "Cross Region Warp Entries", ROMX
+
+INCLUDE "engine/overworld/map_group_warps.asm"
+
 SECTION "Maps 1", ROMX
 
 INCLUDE "data/maps/headers/SilentHill.asm"
@@ -1320,3 +1324,12 @@ INCLUDE "data/maps/headers/SouthCity.asm"
 INCLUDE "scripts/SouthCity.asm"
 INCLUDE "data/maps/objects/SouthCity.asm"
 SouthCity_Blocks: INCBIN "maps/SouthCity.blk"
+
+
+PUSHS
+SECTION FRAGMENT "Cross Region Warp Entries", ROMX
+
+    db $ff ; End of cross-region warp table.
+
+
+POPS

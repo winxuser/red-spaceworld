@@ -44,16 +44,30 @@ MACRO def_warp_events
 	DEF {_NUM_WARP_EVENTS} = 0
 ENDM
 
+
 ;\1 x position
 ;\2 y position
 ;\3 destination map (-1 = wLastMap)
 ;\4 destination warp id; starts at 1 (internally at 0)
+;\5 optional destination map group
 MACRO warp_event
+	ASSERT _NARG == 4 || _NARG == 5, \
+		"warp_event expects 4 or 5 arguments"
+
+	; Preserve the original four-byte warp format.
 	db \2, \1, \4 - 1, \3
+
 	DEF _WARP_{d:{_NUM_WARP_EVENTS}}_X = \1
 	DEF _WARP_{d:{_NUM_WARP_EVENTS}}_Y = \2
+
+	; Record an explicit destination group if provided.
+	IF _NARG == 5
+	DEF _WARP_{d:{_NUM_WARP_EVENTS}}_GROUP = \5
+	ENDC
+
 	DEF {_NUM_WARP_EVENTS} += 1
 ENDM
+
 
 MACRO def_bg_events
 	REDEF _NUM_BG_EVENTS EQUS "_NUM_BG_EVENTS_\@"
@@ -90,6 +104,23 @@ MACRO def_warps_to
 	FOR n, {_NUM_WARP_EVENTS}
 		warp_to _WARP_{d:n}_X, _WARP_{d:n}_Y, \1_WIDTH
 	ENDR
+
+	; Generate separate cross-region warp metadata.
+	; Keep the existing map object format unchanged.
+	PUSHS
+	SECTION FRAGMENT "Cross Region Warp Entries", ROMX
+
+	FOR n, {_NUM_WARP_EVENTS}
+		IF DEF(_WARP_{d:n}_GROUP)
+		; Source group, source map,
+		; source warp index, destination group.
+		db GROUP_\1, \1, n, {_WARP_{d:n}_GROUP}
+		; Prevent this definition leaking into
+		; the next map's warp declarations.
+			PURGE _WARP_{d:n}_GROUP
+	ENDC
+ENDR
+        POPS
 ENDM
 
 ;\1 x position
@@ -140,6 +171,7 @@ ENDM
 ;\3 tileset
 ;\4 connections: combo of NORTH, SOUTH, WEST, and/or EAST, or 0 for none
 MACRO map_header
+	DEF HEADER_MAP_GROUP EQU GROUP_\2
 	DEF CURRENT_MAP_WIDTH = \2_WIDTH
 	DEF CURRENT_MAP_HEIGHT = \2_HEIGHT
 	DEF CURRENT_MAP_OBJECT EQUS "\1_Object"
@@ -155,8 +187,9 @@ ENDM
 ; Comes after map_header and connection macros
 MACRO end_map_header
 	dw {CURRENT_MAP_OBJECT}
-	PURGE CURRENT_MAP_WIDTH, CURRENT_MAP_HEIGHT, CURRENT_MAP_OBJECT
+	PURGE HEADER_MAP_GROUP, CURRENT_MAP_WIDTH, CURRENT_MAP_HEIGHT, CURRENT_MAP_OBJECT
 ENDM
+
 
 ; Connections go in order: north, south, west, east
 ;\1 direction
@@ -165,6 +198,9 @@ ENDM
 ;\4 offset of the target map relative to the current map
 ;   (x offset for east/west, y offset for north/south)
 MACRO connection
+	; Ordinary connections must remain within one map group.
+	ASSERT GROUP_\3 == HEADER_MAP_GROUP, \
+        "Cross-region connection requires explicit group handling"
 
 	; Calculate tile offsets for source (current) and target maps
 	DEF _src = 0

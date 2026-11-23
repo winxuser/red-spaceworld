@@ -1,13 +1,48 @@
 SECTION "Spaceworld Location Popup", ROMX
 
+
 SpaceworldLocation_GetCurrentMapName::
     ld a, [wCurMap]
     ld c, a
 
-    ; Search manually configured locations first.
+    ; Region 2 uses the vanilla outdoor map name table.
+    ld a, [wCurMapGroup]
+    cp MAPGROUP_REGION_2
+    jr nz, .nihon
+
+    ; Check the Region 2 outdoor map boundary.
+    ld a, c
+    cp FIRST_REGION2_INDOOR_MAP
+    ret nc
+
+    ; Each outdoor entry is 3 bytes:
+    ; packed coordinates, name pointer low, name pointer high.
+    ld b, 0
+    ld hl, Region2ExternalMapEntries + 1
+    add hl, bc
+    add hl, bc
+    add hl, bc
+
+    ; Read the name pointer from bank $1C.
+    ld de, wNameBuffer
+    ld bc, 2
+    ld a, BANK(Region2ExternalMapEntries)
+    call FarCopyData
+
+    ld a, [wNameBuffer]
+    ld l, a
+    ld a, [wNameBuffer + 1]
+    ld h, a
+
+    ld a, BANK(Region2ExternalMapEntries)
+    jr .copyName
+
+.nihon
+    ; Preserve the existing Nihon lookup.
     ld hl, SpaceworldLocation_SpecialMaps
 
 .searchSpecial
+
     ld a, [hli]
     cp $ff
     jr z, .checkOutdoor
@@ -92,6 +127,16 @@ SpaceworldLocation_GetNameColumn::
     ret
 
 SpaceworldLocation_IsEligible::
+    ld a, [wCurMapGroup]
+    cp MAPGROUP_REGION_2
+    jr nz, .nihon
+
+    ld a, [wCurMap]
+    cp FIRST_REGION2_INDOOR_MAP
+    jr c, .yes
+    jr .no
+
+.nihon
     ld a, [wCurMap]
 
     ; All outdoor maps are eligible.

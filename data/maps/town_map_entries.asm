@@ -53,6 +53,20 @@ ExternalMapEntries:
 	outdoor_map 11,  0, Route30Name
 	assert_table_length FIRST_INDOOR_MAP
 
+; Region 2 outdoor map locations
+PUSHS
+SECTION FRAGMENT "Region 2 Town Map Data", ROMX
+
+Region2ExternalMapEntries:
+    table_width 3
+
+    ; x, y, name
+;    outdoor_map 10, 12, PalletTownName
+;    outdoor_map 10, 11, Route1KantoName
+
+    assert_table_length FIRST_REGION2_INDOOR_MAP
+
+POPS
 
 MACRO indoor_map
 	db INDOORGROUP_\1
@@ -125,3 +139,18 @@ InternalMapEntries:
 	indoor_map POKEMON_LEAGUE_3,    0,  2, PokemonLeagueName
 	assert_table_length NUM_INDOOR_MAP_GROUPS
 	db -1 ; end
+
+; Region 2 indoor map locations.
+PUSHS
+SECTION FRAGMENT "Region 2 Town Map Data", ROMX
+
+Region2InternalMapEntries:
+    table_width 4
+
+;	indoor_map REGION2_PALLET_TOWN,        10, 12, PalletTownName
+
+    assert_table_length NUM_REGION2_INDOOR_MAP_GROUPS
+
+    db $ff ; End of table.
+
+POPS

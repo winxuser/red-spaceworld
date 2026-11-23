@@ -48,6 +48,20 @@ MapSpriteSets:
 	db SPRITESET_PEWTER_CERULEAN ; ROUTE_30
 	assert_table_length FIRST_INDOOR_MAP
 
+
+; Region 2 outdoor map sprite sets
+
+Region2MapSpriteSets:
+    table_width 1
+
+    ; Temporary entry for Region 2 map $00.
+    ; Will become Pallet Town when its map is restored.
+;    db SPRITESET_PALLET_VIRIDIAN
+;    db SPRITESET_PALLET_VIRIDIAN ; ROUTE_1
+
+    assert_table_length FIRST_REGION2_INDOOR_MAP
+
+
 ; Format:
 ; #1: whether the map is split EAST_WEST or NORTH_SOUTH
 ; #2: coordinate of dividing line

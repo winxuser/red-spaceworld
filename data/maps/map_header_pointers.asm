@@ -248,3 +248,49 @@ MapHeaderPointers::
 	dw BrunosRoom_h
 	dw AgathasRoom_h
 	assert_table_length NUM_MAPS
+
+
+
+; Region 2 map header pointers.
+; Keep these in ROM bank 3, not ROM0.
+PUSHS
+SECTION "Region 2 Map Header Pointers", ROMX, BANK[3]
+
+Region2MapHeaderPointers::
+;    dw PalletTown_h
+;    dw Route1Kanto_h
+;    dw PalletHouse_h
+
+
+; Return the current map's header pointer.
+; Input: wCurMapGroup and wCurMap
+; Output: hl = map header pointer
+; Requires ROM bank 3 to be selected.
+
+GetMapHeaderPointerByGroup::
+    ld a, [wCurMapGroup]
+    cp MAPGROUP_REGION_2
+    jr z, .region2
+
+    ; Nihon pointer table (ROM0).
+    ld hl, MapHeaderPointers
+    jr .lookup
+
+.region2
+    ; Region 2 pointer table (ROM bank 3).
+    ld hl, Region2MapHeaderPointers
+
+.lookup
+    ld a, [wCurMap]
+    ld c, a
+    ld b, 0
+    add hl, bc
+    add hl, bc
+
+    ld a, [hli]
+    ld h, [hl]
+    ld l, a
+    ret
+
+POPS
+

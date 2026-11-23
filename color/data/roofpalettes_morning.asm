@@ -10,8 +10,12 @@ RoofPalettesMorning:
 	dw CinnabarRoof_Morning
 	dw IndigoRoof_Morning
 	dw SaffronRoof_Morning
-	dw PalletRoof_Morning   ; unused map $0B
-	dw PalletRoof_Morning   ; ROUTE_1
+    dw PalletRoof_Morning ; BLUE_FOREST
+    dw PalletRoof_Morning ; NORTH_CITY
+    dw PalletRoof_Morning ; SUGAR
+    dw PalletRoof_Morning ; MT_FUJI
+    dw PalletRoof_Morning ; ROUTE_1
+    dw PalletRoof_Morning ; ROUTE_1_P2
 	dw ViridianRoof_Morning ; ROUTE_2
 	dw PewterRoof_Morning   ; ROUTE_3
 	dw PewterRoof_Morning   ; ROUTE_4
@@ -36,6 +40,11 @@ RoofPalettesMorning:
 	dw IndigoRoof_Morning   ; ROUTE_23
 	dw CeruleanRoof_Morning ; ROUTE_24
 	dw CeruleanRoof_Morning ; ROUTE_25
+    dw PewterRoof_Morning ; ROUTE_26
+    dw PewterRoof_Morning ; ROUTE_29
+    dw PewterRoof_Morning ; ROUTE_30
+
+ASSERT (@ - RoofPalettesMorning) / 2 == FIRST_INDOOR_MAP
 
 PalletRoof_Morning:
     RGB 26,20,9
@@ -70,3 +79,10 @@ IndigoRoof_Morning:
 SaffronRoof_Morning:
     RGB 31,29,2
     RGB 30,24,2
+
+; Region 2 morning roof palettes.
+Region2RoofPalettesMorning:
+;    dw PalletRoof_Morning
+;    dw PalletRoof_Morning ; ROUTE_1
+
+    ASSERT (@ - Region2RoofPalettesMorning) / 2 == FIRST_REGION2_INDOOR_MAP

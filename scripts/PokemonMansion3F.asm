@@ -49,6 +49,11 @@ PokemonMansion3FDefaultScript:
 	ld a, POKEMON_MANSION_2F
 .fellDownHoleTo1F
 	ld [wDungeonWarpDestinationMap], a
+
+	; Both destinations currently belong to Nihon.
+	ASSERT GROUP_POKEMON_MANSION_1F == GROUP_POKEMON_MANSION_2F
+	ld a, GROUP_POKEMON_MANSION_1F
+	ld [wDestinationMapGroup], a
 	ret
 
 .holeCoords:

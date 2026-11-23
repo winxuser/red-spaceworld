@@ -10,8 +10,12 @@ RoofPalettesAfternoon:
 	dw CinnabarRoof_Afternoon
 	dw IndigoRoof_Afternoon
 	dw SaffronRoof_Afternoon
-	dw PalletRoof_Afternoon   ; unused map $0B
-	dw PalletRoof_Afternoon   ; ROUTE_1
+    dw PalletRoof_Afternoon ; BLUE_FOREST
+    dw PalletRoof_Afternoon ; NORTH_CITY
+    dw PalletRoof_Afternoon ; SUGAR
+    dw PalletRoof_Afternoon ; MT_FUJI
+    dw PalletRoof_Afternoon ; ROUTE_1
+    dw PalletRoof_Afternoon ; ROUTE_1_P2
 	dw ViridianRoof_Afternoon ; ROUTE_2
 	dw PewterRoof_Afternoon   ; ROUTE_3
 	dw PewterRoof_Afternoon   ; ROUTE_4
@@ -36,6 +40,11 @@ RoofPalettesAfternoon:
 	dw IndigoRoof_Afternoon   ; ROUTE_23
 	dw CeruleanRoof_Afternoon ; ROUTE_24
 	dw CeruleanRoof_Afternoon ; ROUTE_25
+	dw PewterRoof_Afternoon ; ROUTE_26
+    dw PewterRoof_Afternoon ; ROUTE_29
+    dw PewterRoof_Afternoon ; ROUTE_30
+
+ASSERT (@ - RoofPalettesAfternoon) / 2 == FIRST_INDOOR_MAP
 
 PalletRoof_Afternoon:
     RGB 26,20,9
@@ -70,3 +79,10 @@ IndigoRoof_Afternoon:
 SaffronRoof_Afternoon:
     RGB 31,29,2
     RGB 30,24,2
+
+; Region 2 afternoon roof palettes.
+Region2RoofPalettesAfternoon:
+;    dw PalletRoof_Afternoon
+;	dw PalletRoof_Afternoon ; ROUTE_1
+
+    ASSERT (@ - Region2RoofPalettesAfternoon) / 2 == FIRST_REGION2_INDOOR_MAP

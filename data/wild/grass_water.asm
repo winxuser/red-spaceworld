@@ -321,3 +321,15 @@ INCLUDE "data/wild/maps/VictoryRoad1F.asm"
 INCLUDE "data/wild/maps/DiglettsCave.asm"
 INCLUDE "data/wild/maps/Route1P2.asm"
 INCLUDE "data/wild/maps/SilentHills.asm"
+
+
+; Region 2 wild encounter pointers
+
+Region2WildDataPointers:
+    table_width 2
+;    dw NothingWildMons          ; Pallet Town
+;    dw NothingWildMons          ; ROUTE_1
+;    dw NothingWildMons          ; Pallet House
+
+    assert_table_length NUM_REGION2_MAPS
+    db -1
