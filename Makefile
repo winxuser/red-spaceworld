@@ -144,7 +144,7 @@ $(foreach obj,$(all_objs), \
 endif
 
 
-RGBLINKFLAGS += -d
+#RGBLINKFLAGS += -d
 pokered.gbc:        RGBLINKFLAGS += -p 0x00
 pokeblue.gbc:       RGBLINKFLAGS += -p 0x00
 pokeblue_debug.gbc: RGBLINKFLAGS += -p 0xff

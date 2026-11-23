@@ -1232,7 +1232,41 @@ wBattleMonSpecies2:: db
 
 wEnemyMonNick:: ds NAME_LENGTH
 
-wEnemyMon:: battle_struct wEnemyMon
+
+; Enemy Pokémon battle data.
+; This structure crosses the WRAM0 / WRAM1 boundary.
+
+wEnemyMon::
+wEnemyMonSpecies:: db
+wEnemyMonHP:: dw
+wEnemyMonPartyPos::
+wEnemyMonBoxLevel:: db
+wEnemyMonStatus:: db
+wEnemyMonType::
+wEnemyMonType1:: db
+wEnemyMonType2:: db
+wEnemyMonCatchRate:: db
+wEnemyMonMoves:: ds NUM_MOVES
+wEnemyMonDVs:: dw
+wEnemyMonLevel:: db
+
+wEnemyMonStats::
+wEnemyMonMaxHP:: dw
+wEnemyMonAttack:: dw
+
+; First byte of Defense occupies $CFFF.
+wEnemyMonDefense:: db
+
+; Continue in the original WRAM bank 1.
+SECTION "WRAM Bank 1", WRAMX[$d000], BANK[1]
+
+; Second byte of Defense occupies $D000.
+    db
+
+wEnemyMonSpeed:: dw
+wEnemyMonSpecial:: dw
+wEnemyMonPP:: ds NUM_MOVES
+
 
 wEnemyMonBaseStats:: ds NUM_STATS
 wEnemyMonActualCatchRate:: db
@@ -1761,7 +1795,7 @@ wSavedNPCMovementDirections2Index:: db
 wPlayerName:: ds NAME_LENGTH
 
 
-SECTION "Party Data", WRAM0
+SECTION "Party Data", WRAMX, BANK[1]
 
 wPartyDataStart::
 
@@ -1790,7 +1824,7 @@ wPartyMonNicksEnd::
 wPartyDataEnd::
 
 
-SECTION "Main Data", WRAM0
+SECTION "Main Data", WRAMX, BANK[1]
 
 wMainDataStart::
 
@@ -2307,7 +2341,7 @@ wLastBlackoutMapGroup:: db
 wMainDataEnd::
 
 
-SECTION "Current Box Data", WRAM0
+SECTION "Current Box Data", WRAMX, BANK[1]
 
 wBoxDataStart::
 
@@ -2342,7 +2376,7 @@ wEXPBarCurEXP::       ds 3
 wEXPBarNeededEXP::    ds 3
 wEXPBarKeepFullFlag:: ds 1
 ENDC
-SECTION "Stack", WRAM0
+SECTION "Stack", WRAMX, BANK[1]
 
 ; the stack grows downward
 	ds $100 - 2

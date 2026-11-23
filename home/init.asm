@@ -27,11 +27,17 @@ Init::
 	ld a, LCDC_ON
 	ldh [rLCDC], a
 	call DisableLCD
-
+	; Select the original WRAM bank 1.
+	; Writing 0 to rWBK selects bank 1 on GBC.
+	xor a
+	ldh [rWBK], a
 	ld sp, wStack
 
-	ld hl, STARTOF(WRAM0)
-	ld bc, SIZEOF(WRAM0)
+	; Clear the original 8 KB of WRAM.
+	; WRAM0: $C000-$CFFF
+	; WRAM1: $D000-$DFFF
+	ld hl, $c000
+	ld bc, $2000
 .loop
 	ld [hl], 0
 	inc hl

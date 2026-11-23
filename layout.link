@@ -304,19 +304,23 @@ ROMX $7E
 ROMX $7F
     "Custom Party Icons 1"
 WRAM0
-	"Audio RAM"
-	org $c100
-	"Sprite State Data"
-	"OAM Buffer"
-	"Tilemap"
-	"Overworld Map"
-	"WRAM"
-	"Party Data"
-	"Main Data"
-	"Current Box Data"
-	org $df01
-	"Stack"
-VRAM
+    "Audio RAM"
+    org $c100
+    "Sprite State Data"
+    "OAM Buffer"
+    "Tilemap"
+    "Overworld Map"
+    "WRAM"
+WRAMX $1
+    "WRAM Bank 1"
+    "Party Data"
+    "Main Data"
+    "Current Box Data"
+    org $df01
+    "Stack"
+WRAMX $3
+    "Extended WRAM Bank 3"
+VRAM $0
 	"VRAM"
 SRAM $0
 	"Sprite Buffers"
