@@ -1440,9 +1440,17 @@ EnemySendOutFirstMon:
 	hlcoord 0, 0
 	lb bc, 4, 11
 	call ClearScreenArea
-    ; Keep the player's trainer palette during enemy send-out.
-    ld b, SET_PAL_BATTLE_AFTER_BLACK
-    call RunPaletteCommand
+	; Only use the player trainer palette during the introduction.
+	ld a, [wFirstMonsNotOutYet]
+	and a
+	ld b, SET_PAL_BATTLE_AFTER_BLACK
+	jr nz, .applyBattlePalette
+
+	; The player's Pokemon is already on the battlefield.
+	ld b, SET_PAL_BATTLE
+
+.applyBattlePalette
+	call RunPaletteCommand
 
     call GBPalNormal
     ld hl, TrainerSentOutText

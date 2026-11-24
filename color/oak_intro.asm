@@ -3,7 +3,7 @@
 GetNidorinoPalID:
 	call ClearScreen
 IF GEN_2_GRAPHICS
-	ld a, PAL_NIDORINO
+	ld a, PAL_INTRO_NIDORINO
 ELSE
 	ld a, PAL_PURPLEMON
 ENDC
@@ -18,11 +18,35 @@ GetRedPalID:
 GetRivalPalID:
 	call ClearScreen
 IF GEN_2_GRAPHICS
-	ld a, PAL_GARY1
+	ld a, RIVAL1
+	jr LoadIntroTrainerPalette
 ELSE
 	ld a, PAL_MEWMON
-ENDC
 	jr GotPalID
+ENDC
+
+GetOakPalID:
+IF GEN_2_GRAPHICS
+	ld a, PROF_OAK
+	jr LoadIntroTrainerPalette
+ELSE
+	ld a, PAL_BROWNMON
+	jr GotPalID
+ENDC
+
+; a = trainer class
+LoadIntroTrainerPalette:
+	ld d, a
+	ld e, 0
+
+	ld a, 2
+	ldh [rWBK], a
+
+	farcall LoadTrainerPortraitPalette
+
+	xor a
+	ldh [rWBK], a
+	ret
 
 GotPalID:
 	ld e, 0

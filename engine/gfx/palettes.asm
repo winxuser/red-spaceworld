@@ -59,72 +59,6 @@ SetPalFunctions:
 	dw SetPal_NameEntry	   ; Name entry (partially replaces 08)
 	dw SetPal_BattleAfterBlack ; Like SetPal_Battle but specifically for clearing the black palettes
 
-; HAXed to give trainers palettes independently
-; Also skips the "transform" check, caller does that instead
-DeterminePaletteID:
-	ld [wPokedexNum], a
-	and a
-
-	push bc
-	predef IndexToPokedex ; turn Pokemon ID number into Pokedex number
-	pop bc
-
-	ld a, [wPokedexNum]
-	ld hl, MonsterPalettes
-	and a
-	jr nz, .skipDexNumConversion ; Check if trainer?
-
-IF GEN_2_GRAPHICS ; Trainers are given individualized palettes
-	; In link battle, don't rely in wTrainerClass (for some reason it's set to
-	; OPP_GARY, so ignore it)
-	ld a, [wLinkState]
-	cp LINK_STATE_BATTLING
-	ld a, PAL_HERO
-	ret z
-
-	ld a, [wTrainerClass] ; Get trainer ID
-	ld hl, TrainerPalettes
-ELSE
-	; Trainers are given a single palette (PAL_MEWMON)
-	; However, check specifically for the player's sprite in linked battle
-	ld e, a
-	ld a, [wLinkState]
-	cp LINK_STATE_BATTLING
-	ld a, PAL_REDMON
-	ret z
-
-	ld a, e
-ENDC
-
-.skipDexNumConversion
-	ld e, a
-	ld d, $00
-	add hl, de
-	ld a, [hl]
-	ret
-	
-
-DetermineBackSpritePaletteID:
-	ld [wPokedexNum], a
-	and a
-
-	push bc
-	predef IndexToPokedex ; turn Pokemon ID number into Pokedex number
-	pop bc
-
-	ld a, [wPokedexNum]
-	ld hl, MonsterPalettes
-	and a
-	jr nz, .getPaletteID ; Check if trainer?
-	jp GetPlayerPaletteID
-	ret
-.getPaletteID
-	ld e, a
-	ld d, $00
-	add hl, de
-	ld a, [hl]
-	ret
-
 
 SECTION "InitPartyMenuBlkPacket", ROMX
 
@@ -458,8 +392,6 @@ CopySGBBorderTiles:
 	ret
 
 INCLUDE "data/sgb/sgb_packets.asm"
-
-INCLUDE "data/pokemon/palettes.asm"
 
 ; SGB border not needed in color hack
 ;INCLUDE "data/sgb/sgb_palettes.asm"

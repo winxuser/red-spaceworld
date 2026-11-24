@@ -45,10 +45,6 @@ DEF W2_UpdatedWindowPortion        EQU $d78a
 ; Set if a row or column on the map was drawn during the current vblank.
 DEF W2_DrewRowOrColumn             EQU $d78b
 
-; Palette of the current pokemon (remembered here so pokemon have correct palette when
-; transformed)
-DEF W2_BattleMonPalette            EQU $d78c
-
 ; Used while displaying shiny Pokemon sparkles.
 DEF W2_ShinyPaletteBackup          EQU $d800
 

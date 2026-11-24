@@ -17,6 +17,7 @@ INCLUDE "macros/scripts/events.asm"
 INCLUDE "macros/scripts/text.asm"
 
 INCLUDE "macros/color.asm"
+INCLUDE "macros/pokemon_palettes.asm"
 
 INCLUDE "constants/charmap.asm"
 INCLUDE "constants/hardware.inc"

@@ -93,103 +93,12 @@ SetPal_Battle:
 	ret
 
 SetPal_Battle_Common:
-	ld a, [wPlayerBattleStatus3]
-	bit TRANSFORMED, a
-	jr z, .getBattleMonPal
+	call LoadPlayerBattlePalette
+	call LoadEnemyBattlePalette
 
-; Transformed Pokemon:
-; Determine the palette from its current species.
-	ld a, [wBattleMonSpecies]
-	call DetermineBackSpritePaletteID
-	ld b, a
-	jr .getEnemyMonPal
-
-.getBattleMonPal
-	ld a, [wBattleMonSpecies]
-	call DetermineBackSpritePaletteID
-	ld b, a
-
-.getEnemyMonPal
-	ld a, [wEnemyMonSpecies2]
-	call DeterminePaletteID
-	ld c, a
-
-	ld a, $02
-	ldh [rWBK], a
-
-	; Save the player mon's palette in case it transforms later
-	ld a, b
-	ld [W2_BattleMonPalette], a
-
-	; Player palette
-	push bc
-
-    ; Read shiny flag from WRAM bank 1.
-	ld a, 1
-	ldh [rWBK], a
-
-	ld a, [wBattleMonShiny]
-	ld d, a
-
-    ; Restore WRAM bank 2.
+	; Select palette WRAM bank for the remaining palettes.
 	ld a, 2
 	ldh [rWBK], a
-
-    ; Check shiny flag.
-	ld a, d
-	cp 1
-	jr nz, .normalPlayerPalette
-
-    ; Shiny Pokemon
-	ld d, b
-	ld e, 0
-	farcall LoadShinyPalette
-	jr .playerPaletteDone
-
-.normalPlayerPalette
-    ; Normal Pokemon
-	ld d, b
-	ld e, 0
-	farcall LoadSGBPalette
-
-.playerPaletteDone
-
-    ; Enemy palette
-	pop bc
-	ld d, c
-	ld e, 1
-
-    ; Check whether the enemy Pokemon is shiny.
-    ; The shiny flag is in WRAM bank 1.
-	ld a, 1
-	ldh [rWBK], a
-
-	ld a, [wEnemyMonShiny]
-	ld b, a
-
-    ; Restore WRAM bank 2 for the palette loader.
-	ld a, 2
-	ldh [rWBK], a
-
-    ; Species 0 means we're displaying the enemy trainer.
-    ; Always use the trainer's individual palette.
-	ld a, [wEnemyMonSpecies2]
-	and a
-	jr z, .normalEnemyPalette
-
-    ; Otherwise check whether the enemy Pokemon is shiny.
-	ld a, b
-	and a
-	jr z, .normalEnemyPalette
-
-    ; Load the shiny version of the Pokemon palette.
-	farcall LoadShinyPalette
-	jr .enemyPaletteDone
-
-.normalEnemyPalette
-	farcall LoadSGBPalette
-
-.enemyPaletteDone
 
 	; Player lifebar
 	ld a, [wPlayerHPBarColor]
@@ -284,6 +193,102 @@ ENDC
 
 	ret
 
+LoadPlayerBattlePalette:
+	; Convert the current species to a Pokedex number.
+	ld a, [wBattleMonSpecies]
+	ld [wPokedexNum], a
+	predef IndexToPokedex
+	ld a, [wPokedexNum]
+	and a
+	jr z, .trainer
+
+	ld d, a
+	ld e, 0
+
+	; Select normal or shiny Pokemon colours.
+	ld a, [wBattleMonShiny]
+	jr LoadBattleSpeciesPalette
+
+.trainer
+	; Preserve the player's gender-specific palette.
+	call GetPlayerPaletteID
+	ld d, a
+	ld e, 0
+	jr LoadBattleGenericPalette
+
+
+LoadEnemyBattlePalette:
+	; Convert the current species to a Pokedex number.
+	ld a, [wEnemyMonSpecies2]
+	ld [wPokedexNum], a
+	predef IndexToPokedex
+	ld a, [wPokedexNum]
+	and a
+	jr z, .trainer
+
+	ld d, a
+	ld e, 1
+
+	; Select normal or shiny Pokemon colours.
+	ld a, [wEnemyMonShiny]
+	jr LoadBattleSpeciesPalette
+
+.trainer
+	; Preserve the existing link battle palette.
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
+	jr z, .linkTrainer
+
+	; Load the independent trainer class palette.
+	ld a, [wTrainerClass]
+	ld d, a
+	ld e, 1
+
+	ld a, 2
+	ldh [rWBK], a
+
+	farcall LoadTrainerPortraitPalette
+	jr RestoreBattlePaletteBank
+
+.linkTrainer
+	ld d, PAL_HERO
+	ld e, 1
+	jr LoadBattleGenericPalette
+
+; d = Pokedex number
+; e = destination palette slot
+; a = shiny flag
+LoadBattleSpeciesPalette:
+	ld b, a
+
+	ld a, 2
+	ldh [rWBK], a
+
+	ld a, b
+	and a
+	jr z, .normal
+
+	farcall LoadShinyPokemonPalette
+	jr RestoreBattlePaletteBank
+
+.normal
+	farcall LoadPokemonPalette
+	jr RestoreBattlePaletteBank
+
+
+; d = generic palette ID
+; e = destination palette slot
+LoadBattleGenericPalette:
+	ld a, 2
+	ldh [rWBK], a
+
+	farcall LoadSGBPalette
+
+RestoreBattlePaletteBank:
+	xor a
+	ldh [rWBK], a
+	ret
+
 ; hl: starting address
 ; a: pal number
 ; b: number of rows
@@ -344,9 +349,11 @@ SetPal_StatusScreen:
 	jr c, .pokemon
 	ld a, $1 ; not pokemon
 .pokemon
-	call DeterminePaletteID
+	; Convert internal species ID to Pokedex number.
+	ld [wPokedexNum], a
+	predef IndexToPokedex
+	ld a, [wPokedexNum]
 	ld b, a
-
 	ld a, 2
 	ldh [rWBK], a
 
@@ -382,12 +389,11 @@ ENDC
 	jr nc, .normalPokemonPalette
 
 	; Shiny Pokemon: load Spaceworld shiny colours.
-	farcall LoadShinyPalette
+	farcall LoadShinyPokemonPalette
 	jr .pokemonPaletteDone
 
 .normalPokemonPalette
-	; Normal Pokemon: load original colours.
-	farcall LoadSGBPalette
+	farcall LoadPokemonPalette
 
 .pokemonPaletteDone
 
@@ -439,32 +445,31 @@ ENDC
 	ldh [rWBK], a
 	ret
 
-; Show pokedex data
 SetPal_Pokedex:
+	; Convert the internal species ID to a Pokedex number.
 	ld a, [wCurPartySpecies]
-	call DeterminePaletteID
+	ld [wPokedexNum], a
+	predef IndexToPokedex
+
+	; Use the Pokedex number directly as the palette index.
+	ld a, [wPokedexNum]
 	ld d, a
 	ld e, 0
 
+	; Select palette WRAM bank.
 	ld a, 2
 	ldh [rWBK], a
-
-	; Preserve the Pokemon's normal palette category.
-	push de
 
 	; Check the Pokedex preview mode.
 	ld a, [wPokedexShinyView]
 	and a
 	jr z, .normalPokedexPalette
 
-	; Shiny preview: load Spaceworld shiny colours.
-	pop de
-	farcall LoadShinyPalette
+	farcall LoadShinyPokemonPalette
 	jr .pokedexPaletteDone
 
 .normalPokedexPalette
-	pop de
-	farcall LoadSGBPalette
+	farcall LoadPokemonPalette
 
 .pokedexPaletteDone
 IF DEF(_BLUE)
@@ -571,15 +576,20 @@ SetPal_Slots:
 
 ; Titlescreen with cycling pokemon
 SetPal_TitleScreen:
-	ld a, [wWhichTrade] ; Get the pokemon on the screen
-	call DeterminePaletteID
+	; Convert the displayed species to a Pokedex number.
+	ld a, [wWhichTrade]
+	ld [wPokedexNum], a
+	predef IndexToPokedex
+
+	ld a, [wPokedexNum]
 	ld d, a
 	ld e, 0
 
+	; Load the independent Pokemon palette.
 	ld a, 2
 	ldh [rWBK], a
 
-	farcall LoadSGBPalette
+	farcall LoadPokemonPalette
 
 	ld d, PAL_LOGO2 ; Title logo
 	ld e, 1
@@ -670,7 +680,7 @@ SetPal_NidorinoIntro:
 	ldh [rWBK], a
 
 IF GEN_2_GRAPHICS
-	ld d, PAL_NIDORINO
+	ld d, PAL_INTRO_NIDORINO
 ELSE
 	ld d, PAL_PURPLEMON
 ENDC
@@ -833,24 +843,31 @@ SetPal_PokemonWholeScreen:
 	cp 3
 	jr z, .hallOfFamePokemon
 
-	ld a, c
+	; c = 1 means black palette.
 	dec a
 	ld a, PAL_BLACK
 	jr z, .loadPalette
+
+	; c = 2 means generic palette.
 	ld a, c
 	cp 2
 	ld a, PAL_MEWMON
 	jr z, .loadPalette
-	ld a, [wWholeScreenPaletteMonSpecies]
-    ; Normal whole-screen palette.
-	call DetermineBackSpritePaletteID
-	jr .loadPalette
-.hallOfFamePokemon
-	; Get this Pokemon's normal palette category.
-	ld a, [wWholeScreenPaletteMonSpecies]
-	call DetermineBackSpritePaletteID
 
-	; Preserve the normal palette ID in D.
+	; Normal whole-screen Pokemon palette.
+	call .getPokedexNumber
+	and a
+	jr z, .playerPalette
+
+	ld d, a
+	jr .loadNormalPokemon
+
+.hallOfFamePokemon
+	; Get the Pokemon's Pokedex number.
+	call .getPokedexNumber
+	and a
+	jr z, .playerPalette
+
 	ld d, a
 	push de
 
@@ -860,29 +877,34 @@ SetPal_PokemonWholeScreen:
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 
-	; Check for genuine Gen 2 shiny DVs.
+	; Check whether the Pokemon is shiny.
 	ld d, h
 	ld e, l
 	farcall CheckShininess
 
-	; Restore palette ID into D.
-	; POP DE preserves the carry flag from CheckShininess.
 	pop de
-	jr nc, .normalHoFPalette
+	jr nc, .loadNormalPokemon
 
-	; Shiny Pokemon: load its Spaceworld palette.
+	; Load independent shiny Pokemon palette.
 	ld e, 0
 	ld a, 2
 	ldh [rWBK], a
-	farcall LoadShinyPalette
-
-	; Skip the normal palette loader.
+	farcall LoadShinyPokemonPalette
 	jr .remainingPalettes
 
-.normalHoFPalette
-	ld a, d
-	jr .loadPalette
+.loadNormalPokemon
+	; Load independent normal Pokemon palette.
+	ld e, 0
+	ld a, 2
+	ldh [rWBK], a
+	farcall LoadPokemonPalette
+	jr .remainingPalettes
+
+.playerPalette
+	call GetPlayerPaletteID
+
 .loadPalette
+	; Load a generic or player palette.
 	ld d, a
 	ld a, 2
 	ldh [rWBK], a
@@ -932,6 +954,13 @@ SetPal_PokemonWholeScreen:
 
 	xor a
 	ldh [rWBK], a
+	ret
+
+.getPokedexNumber
+	ld a, [wWholeScreenPaletteMonSpecies]
+	ld [wPokedexNum], a
+	predef IndexToPokedex
+	ld a, [wPokedexNum]
 	ret
 
 
@@ -1380,6 +1409,9 @@ EnemyShinySparkle::
 	call DelayFrame
 	ret
 
+INCLUDE "color/pokemon_palettes.asm"
+
 ; Copy of sound engine used by dmg-mode to play jingle
 SECTION "bank31", ROMX
 INCBIN "color/data/bank31.bin", $0000, $c8000 - $c4000
+

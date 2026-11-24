@@ -61,12 +61,7 @@ OakSpeech:
 	call PrepareForSpecialWarp
 	xor a
 	ldh [hTileAnimations], a
-IF GEN_2_GRAPHICS
-	ld a, PAL_OAK
-ELSE
-	ld a, PAL_BROWNMON
-ENDC
-	call GotPalID ; HAX
+	call GetOakPalID
 	nop
 	nop
 	nop
@@ -348,13 +343,8 @@ BoyGirlChoice::
 	ld b, SET_PAL_OAK_INTRO
 	call RunPaletteCommand
 
-	; Restore Oak's palette.
-IF GEN_2_GRAPHICS
-	ld a, PAL_OAK
-ELSE
-	ld a, PAL_BROWNMON
-ENDC
-	jp GotPalID
+	; Restore Oak's independent trainer palette.
+	jp GetOakPalID
 
 .genderOptions
 	db   "BOY"
