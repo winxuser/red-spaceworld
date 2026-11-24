@@ -11,11 +11,8 @@ ENDC
 
 GetRedPalID:
 	call ClearScreen
-IF GEN_2_GRAPHICS
-	ld a, PAL_HERO
-ELSE
-	ld a, PAL_REDMON
-ENDC
+	farcall GetPlayerPaletteIDFar
+	ld a, d
 	jr GotPalID
 
 GetRivalPalID:

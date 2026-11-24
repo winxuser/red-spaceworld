@@ -292,11 +292,82 @@ IntroDisplayPicCenteredOrUpperRight:
 
 BoyGirlChoice::
 	call SaveScreenTilesToBuffer1
-	ld a, BOY_GIRL_MENU
-	ld [wTwoOptionMenuID], a
-	coord hl, 13, 7
-	lb bc, 8, 14
-	ld a, TWO_OPTION_MENU
-	ld [wTextBoxID], a
-	call DisplayTextBoxID
-	jp LoadScreenTilesFromBuffer1
+
+	; Draw the gender selection box.
+	hlcoord 13, 7
+	lb bc, 3, 5
+	call TextBoxBorder
+
+	hlcoord 15, 8
+	ld de, .genderOptions
+	call PlaceString
+
+	; Initialise menu variables.
+	xor a
+	ld [wCurrentMenuItem], a
+	ld [wLastMenuItem], a
+	ld [wMenuWatchMovingOutOfBounds], a
+	ld [wMenuWrappingEnabled], a
+
+	ld a, 8
+	ld [wTopMenuItemY], a
+	ld a, 14
+	ld [wTopMenuItemX], a
+
+	ld a, 1
+	ld [wMaxMenuItem], a
+
+	; Return control when moving the cursor or confirming.
+	ld a, PAD_A | PAD_UP | PAD_DOWN
+	ld [wMenuWatchedKeys], a
+
+	farcall LoadGenderPreviewGraphics
+	farcall LoadGenderPreviewPalettes
+	call DrawGenderPreview
+
+.inputLoop
+	call HandleMenuInput
+	bit B_PAD_A, a
+	jr nz, .confirmed
+
+	; Only redraw when the selection changes.
+	ld a, [wLastMenuItem]
+	ld b, a
+	ld a, [wCurrentMenuItem]
+	cp b
+	jr z, .inputLoop
+
+	call PlaceMenuCursor
+	call DrawGenderPreview
+	jr .inputLoop
+
+.confirmed
+	call LoadScreenTilesFromBuffer1
+
+	; Restore the normal introduction palette mapping.
+	ld b, SET_PAL_OAK_INTRO
+	call RunPaletteCommand
+
+	; Restore Oak's palette.
+IF GEN_2_GRAPHICS
+	ld a, PAL_OAK
+ELSE
+	ld a, PAL_BROWNMON
+ENDC
+	jp GotPalID
+
+.genderOptions
+	db   "BOY"
+	next "GIRL@"
+
+DrawGenderPreview::
+	ld a, [wCurrentMenuItem]
+	and a
+	jr z, .draw
+
+	ld a, PIC_SIZE
+
+.draw
+	hlcoord 3, 3
+	ldh [hStartTileID], a
+	predef_jump CopyUncompressedPicToTilemap

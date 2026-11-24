@@ -116,12 +116,7 @@ DetermineBackSpritePaletteID:
 	ld hl, MonsterPalettes
 	and a
 	jr nz, .getPaletteID ; Check if trainer?
-
-IF GEN_2_GRAPHICS
-	ld a, PAL_HERO
-ELSE
-	ld a, PAL_REDMON
-ENDC
+	jp GetPlayerPaletteID
 	ret
 .getPaletteID
 	ld e, a
@@ -470,3 +465,38 @@ INCLUDE "data/pokemon/palettes.asm"
 ;INCLUDE "data/sgb/sgb_palettes.asm"
 
 ;INCLUDE "data/sgb/sgb_border.asm"
+
+GetPlayerPaletteID::
+IF GEN_2_GRAPHICS
+	push bc
+
+	; Preserve the current WRAM bank.
+	ldh a, [rWBK]
+	ld c, a
+
+	; Read the player gender from WRAM bank 1.
+	ld a, 1
+	ldh [rWBK], a
+
+	ld a, [wPlayerGender]
+	and a
+	ld b, PAL_HERO
+	jr z, .restoreBank
+	ld b, PAL_HERO_FEMALE
+
+.restoreBank
+	; Restore the original bank before accessing the stack.
+	ld a, c
+	ldh [rWBK], a
+
+	ld a, b
+	pop bc
+ELSE
+	ld a, PAL_REDMON
+ENDC
+	ret
+
+GetPlayerPaletteIDFar::
+	call GetPlayerPaletteID
+	ld d, a
+	ret

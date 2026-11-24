@@ -40,12 +40,8 @@ SetPal_BattleAfterBlack:
     ; Use the trainer palette instead of the active Pokemon's palette.
     ld a, 2
     ldh [rWBK], a
-
-IF GEN_2_GRAPHICS
-    ld d, PAL_HERO
-ELSE
-    ld d, PAL_REDMON
-ENDC
+	call GetPlayerPaletteID
+	ld d, a
     ld e, 0
     farcall LoadSGBPalette
 
@@ -1009,11 +1005,8 @@ SetPal_TrainerCard:
 	farcall LoadSGBPalette
 
 	; Red's palette
-IF GEN_2_GRAPHICS
-	ld d, PAL_HERO
-ELSE
-	ld d, PAL_REDMON
-ENDC
+	call GetPlayerPaletteID
+	ld d, a
 	ld e, 4
 	farcall LoadSGBPalette
 
@@ -1113,6 +1106,7 @@ INCLUDE "color/sprites.asm"
 INCLUDE "color/ssanne.asm"
 INCLUDE "color/boulder.asm"
 INCLUDE "color/super_palettes.asm"
+INCLUDE "color/gender_preview.asm"
 
 INCLUDE "color/data/badgepalettemap.asm"
 

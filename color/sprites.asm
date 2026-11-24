@@ -94,6 +94,20 @@ ColorOverworldSprite::
 	and $f8
 	ld b, a
 
+	; Sprite structure 0 belongs to the player.
+	ldh a, [hSpriteOffset2]
+	and a
+	jr nz, .npcPalette
+
+	; Select the player's palette based on gender.
+	ld a, [wPlayerGender]
+	and a
+	ld a, SPR_PAL_ORANGE
+	jr z, .norandomColor
+	ld a, SPR_PAL_BLUE
+	jr .norandomColor
+
+.npcPalette
 	ldh a, [hSpriteOffset2]
 	ld e, a
 	ld d, wSpriteStateData1 >> 8
