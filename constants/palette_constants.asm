@@ -67,4 +67,7 @@ IF GEN_2_GRAPHICS
 	const PAL_HERO          ; $26
 	const PAL_HERO_FEMALE   ; $27
 ENDC
+	const PAL_GENDER_MALE   ; $28
+	const PAL_GENDER_FEMALE ; $29
+	const PAL_SHINY_SYMBOL  ; $2A
 DEF NUM_SGB_PALS EQU const_value

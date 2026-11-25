@@ -108,6 +108,7 @@ RedrawPartyMenu_::
 	pop hl
 
 .printLevel
+	call PrintPartyMonIndicators
 	ld bc, 10 ; move 10 columns to the right
 	add hl, bc
 	call PrintLevel
@@ -233,6 +234,73 @@ RedrawPartyMenu_::
 	pop hl
 	rst _PrintText
 	jr .done
+
+; Print gender and shiny indicators for the loaded party Pokemon.
+; hl = start of the Pokemon's nickname.
+PrintPartyMonIndicators:
+	push hl
+	push bc
+	push de
+
+	; Determine gender from species and DVs.
+	ld a, [wLoadedMonSpecies]
+	ld [wGenderTemp], a
+	ld de, wLoadedMonDVs
+	farcall GetMonGender
+
+	ld a, [wGenderTemp]
+	cp MALE
+	jr z, .male
+	cp FEMALE
+	jr z, .female
+
+	ld a, ' '
+	jr .printGender
+
+.male
+	ld a, '♂'
+	jr .printGender
+
+.female
+	ld a, '♀'
+
+.printGender
+	pop de
+	pop bc
+	pop hl
+
+	push hl
+	push bc
+	push de
+
+	; Gender goes immediately after the level.
+	ld bc, 13
+	add hl, bc
+	ld [hl], a
+
+	; Check the Pokemon's actual DVs.
+	ld de, wLoadedMonDVs
+	farcall CheckShininess
+	ld a, ' '
+	jr nc, .printShiny
+	ld a, '[SHINY]'
+
+.printShiny
+	pop de
+	pop bc
+	pop hl
+
+	push hl
+	push bc
+
+	; Shiny symbol goes below the nickname.
+	ld bc, SCREEN_WIDTH
+	add hl, bc
+	ld [hl], a
+
+	pop bc
+	pop hl
+	ret
 
 ; Shared text assets for menu states
 AbleText:

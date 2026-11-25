@@ -34,6 +34,7 @@ StartMenu_Pokemon::
 	ld a, FIELD_MOVE_MON_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
+	farcall RefreshPartyIndicatorPalettes
 	ld hl, wFieldMoves
 	lb bc, 2, 12
 	ld e, 5
@@ -65,6 +66,7 @@ StartMenu_Pokemon::
 	call HandleMenuInput
 	push af
 	call LoadScreenTilesFromBuffer1
+	farcall RefreshPartyIndicatorPalettes
 	pop af
 	bit B_PAD_B, a
 	jp nz, .loop

@@ -139,11 +139,23 @@ UpdateHPBar2:
 ; e: current health (in pixels) to start with
 UpdateHPBar_AnimateHPBar:
 	push hl
+	push af
+
+	ldh a, [hUILayoutFlags]
+	bit BIT_PARTY_MENU_HP_BAR, a
+	jr z, .gotBarPosition
+
+	ld bc, 7
+	add hl, bc
+
+.gotBarPosition
+	pop af
+
 .barAnimationLoop
 	push af
 	push de
 	ld d, $6
-	call DrawHPBarWithColor ; HAX: call changed to update color as well
+	call DrawHPBarWithColor
 	ld c, 2
 	rst _DelayFrames
 	pop de
@@ -216,8 +228,11 @@ UpdateHPBar_PrintHPNumber:
 	ldh a, [hUILayoutFlags]
 	bit BIT_PARTY_MENU_HP_BAR, a
 	jr z, .hpBelowBar
-	ld de, $9
+
+	; Party menu HP numbers are at the original coordinate.
+	ld de, 0
 	jr .next
+
 .hpBelowBar
 	ld de, $15
 .next

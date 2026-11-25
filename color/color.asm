@@ -800,6 +800,18 @@ SetPal_PartyMenu:
 	ld d, PAL_REDBAR
 	ld e, 3
 	farcall LoadSGBPalette
+	; Gender and shiny indicator palettes.
+	ld d, PAL_GENDER_MALE
+	ld e, 4
+	farcall LoadSGBPalette
+
+	ld d, PAL_GENDER_FEMALE
+	ld e, 5
+	farcall LoadSGBPalette
+
+	ld d, PAL_SHINY_SYMBOL
+	ld e, 6
+	farcall LoadSGBPalette
 
 	ld b, 9 ; there are only 6 pokemon but iterate 9 times to fill the whole screen
 	ld hl, wPartyMenuHPBarColors
@@ -819,14 +831,265 @@ SetPal_PartyMenu:
 	dec b
 	jr nz, .loop
 
+	call SetPartyIndicatorPalettes
+
 	CALL_INDIRECT ClearSpritePaletteMap
+
+IF USE_CUSTOM_PARTY_ICONS
+	; Return to WRAM bank 1 before reading party data.
+	xor a
+	ldh [rWBK], a
+
+	call LoadPartyIconPalettes
+
+	; Resume the original palette handler in bank 2.
+	ld a, 2
+	ldh [rWBK], a
+ENDC
 
 	ld a, 3
 	ld [W2_StaticPaletteMapChanged], a
+
 	xor a
 	ld [W2_TileBasedPalettes], a
 	ldh [rWBK], a
 	ret
+
+; Refresh party menu gender and shiny indicator palettes.
+; Ordinary text and borders retain their HP row palette.
+; Enters and returns in WRAM bank 1.
+RefreshPartyIndicatorPalettes::
+	push bc
+	push de
+	push hl
+
+	ld a, 2
+	ldh [rWBK], a
+
+	call SetPartyIndicatorPalettes
+
+	xor a
+	ldh [rWBK], a
+
+	pop hl
+	pop de
+	pop bc
+	ret
+
+; Enters and returns in WRAM bank 2.
+SetPartyIndicatorPalettes:
+	hlcoord 16, 0
+	ld b, PARTY_LENGTH
+
+.loop
+	push bc
+
+	; Restore the ordinary palette at the gender position.
+	push hl
+	ld bc, W2_TilesetPaletteMap - wTileMap
+	add hl, bc
+	dec hl
+	ld a, [hli]
+	ld [hl], a
+	pop hl
+
+	; Check the actual displayed character.
+	ld a, [hl]
+	cp '♂'
+	jr z, .male
+	cp '♀'
+	jr z, .female
+	jr .checkShiny
+
+.male
+	ld a, 4
+	jr .setGender
+
+.female
+	ld a, 5
+
+.setGender
+	call .setTilePalette
+
+.checkShiny
+	ld bc, SCREEN_WIDTH - 13
+	add hl, bc
+
+	; Restore the ordinary palette at the shiny position.
+	push hl
+	ld bc, W2_TilesetPaletteMap - wTileMap
+	add hl, bc
+	inc hl
+	ld a, [hld]
+	ld [hl], a
+	pop hl
+
+	; Only colour the tile if it contains the shiny symbol.
+	ld a, [hl]
+	cp '[SHINY]'
+	jr nz, .nextMon
+
+	ld a, 6
+	call .setTilePalette
+
+.nextMon
+	ld bc, SCREEN_WIDTH + 13
+	add hl, bc
+
+	pop bc
+	dec b
+	jr nz, .loop
+
+	ld a, 3
+	ld [W2_StaticPaletteMapChanged], a
+
+	ld a, 1
+	ld [W2_ForceBGPUpdate], a
+	ret
+
+.setTilePalette
+	push hl
+	ld bc, W2_TilesetPaletteMap - wTileMap
+	add hl, bc
+	ld [hl], a
+	pop hl
+	ret
+
+IF USE_CUSTOM_PARTY_ICONS
+
+
+; Load individual normal or shiny palettes for party icons.
+; Enters and returns in WRAM bank 1.
+LoadPartyIconPalettes:
+	ld c, 0
+
+.loop
+	; Stop after the last party Pokemon.
+	ld a, [wPartyCount]
+	cp c
+	jr z, .done
+
+	push bc
+
+	; Get the Pokemon's internal species ID.
+	ld hl, wPartySpecies
+	ld b, 0
+	add hl, bc
+	ld a, [hl]
+
+	; Convert species ID to Pokedex number.
+	ld [wPokedexNum], a
+	predef IndexToPokedex
+
+	; Preserve the Pokedex number.
+	ld a, [wPokedexNum]
+	push af
+
+	; Locate this party Pokemon's DVs.
+	pop af
+	pop bc
+	push bc
+	push af
+
+	ld a, c
+	ld hl, wPartyMon1DVs
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call AddNTimes
+
+	ld d, h
+	ld e, l
+	farcall CheckShininess
+
+	; Restore the Pokedex number and party index.
+	; POP instructions do not modify carry unless popping AF.
+	jr c, .shiny
+
+.normal
+	pop af
+	ld d, a
+	pop bc
+	push bc
+	ld e, c
+
+	ld a, 2
+	ldh [rWBK], a
+	farcall LoadPokemonSpritePalette
+	jr .paletteLoaded
+
+.shiny
+	pop af
+	ld d, a
+	pop bc
+	push bc
+	ld e, c
+
+	ld a, 2
+	ldh [rWBK], a
+	farcall LoadShinyPokemonSpritePalette
+
+.paletteLoaded
+	xor a
+	ldh [rWBK], a
+	pop bc
+
+	; Preserve the current party index in B.
+	ld b, c
+
+	; Assign both icon animation frames to this palette.
+	ld a, 2
+	ldh [rWBK], a
+
+	ld a, b
+	add a
+	add a
+	add CUSTOM_PARTY_ICON_BASE_TILE
+
+	ld hl, W2_SpritePaletteMap
+	add l
+	ld l, a
+
+	ld a, b
+
+	; First animation frame.
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+
+	; Second animation frame.
+	ld a, l
+	add ICONOFFSET - 3
+	ld l, a
+	ld a, b
+
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+
+	xor a
+	ldh [rWBK], a
+
+	inc c
+	jp .loop
+
+.done
+	ld a, 2
+	ldh [rWBK], a
+
+	; All party icon palettes use OBP0.
+	xor a
+	ld [W2_UseOBP1], a
+
+	; Force the hardware sprite palettes to refresh.
+	inc a
+	ld [W2_ForceOBPUpdate], a
+
+	xor a
+	ldh [rWBK], a
+	ret
+
+ENDC
 
 
 ; used when a Pokemon is the only thing on the screen

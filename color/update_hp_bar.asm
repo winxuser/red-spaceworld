@@ -47,10 +47,32 @@ DrawHPBarWithColor:
 	ld a, [wLastMenuItem]
 	call AddNTimes
 
-	ld bc, SCREEN_WIDTH * 2
 	pop af ; Get palette #
 	inc a
-	call FillMemory
+	ld d, a
+
+	; Update the HP palette without overwriting indicator colours.
+	ld b, SCREEN_WIDTH * 2
+
+	pop af
+	inc a
+	ld d, a
+	ld b, SCREEN_WIDTH * 2
+
+.updatePartyRow
+	ld a, [hl]
+	cp 4
+	jr c, .updateTile
+	cp 7
+	jr c, .skipTile
+
+.updateTile
+	ld [hl], d
+
+.skipTile
+	inc hl
+	dec b
+	jr nz, .updatePartyRow
 
 	ld a, 3
 	ld [W2_StaticPaletteMapChanged], a

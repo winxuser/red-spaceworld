@@ -5,8 +5,8 @@ INCLUDE "data/pokemon/shiny_palettes.asm"
 INCLUDE "data/trainers/palettes.asm"
 
 
-; d = Pokedex number
-; e = destination BG palette slot
+; d = Pokedex number or trainer class
+; e = destination palette slot (0-7)
 ; Requires WRAM bank 2.
 
 LoadPokemonPalette::
@@ -19,6 +19,25 @@ LoadShinyPokemonPalette::
 
 LoadTrainerPortraitPalette::
 	ld hl, TrainerPortraitPalettes
+	jr LoadSpeciesPalette
+
+
+; Sprite palette loaders.
+
+LoadPokemonSpritePalette::
+	ld hl, PokemonPalettes
+	jr LoadSpeciesSpritePalette
+
+LoadShinyPokemonSpritePalette::
+	ld hl, ShinyPokemonPalettes
+
+LoadSpeciesSpritePalette:
+	; Sprite palette data follows the eight BG palettes.
+	ld a, e
+	add 8
+	ld e, a
+	jr LoadSpeciesPalette
+
 
 LoadSpeciesPalette:
 	; Calculate the destination palette address.
@@ -41,7 +60,7 @@ LoadSpeciesPalette:
 
 	add hl, de
 
-	; Point to the destination BG palette.
+	; Point to the destination palette.
 	ld de, W2_BgPaletteData
 	ld a, e
 	add c
